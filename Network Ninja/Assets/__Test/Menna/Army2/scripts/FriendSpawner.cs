@@ -62,7 +62,7 @@ public class FriendSpawner : MonoBehaviour
 
         for (int i = 0; i < armySize; i++)
         {
-            Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+            Vector3 randomPosition = transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
 
             chance = Random.Range(0f, 1f);
             //Debug.Log($"Chance {chance}");

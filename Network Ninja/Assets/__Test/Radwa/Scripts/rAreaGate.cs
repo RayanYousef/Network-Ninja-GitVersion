@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class rAreaGate : MonoBehaviour
 {
     public bool isEntered = false;
 
-    public rGameEvent OnAreaEntered;
+    //public rGameEvent OnAreaEntered;
+
+    [SerializeField] UnityEvent<string> OnAreaEnteredEvent;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject == GameObjectsManager.Instance.Player)
@@ -16,7 +19,8 @@ public class rAreaGate : MonoBehaviour
             //
             if(!isEntered)
             {
-                OnAreaEntered.Raise(null);
+                //OnAreaEntered.Raise(null);
+                OnAreaEnteredEvent?.Invoke(null);   
                 isEntered = true;
             }
         }

@@ -19,6 +19,8 @@ public class rPassword : MonoBehaviour
     private PasswordStrength strength;
     private Soldiers soldiersType;
 
+    private int soldierNumber=0;
+
     //[SerializeField] private rSolidersManager solidersManager;
 
     [SerializeField] private FriendSpawner friendSpawner;

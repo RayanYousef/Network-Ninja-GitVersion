@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
         enemyPrefab = GameObjectsManager.Instance.EnemyPrefab;
         objectToSpawnAround = GameObjectsManager.Instance.ObjectToSpawnAround;
 
-        SpawnEnemies(armySize);
+        //SpawnEnemies(armySize);
 
         //enemyPrefab.gameObject.SetActive(false);
 
@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < armySize; i++)
         {
-            Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+            Vector3 randomPosition = transform.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
             EnemyStates enemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
             enemies.Add(enemy);
         }
