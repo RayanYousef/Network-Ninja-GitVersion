@@ -12,7 +12,8 @@ public class EnemyStates : MonoBehaviour
     Animator animator;
 
     [SerializeField] private float speed;
-    [SerializeField] private Transform player;
+
+    private GameObject player;
     private Rigidbody EnemyRB;
 
     private bool IsAttack1;
@@ -27,6 +28,7 @@ public class EnemyStates : MonoBehaviour
 
     void Start()
     {
+        player = GameObjectsManager.Instance.Player;
         EnemyRB = GetComponent<Rigidbody>();
         currentState = FishState.Patrol;
         animator = GetComponent<Animator>();
@@ -100,13 +102,27 @@ public class EnemyStates : MonoBehaviour
         {
             Seek(player.transform.position);
             IsAttack1 = true;
-            animator.SetBool("IsAttack1", IsAttack1);
+            if(animator != null)
+            {
+                animator.SetBool("IsAttack1", IsAttack1);
+            }
+            else
+            {
+                Debug.Log("Animator is null - EnemyStates.cs");
+            }
 
         }
         else
         {
             IsAttack1 = false;
-            animator.SetBool("IsAttack1", IsAttack1);
+            if (animator != null)
+            {
+                animator.SetBool("IsAttack1", IsAttack1);
+            }
+            else
+            {
+                Debug.Log("Animator is null - EnemyStates.cs");
+            }
         }
 
         if (Vector3.SqrMagnitude(player.transform.position - this.transform.position) < 20f)
@@ -130,13 +146,26 @@ public class EnemyStates : MonoBehaviour
             Seek(player.transform.position);
             //animator.Play("Attack2");
             IsAttack2 = true;
-            animator.SetBool("IsAttack2", IsAttack2);
-
+            if (animator != null)
+            {
+                animator.SetBool("IsAttack2", IsAttack2);
+            }
+            else
+            {
+                Debug.Log("Animator is null - EnemyStates.cs");
+            }
         }
         else
         {
             IsAttack2 = false;
+            if (animator != null)
+            {
             animator.SetBool("IsAttack2", IsAttack2);
+            }
+            else
+            {
+                Debug.Log("Animator is null - EnemyStates.cs");
+            }
         }
 
         if (Vector3.SqrMagnitude(player.transform.position - this.transform.position) > 20f && Vector3.SqrMagnitude(player.transform.position - this.transform.position) < 30)

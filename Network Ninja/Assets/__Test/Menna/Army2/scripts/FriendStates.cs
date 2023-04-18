@@ -21,7 +21,7 @@ public class FriendStates : MonoBehaviour
     FriendSpawner FriendSpawner;
     [SerializeField] EnemySpawner enemySpawner;
 
-    public Transform player;
+    private GameObject player;
     public float distanceFromPlayer = 10.0f;
     public float movementSpeed = 5.0f;
 
@@ -37,12 +37,13 @@ public class FriendStates : MonoBehaviour
 
     void Start()
     {
+        player = GameObjectsManager.Instance.Player;
         FriendRB = GetComponent<Rigidbody>();
         currentState = FishState.Patrol;
         animator = GetComponent<Animator>();
 
         //Calculate the target position that is distanceFromPlayer units away from the player
-        targetPosition = player.position + (distanceFromPlayer * player.forward);
+        targetPosition = player.transform.position + (distanceFromPlayer * player.transform.forward);
 
     }
     private void FixedUpdate()
@@ -103,7 +104,7 @@ public class FriendStates : MonoBehaviour
         transform.position += movementDirection * movementSpeed * Time.deltaTime;
 
         // Rotate the army to face the player's direction
-        transform.LookAt(player);
+        transform.LookAt(player.transform);
 
 
         //foreach (EnemyStates obj in EnemySpawner.enemies)
