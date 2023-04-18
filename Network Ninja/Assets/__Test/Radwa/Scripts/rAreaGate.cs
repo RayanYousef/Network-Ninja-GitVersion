@@ -12,7 +12,7 @@ public class rAreaGate : MonoBehaviour
             //raise event
             // UI Manager will listen to this event
             //
-            OnAreaEntered.Raise(null);
+            //OnAreaEntered.Raise(null);
         }
     }
 
