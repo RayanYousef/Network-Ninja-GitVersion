@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public EnemyStates enemyPrefab;
-    //public int armySize = 10;
+    private EnemyStates enemyPrefab;
+    private Transform objectToSpawnAround;
+    
+    public int armySize = 10;
     public float spawnRadius = 10f;
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
     public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
-    public Transform objectToSpawnAround;
 
 
     public List<EnemyStates> enemies;  // A list of all spawned enemies.
@@ -18,10 +19,14 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         enemies = new List<EnemyStates>();
-        SpawnEnemies(10);
+        enemyPrefab = GameObjectsManager.Instance.EnemyPrefab;
+        objectToSpawnAround = GameObjectsManager.Instance.ObjectToSpawnAround;
+
+        SpawnEnemies(armySize);
+
         //enemyPrefab.gameObject.SetActive(false);
-        
-        
+
+
     }
     void SpawnEnemies(int armySize)
     {

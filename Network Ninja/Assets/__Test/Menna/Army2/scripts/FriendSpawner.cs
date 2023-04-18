@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FriendSpawner : MonoBehaviour
 {
-    public FriendStates meleePrefab;
-    public FriendStates rangedPrefab;
-    public FriendStates tankPrefab;
+     FriendStates meleePrefab;
+     FriendStates rangedPrefab;
+     FriendStates tankPrefab;
 
     float meleeChance;
     float rangedChance;
@@ -20,13 +20,18 @@ public class FriendSpawner : MonoBehaviour
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
     public float avoidanceDistance = 2f;  // The distance at which Friends will avoid each other.
-    public Transform objectToSpawnAround;
+    Transform objectToSpawnAround;
 
 
     public List<FriendStates> Friends;  // A list of all spawned Friends.
 
     void Start()
     {
+        meleePrefab = GameObjectsManager.Instance.MeleePrefab;
+        rangedPrefab = GameObjectsManager.Instance.RangedPrefab;
+        tankPrefab = GameObjectsManager.Instance.TankPrefab;
+
+        objectToSpawnAround = GameObjectsManager.Instance.Player.transform;
         Friends = new List<FriendStates>();
         //SpawnFriends(10, Soldiers.Melee);
         //meleePrefab.gameObject.SetActive(false);

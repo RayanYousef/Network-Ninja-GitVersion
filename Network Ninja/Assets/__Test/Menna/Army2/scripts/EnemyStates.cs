@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class EnemyStates : MonoBehaviour
 {
     enum FishState { Patrol, Chase, Attack };
-    public Transform[] waypoints;
+    private Transform[] waypoints;
     FishState currentState;
     private int wayPointsCounter;
     Animator animator;
@@ -30,6 +30,7 @@ public class EnemyStates : MonoBehaviour
         EnemyRB = GetComponent<Rigidbody>();
         currentState = FishState.Patrol;
         animator = GetComponent<Animator>();
+        waypoints = GameObjectsManager.Instance.WayPoints;
     }
     private void FixedUpdate()
     {
@@ -75,7 +76,7 @@ public class EnemyStates : MonoBehaviour
     private void Patrol()
     {
         Seek(waypoints[wayPointsCounter].transform.position);
-        if (Vector3.SqrMagnitude(waypoints[wayPointsCounter].transform.position - this.transform.position) < 0.1f)
+        if (Vector3.SqrMagnitude(waypoints[wayPointsCounter].transform.position - this.transform.position) < 2f)
         {
             wayPointsCounter++;
             if (wayPointsCounter >= waypoints.Length)
