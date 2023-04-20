@@ -1,33 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+public enum RoomType { Base, Fight };
+public enum Soldiers { Melee, Ranged, MeleeRanged, MeleeRangedTank };
 public enum PasswordStrength { Weak, Moderate, Strong };
 
-/* an all alphabet password spawns only melee soldiers,
- * an all numbers password spawns ranged soldiers,
- * an all symbols password spawns tanks.
- * Using all of them spawns a varying army depending on which type was used the most.
- */
-public enum Soldiers { Melee, Ranged, MeleeRanged, MeleeRangedTank };
-
-public class rPassword : MonoBehaviour
+public class rAreaPassword : MonoBehaviour
 {
-    private string[] playerPersonalData;
-    private string[] easyToGuessPasswords = {"pAssword", "passw0rd", "123456789",
-                                             "abcdefghi", "qwerty", "NetworkNinja"};
+    [SerializeField] RoomType roomType;
+    [SerializeField] private bool fightCompleted = false;
+    [SerializeField] private bool isPasswordCreated = false;
+
+    [SerializeField] private bool isInside = false;
+    
     private PasswordStrength strength;
     private Soldiers soldiersType;
 
-    private int soldierNumber=0;
-
-    //[SerializeField] private rSolidersManager solidersManager;
-
+    [SerializeField] private rUIPassword uiPassword;
     [SerializeField] private FriendSpawner friendSpawner;
 
 
+    //[Header("Area Password Events")]
+    //[SerializeField] UnityEvent OnBaseFirstVisitOrFightCompleted;
+
+    [Header("Password Lists")]
+    private string[] playerPersonalData;
+    private string[] easyToGuessPasswords = {"pAssword", "passw0rd", "123456789",
+                                             "abcdefghi", "qwerty", "NetworkNinja"};
+
+    private void Awake()
+    {
+        //uiPassword = GetComponent<rUIPassword>();
+        friendSpawner = GetComponentInChildren<FriendSpawner>();
+    }
+
+    private void Start()
+    {
+        uiPassword.OnTakePassword.AddListener(CheckStrength);
+    }
+
     public void CheckStrength(string password)
     {
+        if(!isInside)
+        {
+            return;
+        }
         // load user personal data to check the password against them
         loadUserPrivateData();
 
@@ -41,6 +60,11 @@ public class rPassword : MonoBehaviour
         int length = password.Length;
         int complexity = 0;
         soldiersType = Soldiers.Melee;
+
+        if(length == 0)
+        {
+            Debug.Log("Somthing is wrong...Length = 0");
+        }
 
         if (length < 8)
         {
@@ -68,7 +92,7 @@ public class rPassword : MonoBehaviour
         }
         if (System.Text.RegularExpressions.Regex.IsMatch(password, @"[0-9]"))
         {
-            if(complexity > 0)
+            if (complexity > 0)
             {
                 soldiersType = Soldiers.MeleeRanged;
             }
@@ -103,7 +127,7 @@ public class rPassword : MonoBehaviour
                 return;
             }
         }
-        
+
         // 4. Check common used passwords
         foreach (string weakPassword in easyToGuessPasswords)
         {
@@ -131,8 +155,12 @@ public class rPassword : MonoBehaviour
 
     void FormArmy()
     {
+        // later, it'd be better to send to the friendly soliders AI script both
+        // the password strength and complexity and the switch case is done there
+        // that way the functionality is separated and the password script knows nothing about the soliders
+
         int solidersNumbers = 15;
-        switch(strength)
+        switch (strength)
         {
             case PasswordStrength.Weak:
                 break;
@@ -149,10 +177,47 @@ public class rPassword : MonoBehaviour
                 break;
         }
 
-        friendSpawner.SpawnFriends(solidersNumbers, soldiersType);
-        //solidersManager.InstantiateSoliders(solidersRows, soldiersType); 
-    }
+        // rasie event
+        // giving the soliders number and type as parameters
 
+        friendSpawner.SpawnFriends(solidersNumbers, soldiersType);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        isInside = true;
+        if (other.gameObject == GameObjectsManager.Instance.Player)
+        {
+            //raise event
+            // UI will listen to this event
+
+            if(roomType == RoomType.Base)
+            {
+                if(isPasswordCreated)
+                {
+                    // prompt the user to check the previously set password
+                }
+                else
+                {
+                    // invoke the event to prompt the user to create new password
+                    //OnBaseFirstVisitOrFightCompleted?.Invoke();
+                    uiPassword.ShowPasswordPanel();
+                    isPasswordCreated = true;
+                }
+            }
+            else
+            {
+                if(fightCompleted)
+                {
+                    // prompt the user to check the previously set password
+                }
+            }
+     
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        isInside = false;
+    }
     public void AutoTest()
     {
         string[] autoTestPasswords = { "pAssw0rd", "12345678", "abcdefghi",
@@ -169,4 +234,5 @@ public class rPassword : MonoBehaviour
             Debug.Log($"{testPassword } is { strength}");
         }
     }
+
 }

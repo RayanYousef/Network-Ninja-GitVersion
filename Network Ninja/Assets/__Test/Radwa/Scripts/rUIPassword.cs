@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 using TMPro;
 
-public class rUIManager : MonoBehaviour
+public class rUIPassword : MonoBehaviour
 {
     [Header("Login Panel")]
     [SerializeField] private GameObject loginPanel;
@@ -11,26 +13,18 @@ public class rUIManager : MonoBehaviour
     [Header("Password Panel")]
     [SerializeField] private GameObject passwordPanel;
     [SerializeField] private TMP_InputField passwordIF;
-    [SerializeField] public TMP_Text debugTxt;
-
-    [Header("Events")]
-    public rGameEvent OnPasswordEntered;
-
-
-    [SerializeField] GameObject passwordManager;
-    rPassword Password;
 
     string username = "Daiavoloz";
     string birthDate = "21102000";
 
+    public UnityEvent<string> OnTakePassword;
 
     void Start()
     {
-        Time.timeScale = 0f;
-        loginPanel.SetActive(true);
+        //Time.timeScale = 0f;
+        //loginPanel.SetActive(true);
         passwordPanel.SetActive(false);
-
-        Password = passwordManager.GetComponent<rPassword>();
+        //Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void LoginBtnClicked()
@@ -38,14 +32,15 @@ public class rUIManager : MonoBehaviour
         Time.timeScale = 1f;
         PlayerPrefs.SetString("username", username);
         PlayerPrefs.SetString("birthDate", birthDate);
-
         loginPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ShowPasswordPanel()
     {
         Time.timeScale = 0f;
         passwordPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     /**
@@ -57,23 +52,13 @@ public class rUIManager : MonoBehaviour
         {
             return;
         }
-        debugTxt.text = passwordIF.text;
 
-        //OnPasswordEntered.Raise(passwordIF.text);
+        // raise event for check strength to get called
+        OnTakePassword?.Invoke(passwordIF.text);
 
-
-        if (Password != null)
-        {
-            /* this should be replaced by event
-            * clicking Form Army btn will raise an event
-            * CheckStrength func. will listen to that event
-            * rPassword will listen to this event
-            * so the rPassword doesn't know anything about the UI
-            * also the UI doesn't know anything about checking the password
-            */
-            Password.CheckStrength(passwordIF.text);
-        }
         passwordPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
     }
 }
+
