@@ -135,30 +135,20 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 352249393}
-    - target: {fileID: -3562609259919566553, guid: 89295627689fad444abe6c8b1d57b15b,
+    - target: {fileID: -8723516979737834980, guid: 89295627689fad444abe6c8b1d57b15b,
         type: 3}
-      propertyPath: range
-      value: 100
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3562609259919566553, guid: 89295627689fad444abe6c8b1d57b15b,
         type: 3}
       propertyPath: centrePoint
       value: 
       objectReference: {fileID: 411711165}
-    - target: {fileID: 4366466862577977072, guid: 89295627689fad444abe6c8b1d57b15b,
+    - target: {fileID: -2187792621882532437, guid: 89295627689fad444abe6c8b1d57b15b,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -26747.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4366466862577977072, guid: 89295627689fad444abe6c8b1d57b15b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 13040.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4366466862577977072, guid: 89295627689fad444abe6c8b1d57b15b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 19075.7
+      propertyPath: m_StoppingDistance
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4884015827840585458, guid: 89295627689fad444abe6c8b1d57b15b,
         type: 3}
@@ -230,10 +220,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7024325047942057716, guid: 89295627689fad444abe6c8b1d57b15b,
+    - target: {fileID: 7299590379327548261, guid: 89295627689fad444abe6c8b1d57b15b,
         type: 3}
-      propertyPath: m_Constraints
-      value: 0
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89295627689fad444abe6c8b1d57b15b, type: 3}
@@ -1171,7 +1161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 720849326}
-  armySize: 20
+  armySize: 30
   spawnRadius: 10
   minDistanceFromObject: 10
   maxDistanceFromObject: 15
