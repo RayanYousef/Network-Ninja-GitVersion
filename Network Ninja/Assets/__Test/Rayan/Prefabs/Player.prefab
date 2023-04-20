@@ -1263,6 +1263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4925132746858222287}
   - component: {fileID: 1564617241237696115}
+  - component: {fileID: 868840672763061009}
   m_Layer: 0
   m_Name: Damage_Collider
   m_TagString: Untagged
@@ -1303,6 +1304,22 @@ MonoBehaviour:
   firstPoint: {x: 0, y: 0, z: 0}
   secondPoint: {x: 0, y: 0, z: 0}
   speed: 10
+--- !u!54 &868840672763061009
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5697694058882828405}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!1 &5842969261490695603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1506,7 +1523,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5977481141235267347}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6, z: -4}
+  m_LocalPosition: {x: 0, y: 1.5999999, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2040,8 +2057,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5977481143078867959}
-  m_LocalRotation: {x: 0.0000000020725204, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.16, y: 0, z: -1.1399999}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

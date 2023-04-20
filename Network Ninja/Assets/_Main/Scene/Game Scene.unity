@@ -245,7 +245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c62f952f06c9746add3e010b1dc9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  friendSpawner: {fileID: 1744887845}
 --- !u!4 &366988790
 Transform:
   m_ObjectHideFlags: 0
@@ -321,22 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a849943677723814f83f60069cc18a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEntered: 0
-  OnAreaEnteredEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5899312107867005517}
-        m_TargetAssemblyTypeName: rUIManager, Assembly-CSharp
-        m_MethodName: ShowPasswordPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &605821481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -419,10 +402,20 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 5977481142853276192, guid: 18ec71b734f4bb54ea44c16dba2058d3,
+        type: 3}
+      propertyPath: attackHandler
+      value: 
+      objectReference: {fileID: 669965104}
     - target: {fileID: 5977481142853276193, guid: 18ec71b734f4bb54ea44c16dba2058d3,
         type: 3}
       propertyPath: defaultJumpForce
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977481143078867958, guid: 18ec71b734f4bb54ea44c16dba2058d3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5977481143078867958, guid: 18ec71b734f4bb54ea44c16dba2058d3,
         type: 3}
@@ -434,8 +427,47 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5977481143078867958, guid: 18ec71b734f4bb54ea44c16dba2058d3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ec71b734f4bb54ea44c16dba2058d3, type: 3}
+--- !u!1 &669965102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5697694058882828405, guid: 18ec71b734f4bb54ea44c16dba2058d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 605821481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &669965104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1564617241237696115, guid: 18ec71b734f4bb54ea44c16dba2058d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 605821481}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669965102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &669965105
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669965102}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1057082889
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,12 +2437,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c41a449914c6d24ca3b03b7bc22277e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loginPanel: {fileID: 5899312108678218372}
-  passwordPanel: {fileID: 5899312107444609675}
-  passwordIF: {fileID: 5899312107616799565}
-  debugTxt: {fileID: 5899312108349955638}
-  OnPasswordEntered: {fileID: 11400000, guid: 63690d0af7cda9941a8c32d4f5b3bf80, type: 2}
-  passwordManager: {fileID: 366988788}
 --- !u!114 &5899312107867005518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2926,7 +2952,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 15
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3138,7 +3164,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 18
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3294,7 +3320,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 15.1
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
