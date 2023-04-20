@@ -36,7 +36,8 @@ public class CS_PlayerManager : MonoBehaviour
         animController = GetComponentInChildren<CS_AnimatorController>();
         camTarget = GetComponentInChildren<CS_CameraTarget>();
         rb = GetComponentInChildren<Rigidbody>();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     private void Update()
