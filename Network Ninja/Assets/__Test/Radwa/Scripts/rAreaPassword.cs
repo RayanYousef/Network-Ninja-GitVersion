@@ -19,7 +19,7 @@ public class rAreaPassword : MonoBehaviour
     private Soldiers soldiersType;
 
     [SerializeField] private rUIPassword uiPassword;
-    [SerializeField] private FriendSpawner friendSpawner;
+    FriendSpawner friendSpawner;
 
 
     //[Header("Area Password Events")]
@@ -38,7 +38,8 @@ public class rAreaPassword : MonoBehaviour
 
     private void Start()
     {
-        uiPassword.OnTakePassword.AddListener(CheckStrength);
+        uiPassword.OnTakeNewPassword.AddListener(CheckStrength);
+        uiPassword.OnTakePreSetPassword.AddListener(CheckPassword);
     }
 
     public void CheckStrength(string password)
@@ -63,8 +64,12 @@ public class rAreaPassword : MonoBehaviour
 
         if(length == 0)
         {
-            Debug.Log("Somthing is wrong...Length = 0");
+            //Debug.Log($"Length = {length} in Area: {name}");
+            return;
         }
+
+        PlayerPrefs.SetString(name, password);
+        //Debug.Log("Correct call");
 
         if (length < 8)
         {
@@ -182,6 +187,32 @@ public class rAreaPassword : MonoBehaviour
 
         friendSpawner.SpawnFriends(solidersNumbers, soldiersType);
     }
+
+    public void CheckPassword(string password)
+    {
+        if(!isInside)
+        {
+            return;
+        }
+
+        int length = password.Length;
+
+        if (length == 0)
+        {
+            //Debug.Log($"Length = {length} in Area: {name}");
+            return;
+        }
+
+        //Debug.Log("Correct call");
+        string currentPassword = PlayerPrefs.GetString(name);
+        if(currentPassword == password)
+        {
+            Debug.Log("Correct Password");
+            return;
+        }
+        Debug.Log("Wrong Password");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         isInside = true;
@@ -195,12 +226,13 @@ public class rAreaPassword : MonoBehaviour
                 if(isPasswordCreated)
                 {
                     // prompt the user to check the previously set password
+                    uiPassword.ShowCheckPasswordPanel();
                 }
                 else
                 {
                     // invoke the event to prompt the user to create new password
                     //OnBaseFirstVisitOrFightCompleted?.Invoke();
-                    uiPassword.ShowPasswordPanel();
+                    uiPassword.ShowCreatePasswordPanel();
                     isPasswordCreated = true;
                 }
             }
@@ -217,22 +249,24 @@ public class rAreaPassword : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         isInside = false;
-    }
-    public void AutoTest()
-    {
-        string[] autoTestPasswords = { "pAssw0rd", "12345678", "abcdefghi",
-                                        "qwerty", "000000000" , "rrrrrrrrr",
-                                        "Daiavoloz", "21102000", "01120273611",
-
-                                        "menn@97", "ttch2007", "Ray1993", "Nadzy_3103",
-
-                                        "bestNinja_2000", "MyFavColorGreen@001",
-                                        "Rayan_93@NetworkNinja"};
-        foreach (string testPassword in autoTestPasswords)
-        {
-            CheckStrength(testPassword);
-            Debug.Log($"{testPassword } is { strength}");
-        }
+        // TO DO
+        // raise event to disable the army in the area the player just left
     }
 
+    //public void AutoTest()
+    //{
+    //    string[] autoTestPasswords = { "pAssw0rd", "12345678", "abcdefghi",
+    //                                    "qwerty", "000000000" , "rrrrrrrrr",
+    //                                    "Daiavoloz", "21102000", "01120273611",
+
+    //                                    "menn@97", "ttch2007", "Ray1993", "Nadzy_3103",
+
+    //                                    "bestNinja_2000", "MyFavColorGreen@001",
+    //                                    "Rayan_93@NetworkNinja"};
+    //    foreach (string testPassword in autoTestPasswords)
+    //    {
+    //        CheckStrength(testPassword);
+    //        Debug.Log($"{testPassword } is { strength}");
+    //    }
+    //}
 }

@@ -11,19 +11,24 @@ public class rUIPassword : MonoBehaviour
     [SerializeField] private GameObject loginPanel;
 
     [Header("Password Panel")]
-    [SerializeField] private GameObject passwordPanel;
-    [SerializeField] private TMP_InputField passwordIF;
+    [SerializeField] private GameObject createPasswordPanel;
+    [SerializeField] private TMP_InputField newPasswordIF;
+    [SerializeField] private GameObject checkPasswordPanel;
+    [SerializeField] private TMP_InputField preSetPasswordIF;
+
 
     string username = "Daiavoloz";
     string birthDate = "21102000";
 
-    public UnityEvent<string> OnTakePassword;
+    public UnityEvent<string> OnTakeNewPassword;
+    public UnityEvent<string> OnTakePreSetPassword;
 
     void Start()
     {
         //Time.timeScale = 0f;
         //loginPanel.SetActive(true);
-        passwordPanel.SetActive(false);
+        createPasswordPanel.SetActive(false);
+        checkPasswordPanel.SetActive(false);
         //Cursor.lockState = CursorLockMode.Confined;
     }
 
@@ -36,27 +41,49 @@ public class rUIPassword : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void ShowPasswordPanel()
+    public void ShowCreatePasswordPanel()
     {
         Time.timeScale = 0f;
-        passwordPanel.SetActive(true);
+        createPasswordPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void ShowCheckPasswordPanel()
+    {
+        Time.timeScale = 0f;
+        checkPasswordPanel.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
     }
 
     /**
      * TakePassword() is called when Form Army button is clicked 
      */
-    public void TakePassword()
+    public void TakeNewPassword()
     {
-        if (string.IsNullOrEmpty(passwordIF.text))
+        if (string.IsNullOrEmpty(newPasswordIF.text))
         {
             return;
         }
 
         // raise event for check strength to get called
-        OnTakePassword?.Invoke(passwordIF.text);
+        OnTakeNewPassword?.Invoke(newPasswordIF.text);
 
-        passwordPanel.SetActive(false);
+        createPasswordPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+    }
+
+    public void TakePreSetPassword()
+    {
+        if (string.IsNullOrEmpty(newPasswordIF.text))
+        {
+            return;
+        }
+
+        // raise event for check strength to get called
+        OnTakePreSetPassword?.Invoke(preSetPasswordIF.text);
+
+        createPasswordPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
     }
