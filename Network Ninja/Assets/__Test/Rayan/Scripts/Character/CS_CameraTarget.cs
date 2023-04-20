@@ -25,7 +25,7 @@ public class CS_CameraTarget : MonoBehaviour
         set => deltaValues = value;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         RotateObject(deltaValues);
     }

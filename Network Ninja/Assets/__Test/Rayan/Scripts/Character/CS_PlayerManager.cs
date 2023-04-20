@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class CS_PlayerManager : MonoBehaviour
 {
+
+    [Header("Events")]
+    [SerializeField] UnityEvent<bool> StartRecordingEvent, StopRecordingEvent;
 
     [Header("Components")]
     [SerializeField] Animator anim;
@@ -32,7 +36,7 @@ public class CS_PlayerManager : MonoBehaviour
         animController = GetComponentInChildren<CS_AnimatorController>();
         camTarget = GetComponentInChildren<CS_CameraTarget>();
         rb = GetComponentInChildren<Rigidbody>();
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()

@@ -7,8 +7,7 @@ public class CS_AnimatorController : MonoBehaviour
 
     [Header("GameObject Components")]
     [SerializeField] Animator anim;
-    [SerializeField] CS_PlayerManager playerManager;
-    [SerializeField] CS_MovementController moveController;
+    [SerializeField] CS_AttackHandler attackHandler;
 
     [Header("Applied Force To Animation")]
     [SerializeField] float appliedForce;
@@ -42,8 +41,6 @@ public class CS_AnimatorController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        playerManager = GetComponentInChildren<CS_PlayerManager>();
-        moveController = GetComponentInChildren<CS_MovementController>();
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -63,20 +60,34 @@ public class CS_AnimatorController : MonoBehaviour
         anim.SetFloat(f_animSpeed, speed);
     }
 
-    public void CanTransit()
-    {
-        anim.SetBool(b_canTransit, true);
-    }
+
     #endregion
 
 
+    #region Animation Event
+    public void CanTransit()
+    {
+        anim.SetBool(b_canTransit, true);
+        //attackHandler.gameObject.SetActive(false);
+    }
 
-    #region Parameters Modifiers
     public void ApplyForwardForce(float force)
     {
         GetComponent<Rigidbody>().
-            AddForce(transform.forward * (appliedForce+force), ForceMode.Impulse);
+            AddForce(transform.forward * (appliedForce + force), ForceMode.Impulse);
+        attackHandler.gameObject.SetActive(true);
+
+
     }
+
+    public void OnAnimationSetAttackRotation()
+    {
+        attackHandler.SetAttackRotation();
+
+    }
+
+    #endregion
+    #region Parameters Modifiers
     public void ResetCombo()
     {
         anim.SetInteger(I_Combo, 0);
