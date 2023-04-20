@@ -8,8 +8,6 @@ using UnityEngine.InputSystem;
 public class CS_PlayerManager : MonoBehaviour
 {
 
-    [Header("Events")]
-    [SerializeField] UnityEvent<bool> StartRecordingEvent, StopRecordingEvent;
 
     [Header("Components")]
     [SerializeField] Animator anim;

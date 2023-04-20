@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class CS_AnimatorController : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class CS_AnimatorController : MonoBehaviour
     [SerializeField] string f_Direction, f_MotionTime, f_animSpeed;
     [SerializeField] string b_Grounded, b_Attacking, b_Dashing, b_Jumping, b_canTransit, t_Dash, t_Jump;
 
-
+    public CS_AttackHandler AttackHandler { get => attackHandler; }
     public string I_Combo { get => i_Combo; }
     public string F_MotionTime { get => f_MotionTime; }
     public string F_Direction { get => f_Direction; }
@@ -68,7 +69,7 @@ public class CS_AnimatorController : MonoBehaviour
     public void CanTransit()
     {
         anim.SetBool(b_canTransit, true);
-        //attackHandler.gameObject.SetActive(false);
+        attackHandler.gameObject.SetActive(false);
     }
 
     public void ApplyForwardForce(float force)
@@ -80,9 +81,22 @@ public class CS_AnimatorController : MonoBehaviour
 
     }
 
-    public void OnAnimationSetAttackRotation()
+    public void OnAttackSetFirstPoint()
     {
-        attackHandler.SetAttackRotation();
+        attackHandler.SetFirstPoint();  
+    }
+
+    public void OnAttackSetPointTwo(ProjectOnPlaneAxis axis)
+    {
+        Vector3 projectionAxis= Vector3.zero;
+        switch(axis)
+        {
+            case ProjectOnPlaneAxis.forward: projectionAxis = transform.forward; break;
+            case ProjectOnPlaneAxis.right: projectionAxis = transform.right; break;
+
+        }
+
+        attackHandler.ProjectOnAxis(projectionAxis, transform.forward, GetComponent<Collider>().bounds.center);
 
     }
 
@@ -91,6 +105,7 @@ public class CS_AnimatorController : MonoBehaviour
     public void ResetCombo()
     {
         anim.SetInteger(I_Combo, 0);
+        attackHandler.gameObject.SetActive(false);
 
     }
 
