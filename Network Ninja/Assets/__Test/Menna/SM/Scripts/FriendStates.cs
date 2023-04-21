@@ -37,6 +37,7 @@ public class FriendStates : MonoBehaviour
 
     void Start()
     {
+        player = GameObjectsManager.Instance.Player.transform;
         FriendRB = GetComponent<Rigidbody>();
         currentState = FishState.Patrol;
         animator = GetComponent<Animator>();
@@ -106,17 +107,14 @@ public class FriendStates : MonoBehaviour
         transform.LookAt(player);
 
 
-        foreach (GameObject obj in EnemySpawner.enemies)
-        {
-            if (Vector3.SqrMagnitude(obj.transform.position - this.transform.position) < 30 && Vector3.SqrMagnitude(obj.transform.position - this.transform.position) > 20)
-            {
-                Debug.Log("CHASE");
-                currentState = FishState.Chase;
-            }
-        }
-
-
-
+        //foreach (GameObject obj in EnemySpawner.enemies)
+        //{
+        //    if (Vector3.SqrMagnitude(obj.transform.position - this.transform.position) < 30 && Vector3.SqrMagnitude(obj.transform.position - this.transform.position) > 20)
+        //    {
+        //        Debug.Log("CHASE");
+        //        currentState = FishState.Chase;
+        //    }
+        //}
     }
 
     private void Chase()

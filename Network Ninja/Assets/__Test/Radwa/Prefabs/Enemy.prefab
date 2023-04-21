@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6264938536597744786}
   - component: {fileID: 4710034639972692773}
   - component: {fileID: 9186942290994989209}
-  - component: {fileID: 8452078973288597188}
+  - component: {fileID: -1100503386967401008}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -132,7 +132,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   HealthBar: {fileID: 7361616989233626549}
---- !u!114 &8452078973288597188
+--- !u!114 &-1100503386967401008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,16 +141,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6264938536597744787}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d3db4ee92f70140865ebb82589670a, type: 3}
+  m_Script: {fileID: 11500000, guid: 420cf7b8ab00b6b4b9d7be4ec75b22f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  player: {fileID: 1145844590366674874, guid: c88e184cc78ba1c4f8fa4c685e43d08b, type: 3}
-  avoidanceRadius: 1
-  avoidanceForce: 1
-  overlapLayer:
-    serializedVersion: 2
-    m_Bits: 32
+  speed: 0
+  chaseRange: 0
+  attackRange: 0
+  RB: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1001 &6738828003956449516
 PrefabInstance:
   m_ObjectHideFlags: 0
