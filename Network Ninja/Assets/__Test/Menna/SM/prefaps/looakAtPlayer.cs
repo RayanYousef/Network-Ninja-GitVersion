@@ -5,17 +5,13 @@ using UnityEngine;
 public class looakAtPlayer : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
-    // Start is called before the first frame update
     void Start()
     {
-
+        playerTransform = GameObjectsManager.Instance.Player.transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.LookAt(playerTransform);
-
     }
-
 }

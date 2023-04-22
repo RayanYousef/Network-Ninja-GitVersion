@@ -173,17 +173,20 @@ public class rPasswordManager : MonoBehaviour
     public void FormArmy()
     {
         int solidersNumbers = 15;
+        int rings = 2;
         switch (strength)
         {
             case PasswordStrength.Weak:
                 break;
 
             case PasswordStrength.Moderate:
-                solidersNumbers = 20; // 4*5
+                solidersNumbers = 45; // 4*5
+                rings = 3;
                 break;
 
             case PasswordStrength.Strong:
-                solidersNumbers = 30; // 6*5
+                solidersNumbers = 80; // 6*5
+                rings = 4;
                 break;
 
             default:
@@ -195,8 +198,14 @@ public class rPasswordManager : MonoBehaviour
         /// that way the functionality is separated and the password script knows nothing about the soliders
 
         ///also we can instantiate the army using StartCoroutine to instantiate one by one
+        RadialFormation rf = currentArea.GetComponentInChildren<RadialFormation>();
+        rf.Amount = solidersNumbers;
+        rf.Rings = rings;
+        ExampleArmy ea = currentArea.GetComponentInChildren<ExampleArmy>();
+        ea.SetPrefabsTypes(soldiersType);
+        ea.enabled = true;
 
-        currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
+        //currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
         //friendSpawner.SpawnFriends(solidersNumbers, soldiersType);
 
         // spawnFtiends(solidersNumbers, soldiersType, instantiatePos);

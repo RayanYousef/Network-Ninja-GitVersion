@@ -37,9 +37,10 @@ public class rArea : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<FriendStates>(out FriendStates friend))
         {
-            Destroy(friend.gameObject);
+            Destroy(collision.gameObject);
         }
-            if (collision.gameObject == GameObjectsManager.Instance.Player)
+        
+        if (collision.gameObject == GameObjectsManager.Instance.Player)
         {
             rPasswordManager.Instance.CurrentArea = this;
 
@@ -47,12 +48,12 @@ public class rArea : MonoBehaviour
             {
                 if(areaPassword != null)
                 {
-                    // UI CheckPasswordPanel
+                    // UI CheckPasswordPanel listens to this event
                     OnAreaRevisited?.Invoke();
                 }
                 else
                 {
-                    // UI CreatePasswordPanel
+                    // UI CreatePasswordPanel listens to this event
                     OnBaseFirstVisitOrFightCompleted?.Invoke();
                 }
             }
@@ -60,7 +61,12 @@ public class rArea : MonoBehaviour
             {
                 if (fightCompleted)
                 {
-                    /// prompt the user to check the previously set password
+                    /// prompt the user to create a password
+                }
+                else
+                {
+                    areaCollider.isTrigger = true;
+                    // spawn enemies
                 }
             }
         }
@@ -71,6 +77,11 @@ public class rArea : MonoBehaviour
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
             areaCollider.isTrigger = false;
+
+            if(areaType == AreaType.Base)
+            {
+                GetComponentInChildren<ExampleArmy>().enabled = false;
+            }
 
             //isInside = false;
             // TO DO
