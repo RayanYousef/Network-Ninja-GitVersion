@@ -20,8 +20,8 @@ public class rUIPassword : MonoBehaviour
 
     [Header("Check Password Panel")]
     [SerializeField] private GameObject checkPasswordPanel;
-    [SerializeField] private Button[] ansBtns;
-    [SerializeField] private string[] answers = new string[3];
+     private Button[] ansBtns;
+    private string[] answers = new string[3];
 
 
     //public static rUIPassword Instance { get => instance; }
@@ -81,6 +81,7 @@ public class rUIPassword : MonoBehaviour
         Time.timeScale = 0f;
 
         createPasswordPanel.SetActive(true);
+        passwordIF.Select();
         Cursor.lockState = CursorLockMode.Confined;
     }
 
