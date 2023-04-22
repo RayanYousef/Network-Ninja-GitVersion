@@ -1,91 +1,170 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-//using UnityEngine.Events;
-//using UnityEngine.UI;
-//using TMPro;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+using TMPro;
 
-//public class rUIPassword : MonoBehaviour
-//{
-//    [Header("Login Panel")]
-//    [SerializeField] private GameObject loginPanel;
+public class rUIPassword : MonoBehaviour
+{
+    #region Password_UI
+    //private static rUIPassword instance;
 
-//    [Header("Password Panel")]
-//    [SerializeField] private GameObject createPasswordPanel;
-//    [SerializeField] private TMP_InputField newPasswordIF;
-//    [SerializeField] private GameObject checkPasswordPanel;
-//    [SerializeField] private TMP_InputField preSetPasswordIF;
+    private CS_PlayerManager playerManager;
+    public UnityEvent OnTakePassword;
+
+    [Header("Create Password Panel")]
+    [SerializeField] private GameObject createPasswordPanel;
+    private TMP_InputField passwordIF;
+    private Button passwordBtn;
+
+    [Header("Check Password Panel")]
+    [SerializeField] private GameObject checkPasswordPanel;
+    [SerializeField] private Button[] ansBtns;
+    [SerializeField] private string[] answers = new string[3];
 
 
-//    string username = "Daiavoloz";
-//    string birthDate = "21102000";
+    //public static rUIPassword Instance { get => instance; }
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //    }
+    //    else if (instance != null)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //    DontDestroyOnLoad(gameObject);
+    //}
 
-//    public UnityEvent<string> OnTakeNewPassword;
-//    public UnityEvent<string> OnTakePreSetPassword;
+    void Start()
+    {
+        playerManager = GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>();
 
-//    void Start()
-//    {
-//        //Time.timeScale = 0f;
-//        //loginPanel.SetActive(true);
-//        createPasswordPanel.SetActive(false);
-//        checkPasswordPanel.SetActive(false);
-//        //Cursor.lockState = CursorLockMode.Confined;
-//    }
+        passwordIF = createPasswordPanel.GetComponentInChildren<TMP_InputField>();
+        passwordBtn = createPasswordPanel.GetComponentInChildren<Button>();
+        passwordBtn.onClick.AddListener(TakeNewPassword);
+        createPasswordPanel.SetActive(false);
+        checkPasswordPanel.SetActive(false);
 
-//    public void LoginBtnClicked()
-//    {
-//        Time.timeScale = 1f;
-//        PlayerPrefs.SetString("username", username);
-//        PlayerPrefs.SetString("birthDate", birthDate);
-//        loginPanel.SetActive(false);
-//        Cursor.lockState = CursorLockMode.Locked;
-//    }
+        ansBtns = checkPasswordPanel.GetComponentsInChildren<Button>();
+        ansBtns[0].onClick.AddListener(() => { TakeAns(ansBtns[0]); });
+        ansBtns[1].onClick.AddListener(() => { TakeAns(ansBtns[1]); });
+        ansBtns[2].onClick.AddListener(() => { TakeAns(ansBtns[2]); });
 
-//    public void ShowCreatePasswordPanel()
-//    {
-//        Time.timeScale = 0f;
-//        createPasswordPanel.SetActive(true);
-//        Cursor.lockState = CursorLockMode.Confined;
-//    }
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
-//    public void ShowCheckPasswordPanel()
-//    {
-//        Time.timeScale = 0f;
-//        checkPasswordPanel.SetActive(true);
-//        Cursor.lockState = CursorLockMode.Confined;
-//    }
+    public void TakeAns(Button selectedBtn)
+    {
+        if(selectedBtn.GetComponent<rAnswerButton>().IsCorrect)
+        {
+            Debug.Log("Correct Password");
+            rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
+            rPasswordManager.Instance.CheckStrength(selectedBtn.GetComponentInChildren<TMP_Text>().text);
+        }
+        else
+        {
+            Debug.Log("Wrong Password");
+        }
 
-//    /**
-//     * TakePassword() is called when Form Army button is clicked 
-//     */
-//    public void TakeNewPassword()
-//    {
-//        if (string.IsNullOrEmpty(newPasswordIF.text))
-//        {
-//            return;
-//        }
+        checkPasswordPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+        playerManager.enabled = true;
+    }
 
-//        // raise event for check strength to get called
-//        OnTakeNewPassword?.Invoke(newPasswordIF.text);
+    public void ShowCreatePasswordPanel()
+    {
+        playerManager.enabled = false;
+        Time.timeScale = 0f;
 
-//        createPasswordPanel.SetActive(false);
-//        Cursor.lockState = CursorLockMode.Locked;
-//        Time.timeScale = 1f;
-//    }
+        createPasswordPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+    }
 
-//    public void TakePreSetPassword()
-//    {
-//        if (string.IsNullOrEmpty(newPasswordIF.text))
-//        {
-//            return;
-//        }
+    public void ShowCheckPasswordPanel()
+    {
+        playerManager.enabled = false;
+        Time.timeScale = 0f;
+        string correctAns = rPasswordManager.Instance.CurrentArea.areaPassword;
+        Debug.Log($"Correct Answer is {correctAns}");
 
-//        // raise event for check strength to get called
-//        OnTakePreSetPassword?.Invoke(preSetPasswordIF.text);
+        /// generate 2 answers shuffled from the correct answer
+        /// and randomly set answers to buttons
+        SetAnswersToButtons(correctAns);
 
-//        createPasswordPanel.SetActive(false);
-//        Cursor.lockState = CursorLockMode.Locked;
-//        Time.timeScale = 1f;
-//    }
-//}
+        checkPasswordPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+    }
 
+    /**
+     * TakePassword() is called when password button is clicked 
+     */
+    private void TakeNewPassword()
+    {
+        if (string.IsNullOrEmpty(passwordIF.text))
+        {
+            return;
+        }
+
+        rPasswordManager.Instance.ManagePassword(passwordIF.text);
+
+        createPasswordPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+        passwordIF.text = null;
+        playerManager.enabled = true;
+    }
+
+
+    private void SetAnswersToButtons(string correctAns)
+    {
+        answers[0] = correctAns;
+        answers[1] = Shuffle(correctAns);
+        answers[2] = Shuffle(correctAns);
+
+        System.Random rand = new System.Random();
+        int n = answers.Length;
+        while (n > 1)
+        {
+            n--;
+            int k = rand.Next(n + 1);
+            string temp = answers[k];
+            answers[k] = answers[n];
+            answers[n] = temp;
+        }
+
+
+        for (int i = 0; i < ansBtns.Length; i++)
+        {
+            ansBtns[i].GetComponent<rAnswerButton>().IsCorrect = false;
+        }
+
+        for (int i = 0; i < ansBtns.Length; i++)
+        {
+            ansBtns[i].GetComponentInChildren<TMP_Text>().text = answers[i];
+            if (answers[i] == correctAns)
+            {
+                ansBtns[i].GetComponent<rAnswerButton>().IsCorrect = true;
+            }
+        }
+    }
+
+    private string Shuffle(string str)
+    {
+        char[] chars = str.ToCharArray();
+        System.Random rand = new System.Random();
+        for (int i = 0; i < chars.Length - 1; i++)
+        {
+            int j = rand.Next(i, chars.Length);
+            char temp = chars[i];
+            chars[i] = chars[j];
+            chars[j] = temp;
+        }
+        return new string(chars);
+    }
+
+    #endregion
+}
