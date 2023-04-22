@@ -20662,7 +20662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c62f952f06c9746add3e010b1dc9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  friendSpawner: {fileID: 1744887845}
 --- !u!4 &366988790
 Transform:
   m_ObjectHideFlags: 0
@@ -21410,22 +21409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a849943677723814f83f60069cc18a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEntered: 0
-  OnAreaEnteredEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5899312107867005517}
-        m_TargetAssemblyTypeName: rUIManager, Assembly-CSharp
-        m_MethodName: ShowPasswordPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &548625819
 GameObject:
   m_ObjectHideFlags: 0
@@ -45415,11 +45398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 878171c354ddaf448b4447cf80fccf0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 10
-  minDistanceFromObject: 5
-  maxDistanceFromObject: 10
-  avoidanceDistance: 2
-  Friends: []
 --- !u!114 &1744887846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45432,12 +45410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029f4f2b429a71141ba8d01429727d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armySize: 10
-  spawnRadius: 10
-  minDistanceFromObject: 5
-  maxDistanceFromObject: 10
-  avoidanceDistance: 5
-  enemies: []
 --- !u!43 &1752712957
 Mesh:
   m_ObjectHideFlags: 0
@@ -89827,7 +89799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &5899312107867005513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89880,12 +89852,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c41a449914c6d24ca3b03b7bc22277e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loginPanel: {fileID: 5899312108678218372}
-  passwordPanel: {fileID: 5899312107444609675}
-  passwordIF: {fileID: 5899312107616799565}
-  debugTxt: {fileID: 5899312108349955638}
-  OnPasswordEntered: {fileID: 11400000, guid: 63690d0af7cda9941a8c32d4f5b3bf80, type: 2}
-  passwordManager: {fileID: 366988788}
 --- !u!114 &5899312107867005518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90769,7 +90735,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 16.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -5,21 +5,54 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+public enum ProjectOnPlaneAxis { forward, right };
+
 public class CS_AttackHandler : MonoBehaviour
 {
+    [Header("List Of Hit Objects (can't take damage again)")]
     [SerializeField] List<Collider> hitObjects = new List<Collider>();
-    [SerializeField] Transform weapon, player;
+
+    [Header("Player and Weapon")]
+    [SerializeField] Transform weaponTip;
+    [SerializeField] Vector3 firstPoint, secondPoint;
+
+    [Header("Variables")]
     [SerializeField] float speed;
 
 
-
-
-    public void SetAttackRotation() 
+    public void SetFirstPoint()
     {
-        transform.rotation=weapon.rotation;
-        transform.position= player.GetComponent<Collider>().bounds.center;
+        firstPoint = weaponTip.transform.position;
+    }
+
+    public void ProjectOnAxis(Vector3 axis, Vector3 playerForward, Vector3 position)
+    {
+        secondPoint = weaponTip.transform.position;
+        //RotateTowardDirection();
+        CalculateRotation(axis);
+
+        transform.position = position;
         GetComponentInChildren<Rigidbody>().velocity = Vector3.zero;
-        GetComponentInChildren<Rigidbody>().AddForce(player.forward * speed, ForceMode.VelocityChange);
+        GetComponentInChildren<Rigidbody>().AddForce(playerForward * speed, ForceMode.VelocityChange);
+    }
+
+    //public void RotateTowardDirection()
+    //{
+    //    transform.position = firstPoint;
+    //    transform.LookAt(secondPoint);
+    //    firstPoint = Vector3.ProjectOnPlane(transform.position, player.forward);
+    //    secondPoint = Vector3.ProjectOnPlane(transform.GetChild(0).transform.position, player.forward);
+    //    Vector3 direction = firstPoint - secondPoint;
+    //    transform.rotation = Quaternion.LookRotation(direction);
+    //}
+
+    private void CalculateRotation(Vector3 value)
+    {
+        Vector3 direction = secondPoint - firstPoint;
+        Vector3 projectedDirection = Vector3.ProjectOnPlane(direction, value);
+        transform.rotation = Quaternion.LookRotation(projectedDirection);
+
     }
 
     // Update is called once per frame
@@ -31,7 +64,6 @@ public class CS_AttackHandler : MonoBehaviour
 
     private void OnDisable()
     {
-        hitObjects.Clear();
 
     }
 

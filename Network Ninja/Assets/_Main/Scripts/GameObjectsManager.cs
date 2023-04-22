@@ -16,14 +16,14 @@ public class GameObjectsManager : MonoBehaviour
     [SerializeField] FriendStates tankPrefab;
 
     [Header("Level Objects")]
-    [SerializeField] EnemyStates enemyPrefab;
+    [SerializeField] NPCStateMachine enemyPrefab;
     [SerializeField] Transform objectToSpawnAround;
     [SerializeField] Transform[] wayPoints;
 
 
 
     public static GameObjectsManager Instance { get => instance; }
-    public EnemyStates EnemyPrefab { get => enemyPrefab; }
+    public NPCStateMachine EnemyPrefab { get => enemyPrefab; }
     public Transform ObjectToSpawnAround { get => objectToSpawnAround; }
     public Transform[] WayPoints { get => wayPoints; }
     public GameObject Player { get => player; }
