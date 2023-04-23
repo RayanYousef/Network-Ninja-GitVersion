@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class rAnswerButton : MonoBehaviour
+public class rAnswerButton :MonoBehaviour
 {
     [SerializeField] private bool isCorrect;
 

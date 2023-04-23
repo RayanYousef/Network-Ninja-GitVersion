@@ -11,8 +11,7 @@ public class rArea : MonoBehaviour
 {
     [SerializeField] public AreaType areaType;
     [SerializeField] public int areaID;
-
-    [SerializeField] public string areaPassword;
+    [SerializeField] public string Password;
 
     [SerializeField] private bool fightCompleted = false;
 
@@ -28,7 +27,7 @@ public class rArea : MonoBehaviour
     void Start()
     {
         areaID = GetInstanceID();
-        areaPassword = null;
+        Password = null;
         areaCollider.isTrigger = false;
     }
 
@@ -46,7 +45,7 @@ public class rArea : MonoBehaviour
 
             if (areaType == AreaType.Base)
             {
-                if(areaPassword != null)
+                if(Password != null)
                 {
                     // UI CheckPasswordPanel listens to this event
                     OnAreaRevisited?.Invoke();

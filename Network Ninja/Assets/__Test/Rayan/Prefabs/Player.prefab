@@ -1281,7 +1281,7 @@ Transform:
   m_GameObject: {fileID: 5697694058882828405}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.208, z: 1.07}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2887399466128720272}
@@ -1913,7 +1913,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.28
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -1978,6 +1978,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd60e984a0c4ba4ab4eb92808b1e6ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartRecordingEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  StopRecordingEvent:
+    m_PersistentCalls:
+      m_Calls: []
   anim: {fileID: 0}
   moveController: {fileID: 0}
   animController: {fileID: 0}
