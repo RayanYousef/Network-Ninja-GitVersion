@@ -7,17 +7,19 @@ using TMPro;
 
 public enum AreaType { Base, Fight };
 
+
+
 public class rArea : MonoBehaviour
 {
     [SerializeField] public AreaType areaType;
     [SerializeField] public int areaID;
-
-    [SerializeField] public string areaPassword;
+    [SerializeField] public string Password;
 
     [SerializeField] private bool fightCompleted = false;
 
-    public UnityEvent OnBaseFirstVisitOrFightCompleted;
-    public UnityEvent OnAreaRevisited;
+    //public UnityEvent OnBaseFirstVisitOrFightCompleted;
+    //public UnityEvent OnAreaRevisited;
+    [SerializeField] UnityEvent OnEnteringArea;
 
     public Collider areaCollider;
 
@@ -28,7 +30,7 @@ public class rArea : MonoBehaviour
     void Start()
     {
         areaID = GetInstanceID();
-        areaPassword = null;
+        Password = null;
         areaCollider.isTrigger = false;
     }
 
@@ -46,16 +48,19 @@ public class rArea : MonoBehaviour
 
             if (areaType == AreaType.Base)
             {
-                if(areaPassword != null)
-                {
-                    // UI CheckPasswordPanel listens to this event
-                    OnAreaRevisited?.Invoke();
-                }
-                else
-                {
-                    // UI CreatePasswordPanel listens to this event
-                    OnBaseFirstVisitOrFightCompleted?.Invoke();
-                }
+                //if(Password != null)
+                //{
+                //    // UI CheckPasswordPanel listens to this event
+                //    OnAreaRevisited?.Invoke();
+                //}
+                //else
+                //{
+                //    // UI CreatePasswordPanel listens to this event
+                //    OnBaseFirstVisitOrFightCompleted?.Invoke();
+                //}
+
+                // On Entering Area call On Entering Area in UIPassword
+                OnEnteringArea?.Invoke();
             }
             else
             {

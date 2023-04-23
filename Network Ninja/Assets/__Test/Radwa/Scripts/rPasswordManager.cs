@@ -23,7 +23,7 @@ public class rPasswordManager : MonoBehaviour
 
     //
     public static rPasswordManager Instance { get => instance; }
-    public rArea CurrentArea { get => currentArea; set => currentArea = value; }
+    public rArea CurrentArea { get { return currentArea; } set => currentArea = value; }
 
     private void Awake()
     {
@@ -45,20 +45,20 @@ public class rPasswordManager : MonoBehaviour
      *      - if the password is new, call:
      *  - CheckStrength to check the new password strength ans instantiate a friendly army
      */
-    public void ManagePassword(string password)
-    {
-        if (currentArea.areaPassword != null)
-        {
-            CheckPassword(password);
-            return;
-        }
-        areasPassword.Add(currentArea.areaID, currentArea.areaPassword);
-        currentArea.areaPassword = password;
-        CheckStrength(currentArea.areaPassword);
-        currentArea.GetComponent<Collider>().isTrigger = true;
-    }
+    //public void ManagePassword(string password)
+    //{
+    //    //if (currentArea.Password != null)
+    //    //{
+    //    //    CheckPassword(password);
+    //    //    return;
+    //    //}
+    //    //areasPassword.Add(currentArea.areaID, currentArea.Password);
+    //    currentArea.Password = password;
+    //    CheckStrength(currentArea.Password);
+    //    currentArea.GetComponent<Collider>().isTrigger = true;
+    //}
 
-    public void CheckStrength(string password)
+    public void CheckCurrentAreaPasswordStrength()
     {
         /// load user personal data to check the password against them
         loadUserPrivateData();
@@ -70,7 +70,7 @@ public class rPasswordManager : MonoBehaviour
         /// 4. comparing to previous passwords and common used passwords (12345678, qwerty, etc...)
 
         /// 1. Check length
-        int length = password.Length;
+        int length = currentArea.Password.Length;
         int complexity = 0;
         soldiersType = Soldiers.Melee;
 
@@ -80,13 +80,12 @@ public class rPasswordManager : MonoBehaviour
             return;
         }
 
-        PlayerPrefs.SetString(name, password);
+        PlayerPrefs.SetString(name, currentArea.Password);
         //Debug.Log("Correct call");
 
         if (length < 8)
         {
             strength = PasswordStrength.Weak;
-            FormArmy();
             return;
         }
         else if (length < 12)
@@ -99,15 +98,15 @@ public class rPasswordManager : MonoBehaviour
         }
 
         /// 2. Check complexity
-        if (System.Text.RegularExpressions.Regex.IsMatch(password, @"[A-Z]"))
+        if (System.Text.RegularExpressions.Regex.IsMatch(currentArea.Password, @"[A-Z]"))
         {
             complexity++;
         }
-        if (System.Text.RegularExpressions.Regex.IsMatch(password, @"[a-z]"))
+        if (System.Text.RegularExpressions.Regex.IsMatch(currentArea.Password, @"[a-z]"))
         {
             complexity++;
         }
-        if (System.Text.RegularExpressions.Regex.IsMatch(password, @"[0-9]"))
+        if (System.Text.RegularExpressions.Regex.IsMatch(currentArea.Password, @"[0-9]"))
         {
             if (complexity > 0)
             {
@@ -119,7 +118,7 @@ public class rPasswordManager : MonoBehaviour
             }
             complexity++;
         }
-        if (System.Text.RegularExpressions.Regex.IsMatch(password, @"[!@#$%^&*()_+=\[{\]};:<>|./?,-]"))
+        if (System.Text.RegularExpressions.Regex.IsMatch(currentArea.Password, @"[!@#$%^&*()_+=\[{\]};:<>|./?,-]"))
         {
             soldiersType = Soldiers.MeleeRangedTank;
             complexity++;
@@ -146,17 +145,6 @@ public class rPasswordManager : MonoBehaviour
         //}
 
         // 4. Check common used passwords
-        foreach (string weakPassword in easyToGuessPasswords)
-        {
-            if (password.ToLower().Contains(weakPassword))
-            {
-                strength = PasswordStrength.Weak;
-                FormArmy();
-                return;
-            }
-        }
-
-        FormArmy();
     }
 
     void loadUserPrivateData()
@@ -172,6 +160,16 @@ public class rPasswordManager : MonoBehaviour
 
     public void FormArmy()
     {
+
+        foreach (string weakPassword in easyToGuessPasswords)
+        {
+            if (currentArea.Password.ToLower().Contains(weakPassword))
+            {
+                strength = PasswordStrength.Weak;
+
+            }
+        }
+
         int solidersNumbers = 15;
         int rings = 2;
         switch (strength)

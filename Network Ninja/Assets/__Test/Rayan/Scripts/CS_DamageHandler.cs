@@ -8,12 +8,13 @@ using UnityEngine.Events;
 
 public enum ProjectOnPlaneAxis { forward, right };
 
-public class CS_AttackHandler : MonoBehaviour
+public class CS_DamageHandler : MonoBehaviour
 {
     [Header("List Of Hit Objects (can't take damage again)")]
     [SerializeField] List<Collider> hitObjects = new List<Collider>();
 
     [Header("Player and Weapon")]
+    [SerializeField] CS_ObjectStats stats;
     [SerializeField] Transform weaponTip;
     [SerializeField] Vector3 firstPoint, secondPoint;
 
@@ -62,16 +63,14 @@ public class CS_AttackHandler : MonoBehaviour
 
     }
 
-    private void OnDisable()
-    {
-
-    }
-
     public void OnTriggerEnter(Collider other)
     {
-        if (!hitObjects.Contains(other))
+        if (!hitObjects.Contains(other) &&  other.TryGetComponent<IDamageable>(out IDamageable damagable))
         {
-            Debug.Log(other.name);
+            CS_ObjectStats otherStats = other.GetComponentInChildren<CS_ObjectStats>();
+            hitObjects.Add(other);  
+            if(stats != null && otherStats.team != stats.team)
+                damagable.ApplyDamage(stats.attack);
         }
     }
 }
