@@ -48,7 +48,7 @@ public class rUIPassword : MonoBehaviour
 
     public void TakeAns(Button selectedBtn)
     {
-        if(selectedBtn.GetComponent<rAnswerButton>().IsCorrect)
+        if (selectedBtn.GetComponent<rAnswerButton>().IsCorrect)
         {
             Debug.Log("Correct Password");
             rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
@@ -66,7 +66,21 @@ public class rUIPassword : MonoBehaviour
     }
 
     #region UI Panels
-    public void ShowCreatePasswordPanel()
+
+    public void OnEnteringAreaShowPannels()
+    {
+
+        switch (rPasswordManager.Instance.CurrentArea.Password != null)
+        {
+            case true:
+                ShowCheckPasswordPanel();
+                break;
+            case false:
+                ShowCreatePasswordPanel();
+                break;
+        }
+    }
+     void ShowCreatePasswordPanel()
     {
         playerInputs.enabled = false;
         Time.timeScale = 0f;
@@ -76,7 +90,7 @@ public class rUIPassword : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
     }
 
-    public void ShowCheckPasswordPanel()
+     void ShowCheckPasswordPanel()
     {
         playerInputs.enabled = false;
         Time.timeScale = 0f;
@@ -89,7 +103,7 @@ public class rUIPassword : MonoBehaviour
 
         checkPasswordPanel.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
-    } 
+    }
     #endregion
 
     #region On Button Clicked Do Functions
@@ -101,7 +115,7 @@ public class rUIPassword : MonoBehaviour
         }
 
         //rPasswordManager.Instance.ManagePassword(passwordIF.text);
-        rPasswordManager.Instance.CurrentArea.Password= passwordIF.text;
+        rPasswordManager.Instance.CurrentArea.Password = passwordIF.text;
         rPasswordManager.Instance.CheckCurrentAreaPasswordStrength();
         rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
         rPasswordManager.Instance.FormArmy();
