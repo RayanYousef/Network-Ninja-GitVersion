@@ -86,7 +86,7 @@ public class rUIPassword : MonoBehaviour
         Time.timeScale = 0f;
 
         createPasswordPanel.SetActive(true);
-        passwordIF.Select();
+        //passwordIF.Select();
         Cursor.lockState = CursorLockMode.Confined;
     }
 

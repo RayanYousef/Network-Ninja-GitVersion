@@ -8,7 +8,8 @@ public class rTempFriendScript : MonoBehaviour
     //{
     //    if (collision.gameObject.TryGetComponent<rArea>(out rArea area))
     //    {
-    //        Destroy(transform.parent.gameObject);
+    //        //Destroy(transform.parent.gameObject);
+    //        Destroy(gameObject);
     //    }
     //}
 }
