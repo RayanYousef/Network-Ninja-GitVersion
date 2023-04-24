@@ -123,6 +123,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &48465787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 48465788}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &48465788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48465787}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 472.21695, y: 195.81575, z: 53.626545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1921848853}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &295655714
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1196389188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,6 +655,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1921848852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1921848853}
+  - component: {fileID: 1921848854}
+  m_Layer: 0
+  m_Name: GameObjectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1921848853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921848852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 48465788}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1921848854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921848852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d117a8eaba958794bbba6bc3985b6761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5977481141217125452, guid: 18ec71b734f4bb54ea44c16dba2058d3, type: 3}
+  meleePrefab: {fileID: 4533766031866850556, guid: 26f5e7fbe32fd514fb11dff50cf960ea,
+    type: 3}
+  rangedPrefab: {fileID: 1885868845091933978, guid: 5ce3946103e0c514d8e9b9a7faec181e,
+    type: 3}
+  tankPrefab: {fileID: 8685197617551417825, guid: 939d0dd6c1ce07b45823487277097875,
+    type: 3}
+  enemyPrefab: {fileID: 6668250516416360774, guid: 73f9f6b5701f7ef45964231b954cd7d7,
+    type: 3}
+  objectToSpawnAround: {fileID: 1196389189}
 --- !u!1 &2040986850
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,6 +834,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 548722731242729380, guid: 73f9f6b5701f7ef45964231b954cd7d7,
+        type: 3}
+      propertyPath: attackMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 6668250515258244826, guid: 73f9f6b5701f7ef45964231b954cd7d7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

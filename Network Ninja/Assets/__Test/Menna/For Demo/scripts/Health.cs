@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
@@ -10,6 +11,9 @@ public class Health : MonoBehaviour
    public int currentHealth;
     Animator animator;
     public Slider HealthBar;
+
+    public UnityEvent OnEnemyKilled;  // Declare the event
+
 
 
     // Start is called before the first frame update
@@ -41,17 +45,11 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
+        // Raise the event when the enemy is killed
+        OnEnemyKilled.Invoke();
+        //animation
         animator.SetTrigger("Death");
 
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.CompareTag("Player"))
-    //    {
-    //        Debug.Log("playerhealth");
-    //        PlayerHealth PH = other.gameObject.GetComponent<PlayerHealth>();
-    //        PH.TakeDamage(25);
-    //    }
-    //}
 }

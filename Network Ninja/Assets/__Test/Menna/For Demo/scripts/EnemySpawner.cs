@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class EnemySpawner : MonoBehaviour
 
 
     public List<GameObject> enemies;  // A list of all spawned enemies.
+
+    public UnityEvent OnAllEnemiesKilled;
+
 
     void Start()
     {
@@ -31,10 +35,20 @@ public class EnemySpawner : MonoBehaviour
         {
             Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
             GameObject enemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+            enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
             enemies.Add(enemy);
         }
 
 
+    }
+
+    void HandleEnemyKilled(GameObject enemy)
+    {
+        enemies.Remove(enemy);
+        if (enemies.Count == 0 && OnAllEnemiesKilled != null)
+        {
+            OnAllEnemiesKilled.Invoke();
+        }
     }
 }
 
