@@ -3940,7 +3940,7 @@ GameObject:
   - component: {fileID: 33029496866222055}
   - component: {fileID: 23818828559189471}
   - component: {fileID: 65221492555151331}
-  - component: {fileID: 65314467849537172}
+  - component: {fileID: 65221492555151332}
   m_Layer: 6
   m_Name: Centre Cube
   m_TagString: Untagged
@@ -4026,7 +4026,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9999999, y: 0.99999994, z: 0.99999994}
   m_Center: {x: -0.00000047683716, y: -0.000000059604645, z: 0.00000023841858}
---- !u!114 &65314467849537172
+--- !u!114 &65221492555151332
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4035,13 +4035,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1365697119629549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9420ebd662cd0546a0f0b8aa7d271ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 358e228c87df7164c992c6c3efef015c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
-  health: 0
-  maxHealth: 1000
-  attack: 10
+  objectsRenderer: []
+  MaxHealth: {r: 0, g: 1, b: 0.06837106, a: 0.2627451}
+  HalfHealth: {r: 0.93591917, g: 1, b: 0, a: 0.25490198}
+  LowHealth: {r: 1, g: 0, b: 0, a: 0.24705882}
+  colorState: 0
 --- !u!1001 &5977481142721937419
 PrefabInstance:
   m_ObjectHideFlags: 0
