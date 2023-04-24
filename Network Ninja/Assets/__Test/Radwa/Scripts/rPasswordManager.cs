@@ -8,15 +8,15 @@ public enum PasswordStrength { Weak, Moderate, Strong };
 public class rPasswordManager : MonoBehaviour
 {
     private static rPasswordManager instance;
-    //
 
-    private rArea currentArea;
+    [SerializeField] int maxSoldiersNumber = 80;
 
-    private PasswordStrength strength;
-    private Soldiers soldiersType;
+    [Header("Current Area Info")]
+    [SerializeField] rArea currentArea;
+    [SerializeField] PasswordStrength strength;
+    [SerializeField] Soldiers soldiersType;
 
     [Header("Password Lists")]
-    [SerializeField] private Dictionary<int, string> areasPassword = new Dictionary<int, string>();
     private string[] playerPersonalData;
     private string[] easyToGuessPasswords = {"pAssword", "passw0rd", "123456789",
                                              "abcdefghi", "qwerty", "NetworkNinja"};
@@ -24,6 +24,8 @@ public class rPasswordManager : MonoBehaviour
     //
     public static rPasswordManager Instance { get => instance; }
     public rArea CurrentArea { get { return currentArea; } set => currentArea = value; }
+
+    public int MaxSoldiersNumber { get => maxSoldiersNumber; }
 
     private void Awake()
     {
@@ -86,7 +88,6 @@ public class rPasswordManager : MonoBehaviour
         if (length < 8)
         {
             strength = PasswordStrength.Weak;
-            return;
         }
         else if (length < 12)
         {
@@ -124,14 +125,14 @@ public class rPasswordManager : MonoBehaviour
             complexity++;
         }
 
-        if (complexity <= 2)
-        {
+        if (complexity < 2)
+            strength = PasswordStrength.Weak;
+        else if (complexity <= 3)
             strength = PasswordStrength.Moderate;
-        }
-        else
-        {
+        else if (complexity > 3)
             strength = PasswordStrength.Strong;
-        }
+
+        Debug.Log(complexity);
 
         /// 3. Check personal data
         //foreach (string weakPassword in playerPersonalData)
@@ -158,38 +159,45 @@ public class rPasswordManager : MonoBehaviour
         playerPersonalData[1] = PlayerPrefs.GetString("birthDate").ToLower();
     }
 
-    public void FormArmy()
-    {
 
+    public void SetAreaHealthBasedOnPassword()
+    {
         foreach (string weakPassword in easyToGuessPasswords)
         {
             if (currentArea.Password.ToLower().Contains(weakPassword))
             {
                 strength = PasswordStrength.Weak;
-
             }
         }
 
-        int solidersNumbers = 15;
-        int rings = 2;
         switch (strength)
         {
             case PasswordStrength.Weak:
+                currentArea.Health = MaxSoldiersNumber / 4;
                 break;
 
             case PasswordStrength.Moderate:
-                solidersNumbers = 45; // 4*5
-                rings = 3;
+                currentArea.Health = MaxSoldiersNumber / 2;
                 break;
 
             case PasswordStrength.Strong:
-                solidersNumbers = 80; // 6*5
-                rings = 4;
-                break;
-
-            default:
+                currentArea.Health = MaxSoldiersNumber;
                 break;
         }
+
+    }
+
+    public void FormArmyBasedOnAreaHealth()
+    {
+        int rings = 0;
+        if (currentArea.Health <= MaxSoldiersNumber / 4)
+            rings = 1;
+        else if (currentArea.Health <= MaxSoldiersNumber / 2)
+            rings = 2;
+        else if (currentArea.Health <= MaxSoldiersNumber)
+            rings = 3;
+
+        Debug.Log(rings);
 
         /// later, it'd be better to send to the friendly soliders AI script both
         /// the password strength and complexity and the switch case is done there
@@ -197,7 +205,7 @@ public class rPasswordManager : MonoBehaviour
 
         ///also we can instantiate the army using StartCoroutine to instantiate one by one
         RadialFormation rf = currentArea.GetComponentInChildren<RadialFormation>();
-        rf.Amount = solidersNumbers;
+        rf.Amount = currentArea.Health;
         rf.Rings = rings;
         ExampleArmy ea = currentArea.GetComponentInChildren<ExampleArmy>();
         ea.SetPrefabsTypes(soldiersType);
@@ -226,14 +234,13 @@ public class rPasswordManager : MonoBehaviour
         }
 
         //Debug.Log("Correct call");
-        
-        if (password == areasPassword[currentArea.areaID])
+
+        if (password == currentArea.Password)
         {
             Debug.Log("Correct Password");
             currentArea.GetComponent<Collider>().isTrigger = true;
             return;
         }
-        Debug.Log("Wrong Password");
     }
 
     //public void AutoTest()
