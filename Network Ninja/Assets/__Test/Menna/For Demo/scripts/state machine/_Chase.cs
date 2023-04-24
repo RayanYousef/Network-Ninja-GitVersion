@@ -9,7 +9,6 @@ public class _Chase : StateMachineBehaviour
 
     public float speed;
     public float attackRange;
-    public float chaseRange;
 
     Rigidbody RB;
     private Transform player;
