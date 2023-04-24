@@ -32,7 +32,8 @@ public class ExampleArmy : MonoBehaviour {
     private void SetFormation() {
         _points = Formation.EvaluatePoints().ToList();
 
-        if (_points.Count > _spawnedUnits.Count) {
+        if (_points.Count > _spawnedUnits.Count)
+        {
             var remainingPoints = _points.Skip(_spawnedUnits.Count);
             Spawn(remainingPoints);
         }

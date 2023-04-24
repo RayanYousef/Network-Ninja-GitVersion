@@ -1,0 +1,52 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+    private Transform player;
+
+
+
+    //overlap
+    public float avoidanceRadius = 1f;
+    public float avoidanceForce = 1f;
+    public LayerMask overlapLayer;
+
+    private Collider[] overlappingColliders;
+
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player").transform;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.LookAt(player);
+
+    }
+
+    private void FixedUpdate()
+    {
+        // Detect overlapping colliders within the specified radius
+        overlappingColliders = Physics.OverlapSphere(transform.position, avoidanceRadius, overlapLayer);
+
+        // Apply force to avoid overlapping with other colliders
+        foreach (Collider collider in overlappingColliders)
+        {
+            if (collider.gameObject != gameObject) // Ignore self
+            {
+                Vector3 avoidanceDirection = transform.position - collider.transform.position;
+                Vector3 avoidanceForceVector = avoidanceDirection.normalized * avoidanceForce;
+                GetComponent<Rigidbody>().AddForce(avoidanceForceVector);
+            }
+        }
+    }
+
+
+}

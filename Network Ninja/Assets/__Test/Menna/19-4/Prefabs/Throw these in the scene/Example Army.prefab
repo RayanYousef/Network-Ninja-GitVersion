@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5568599887042208713}
   - component: {fileID: 5568599887042208712}
   - component: {fileID: 6163999930963739124}
-  - component: {fileID: 8515708254506814540}
+  - component: {fileID: 6959702384360562876}
   m_Layer: 0
   m_Name: Example Army
   m_TagString: Dummie
@@ -47,8 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6315fc45ff4dce74b8e5af6de60294eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitPrefab: {fileID: 4195298518560012091, guid: c11d109d3489f0f4ebd9e281d01c7332,
-    type: 3}
+  _unitPrefab: {fileID: 0}
   _unitSpeed: 2
 --- !u!114 &5568599887042208712
 MonoBehaviour:
@@ -80,7 +79,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8515708254506814540
+--- !u!114 &6959702384360562876
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,12 +88,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5568599887042208718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de2240909800957478cb1b0afb0bc89a, type: 3}
+  m_Script: {fileID: 11500000, guid: bcfad69e23d1bcb40b2d7ad4b423e3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _noise: 0
   Spread: 1
-  _unitWidth: 5
-  _unitDepth: 5
-  _hollow: 0
+  _amount: 10
+  _radius: 1
+  _radiusGrowthMultiplier: 0
+  _rotations: 1
+  _rings: 1
+  _ringOffset: 1
   _nthOffset: 0

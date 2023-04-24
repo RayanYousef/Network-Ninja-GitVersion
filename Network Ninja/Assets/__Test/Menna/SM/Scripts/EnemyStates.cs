@@ -90,7 +90,7 @@ public class EnemyStates : MonoBehaviour
         {
             Vector3 targetPositopn;
             targetPositopn = player.transform.position - transform.forward * distance;
-            Seek(targetPositopn);
+            Seek(player.transform.position);
             // animator.Play("Attack1");
             IsAttack1 = true;
             animator.SetBool("IsAttack1", IsAttack1);
@@ -121,7 +121,7 @@ public class EnemyStates : MonoBehaviour
         {
             Vector3 targetPositopn;
             targetPositopn = player.transform.position - transform.forward * distance;
-            Seek(targetPositopn);
+            Seek(player.transform.position);
             //animator.Play("Attack2");
             IsAttack2 = true;
             animator.SetBool("IsAttack2", IsAttack2);
