@@ -11,21 +11,26 @@ public enum AreaType { Base, Fight };
 
 public class rArea : MonoBehaviour
 {
+    [Header("Area Info")]
     [SerializeField] public AreaType areaType;
     [SerializeField] public int areaID;
     [SerializeField] public string Password;
 
     [SerializeField] private bool fightCompleted = false;
 
-    //public UnityEvent OnBaseFirstVisitOrFightCompleted;
-    //public UnityEvent OnAreaRevisited;
     [SerializeField] UnityEvent OnEnteringArea;
 
     public Collider areaCollider;
 
+    [Header("MiniMap Components")]
+    SpriteRenderer areaMapUI, passwordSharedUI;
+
+
     private void Awake()
     {
         areaCollider = GetComponent<Collider>();
+        areaMapUI = GetComponentsInChildren<SpriteRenderer>()[0];
+        passwordSharedUI = GetComponentsInChildren<SpriteRenderer>()[1];
     }
     void Start()
     {
@@ -48,18 +53,7 @@ public class rArea : MonoBehaviour
 
             if (areaType == AreaType.Base)
             {
-                //if(Password != null)
-                //{
-                //    // UI CheckPasswordPanel listens to this event
-                //    OnAreaRevisited?.Invoke();
-                //}
-                //else
-                //{
-                //    // UI CreatePasswordPanel listens to this event
-                //    OnBaseFirstVisitOrFightCompleted?.Invoke();
-                //}
-
-                // On Entering Area call On Entering Area in UIPassword
+                /// On Entering Area call On Entering Area in UIPassword
                 OnEnteringArea?.Invoke();
             }
             else
@@ -87,10 +81,6 @@ public class rArea : MonoBehaviour
             {
                 GetComponentInChildren<ExampleArmy>().enabled = false;
             }
-
-            //isInside = false;
-            // TO DO
-            // Disable the army in the area the player just left
         }
     }
 }
