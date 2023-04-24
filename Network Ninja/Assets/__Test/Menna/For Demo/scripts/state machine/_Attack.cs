@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class _Attack : StateMachineBehaviour
 {
-    public float speed;
     public float attackRange;
 
     Rigidbody RB;
