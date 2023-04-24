@@ -9,6 +9,7 @@ public class _Attack : StateMachineBehaviour
 
     Rigidbody RB;
     private Transform player;
+    
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -16,6 +17,8 @@ public class _Attack : StateMachineBehaviour
         RB = animator.GetComponent<Rigidbody>();
         // player = GameObjectsManager.Instance.Player.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        RB.velocity = Vector3.zero;
+
 
     }
 

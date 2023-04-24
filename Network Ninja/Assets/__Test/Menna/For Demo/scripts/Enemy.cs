@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
     Transform player;
 
+    NavMeshAgent agent;
 
 
     //overlap
@@ -28,8 +30,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player);
-
+        //transform.LookAt(player);
+        agent.SetDestination(player.position);
     }
 
     private void FixedUpdate()
