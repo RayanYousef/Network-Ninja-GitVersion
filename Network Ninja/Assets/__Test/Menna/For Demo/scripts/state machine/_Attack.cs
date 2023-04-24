@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class _Attack : StateMachineBehaviour
 {
-    public float speed;
     public float attackRange;
 
     Rigidbody RB;
     private Transform player;
+    private NavMeshAgent agent;
     
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -17,14 +18,15 @@ public class _Attack : StateMachineBehaviour
         RB = animator.GetComponent<Rigidbody>();
         // player = GameObjectsManager.Instance.Player.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        RB.velocity = Vector3.zero;
-
+        //RB.velocity = Vector3.zero;
+        agent = animator.GetComponent<NavMeshAgent>();  
 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+       // agent.velocity = Vector3.zero;
 
         if (Vector3.SqrMagnitude(player.transform.position - RB.transform.position) > attackRange)
         {

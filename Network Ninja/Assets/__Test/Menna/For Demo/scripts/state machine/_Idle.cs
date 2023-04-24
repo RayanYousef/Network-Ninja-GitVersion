@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class _Idle : StateMachineBehaviour
 {
     public float chaseRange;
 
-
     Rigidbody RB;
     private Transform player;
+    NavMeshAgent agent;
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -17,6 +18,9 @@ public class _Idle : StateMachineBehaviour
         //player = GameObjectsManager.Instance.Player.transform;
         RB = animator.GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        agent = animator.GetComponent<NavMeshAgent>();
+      //  RB.velocity = Vector3.zero;
+
 
     }
 
@@ -24,6 +28,7 @@ public class _Idle : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Debug.Log("Idle");
+        agent.velocity = Vector3.zero;
 
         if (Vector3.Distance(player.transform.position , RB.transform.position) < chaseRange)
         {
