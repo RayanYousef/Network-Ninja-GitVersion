@@ -14,7 +14,6 @@ public class CS_DamageHandler : MonoBehaviour
     [SerializeField] List<Collider> hitObjects = new List<Collider>();
 
     [Header("Player and Weapon")]
-    [SerializeField] CS_ObjectStats stats;
     [SerializeField] Transform weaponTip;
     [SerializeField] Vector3 firstPoint, secondPoint;
 
@@ -65,12 +64,11 @@ public class CS_DamageHandler : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (!hitObjects.Contains(other) &&  other.TryGetComponent<IDamageable>(out IDamageable damagable))
+        if (!hitObjects.Contains(other) &&  other.TryGetComponent<Health>(out Health stats))
         {
-            CS_ObjectStats otherStats = other.GetComponentInChildren<CS_ObjectStats>();
             hitObjects.Add(other);  
-            if(stats != null && otherStats.team != stats.team)
-                damagable.ApplyDamage(stats.attack);
+            if(stats != null)
+                stats.TakeDamage(10);
         }
     }
 }

@@ -118,7 +118,8 @@ public class rUIPassword : MonoBehaviour
         rPasswordManager.Instance.CurrentArea.Password = passwordIF.text;
         rPasswordManager.Instance.CheckCurrentAreaPasswordStrength();
         rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
-        rPasswordManager.Instance.FormArmy();
+        rPasswordManager.Instance.SetAreaHealthBasedOnPassword();
+        rPasswordManager.Instance.FormArmyBasedOnAreaHealth();
 
         createPasswordPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
