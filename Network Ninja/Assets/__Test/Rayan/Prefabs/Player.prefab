@@ -1301,6 +1301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitObjects: []
+  stats: {fileID: 0}
   weaponTip: {fileID: 6516665798729649045}
   firstPoint: {x: 0, y: 0, z: 0}
   secondPoint: {x: 0, y: 0, z: 0}
@@ -1334,6 +1335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitObjects: []
+  stats: {fileID: 1456825627}
   weaponTip: {fileID: 6516665798729649045}
   firstPoint: {x: 0, y: 0, z: 0}
   secondPoint: {x: 0, y: 0, z: 0}
@@ -1749,6 +1751,7 @@ GameObject:
   - component: {fileID: 5977481142853276194}
   - component: {fileID: 5977481142853276193}
   - component: {fileID: 5977481142853276204}
+  - component: {fileID: 1456825627}
   m_Layer: 0
   m_Name: Moving Object
   m_TagString: Untagged
@@ -1954,9 +1957,9 @@ MonoBehaviour:
   dashAttenuationRate: 50
   jumpDuration: 0.2
   defaultJumpForce: 140
-  jumpAttenuation: 10
+  jumpAttenuation: 0
   gravityAccumiliationForce: 1.3
-  maxGravity: 200
+  maxGravity: 170
   minGravity: 1
   movementSpeed: 100
   rotationSpeed: 600
@@ -1978,12 +1981,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd60e984a0c4ba4ab4eb92808b1e6ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartRecordingEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  StopRecordingEvent:
-    m_PersistentCalls:
-      m_Calls: []
   anim: {fileID: 0}
   moveController: {fileID: 0}
   animController: {fileID: 0}
@@ -1992,6 +1989,22 @@ MonoBehaviour:
   drag: 10
   clicksIntervalTime: 0.2
   currentState: 0
+--- !u!114 &1456825627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5977481142853276207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9420ebd662cd0546a0f0b8aa7d271ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
+  health: 0
+  maxHealth: 200
+  attack: 10
 --- !u!1 &5977481143026708640
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,7 +2031,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5977481143026708640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.007, z: 0}
+  m_LocalPosition: {x: 0, y: -0.014, z: 0}
   m_LocalScale: {x: 0.50142, y: 0.22276, z: 0.25368}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2052,7 +2065,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.63
+  m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5977481143078867959
 GameObject:
