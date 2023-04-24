@@ -34,7 +34,7 @@ public class CS_PlayerManager : MonoBehaviour
         animController = GetComponentInChildren<CS_AnimatorController>();
         camTarget = GetComponentInChildren<CS_CameraTarget>();
         rb = GetComponentInChildren<Rigidbody>();
-        //Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     private void Update()
@@ -120,7 +120,6 @@ public class CS_PlayerManager : MonoBehaviour
     #region Animator States
     public void OnStateEnter(CharacterState enteredState)
     {
-        //Debug.Log("Entered State:" + enteredState);
         currentState = enteredState;
         if (enteredState != CharacterState.Attacking)
             animController.ResetCombo();

@@ -8,7 +8,7 @@ public class CS_AnimatorController : MonoBehaviour
 
     [Header("GameObject Components")]
     [SerializeField] Animator anim;
-    [SerializeField] CS_AttackHandler attackHandler;
+    [SerializeField] CS_DamageHandler attackHandler;
 
     [Header("Applied Force To Animation")]
     [SerializeField] float appliedForce;
@@ -18,7 +18,7 @@ public class CS_AnimatorController : MonoBehaviour
     [SerializeField] string f_Direction, f_MotionTime, f_animSpeed;
     [SerializeField] string b_Grounded, b_Attacking, b_Dashing, b_Jumping, b_canTransit, t_Dash, t_Jump;
 
-    public CS_AttackHandler AttackHandler { get => attackHandler; }
+    public CS_DamageHandler AttackHandler { get => attackHandler; }
     public string I_Combo { get => i_Combo; }
     public string F_MotionTime { get => f_MotionTime; }
     public string F_Direction { get => f_Direction; }
@@ -76,7 +76,7 @@ public class CS_AnimatorController : MonoBehaviour
     {
         GetComponent<Rigidbody>().
             AddForce(transform.forward * (appliedForce + force), ForceMode.Impulse);
-        attackHandler.gameObject.SetActive(true);
+  
 
 
     }
@@ -96,8 +96,8 @@ public class CS_AnimatorController : MonoBehaviour
 
         }
 
+        attackHandler.gameObject.SetActive(true);
         attackHandler.ProjectOnAxis(projectionAxis, transform.forward, GetComponent<Collider>().bounds.center);
-
     }
 
     #endregion

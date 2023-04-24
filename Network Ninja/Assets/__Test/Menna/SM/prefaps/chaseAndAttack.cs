@@ -9,7 +9,7 @@ public class chaseAndAttack : MonoBehaviour
     Animator animator;
 
     [SerializeField] private float speed;
-    [SerializeField] private Transform player;
+    private Transform player;
     private Rigidbody fishRB;
 
     private bool IsAttack1;
@@ -17,17 +17,15 @@ public class chaseAndAttack : MonoBehaviour
     [SerializeField] float distance;
     void Start()
     {
+        player = GameObjectsManager.Instance.Player.transform;
         fishRB = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
     }
 
     void Update()
     {
         ChangeState(currentState);
         //Debug.Log(Vector3.SqrMagnitude(player.transform.position - this.transform.position));
-
-
     }
 
 
