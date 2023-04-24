@@ -17,7 +17,8 @@ public class _Attack : StateMachineBehaviour
     {
         RB = animator.GetComponent<Rigidbody>();
         // player = GameObjectsManager.Instance.Player.transform;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObjectsManager.Instance.Player.GetComponentInChildren<NavMeshAgent>().transform;
+
         //RB.velocity = Vector3.zero;
         agent = animator.GetComponent<NavMeshAgent>();  
 

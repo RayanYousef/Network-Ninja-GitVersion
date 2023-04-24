@@ -18,8 +18,8 @@ public class _Chase : StateMachineBehaviour
     {
         RB = animator.GetComponent<Rigidbody>();
       //  player = GameObjectsManager.Instance.Player.transform;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        
+        player = GameObjectsManager.Instance.Player.GetComponentInChildren<NavMeshAgent>().transform;
+
         agent = RB.GetComponent<NavMeshAgent>();
 
 

@@ -17,7 +17,7 @@ public class _Idle : StateMachineBehaviour
     {
         //player = GameObjectsManager.Instance.Player.transform;
         RB = animator.GetComponent<Rigidbody>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObjectsManager.Instance.Player.GetComponentInChildren<NavMeshAgent>().transform;
         agent = animator.GetComponent<NavMeshAgent>();
       //  RB.velocity = Vector3.zero;
 

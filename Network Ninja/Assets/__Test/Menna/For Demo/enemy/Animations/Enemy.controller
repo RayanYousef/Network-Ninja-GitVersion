@@ -107,7 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0549afbbe23be9f41a04ae9c5abf1f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
   attackRange: 4
 --- !u!1101 &-2644609347859045073
 AnimatorStateTransition:
@@ -203,6 +202,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: IsAttacking
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsChasing
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2095342302428427288}
   m_Solo: 0
@@ -259,7 +261,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   attackRange: 4
-  chaseRange: 9
 --- !u!1102 &3292142829069719675
 AnimatorState:
   serializedVersion: 6
@@ -309,6 +310,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 2
     m_ConditionEvent: IsAttacking
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsChasing
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7853094906671309494}

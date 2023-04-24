@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    Transform player;
+    [SerializeField] Transform player;
 
     NavMeshAgent agent;
 
@@ -22,8 +22,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //player = GameObjectsManager.Instance.Player.transform;
-        player = GameObject.FindWithTag("Player").transform;
+        player = GameObjectsManager.Instance.Player.GetComponentInChildren<NavMeshAgent>().transform;
+        //player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
 
     }

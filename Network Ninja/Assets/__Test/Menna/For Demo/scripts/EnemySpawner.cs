@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
         // Subscribe to the OnEnemyKilled event for each enemy spawned
         foreach (GameObject enemy in enemies)
         {
-            enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
+            enemy.GetComponent<Health>().OnEnemyKilled?.AddListener(HandleEnemyKilled);
         }
 
     }

@@ -26,6 +26,12 @@ public class Health : MonoBehaviour
     private void Update()
     {
         HealthBar.value = currentHealth;
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Enemy died");
+
+            Die();
+        }
     }
 
     //Health and damage
@@ -49,6 +55,7 @@ public class Health : MonoBehaviour
         OnEnemyKilled.Invoke();
         //animation
         animator.SetTrigger("Death");
+        Destroy(gameObject);
 
     }
 

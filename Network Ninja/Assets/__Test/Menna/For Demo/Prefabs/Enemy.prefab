@@ -690,11 +690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aafe31c00b5c33a419219ad7ba15f5d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avoidanceRadius: 1000
-  avoidanceForce: 1000
-  overlapLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  player: {fileID: 0}
 --- !u!114 &1591604874961394986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,7 +726,7 @@ MonoBehaviour:
   attackRange: 1
   attackMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1280
 --- !u!195 &6388914662322203081
 NavMeshAgent:
   m_ObjectHideFlags: 0
