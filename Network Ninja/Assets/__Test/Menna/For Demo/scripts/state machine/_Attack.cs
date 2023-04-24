@@ -17,9 +17,9 @@ public class _Attack : StateMachineBehaviour
     {
         RB = animator.GetComponent<Rigidbody>();
         // player = GameObjectsManager.Instance.Player.transform;
-        player = GameObjectsManager.Instance.Player.GetComponentInChildren<NavMeshAgent>().transform;
+        player = GameObjectsManager.Instance.Player.transform;
 
-        //RB.velocity = Vector3.zero;
+        RB.velocity = Vector3.zero;
         agent = animator.GetComponent<NavMeshAgent>();  
 
     }
@@ -27,9 +27,9 @@ public class _Attack : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       // agent.velocity = Vector3.zero;
+        // agent.velocity = Vector3.zero;
 
-        if (Vector3.SqrMagnitude(player.transform.position - RB.transform.position) > attackRange)
+        if (Vector3.SqrMagnitude(player.position - RB.transform.position) > attackRange)
         {
             Debug.Log("CHASE");
            // animator.SetTrigger("Chase");

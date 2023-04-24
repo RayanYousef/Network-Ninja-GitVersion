@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRadius = 10f;
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
+    public bool allArmyDied = false;
    // public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
 
 
@@ -30,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
         // Subscribe to the OnEnemyKilled event for each enemy spawned
         foreach (GameObject enemy in enemies)
         {
-            enemy.GetComponent<Health>().OnEnemyKilled?.AddListener(HandleEnemyKilled);
+            enemy.GetComponent<Health>().OnEnemyKilled +=HandleEnemyKilled;
         }
 
     }
@@ -79,33 +80,36 @@ public class EnemySpawner : MonoBehaviour
     //        yield return null;
     //    }
     //}
-    void HandleEnemyKilled()
-    {
-        // Check if all enemies have been killed
-        bool allEnemiesKilled = true;
-        foreach (GameObject enemy in enemies)
-        {
-            if (enemy != null)
-            {
-                allEnemiesKilled = false;
-                break;
-            }
-        }
-
-        // If all enemies are killed, raise the OnAllEnemiesKilled event
-        if (allEnemiesKilled)
-        {
-            OnAllEnemiesKilled.Invoke();
-        }
-    }
-    //void HandleEnemyKilled(GameObject enemy)
+    //void HandleEnemyKilled()
     //{
-    //    enemies.Remove(enemy);
-    //    if (enemies.Count == 0 && OnAllEnemiesKilled != null)
+    //    // Check if all enemies have been killed
+    //    bool allEnemiesKilled = true;
+    //    foreach (GameObject enemy in enemies)
+    //    {
+    //        if (enemy != null)
+    //        {
+    //            allEnemiesKilled = false;
+    //            break;
+    //        }
+    //    }
+
+    //    // If all enemies are killed, raise the OnAllEnemiesKilled event
+    //    if (allEnemiesKilled)
     //    {
     //        OnAllEnemiesKilled.Invoke();
     //    }
+
+    //    allArmyDied = allEnemiesKilled;
     //}
+    void HandleEnemyKilled(GameObject enemy)
+    {
+        enemies.Remove(enemy);
+        if (enemies.Count == 0 && OnAllEnemiesKilled != null)
+        {
+            OnAllEnemiesKilled.Invoke();
+            Debug.Log("All DEAAAAAAAAAAAAAAAAAAAAAAAD");
+        }
+    }
 }
 
 

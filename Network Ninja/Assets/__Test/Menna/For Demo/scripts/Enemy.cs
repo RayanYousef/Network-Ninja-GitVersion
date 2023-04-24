@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObjectsManager.Instance.Player.GetComponentInChildren<NavMeshAgent>().transform;
+        player = GameObjectsManager.Instance.Player.transform;
         //player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
 
@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(player.position);
         //transform.LookAt(player);
         agent.SetDestination(player.position);
     }

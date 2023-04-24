@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class Health : MonoBehaviour
     Animator animator;
     public Slider HealthBar;
 
-    public UnityEvent OnEnemyKilled;  // Declare the event
+    public Action<GameObject> OnEnemyKilled;  // Declare the event
 
 
 
@@ -26,12 +27,6 @@ public class Health : MonoBehaviour
     private void Update()
     {
         HealthBar.value = currentHealth;
-        if (currentHealth <= 0)
-        {
-            Debug.Log("Enemy died");
-
-            Die();
-        }
     }
 
     //Health and damage
@@ -52,10 +47,10 @@ public class Health : MonoBehaviour
     public void Die()
     {
         // Raise the event when the enemy is killed
-        OnEnemyKilled.Invoke();
+        OnEnemyKilled.Invoke(this.gameObject);
         //animation
         animator.SetTrigger("Death");
-        Destroy(gameObject);
+        Destroy(gameObject,1);
 
     }
 

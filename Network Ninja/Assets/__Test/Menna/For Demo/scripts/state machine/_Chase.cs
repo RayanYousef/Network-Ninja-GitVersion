@@ -18,7 +18,7 @@ public class _Chase : StateMachineBehaviour
     {
         RB = animator.GetComponent<Rigidbody>();
       //  player = GameObjectsManager.Instance.Player.transform;
-        player = GameObjectsManager.Instance.Player.GetComponentInChildren<NavMeshAgent>().transform;
+        player = GameObjectsManager.Instance.Player.transform;
 
         agent = RB.GetComponent<NavMeshAgent>();
 
@@ -30,14 +30,14 @@ public class _Chase : StateMachineBehaviour
     {
        // Debug.Log(Time.deltaTime);
        // Debug.Log("nav mesh");
-       
+       agent.SetDestination(player.position);
         Vector3 target = agent.destination;
         //  Seek(player.transform.position);
         RB.transform.LookAt(target);
         agent.isStopped = true;
         RB.transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        if (Vector3.SqrMagnitude(player.transform.position - RB.transform.position) < attackRange)
+        if (Vector3.SqrMagnitude(player.position - RB.transform.position) < attackRange)
         {
             Debug.Log("ATTACK");
             // animator.SetTrigger("Attack");
