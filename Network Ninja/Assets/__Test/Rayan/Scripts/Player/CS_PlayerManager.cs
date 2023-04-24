@@ -132,6 +132,7 @@ public class CS_PlayerManager : MonoBehaviour
                 break;
 
             case CharacterState.Jumping:
+                rb.constraints = RigidbodyConstraints.FreezeRotation; 
                 anim.SetBool(animController.B_Jumping, true);
                 moveController.Jump();
                 break;
@@ -146,6 +147,7 @@ public class CS_PlayerManager : MonoBehaviour
                 break;
 
             case CharacterState.Falling:
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
                 break;
 
             case CharacterState.Idling:
@@ -169,6 +171,7 @@ public class CS_PlayerManager : MonoBehaviour
         anim.SetBool(animController.B_Jumping, false);
         anim.SetBool(animController.B_Attacking, false);
         anim.SetBool(animController.B_canTransit,false);
+        rb.constraints = RigidbodyConstraints.FreezeRotation| RigidbodyConstraints.FreezePositionY;
         rb.drag = drag;
         
     }

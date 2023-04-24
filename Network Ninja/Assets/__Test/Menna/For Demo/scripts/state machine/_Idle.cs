@@ -17,9 +17,11 @@ public class _Idle : StateMachineBehaviour
     {
         //player = GameObjectsManager.Instance.Player.transform;
         RB = animator.GetComponent<Rigidbody>();
-        player = GameObjectsManager.Instance.Player.GetComponentInChildren<NavMeshAgent>().transform;
+        player = GameObjectsManager.Instance.Player.transform;
         agent = animator.GetComponent<NavMeshAgent>();
-      //  RB.velocity = Vector3.zero;
+        Debug.Log("Idle");
+        agent.velocity = Vector3.zero;
+        //  RB.velocity = Vector3.zero;
 
 
     }
@@ -27,10 +29,9 @@ public class _Idle : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Idle");
-        agent.velocity = Vector3.zero;
 
-        if (Vector3.Distance(player.transform.position , RB.transform.position) < chaseRange)
+
+        if (Vector3.Distance(player.position , RB.transform.position) < chaseRange)
         {
             Debug.Log("CHASE");
             //animator.SetTrigger("Chase");
