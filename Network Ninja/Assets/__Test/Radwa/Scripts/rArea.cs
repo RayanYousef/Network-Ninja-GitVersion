@@ -17,7 +17,7 @@ public class rArea : MonoBehaviour
     [SerializeField] bool mine = false;
 
     [Header("Events")]
-    [SerializeField] UnityEvent OnEnteringArea;
+    [SerializeField] UnityEvent OnEnteringArea, OnEnteringFight;
 
     [Header("Area Components")]
     [SerializeField] Collider areaCollider;
@@ -40,12 +40,21 @@ public class rArea : MonoBehaviour
         areaCollider = GetComponent<Collider>();
         passwordSharedUI = GetComponentsInChildren<SpriteRenderer>()[0];
 
-
+        //OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
     }
     void Start()
     {
         Password = null;
-        areaCollider.isTrigger = false;
+        if(areaType == AreaType.Base)
+        {
+            areaCollider.isTrigger = false;
+
+        }
+        else
+        {
+            areaCollider.isTrigger = true;
+
+        }
         maxHealth = rPasswordManager.Instance.MaxSoldiersNumber;
 
     }
@@ -102,6 +111,16 @@ public class rArea : MonoBehaviour
                     // spawn enemies
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(areaType == AreaType.Fight && other.gameObject == GameObjectsManager.Instance.Player)
+        {
+            // raise event to spawn enemies
+
+            OnEnteringFight?.Invoke();
         }
     }
 
