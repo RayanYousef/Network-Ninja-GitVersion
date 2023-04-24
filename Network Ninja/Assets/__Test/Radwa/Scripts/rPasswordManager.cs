@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum Soldiers { Melee, Ranged, MeleeRanged, MeleeRangedTank };
@@ -9,6 +11,8 @@ public class rPasswordManager : MonoBehaviour
 {
     private static rPasswordManager instance;
 
+    [Header("Password Manager Components")]
+    [SerializeField] rArea[] listOfLevelAreas;
     [SerializeField] int maxSoldiersNumber = 80;
 
     [Header("Current Area Info")]
@@ -59,6 +63,30 @@ public class rPasswordManager : MonoBehaviour
     //    CheckStrength(currentArea.Password);
     //    currentArea.GetComponent<Collider>().isTrigger = true;
     //}
+
+    public void AreasWithSamePasswordAsCurrent()
+    {
+
+        foreach(rArea area in listOfLevelAreas)
+        {
+            
+            if(area != currentArea && area.Password==currentArea.Password)
+            {
+
+            }
+ 
+        }
+        CurrentArea = currentArea;
+    }
+
+    public void OnHealthZeroDestroyAreasWithSamePassword(rArea lostArea)
+    {
+        foreach(rArea area in listOfLevelAreas)
+        {
+            if (area != lostArea && area.Password == lostArea.Password)
+                area.Health = 0;
+        }
+    }
 
     public void CheckCurrentAreaPasswordStrength()
     {
