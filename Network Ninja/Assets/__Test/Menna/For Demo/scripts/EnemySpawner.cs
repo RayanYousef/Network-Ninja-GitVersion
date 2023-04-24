@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRadius = 10f;
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
-    public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
+   // public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
 
 
     public List<GameObject> enemies;  // A list of all spawned enemies.
@@ -43,10 +43,42 @@ public class EnemySpawner : MonoBehaviour
            // enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
             enemies.Add(enemy);
         }
+      //  StartCoroutine(AvoidEnemies());
 
 
     }
 
+    //IEnumerator AvoidEnemies()
+    //{
+    //    while (true)
+    //    {
+    //        foreach (GameObject enemy in enemies)
+    //        {
+    //            Collider[] hitColliders = Physics.OverlapSphere(enemy.transform.position, avoidanceDistance);
+
+    //            Vector3 avoidDirection = Vector3.zero;
+    //            int numEnemies = 0;
+
+    //            foreach (Collider hitCollider in hitColliders)
+    //            {
+    //                if (hitCollider.gameObject != enemy)
+    //                {
+    //                    avoidDirection += enemy.transform.position - hitCollider.transform.position;
+    //                    numEnemies++;
+    //                }
+    //            }
+
+    //            if (numEnemies > 0)
+    //            {
+    //                avoidDirection /= numEnemies;
+    //                avoidDirection.Normalize();
+    //                enemy.transform.position += avoidDirection * avoidanceDistance * Time.deltaTime;
+    //            }
+    //        }
+
+    //        yield return null;
+    //    }
+    //}
     void HandleEnemyKilled()
     {
         // Check if all enemies have been killed

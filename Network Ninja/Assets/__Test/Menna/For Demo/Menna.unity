@@ -384,6 +384,9 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   HealthBar: {fileID: 0}
+  OnEnemyKilled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &959473855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -618,7 +621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1196389188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,8 +641,10 @@ MonoBehaviour:
   spawnRadius: 10
   minDistanceFromObject: 5
   maxDistanceFromObject: 10
-  avoidanceDistance: 2
   enemies: []
+  OnAllEnemiesKilled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1196389189
 Transform:
   m_ObjectHideFlags: 0
@@ -1012,7 +1017,7 @@ PrefabInstance:
     - target: {fileID: 6668250516416360774, guid: 73f9f6b5701f7ef45964231b954cd7d7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6668250516417291876, guid: 73f9f6b5701f7ef45964231b954cd7d7,
         type: 3}
@@ -1272,12 +1277,12 @@ PrefabInstance:
     - target: {fileID: 8596036045096164803, guid: 73f9f6b5701f7ef45964231b954cd7d7,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8596036045096164803, guid: 73f9f6b5701f7ef45964231b954cd7d7,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73f9f6b5701f7ef45964231b954cd7d7, type: 3}
