@@ -24,7 +24,9 @@ public class _Attack : StateMachineBehaviour
         if (Vector3.SqrMagnitude(player.transform.position - RB.transform.position) > attackRange)
         {
             Debug.Log("CHASE");
-            animator.SetTrigger("Chase");
+           // animator.SetTrigger("Chase");
+            animator.SetBool("IsAttacking", false);
+
         }
     }
 
@@ -33,7 +35,7 @@ public class _Attack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("Chase");
+       // animator.ResetTrigger("Chase");
 
     }
 

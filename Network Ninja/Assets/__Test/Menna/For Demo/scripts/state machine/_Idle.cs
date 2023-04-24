@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class _Idle : StateMachineBehaviour
 {
-    public float speed;
     public float chaseRange;
 
 
@@ -28,7 +27,8 @@ public class _Idle : StateMachineBehaviour
         if (Vector3.Distance(player.transform.position , RB.transform.position) < chaseRange)
         {
             Debug.Log("CHASE");
-            animator.SetTrigger("Chase");
+            //animator.SetTrigger("Chase");
+            animator.SetBool("IsChasing" , true);
         }
 
     }
@@ -36,6 +36,6 @@ public class _Idle : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("Chase");
+       // animator.ResetTrigger("Chase");
     }
 }

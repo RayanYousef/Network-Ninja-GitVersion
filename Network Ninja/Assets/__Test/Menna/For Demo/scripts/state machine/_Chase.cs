@@ -8,6 +8,7 @@ public class _Chase : StateMachineBehaviour
 
     public float speed;
     public float attackRange;
+    public float chaseRange;
 
     Rigidbody RB;
     Transform player;
@@ -32,27 +33,29 @@ public class _Chase : StateMachineBehaviour
         if (Vector3.SqrMagnitude(player.transform.position - RB.transform.position) < attackRange)
         {
             Debug.Log("ATTACK");
-            animator.SetTrigger("Attack");
+            // animator.SetTrigger("Attack");
+            animator.SetBool("IsAttacking", true);
+
+
         }
 
 
+        //if (Vector3.SqrMagnitude(player.transform.position - RB.transform.position) > chaseRange)
+        //{
+        //    Debug.Log("IDLE");
+        //    // animator.SetTrigger("Idle");
+        //    animator.SetBool("IsChasing", false);
+        //}
 
     }
 
-    //public void Seek(Vector3 target)
-    //{
-    //    var direction = (target - RB.transform.position).normalized;
-    //    RB.velocity = direction * speed;
-    //    //// Rotate to face player
-    //    RB.transform.LookAt(RB.transform.position + direction);
-    //}
 
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("Attack");
-        //animator.ResetTrigger("Idle");
+       // animator.ResetTrigger("Attack");
+      //  animator.ResetTrigger("Idle");
 
     }
 
