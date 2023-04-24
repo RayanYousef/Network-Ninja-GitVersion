@@ -8,12 +8,13 @@ public class _Idle : StateMachineBehaviour
 
 
     Rigidbody RB;
-    Transform player;
+    private Transform player;
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //player = GameObjectsManager.Instance.Player.transform;
         RB = animator.GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
 

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform player;
+    Transform player;
 
+    NavMeshAgent agent;
 
 
     //overlap
@@ -20,6 +22,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //player = GameObjectsManager.Instance.Player.transform;
         player = GameObject.FindWithTag("Player").transform;
 
     }
@@ -27,8 +30,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player);
-
+        //transform.LookAt(player);
+        agent.SetDestination(player.position);
     }
 
     private void FixedUpdate()
