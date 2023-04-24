@@ -35,7 +35,7 @@ public class ExampleArmy : MonoBehaviour {
     }
 
     private void Update() {
-        SetFormation();
+        //SetFormation();
     }
 
     public void SetFormation() {

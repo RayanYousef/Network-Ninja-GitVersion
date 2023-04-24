@@ -33,30 +33,28 @@ public class rArea : MonoBehaviour
     public string Password { get => password; set => password = value; }
     public int Health { get => health; set => health = value; }
     public bool Mine { get => mine; set => mine = value; }
+    public AreaType AreaType { get => areaType; set => areaType = value; }
 
     private void Awake()
     {
-
         areaCollider = GetComponent<Collider>();
         passwordSharedUI = GetComponentsInChildren<SpriteRenderer>()[0];
 
-        //OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
+        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
     }
     void Start()
     {
         Password = null;
-        if(areaType == AreaType.Base)
+        if (areaType == AreaType.Base)
         {
             areaCollider.isTrigger = false;
-
         }
         else
         {
             areaCollider.isTrigger = true;
-
         }
+  
         maxHealth = rPasswordManager.Instance.MaxSoldiersNumber;
-
     }
 
     private void FixedUpdate()
@@ -75,12 +73,12 @@ public class rArea : MonoBehaviour
             if (health == 0 && password!=null)
             {
                 areaType = AreaType.Fight;
+                areaCollider.isTrigger = true;
+
                 password = null;
             }
         }
     }
-
-
 
 
     private void OnCollisionEnter(Collision collision)
@@ -90,27 +88,30 @@ public class rArea : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject == GameObjectsManager.Instance.Player)
+        if (areaType == AreaType.Base && collision.gameObject == GameObjectsManager.Instance.Player)
         {
             rPasswordManager.Instance.CurrentArea = this;
 
-            if (areaType == AreaType.Base)
-            {
-                /// On Entering Area call On Entering Area in UIPassword
-                OnEnteringArea?.Invoke();
-            }
-            else
-            {
-                if (mine)
-                {
-                    areaCollider.isTrigger = true;
-                }
-                else
-                {
+            /// On Entering Area call On Entering Area in UIPassword
+            OnEnteringArea?.Invoke();
+
+            //if (areaType == AreaType.Base)
+            //{
+            //    /// On Entering Area call On Entering Area in UIPassword
+            //    OnEnteringArea?.Invoke();
+            //}
+            //else
+            //{
+            //    if (mine)
+            //    {
+            //        areaCollider.isTrigger = true;
+            //    }
+            //    else
+            //    {
     
-                    // spawn enemies
-                }
-            }
+            //        // spawn enemies
+            //    }
+            //}
         }
     }
 
@@ -119,21 +120,18 @@ public class rArea : MonoBehaviour
         if(areaType == AreaType.Fight && other.gameObject == GameObjectsManager.Instance.Player)
         {
             // raise event to spawn enemies
-
+            rPasswordManager.Instance.CurrentArea = this;
             OnEnteringFight?.Invoke();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == GameObjectsManager.Instance.Player)
+        if (areaType == AreaType.Base && other.gameObject == GameObjectsManager.Instance.Player)
         {
             areaCollider.isTrigger = false;
 
-            if (areaType == AreaType.Base)
-            {
-                GetComponentInChildren<ExampleArmy>().enabled = false;
-            }
+            GetComponentInChildren<ExampleArmy>().enabled = false;
         }
     }
 }

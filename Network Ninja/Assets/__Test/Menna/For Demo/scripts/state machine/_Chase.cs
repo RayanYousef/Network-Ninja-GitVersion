@@ -21,6 +21,7 @@ public class _Chase : StateMachineBehaviour
         player = GameObjectsManager.Instance.Player.transform;
 
         agent = RB.GetComponent<NavMeshAgent>();
+        agent.speed = speed;
 
 
     }

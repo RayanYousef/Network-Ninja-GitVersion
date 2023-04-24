@@ -24,24 +24,25 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         enemies = new List<GameObject>();
-        SpawnEnemies(armySize);
+        //SpawnEnemies();
         //  enemyPrefab = GameObjectsManager.Instance.EnemyPrefab;
         // objectToSpawnAround = GameObjectsManager.Instance.ObjectToSpawnAround;
 
         // Subscribe to the OnEnemyKilled event for each enemy spawned
-        foreach (GameObject enemy in enemies)
-        {
-            enemy.GetComponent<Health>().OnEnemyKilled +=HandleEnemyKilled;
-        }
+        //foreach (GameObject enemy in enemies)
+        //{
+        //    enemy.GetComponent<Health>().OnEnemyKilled +=HandleEnemyKilled;
+        //}
 
     }
-    void SpawnEnemies(int armySize)
+    public void SpawnEnemies()
     {
         for (int i = 0; i < armySize; i++)
         {
             Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
             GameObject enemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
-           // enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
+            enemy.GetComponent<Health>().OnEnemyKilled += HandleEnemyKilled;
+            //enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
             enemies.Add(enemy);
         }
       //  StartCoroutine(AvoidEnemies());
