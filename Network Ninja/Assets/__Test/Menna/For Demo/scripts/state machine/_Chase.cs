@@ -11,13 +11,15 @@ public class _Chase : StateMachineBehaviour
     public float chaseRange;
 
     Rigidbody RB;
-    Transform player;
+    private Transform player;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         RB = animator.GetComponent<Rigidbody>();
+      //  player = GameObjectsManager.Instance.Player.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
 
 
     }

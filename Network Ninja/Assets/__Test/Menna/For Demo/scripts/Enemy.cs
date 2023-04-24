@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform player;
+    Transform player;
 
 
 
@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //player = GameObjectsManager.Instance.Player.transform;
         player = GameObject.FindWithTag("Player").transform;
 
     }
