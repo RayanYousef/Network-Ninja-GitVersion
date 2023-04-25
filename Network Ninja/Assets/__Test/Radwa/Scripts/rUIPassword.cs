@@ -43,7 +43,7 @@ public class rUIPassword : MonoBehaviour
         ansBtns[1].onClick.AddListener(() => { TakeAns(ansBtns[1]); });
         ansBtns[2].onClick.AddListener(() => { TakeAns(ansBtns[2]); });
 
-        Cursor.lockState = CursorLockMode.Locked;
+        //ursor.lockState = CursorLockMode.Locked;
     }
 
     public void TakeAns(Button selectedBtn)
@@ -60,7 +60,7 @@ public class rUIPassword : MonoBehaviour
         }
 
         checkPasswordPanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         playerInputs.enabled = true;
     }
@@ -80,7 +80,7 @@ public class rUIPassword : MonoBehaviour
                 break;
         }
     }
-     void ShowCreatePasswordPanel()
+    public void ShowCreatePasswordPanel()
     {
         playerInputs.enabled = false;
         Time.timeScale = 0f;
@@ -121,9 +121,10 @@ public class rUIPassword : MonoBehaviour
         rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
         rPasswordManager.Instance.SetAreaHealthBasedOnPassword();
         rPasswordManager.Instance.FormArmyBasedOnAreaHealth();
+        rPasswordManager.Instance.AreasWithSamePasswordAsCurrent();
 
         createPasswordPanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
         passwordIF.text = null;
         playerInputs.enabled = true;
@@ -164,6 +165,7 @@ public class rUIPassword : MonoBehaviour
                 ansBtns[i].GetComponent<rAnswerButton>().IsCorrect = true;
             }
         }
+        rPasswordManager.Instance.FormArmyBasedOnAreaHealth();
     }
 
     private string Shuffle(string str)

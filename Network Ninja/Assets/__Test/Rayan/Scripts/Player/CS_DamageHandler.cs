@@ -67,9 +67,9 @@ public class CS_DamageHandler : MonoBehaviour
         if (!hitObjects.Contains(other) &&  other.TryGetComponent<Health>(out Health stats))
         {
             hitObjects.Add(other);
-            if (stats != null)
+            if (stats != null && stats.currentHealth>0)
             {
-                stats.TakeDamage(10);
+                stats.TakeDamage(35);
                 other.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity*2;  
             }
             

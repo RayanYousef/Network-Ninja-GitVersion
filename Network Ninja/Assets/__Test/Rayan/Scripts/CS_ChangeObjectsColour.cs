@@ -5,27 +5,36 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
-public class CS_ChangeObjectsColour :MonoBehaviour
+public class CS_ChangeObjectsColour
 {
-    [SerializeField] Renderer[] objectsRenderer;
-    [SerializeField] Color MaxHealth, HalfHealth, LowHealth;
+    public Renderer[] MeshRenderers;
+    public Color MaxHealth, HalfHealth, LowHealth;
 
-    //[SerializeField,Range(0, 1)] float colorState;
 
-    //private void Update()
-    //{
-    //    ChangeColour(colorState);
-    //}
-
-    public void ChangeColour(float value)
+    public void ChangeToColour(Color color)
     {
-        foreach (Renderer renderer in objectsRenderer)
+        foreach (Renderer renderer in MeshRenderers)
         {
-            renderer.material.color = LerpColors(value);
+            renderer.material.color =color;
+        }
+    }
+    public void LerpBetweenThreeGivenColours(float value, Color LowHealth, Color HalfHealth, Color MaxHealth)
+    {
+        foreach (Renderer renderer in MeshRenderers)
+        {
+            renderer.material.color = LerpColors(value, LowHealth, HalfHealth,MaxHealth);
         }
     }
 
-    public Color LerpColors(float t)
+    public void LerpBetweenObjectColours(float value)
+    {
+        foreach (Renderer renderer in MeshRenderers)
+        {
+            renderer.material.color = LerpColors(value, LowHealth, HalfHealth, MaxHealth);
+        }
+    }
+
+    public Color LerpColors(float t, Color LowHealth, Color HalfHealth, Color MaxHealth)
     {
         if (t < 0.5f)
         {

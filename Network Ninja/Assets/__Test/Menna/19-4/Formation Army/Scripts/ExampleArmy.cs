@@ -26,7 +26,7 @@ public class ExampleArmy : MonoBehaviour {
 
     float min, mid, max;
 
-    private readonly List<GameObject> _spawnedUnits = new List<GameObject>();
+    public List<GameObject> _spawnedUnits = new List<GameObject>();
     private List<Vector3> _points = new List<Vector3>();
     private Transform _parent;
 
