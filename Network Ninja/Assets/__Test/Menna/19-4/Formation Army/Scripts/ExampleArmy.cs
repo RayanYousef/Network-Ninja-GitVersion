@@ -49,8 +49,8 @@ public class ExampleArmy : MonoBehaviour {
         else if (_points.Count < _spawnedUnits.Count) {
             Kill(_spawnedUnits.Count - _points.Count);
         }
-
         for (var i = 0; i < _spawnedUnits.Count; i++) {
+            if (_spawnedUnits[i] != null)
             _spawnedUnits[i].transform.position = Vector3.MoveTowards(_spawnedUnits[i].transform.position, transform.position + _points[i], _unitSpeed * Time.deltaTime);
         }
     }

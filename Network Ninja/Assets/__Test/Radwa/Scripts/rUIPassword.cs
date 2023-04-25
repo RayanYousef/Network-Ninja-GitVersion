@@ -53,6 +53,8 @@ public class rUIPassword : MonoBehaviour
             Debug.Log("Correct Password");
             rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
             rPasswordManager.Instance.CheckCurrentAreaPasswordStrength(/*selectedBtn.GetComponentInChildren<TMP_Text>().text*/);
+            rPasswordManager.Instance.FormArmyBasedOnAreaHealth();
+
         }
         else
         {
@@ -165,7 +167,6 @@ public class rUIPassword : MonoBehaviour
                 ansBtns[i].GetComponent<rAnswerButton>().IsCorrect = true;
             }
         }
-        rPasswordManager.Instance.FormArmyBasedOnAreaHealth();
     }
 
     private string Shuffle(string str)
