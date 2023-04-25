@@ -24,8 +24,8 @@ public class rArea : MonoBehaviour
 
     [Header("Area Components")]
     [SerializeField] Collider areaCollider;
-    [SerializeField] ExampleArmy enemySpawner;
-    [SerializeField] FriendSpawner friendSpawner;
+    [SerializeField] EnemySpawner enemySpawner;
+    [SerializeField] ExampleArmy friendSpawner;
 
     [Header("MiniMap Components")]
     [SerializeField] CS_ChangeObjectsColour meshColourChanger;
@@ -56,8 +56,8 @@ public class rArea : MonoBehaviour
         sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
 
-        enemySpawner = GetComponentInChildren<ExampleArmy>();
-        friendSpawner = GetComponentInChildren<FriendSpawner>();
+        enemySpawner = GetComponentInChildren<EnemySpawner>();
+        friendSpawner = GetComponentInChildren<ExampleArmy>();
 
         meshColourChanger.MaxHealth = rPasswordManager.Instance.MaxHealth;
         meshColourChanger.HalfHealth = rPasswordManager.Instance.HalfHealth;
@@ -178,19 +178,21 @@ public class rArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        rPasswordManager.Instance.ResetPasswordButtonInteractbility(false);
+
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
-            foreach (FriendStates friend in friendSpawner.Friends)
+            rPasswordManager.Instance.ResetPasswordButtonInteractbility(false);
+            foreach (GameObject friend in friendSpawner._spawnedUnits)
             {
-                Destroy(friend);
+                Destroy(friend.gameObject);
             }
-            foreach (GameObject enemy in enemySpawner._spawnedUnits)
+
+            foreach (GameObject enemy in enemySpawner.enemies)
             {
                 Destroy(enemy);
             }
-            friendSpawner.Friends.Clear();
-            enemySpawner._spawnedUnits.Clear();
+            friendSpawner._spawnedUnits.Clear();
+            enemySpawner.enemies.Clear();
         }
 
         if (areaType == AreaType.Base && other.gameObject == GameObjectsManager.Instance.Player)
