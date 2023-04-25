@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public enum Soldiers { Melee, Ranged, MeleeRanged, MeleeRangedTank };
 public enum PasswordStrength { Weak, Moderate, Strong };
@@ -10,10 +12,12 @@ public enum PasswordStrength { Weak, Moderate, Strong };
 public class rPasswordManager : MonoBehaviour
 {
     private static rPasswordManager instance;
+    [SerializeField] UnityEngine.UI.Button ResetButton;
 
     [Header("Password Manager Components")]
     [SerializeField] rArea[] listOfLevelAreas;
     [SerializeField] int maxSoldiersNumber = 80;
+    [SerializeField] Color maxHealth, halfHealth, lowHealth, enemyColor;
 
     [Header("Current Area Info")]
     [SerializeField] rArea currentArea;
@@ -30,6 +34,10 @@ public class rPasswordManager : MonoBehaviour
     public rArea CurrentArea { get { return currentArea; } set => currentArea = value; }
 
     public int MaxSoldiersNumber { get => maxSoldiersNumber; }
+    public Color MaxHealth { get => maxHealth; }
+    public Color HalfHealth { get => halfHealth; }
+    public Color LowHealth { get => lowHealth; }
+    public Color EnemyColor { get => enemyColor;}
 
     private void Awake()
     {
@@ -64,17 +72,29 @@ public class rPasswordManager : MonoBehaviour
     //    currentArea.GetComponent<Collider>().isTrigger = true;
     //}
 
+    public void ResetPasswordButtonInteractbility(bool value)
+    {
+        ResetButton.interactable = value;
+    }
     public void AreasWithSamePasswordAsCurrent()
     {
 
-        foreach(rArea area in listOfLevelAreas)
+        foreach (rArea area in listOfLevelAreas)
         {
-            
-            if(area != currentArea && area.Password==currentArea.Password)
-            {
+            area.SharingPasswordWarningIcon.gameObject.SetActive(false);
+        }
 
+        for (int i = 0; i < listOfLevelAreas.Length; i++)
+        {
+            for (int j = i + 1; j < listOfLevelAreas.Length; j++)
+            {
+                if (listOfLevelAreas[i].Password!=null && listOfLevelAreas[i].Password == listOfLevelAreas[j].Password)
+                {
+                    listOfLevelAreas[i].SharingPasswordWarningIcon.gameObject.SetActive(true);
+                    listOfLevelAreas[j].SharingPasswordWarningIcon.gameObject.SetActive(true);
+
+                }
             }
- 
         }
         CurrentArea = currentArea;
     }
@@ -213,6 +233,7 @@ public class rPasswordManager : MonoBehaviour
                 break;
         }
 
+        currentArea.MeshColourChanger.LerpBetweenObjectColours(currentArea.Health / maxSoldiersNumber);
     }
 
     public void FormArmyBasedOnAreaHealth()
@@ -225,15 +246,13 @@ public class rPasswordManager : MonoBehaviour
         else if (currentArea.Health <= MaxSoldiersNumber)
             rings = 3;
 
-        Debug.Log(rings);
-
         /// later, it'd be better to send to the friendly soliders AI script both
         /// the password strength and complexity and the switch case is done there
         /// that way the functionality is separated and the password script knows nothing about the soliders
 
         ///also we can instantiate the army using StartCoroutine to instantiate one by one
         RadialFormation rf = currentArea.GetComponentInChildren<RadialFormation>();
-        rf.Amount = currentArea.Health;
+        rf.Amount =(int)currentArea.Health;
         rf.Rings = rings;
         ExampleArmy ea = currentArea.GetComponentInChildren<ExampleArmy>();
         ea.SetPrefabsTypes(soldiersType);
