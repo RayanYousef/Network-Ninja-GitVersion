@@ -171,9 +171,26 @@ public class CS_PlayerManager : MonoBehaviour
         anim.SetBool(animController.B_Jumping, false);
         anim.SetBool(animController.B_Attacking, false);
         anim.SetBool(animController.B_canTransit,false);
-        //rb.constraints = RigidbodyConstraints.FreezeRotation| RigidbodyConstraints.FreezePositionY;
+        //
         rb.drag = drag;
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 6)
+        {
+            var contactPoints = collision.contacts;
+            foreach (var contact in contactPoints)
+            {
+                var yLength = GetComponent<CapsuleCollider>().bounds.center.y - contact.point.y;
+                if (yLength > GetComponent<CapsuleCollider>().height/2-0.01f)
+                {
+                    Debug.Log("happened");
+                    rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+                }
+            }
+        }
     }
     #endregion
 

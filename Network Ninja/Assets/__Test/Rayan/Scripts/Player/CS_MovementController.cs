@@ -57,15 +57,12 @@ public class CS_MovementController : MonoBehaviour
         switch (playerManager.AnimatorCurrentState)
         {
             case CharacterState.Idling:
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 break;
 
             case CharacterState.Running:
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 MoveTowardsDirection(movementSpeed);
                 break;
             case CharacterState.Attacking:
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 MoveTowardsDirection(movementSpeed/8);
                 break;
 
@@ -174,4 +171,5 @@ public class CS_MovementController : MonoBehaviour
     #endregion
 
 
+  
 }
