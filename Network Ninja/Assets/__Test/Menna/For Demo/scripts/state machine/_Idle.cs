@@ -30,7 +30,7 @@ public class _Idle : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        RB.transform.LookAt(player);
         agent.SetDestination(player.position);
         if (Vector3.Distance(player.position , RB.transform.position) < chaseRange)
         {
