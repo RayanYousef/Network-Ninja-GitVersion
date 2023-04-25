@@ -171,7 +171,7 @@ public class CS_PlayerManager : MonoBehaviour
         anim.SetBool(animController.B_Jumping, false);
         anim.SetBool(animController.B_Attacking, false);
         anim.SetBool(animController.B_canTransit,false);
-        rb.constraints = RigidbodyConstraints.FreezeRotation| RigidbodyConstraints.FreezePositionY;
+        //rb.constraints = RigidbodyConstraints.FreezeRotation| RigidbodyConstraints.FreezePositionY;
         rb.drag = drag;
         
     }

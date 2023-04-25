@@ -10342,18 +10342,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 421865616}
   m_Mesh: {fileID: -7060430426208136873, guid: 355c2e1fddeb18c40b1425d28c5faec1, type: 3}
---- !u!114 &467642420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5977481141695241984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9420ebd662cd0546a0f0b8aa7d271ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &491796074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31120,6 +31108,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7755407847780162767, guid: 355c2e1fddeb18c40b1425d28c5faec1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8500439022707344609, guid: 355c2e1fddeb18c40b1425d28c5faec1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -31198,6 +31191,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1186392032}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &1186392044
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186392039}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6273828154215867383, guid: 355c2e1fddeb18c40b1425d28c5faec1, type: 3}
 --- !u!65 &1186392045
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31252,20 +31259,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 48.770176, y: 0.31994668, z: 25.832588}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!64 &1186392052
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186392039}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6273828154215867383, guid: 355c2e1fddeb18c40b1425d28c5faec1, type: 3}
 --- !u!23 &1186392053 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 365453419767964300, guid: 355c2e1fddeb18c40b1425d28c5faec1,
@@ -67014,11 +67007,10 @@ GameObject:
   - component: {fileID: 5977481141695241999}
   - component: {fileID: 5977481141695241986}
   - component: {fileID: 5977481141695241996}
-  - component: {fileID: 5977481141695241992}
   - component: {fileID: 5977481141695241997}
   - component: {fileID: 5977481141695241998}
   - component: {fileID: 5977481141695241987}
-  - component: {fileID: 467642420}
+  - component: {fileID: 5977481141695242000}
   m_Layer: 0
   m_Name: Moving Object
   m_TagString: Untagged
@@ -67148,20 +67140,6 @@ MonoBehaviour:
   drag: 10
   clicksIntervalTime: 0.2
   currentState: 0
---- !u!136 &5977481141695241992
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5977481141695241984}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.28
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &5977481141695241996
 Animator:
   serializedVersion: 5
@@ -67197,7 +67175,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 3
 --- !u!114 &5977481141695241998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67257,6 +67235,20 @@ MonoBehaviour:
   b_canTransit: CanTransit
   t_Dash: Dash
   t_Jump: Jump
+--- !u!136 &5977481141695242000
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5977481141695241984}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.18
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.83, z: 0}
 --- !u!81 &5977481141954091300
 AudioListener:
   m_ObjectHideFlags: 0
