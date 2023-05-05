@@ -54,7 +54,8 @@ public class rArea : MonoBehaviour
     {
         areaCollider = GetComponent<Collider>();
         sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
-        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
+       // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
+        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemiesEachInterval);
 
         enemySpawner = GetComponentInChildren<EnemySpawner>();
         friendSpawner = GetComponentInChildren<ExampleArmy>();

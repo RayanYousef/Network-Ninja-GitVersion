@@ -52,6 +52,10 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
+    public void  SpawnEnemiesEachInterval()
+    {
+        StartCoroutine("spawnMoreEnemies");
+    }
     public IEnumerator spawnMoreEnemies()
     {
         //condition when player and mini boss in area (player != null && miniboss != null)
@@ -60,7 +64,6 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemies();
             yield return (new WaitForSeconds(spawnInterval));
         }
-
     }
 
     void HandleEnemyKilled(GameObject enemy)
