@@ -111,7 +111,7 @@ public class rPasswordManager : MonoBehaviour
     public void CheckCurrentAreaPasswordStrength()
     {
         /// load user personal data to check the password against them
-        loadUserPrivateData();
+        ///loadUserPrivateData();
 
         /// to calculate the strength of the password, the following will be checked
         /// 1. the length
@@ -130,7 +130,6 @@ public class rPasswordManager : MonoBehaviour
             return;
         }
 
-        PlayerPrefs.SetString(name, currentArea.Password);
         //Debug.Log("Correct call");
 
         if (length < 8)
@@ -256,17 +255,10 @@ public class rPasswordManager : MonoBehaviour
         rf.Rings = rings;
         ExampleArmy ea = currentArea.GetComponentInChildren<ExampleArmy>();
         ea.SetPrefabsTypes(soldiersType);
-        //ea.enabled = true;
         ea.SetFormation();
 
         //currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
-        //friendSpawner.SpawnFriends(solidersNumbers, soldiersType);
 
-        // spawnFtiends(solidersNumbers, soldiersType, instantiatePos);
-        /// area
-        /// ID
-        /// password
-        /// 
         /// password manager holds list of passwords
         //areaCollider.isTrigger = true;
     }
