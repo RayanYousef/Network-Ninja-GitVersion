@@ -26,7 +26,7 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        HealthBar.value = currentHealth;
+        HealthBar.value = currentHealth; 
     }
 
     //Health and damage
