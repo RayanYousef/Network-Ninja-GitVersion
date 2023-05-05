@@ -56,6 +56,9 @@ public class CS_MovementController : MonoBehaviour
     {
         switch (playerManager.AnimatorCurrentState)
         {
+            case CharacterState.Idling:
+                break;
+
             case CharacterState.Running:
                 MoveTowardsDirection(movementSpeed);
                 break;
@@ -168,4 +171,5 @@ public class CS_MovementController : MonoBehaviour
     #endregion
 
 
+  
 }
