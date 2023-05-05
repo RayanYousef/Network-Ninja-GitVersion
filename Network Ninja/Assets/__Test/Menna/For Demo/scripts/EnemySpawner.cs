@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public Transform objectToSpawnAround;
 
-    public int armySize = 10;
+    public int armySize = 15;
     public float spawnRadius = 10f;
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
@@ -24,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         enemies = new List<GameObject>();
+
         //SpawnEnemies();
         //  enemyPrefab = GameObjectsManager.Instance.EnemyPrefab;
         // objectToSpawnAround = GameObjectsManager.Instance.ObjectToSpawnAround;
@@ -48,6 +49,24 @@ public class EnemySpawner : MonoBehaviour
       //  StartCoroutine(AvoidEnemies());
 
 
+    }
+
+    public IEnumerator spawnMoreEnemies()
+    {
+        //condition when player and mini boss in area (player != null && miniboss != null)
+        // while()
+        SpawnEnemies();
+        yield return (new WaitForSeconds(10));
+    }
+
+    void HandleEnemyKilled(GameObject enemy)
+    {
+        enemies.Remove(enemy);
+        if (enemies.Count == 0 && OnAllEnemiesKilled != null)
+        {
+            OnAllEnemiesKilled.Invoke();
+            Debug.Log("All DEAAAAAAAAAAAAAAAAAAAAAAAD");
+        }
     }
 
     //IEnumerator AvoidEnemies()
@@ -81,6 +100,9 @@ public class EnemySpawner : MonoBehaviour
     //        yield return null;
     //    }
     //}
+
+
+
     //void HandleEnemyKilled()
     //{
     //    // Check if all enemies have been killed
@@ -102,15 +124,7 @@ public class EnemySpawner : MonoBehaviour
 
     //    allArmyDied = allEnemiesKilled;
     //}
-    void HandleEnemyKilled(GameObject enemy)
-    {
-        enemies.Remove(enemy);
-        if (enemies.Count == 0 && OnAllEnemiesKilled != null)
-        {
-            OnAllEnemiesKilled.Invoke();
-            Debug.Log("All DEAAAAAAAAAAAAAAAAAAAAAAAD");
-        }
-    }
+
 }
 
 
