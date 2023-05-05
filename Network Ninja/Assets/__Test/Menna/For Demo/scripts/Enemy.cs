@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
         //Debug.Log(player.position);
         //transform.LookAt(player);
         agent.SetDestination(player.position);
+        
     }
 
     //private void FixedUpdate()

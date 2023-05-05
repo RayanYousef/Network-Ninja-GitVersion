@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
     public bool allArmyDied = false;
+    public int spawnInterval = 5;
    // public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
 
 
@@ -54,9 +55,12 @@ public class EnemySpawner : MonoBehaviour
     public IEnumerator spawnMoreEnemies()
     {
         //condition when player and mini boss in area (player != null && miniboss != null)
-        // while()
-        SpawnEnemies();
-        yield return (new WaitForSeconds(10));
+        while (true)
+        {
+            SpawnEnemies();
+            yield return (new WaitForSeconds(spawnInterval));
+        }
+
     }
 
     void HandleEnemyKilled(GameObject enemy)
