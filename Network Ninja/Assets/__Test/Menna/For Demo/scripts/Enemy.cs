@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         //Debug.Log(player.position);
-        //transform.LookAt(player);
+        transform.LookAt(player);
         agent.SetDestination(player.position);
         
     }
