@@ -13,6 +13,10 @@ public class AudioManager : MonoBehaviour
 
     [Header("Keyboard Single Clicks Array")]
     [SerializeField] AudioClip[] clickClips;
+    [SerializeField] AudioClip[] footsteps;
+
+    public AudioClip[] ClickClips { get => clickClips; set => clickClips = value; }
+    public AudioClip[] Footsteps { get => footsteps; set => footsteps = value; }
 
     private void Awake()
     {
@@ -65,9 +69,9 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void PlayKeyboardClicks()
+    public void PlayVariedPitcheAudio(AudioClip[] audioClipsArray)
     {
-        pitchVariedsfxSource.clip = clickClips[UnityEngine.Random.Range(0, clickClips.Length)];
+        pitchVariedsfxSource.clip = audioClipsArray[UnityEngine.Random.Range(0, clickClips.Length)];
         pitchVariedsfxSource.volume = UnityEngine.Random.Range(0.5f, 1f);
         pitchVariedsfxSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
 

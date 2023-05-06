@@ -63,7 +63,7 @@ public class rUIPassword : MonoBehaviour
         {
             if(Input.anyKeyDown)
             {
-                AudioManager.instance.PlayKeyboardClicks();
+                AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.ClickClips);
             }
         }
     }
