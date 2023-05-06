@@ -15,23 +15,26 @@ public class rUIPassword : MonoBehaviour
     [SerializeField] TMP_InputField passwordIF;
     [SerializeField] Button passwordBtn;
 
+
     [Header("Check Password Panel")]
     [SerializeField] private GameObject checkPasswordPanel;
     [SerializeField] Button[] ansBtns;
     [SerializeField] string[] answers = new string[3];
 
 
+    [Header("Menu")]
+    [SerializeField] private GameObject menuPanel;
+    [SerializeField] Button resetBtn;
+
     void Start()
     {
 
         playerInputs = GameObjectsManager.Instance.Player.GetComponent<PlayerInput>();
 
-
         createPasswordPanel.SetActive(false);
         passwordIF = createPasswordPanel.GetComponentInChildren<TMP_InputField>();
         passwordBtn = createPasswordPanel.GetComponentInChildren<Button>();
         passwordBtn.onClick.AddListener(OnClickFormArmyBasedOnPassword);
-
 
 
         checkPasswordPanel.SetActive(false);
@@ -40,7 +43,51 @@ public class rUIPassword : MonoBehaviour
         ansBtns[1].onClick.AddListener(() => { TakeAns(ansBtns[1]); });
         ansBtns[2].onClick.AddListener(() => { TakeAns(ansBtns[2]); });
 
+        menuPanel.SetActive(false);
+        resetBtn = menuPanel.GetComponentInChildren<Button>();
+        resetBtn.onClick.AddListener(ShowCreatePasswordPanel);
+        resetBtn.onClick.AddListener(ShowHideMenu);
+
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            ShowHideMenu();
+        }
+    }
+
+    void ShowHideMenu()
+    {
+        
+        switch (menuPanel.activeSelf)
+        {
+            case true:
+                menuPanel.SetActive(false);
+                if(createPasswordPanel.activeSelf)
+                {
+                    return;
+                }
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
+                break;
+            case false:
+                if (createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf)
+                {
+                    return;
+                }
+                menuPanel.SetActive(true);
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.Confined;
+                break;
+        }
+    }
+
+    public void ResetPasswordButtonInteractbility(bool value)
+    {
+        resetBtn.interactable = value;
     }
 
     public void TakeAns(Button selectedBtn)

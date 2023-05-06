@@ -16,7 +16,6 @@ public class rArea : MonoBehaviour
     [SerializeField] AreaType areaType;
     [SerializeField] float health, maxHealth;
     [SerializeField] string password;
-    [SerializeField] bool mine = false;
     [SerializeField] bool playerInside = false;
 
     [Header("Events")]
@@ -45,7 +44,6 @@ public class rArea : MonoBehaviour
             if (health == 0) LostArea();
         }
     }
-    public bool Mine { get => mine; set => mine = value; }
     public AreaType AreaType { get => areaType; set => areaType = value; }
     public CS_ChangeObjectsColour MeshColourChanger { get => meshColourChanger; }
     public SpriteRenderer SharingPasswordWarningIcon { get => sharingPasswordWarningIcon; }
@@ -53,13 +51,14 @@ public class rArea : MonoBehaviour
     private void Awake()
     {
         areaCollider = GetComponent<Collider>();
-        sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
-       // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
-        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemiesEachInterval);
-
-        enemySpawner = GetComponentInChildren<EnemySpawner>();
         friendSpawner = GetComponentInChildren<ExampleArmy>();
 
+        enemySpawner = GetComponentInChildren<EnemySpawner>();
+        //OnEnteringFight.AddListener(enemySpawner.SpawnEnemies);
+        OnEnteringFight.AddListener(enemySpawner.SpawnEnemiesEachInterval);
+        
+
+        sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
         meshColourChanger.MaxHealth = rPasswordManager.Instance.MaxHealth;
         meshColourChanger.HalfHealth = rPasswordManager.Instance.HalfHealth;
         meshColourChanger.LowHealth = rPasswordManager.Instance.LowHealth;
@@ -140,39 +139,21 @@ public class rArea : MonoBehaviour
 
             /// On Entering Area call On Entering Area in UIPassword
             OnEnteringArea?.Invoke();
-
-            //if (areaType == AreaType.Base)
-            //{
-            //    /// On Entering Area call On Entering Area in UIPassword
-            //    OnEnteringArea?.Invoke();
-            //}
-            //else
-            //{
-            //    if (mine)
-            //    {
-            //        areaCollider.isTrigger = true;
-            //    }
-            //    else
-            //    {
-
-            //        // spawn enemies
-            //    }
-            //}
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (areaType == AreaType.Base)
-            rPasswordManager.Instance.ResetPasswordButtonInteractbility(true);
+            rPasswordManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
         else
-            rPasswordManager.Instance.ResetPasswordButtonInteractbility(false);
+            rPasswordManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
 
         if (areaType == AreaType.Fight && other.gameObject == GameObjectsManager.Instance.Player)
         {
             playerInside = true;
-            // raise event to spawn enemies
             rPasswordManager.Instance.CurrentArea = this;
+            // raise event to spawn enemies
             OnEnteringFight?.Invoke();
         }
     }
@@ -182,7 +163,7 @@ public class rArea : MonoBehaviour
 
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
-            rPasswordManager.Instance.ResetPasswordButtonInteractbility(false);
+            rPasswordManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
             foreach (GameObject friend in friendSpawner._spawnedUnits)
             {
                 Destroy(friend.gameObject);

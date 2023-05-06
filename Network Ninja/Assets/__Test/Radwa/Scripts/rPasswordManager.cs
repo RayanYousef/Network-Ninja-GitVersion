@@ -12,7 +12,7 @@ public enum PasswordStrength { Weak, Moderate, Strong };
 public class rPasswordManager : MonoBehaviour
 {
     private static rPasswordManager instance;
-    [SerializeField] UnityEngine.UI.Button ResetButton;
+    [SerializeField] rUIPassword passwordCanvas;
 
     [Header("Password Manager Components")]
     [SerializeField] rArea[] listOfLevelAreas;
@@ -38,6 +38,7 @@ public class rPasswordManager : MonoBehaviour
     public Color HalfHealth { get => halfHealth; }
     public Color LowHealth { get => lowHealth; }
     public Color EnemyColor { get => enemyColor;}
+    public rUIPassword PasswordCanvas { get => passwordCanvas; set => passwordCanvas = value; }
 
     private void Awake()
     {
@@ -51,31 +52,8 @@ public class rPasswordManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-    /*
-     *** Future compelet implementation for ManagePassword ***
-     * ManagePassword will be called when creating the new area password and will call:
-     *  - CheckPassword to check the password against the previously set passwords
-     *      - if the password was used before, split the army or give any visual feedback
-     *      - if the password is new, call:
-     *  - CheckStrength to check the new password strength ans instantiate a friendly army
-     */
-    //public void ManagePassword(string password)
-    //{
-    //    //if (currentArea.Password != null)
-    //    //{
-    //    //    CheckPassword(password);
-    //    //    return;
-    //    //}
-    //    //areasPassword.Add(currentArea.areaID, currentArea.Password);
-    //    currentArea.Password = password;
-    //    CheckStrength(currentArea.Password);
-    //    currentArea.GetComponent<Collider>().isTrigger = true;
-    //}
 
-    public void ResetPasswordButtonInteractbility(bool value)
-    {
-        ResetButton.interactable = value;
-    }
+    
     public void AreasWithSamePasswordAsCurrent()
     {
 
@@ -249,7 +227,7 @@ public class rPasswordManager : MonoBehaviour
         /// the password strength and complexity and the switch case is done there
         /// that way the functionality is separated and the password script knows nothing about the soliders
 
-        ///also we can instantiate the army using StartCoroutine to instantiate one by one
+        ///also we may instantiate the army using StartCoroutine to instantiate one by one
         RadialFormation rf = currentArea.GetComponentInChildren<RadialFormation>();
         rf.Amount =(int)currentArea.Health;
         rf.Rings = rings;
@@ -258,9 +236,6 @@ public class rPasswordManager : MonoBehaviour
         ea.SetFormation();
 
         //currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
-
-        /// password manager holds list of passwords
-        //areaCollider.isTrigger = true;
     }
 
     private void CheckPassword(string password)
