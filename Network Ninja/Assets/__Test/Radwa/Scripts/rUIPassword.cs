@@ -57,6 +57,14 @@ public class rUIPassword : MonoBehaviour
         {
             ShowHideMenu();
         }
+
+        if(createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf || menuPanel.activeSelf)
+        {
+            if(Input.anyKeyDown)
+            {
+                AudioManager.instance.PlayKeyboardClicks();
+            }
+        }
     }
 
     void ShowHideMenu()
