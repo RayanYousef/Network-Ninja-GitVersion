@@ -5,6 +5,8 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using System.Text.RegularExpressions;
+
 
 public class rUIPassword : MonoBehaviour
 {
@@ -59,11 +61,17 @@ public class rUIPassword : MonoBehaviour
             ShowHideMenu();
         }
 
-        if(createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf || menuPanel.activeSelf)
+        /// prevent input filed from taking arabic text
+        passwordIF.text = Regex.Replace(passwordIF.text, @"[^a-zA-Z0-9 !@#$%^&*()_+=\[{\]};:<>|./?,-]", "");
+
+        if (createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf || menuPanel.activeSelf)
         {
-            if(Input.anyKeyDown)
+            if(Input.anyKeyDown && passwordIF.isFocused && passwordIF.text.Length != 0)
             {
                 AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.ClickClips);
+
+                /// play clicks sounds only when inputfield is focused,
+                /// play other sounds for clicking buttons and showing panels.
             }
         }
     }

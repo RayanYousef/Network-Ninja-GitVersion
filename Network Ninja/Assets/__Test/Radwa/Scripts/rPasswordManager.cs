@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using System.Text.RegularExpressions;
+
 
 public enum Soldiers { Melee, Ranged, MeleeRanged, MeleeRangedTank };
 public enum PasswordStrength { Weak, Moderate, Strong };
@@ -124,15 +126,15 @@ public class rPasswordManager : MonoBehaviour
         }
 
         /// 2. Check complexity
-        if (System.Text.RegularExpressions.Regex.IsMatch(currentArea.Password, @"[A-Z]"))
+        if (Regex.IsMatch(currentArea.Password, @"[A-Z]"))
         {
             complexity++;
         }
-        if (System.Text.RegularExpressions.Regex.IsMatch(currentArea.Password, @"[a-z]"))
+        if (Regex.IsMatch(currentArea.Password, @"[a-z]"))
         {
             complexity++;
         }
-        if (System.Text.RegularExpressions.Regex.IsMatch(currentArea.Password, @"[0-9]"))
+        if (Regex.IsMatch(currentArea.Password, @"[0-9]"))
         {
             if (complexity > 0)
             {
