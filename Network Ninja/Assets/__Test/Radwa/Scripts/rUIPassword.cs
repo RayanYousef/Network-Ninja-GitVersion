@@ -33,6 +33,7 @@ public class rUIPassword : MonoBehaviour
 
         createPasswordPanel.SetActive(false);
         passwordIF = createPasswordPanel.GetComponentInChildren<TMP_InputField>();
+        passwordIF.characterLimit = 18;
         passwordBtn = createPasswordPanel.GetComponentInChildren<Button>();
         passwordBtn.onClick.AddListener(OnClickFormArmyBasedOnPassword);
 
