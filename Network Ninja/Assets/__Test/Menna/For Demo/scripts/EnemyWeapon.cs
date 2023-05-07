@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyWeapon : MonoBehaviour
 {
-    public int attackDamage = 20;
+    public int attackDamage = 10;
 
     public Vector3 attackOffset;
     public float attackRange = 1f;
@@ -17,6 +17,7 @@ public class EnemyWeapon : MonoBehaviour
         pos += transform.up * attackOffset.y;
         pos += transform.right * attackOffset.x;
 
+        //apply damage on player
         Collider[] hitColliders = Physics.OverlapSphere(pos, attackRange, attackMask);
         foreach (Collider col in hitColliders)
         {

@@ -43,14 +43,13 @@ public class Health : MonoBehaviour
             Die();
         }
     }
-
     public void Die()
     {
-        // Raise the event when the enemy is killed
-        OnEnemyKilled.Invoke(this.gameObject);
         //animation
         animator.SetTrigger("Death");
-        Destroy(gameObject,1);
+        // Raise the event when the enemy is killed
+        OnEnemyKilled.Invoke(this.gameObject);
+        Destroy(gameObject, 1.5f);
 
     }
 

@@ -51,14 +51,14 @@ public class rArea : MonoBehaviour
     private void Awake()
     {
         areaCollider = GetComponent<Collider>();
-        friendSpawner = GetComponentInChildren<ExampleArmy>();
+        sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
+        // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
+        //OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemiesEachInterval);
+        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
 
         enemySpawner = GetComponentInChildren<EnemySpawner>();
-        //OnEnteringFight.AddListener(enemySpawner.SpawnEnemies);
-        OnEnteringFight.AddListener(enemySpawner.SpawnEnemiesEachInterval);
-        
+        friendSpawner = GetComponentInChildren<ExampleArmy>();
 
-        sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
         meshColourChanger.MaxHealth = rPasswordManager.Instance.MaxHealth;
         meshColourChanger.HalfHealth = rPasswordManager.Instance.HalfHealth;
         meshColourChanger.LowHealth = rPasswordManager.Instance.LowHealth;

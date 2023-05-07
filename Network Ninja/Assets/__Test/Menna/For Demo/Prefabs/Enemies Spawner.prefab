@@ -28,7 +28,8 @@ Transform:
   m_LocalPosition: {x: 465.78, y: 196.84, z: 44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 782552500164399174}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,14 +47,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8895072523819109860, guid: 1807d0f8e7aa2f64dbb81153123ea94d,
     type: 3}
+  MiniBossPrefab: {fileID: 8895072523819109860, guid: e1c1de2f01a4bab429d509acdee87d26,
+    type: 3}
   objectToSpawnAround: {fileID: 5956289530070099838}
-  armySize: 10
-  spawnRadius: 10
+  armySize: 20
+  spawnRadius: 20
   minDistanceFromObject: 5
   maxDistanceFromObject: 10
   allArmyDied: 0
   spawnInterval: 5
+  miniBossSize: 4
   enemies: []
   OnAllEnemiesKilled:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: rUIPassword, Assembly-CSharp
+        m_MethodName: OnEnteringAreaShowPannels
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &8579903735399700030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 782552500164399174}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &782552500164399174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8579903735399700030}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.0511578, y: 0.18873844, z: 1.8930799}
+  m_LocalScale: {x: 0.016666668, y: 0.05, z: 0.035714284}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5956289530070099838}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
