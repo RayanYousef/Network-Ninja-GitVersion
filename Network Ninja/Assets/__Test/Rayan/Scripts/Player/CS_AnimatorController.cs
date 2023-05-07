@@ -66,6 +66,12 @@ public class CS_AnimatorController : MonoBehaviour
 
 
     #region Animation Event
+
+    public void PlayFootstepsAudio()
+    {
+        AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.Footsteps);
+    }
+
     public void CanTransit()
     {
         anim.SetBool(b_canTransit, true);
