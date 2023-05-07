@@ -48,6 +48,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
             GameObject enemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+            enemy.transform.parent = this.transform;
             enemy.GetComponent<Health>().OnEnemyKilled += HandleEnemyKilled;
             //enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
             enemies.Add(enemy);

@@ -32,6 +32,7 @@ public class ExampleArmy : MonoBehaviour {
 
     private void Awake() {
         _parent = new GameObject("Unit Parent").transform;
+        _parent.transform.parent = this.transform;
     }
 
     private void Update() {
