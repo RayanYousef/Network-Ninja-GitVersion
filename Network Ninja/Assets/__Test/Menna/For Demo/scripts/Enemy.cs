@@ -5,11 +5,10 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] Transform player;
-
+    Transform player;
     NavMeshAgent agent;
 
-
+    #region //variables for overlap
     ////overlap
     //public float avoidanceRadius = 1f;
     //public float avoidanceForce = 1f;
@@ -17,7 +16,7 @@ public class Enemy : MonoBehaviour
 
     //private Collider[] overlappingColliders;
 
-
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +30,12 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(player.position);
         transform.LookAt(player);
         agent.SetDestination(player.position);
         
     }
 
+    #region //overlap
     //private void FixedUpdate()
     //{
     //    // Detect overlapping colliders within the specified radius
@@ -53,6 +52,6 @@ public class Enemy : MonoBehaviour
     //        }
     //    }
     //}
-
+    #endregion
 
 }

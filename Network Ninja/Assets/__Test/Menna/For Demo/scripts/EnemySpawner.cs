@@ -5,7 +5,10 @@ using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour
 {
+    Transform player;
+
     public GameObject enemyPrefab;
+    public GameObject MiniBossPrefab;
     public Transform objectToSpawnAround;
 
     public int armySize = 10;
@@ -13,7 +16,8 @@ public class EnemySpawner : MonoBehaviour
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
     public bool allArmyDied = false;
-    public int spawnInterval = 10;
+    public int spawnInterval = 20;
+    public int miniBossSize;
    // public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
 
 
@@ -25,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         enemies = new List<GameObject>();
+        player = GameObjectsManager.Instance.Player.transform;
 
         //SpawnEnemies();
         //  enemyPrefab = GameObjectsManager.Instance.EnemyPrefab;
@@ -47,25 +52,29 @@ public class EnemySpawner : MonoBehaviour
             //enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
             enemies.Add(enemy);
         }
+
       //  StartCoroutine(AvoidEnemies());
 
 
     }
 
+    //spawn enemies each interval of time
     public void  SpawnEnemiesEachInterval()
     {
         StartCoroutine("spawnMoreEnemies");
     }
+
     public IEnumerator spawnMoreEnemies()
     {
-        //condition when player and mini boss in area (player != null && miniboss != null)
-        for(int i = 0; i < spawnInterval; i++)
+        //condition when player and mini boss in area (player != null && miniboss != null) => while()
+        for(int i = 0; i < 3; i++)
         {
-            SpawnEnemies();
-            yield return (new WaitForSeconds(spawnInterval));
+                SpawnEnemies();
+                yield return (new WaitForSeconds(spawnInterval));
         }
     }
 
+    //invoke event when all enemies died 
     void HandleEnemyKilled(GameObject enemy)
     {
         enemies.Remove(enemy);
@@ -76,6 +85,18 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    // spawn MiniBosses
+    public void SpawnMiniBosses()
+    {
+        for (int i = 0; i < miniBossSize; i++)
+        {
+            Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+            GameObject enemy = Instantiate(MiniBossPrefab, randomPosition, Quaternion.identity);
+            Debug.Log("mini boss spawned");
+
+        }
+    }
+    #region //trials
     //IEnumerator AvoidEnemies()
     //{
     //    while (true)
@@ -131,7 +152,7 @@ public class EnemySpawner : MonoBehaviour
 
     //    allArmyDied = allEnemiesKilled;
     //}
-
+    #endregion
 }
 
 
