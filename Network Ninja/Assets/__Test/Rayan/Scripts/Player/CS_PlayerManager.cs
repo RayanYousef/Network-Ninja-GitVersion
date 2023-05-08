@@ -15,6 +15,7 @@ public class CS_PlayerManager : MonoBehaviour
     [SerializeField] CS_AnimatorController animController;
     [SerializeField] CS_CameraTarget camTarget;
     [SerializeField] Rigidbody rb;
+    [SerializeField] FixedJoystick joyStick;
 
     [Header("Variables")]
     [SerializeField] float drag;
@@ -47,6 +48,8 @@ public class CS_PlayerManager : MonoBehaviour
         SendJumpInputState(Input.GetKeyDown(KeyCode.Space));
         SendAttackInputState(Input.GetMouseButton(0));
         SendDashInputState(Input.GetKeyDown(KeyCode.LeftShift));
+
+        SendInputDirection(joyStick.Direction);
 
 
 
