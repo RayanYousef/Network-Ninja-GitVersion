@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ExampleArmy : MonoBehaviour {
+public class AlliesSpawner : MonoBehaviour {
     private FormationBase _formation;
 
     public FormationBase Formation {

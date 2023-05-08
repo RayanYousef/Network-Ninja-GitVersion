@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
             enemy.transform.parent = this.transform;
             enemy.GetComponent<Health>().OnEnemyKilled += HandleEnemyKilled;
-            //enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
+           // enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
             enemies.Add(enemy);
         }
 

@@ -24,7 +24,11 @@ public class rArea : MonoBehaviour
     [Header("Area Components")]
     [SerializeField] Collider areaCollider;
     [SerializeField] EnemySpawner enemySpawner;
-    [SerializeField] ExampleArmy friendSpawner;
+
+    public Formation[] FArmyArray;
+    public Formation WeakArmy;
+    public Formation ModerateArmy;
+    public Formation StrongArmy;
 
     [Header("MiniMap Components")]
     [SerializeField] CS_ChangeObjectsColour meshColourChanger;
@@ -33,6 +37,7 @@ public class rArea : MonoBehaviour
 
     [Header("Script Internal Variables")]
     [SerializeField] float healthTimer;
+    [SerializeField] float formationRemovingTimer;
 
     public string Password { get => password; set => password = value; }
     public float Health
@@ -53,11 +58,14 @@ public class rArea : MonoBehaviour
         areaCollider = GetComponent<Collider>();
         sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
         // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
-        //OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemiesEachInterval);
-        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
+        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemiesEachInterval);
+       // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
 
         enemySpawner = GetComponentInChildren<EnemySpawner>();
-        friendSpawner = GetComponentInChildren<ExampleArmy>();
+        FArmyArray = GetComponentsInChildren<Formation>();
+        WeakArmy = FArmyArray[0];
+        ModerateArmy = FArmyArray[1];
+        StrongArmy = FArmyArray[2];
 
         meshColourChanger.MaxHealth = rPasswordManager.Instance.MaxHealth;
         meshColourChanger.HalfHealth = rPasswordManager.Instance.HalfHealth;
@@ -68,6 +76,8 @@ public class rArea : MonoBehaviour
         meshColourChanger.MeshRenderers = Renderers;
 
         sharingPasswordWarningIcon.gameObject.SetActive(false);
+
+
 
     }
     void Start()
@@ -85,11 +95,16 @@ public class rArea : MonoBehaviour
         }
 
         maxHealth = rPasswordManager.Instance.MaxSoldiersNumber;
+
+        foreach(Formation army in FArmyArray)
+        {
+            army.gameObject.SetActive(false);
+        }
     }
 
     private void FixedUpdate()
     {
-        if (playerInside == false)
+        if (playerInside == false && password != null)
             UpdateHealth();
     }
 
@@ -113,6 +128,27 @@ public class rArea : MonoBehaviour
                 LostArea();
             }
         }
+
+        formationRemovingTimer += Time.deltaTime;
+        if(formationRemovingTimer > 3)
+        {
+            formationRemovingTimer = 0;
+
+            if (Health <= maxHealth / 4 && WeakArmy.AgentsList.Count != 0)
+            {
+                WeakArmy.RemoveFormationAgent();
+            }
+            else if (Health <= maxHealth / 2 && ModerateArmy.AgentsList.Count != 0)
+            {
+                ModerateArmy.RemoveFormationAgent();
+
+
+            }
+            else if (Health <= maxHealth && StrongArmy.AgentsList.Count != 0)
+            {
+                StrongArmy.RemoveFormationAgent();
+            }
+        }
     }
 
     public void LostArea()
@@ -121,15 +157,61 @@ public class rArea : MonoBehaviour
         areaCollider.isTrigger = true;
         password = null;
         sharingPasswordWarningIcon.gameObject.SetActive(false);
+
+
+        WeakArmy.clearList();
+        ModerateArmy.clearList();
+        StrongArmy.clearList();
+
     }
 
+    public void FormArmyBasedOnAreaHealth()
+    {
+        WeakArmy.gameObject.SetActive(false);
+        ModerateArmy.gameObject.SetActive(false);
+        StrongArmy.gameObject.SetActive(false);
+
+        if (Health <= maxHealth / 4)
+        {
+          WeakArmy.gameObject.SetActive(true);
+        }
+        else if (Health <= maxHealth/ 2)
+        {
+            WeakArmy.gameObject.SetActive(true);
+            ModerateArmy.gameObject.SetActive(true);
+
+        }
+        else if (Health <= maxHealth)
+        {
+            WeakArmy.gameObject.SetActive(true);
+            ModerateArmy.gameObject.SetActive(true);
+            StrongArmy.gameObject.SetActive(true);
+        }
+
+        /// later, it'd be better to send to the friendly soliders AI script both
+        /// the password strength and complexity and the switch case is done there
+        /// that way the functionality is separated and the password script knows nothing about the soliders
+
+        /// also we may instantiate the army using StartCoroutine to instantiate one by one
+        foreach (Formation s in FArmyArray)
+        {
+            if(s.isActiveAndEnabled)
+            {
+                s.SpawnFormationPointsAndAgents(16);
+            }
+        }
+
+        //  currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
+    }
 
     #region Collision and Trigger
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent<rTempFriendScript>(out rTempFriendScript friend))
         {
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
+            collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().gameObject.SetActive(false);
+            collision.gameObject.GetComponent<rTempFriendScript>().gameObject.SetActive(false);
         }
 
         if (areaType == AreaType.Base && collision.gameObject == GameObjectsManager.Instance.Player)
@@ -164,16 +246,16 @@ public class rArea : MonoBehaviour
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
             rPasswordManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
-            foreach (GameObject friend in friendSpawner._spawnedUnits)
-            {
-                Destroy(friend.gameObject);
-            }
+            //foreach (GameObject friend in WeakArmy._spawnedUnits)
+            //{
+            //    Destroy(friend.gameObject);
+            //}
 
             foreach (GameObject enemy in enemySpawner.enemies)
             {
                 Destroy(enemy);
             }
-            friendSpawner._spawnedUnits.Clear();
+            //WeakArmy._spawnedUnits.Clear();
             enemySpawner.enemies.Clear();
         }
 
@@ -181,7 +263,7 @@ public class rArea : MonoBehaviour
         {
             areaCollider.isTrigger = false;
             playerInside = false;
-            GetComponentInChildren<ExampleArmy>().enabled = false;
+           // GetComponentInChildren<AlliesSpawner>().enabled = false;
         }
     }
     #endregion

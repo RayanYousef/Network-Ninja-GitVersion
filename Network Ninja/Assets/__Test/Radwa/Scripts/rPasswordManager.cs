@@ -214,33 +214,75 @@ public class rPasswordManager : MonoBehaviour
 
         currentArea.MeshColourChanger.LerpBetweenObjectColours(currentArea.Health / maxSoldiersNumber);
     }
+    #region Radial formation
+    //public void FormArmyBasedOnAreaHealth()
+    //{
+    //    int rings = 0;
+    //    if (currentArea.Health <= MaxSoldiersNumber / 4)
+    //        rings = 1;
+    //    else if (currentArea.Health <= MaxSoldiersNumber / 2)
+    //        rings = 2;
+    //    else if (currentArea.Health <= MaxSoldiersNumber)
+    //        rings = 3;
 
-    public void FormArmyBasedOnAreaHealth()
-    {
-        int rings = 0;
-        if (currentArea.Health <= MaxSoldiersNumber / 4)
-            rings = 1;
-        else if (currentArea.Health <= MaxSoldiersNumber / 2)
-            rings = 2;
-        else if (currentArea.Health <= MaxSoldiersNumber)
-            rings = 3;
+    //    /// later, it'd be better to send to the friendly soliders AI script both
+    //    /// the password strength and complexity and the switch case is done there
+    //    /// that way the functionality is separated and the password script knows nothing about the soliders
 
-        /// later, it'd be better to send to the friendly soliders AI script both
-        /// the password strength and complexity and the switch case is done there
-        /// that way the functionality is separated and the password script knows nothing about the soliders
+    //    ///also we may instantiate the army using StartCoroutine to instantiate one by one
+    //    //RadialFormation rf = currentArea.GetComponentInChildren<RadialFormation>();
+    //    //rf.Amount =(int)currentArea.Health;
+    //    //rf.Rings = rings;
+    //    AlliesSpawner ea = currentArea.GetComponentInChildren<AlliesSpawner>();
+    //    ea.SetPrefabsTypes(soldiersType);
+    //    ea.SetFormation();
 
-        ///also we may instantiate the army using StartCoroutine to instantiate one by one
-        RadialFormation rf = currentArea.GetComponentInChildren<RadialFormation>();
-        rf.Amount =(int)currentArea.Health;
-        rf.Rings = rings;
-        ExampleArmy ea = currentArea.GetComponentInChildren<ExampleArmy>();
-        ea.SetPrefabsTypes(soldiersType);
-        ea.SetFormation();
+    //    //currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
+    //}
+    #endregion
 
-        //currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
-    }
+    //public void FormArmyBasedOnAreaHealth()
+    //{
+    //    currentArea.WeakArmy.gameObject.SetActive(false);
+    //    currentArea.ModerateArmy.gameObject.SetActive(false);
+    //    currentArea.StrongArmy.gameObject.SetActive(false);
 
-    private void CheckPassword(string password)
+    //    if (currentArea.Health <= MaxSoldiersNumber / 4)
+    //    {
+    //        currentArea.WeakArmy.gameObject.SetActive(true);
+    //    }
+    //    else if (currentArea.Health <= MaxSoldiersNumber / 2)
+    //    {
+    //        currentArea.WeakArmy.gameObject.SetActive(true);
+    //        currentArea.ModerateArmy.gameObject.SetActive(true);
+
+    //    }
+    //    else if (currentArea.Health <= MaxSoldiersNumber)
+    //    {
+    //        currentArea.WeakArmy.gameObject.SetActive(true);
+    //        currentArea.ModerateArmy.gameObject.SetActive(true);
+    //        currentArea.StrongArmy.gameObject.SetActive(true);
+    //    }
+
+    ///// later, it'd be better to send to the friendly soliders AI script both
+    ///// the password strength and complexity and the switch case is done there
+    ///// that way the functionality is separated and the password script knows nothing about the soliders
+
+    ///// also we may instantiate the army using StartCoroutine to instantiate one by one
+    //        BoxFormation bf = currentArea.GetComponentInChildren<BoxFormation>();
+    //        AlliesSpawner[] allies = currentArea.GetComponentsInChildren<AlliesSpawner>();
+    //        foreach(AlliesSpawner s in allies)
+    //        {
+    //            s.SetPrefabsTypes(soldiersType);
+    //            s.SetFormation();
+    //        }
+
+    //      //  currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
+    //    }
+
+        /// 
+
+        private void CheckPassword(string password)
     {
         int length = password.Length;
 

@@ -9,8 +9,8 @@ public class Health : MonoBehaviour
 {
 
     public int maxHealth = 100;
-   public int currentHealth;
-    Animator animator;
+    public int currentHealth;
+    public Animator animator;
     public Slider HealthBar;
 
     public Action<GameObject> OnEnemyKilled;  // Declare the event
@@ -43,7 +43,7 @@ public class Health : MonoBehaviour
             Die();
         }
     }
-    public void Die()
+    public virtual void Die()
     {
         //animation
         animator.SetTrigger("Death");
