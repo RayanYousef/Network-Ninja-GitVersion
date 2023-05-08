@@ -23,9 +23,8 @@ public class rPasswordManager : MonoBehaviour
     [SerializeField] Color maxHealth, halfHealth, lowHealth, enemyColor;
 
     [SerializeField] rArea currentArea;
-    [SerializeField] Result result;
     [SerializeField] PasswordStrength strength;
-    //[SerializeField] Soldiers soldiersType;
+    [SerializeField] Result result;
 
     [Header("Password Lists")]
     private string[] playerPersonalData;
@@ -101,93 +100,6 @@ public class rPasswordManager : MonoBehaviour
             strength = PasswordStrength.Weak;
     }
 
-    //public void OldCheckCurrentAreaPasswordStrength()
-    //{
-    //    /// load user personal data to check the password against them
-    //    ///loadUserPrivateData();
-
-    //    /// to calculate the strength of the password, the following will be checked
-    //    /// 1. the length
-    //    /// 2. the complexity
-    //    /// 3. personal data (username, birth date, etc..)
-    //    /// 4. comparing to previous passwords and common used passwords (12345678, qwerty, etc...)
-
-    //    /// 1. Check length
-    //    int length = currentArea.Password.Length;
-    //    int complexity = 0;
-    //    soldiersType = Soldiers.Melee;
-
-    //    if (length == 0)
-    //    {
-    //        //Debug.Log($"Length = {length} in Area: {name}");
-    //        return;
-    //    }
-
-    //    //Debug.Log("Correct call");
-
-    //    if (length < 8)
-    //    {
-    //        strength = PasswordStrength.Weak;
-    //    }
-    //    else if (length < 12)
-    //    {
-    //        strength = PasswordStrength.Moderate;
-    //    }
-    //    else
-    //    {
-    //        strength = PasswordStrength.Strong;
-    //    }
-
-    //    /// 2. Check complexity
-    //    if (Regex.IsMatch(currentArea.Password, @"[A-Z]"))
-    //    {
-    //        complexity++;
-    //    }
-    //    if (Regex.IsMatch(currentArea.Password, @"[a-z]"))
-    //    {
-    //        complexity++;
-    //    }
-    //    if (Regex.IsMatch(currentArea.Password, @"[0-9]"))
-    //    {
-    //        if (complexity > 0)
-    //        {
-    //            soldiersType = Soldiers.MeleeRanged;
-    //        }
-    //        else
-    //        {
-    //            soldiersType = Soldiers.Ranged;
-    //        }
-    //        complexity++;
-    //    }
-    //    if (System.Text.RegularExpressions.Regex.IsMatch(currentArea.Password, @"[!@#$%^&*()_+=\[{\]};:<>|./?,-]"))
-    //    {
-    //        soldiersType = Soldiers.MeleeRangedTank;
-    //        complexity++;
-    //    }
-
-    //    if (complexity < 2)
-    //        strength = PasswordStrength.Weak;
-    //    else if (complexity <= 3)
-    //        strength = PasswordStrength.Moderate;
-    //    else if (complexity > 3)
-    //        strength = PasswordStrength.Strong;
-
-    //    Debug.Log(complexity);
-
-    //    /// 3. Check personal data
-    //    //foreach (string weakPassword in playerPersonalData)
-    //    //{
-    //    //    if (password.ToLower().Contains(weakPassword))
-    //    //    {
-    //    //        strength = PasswordStrength.Weak;
-    //    //        FormArmy();
-    //    //        return;
-    //    //    }
-    //    //}
-
-    //    // 4. Check common used passwords
-    //}
-
     void loadUserPrivateData()
     {
         playerPersonalData = new string[2];
@@ -247,16 +159,12 @@ public class rPasswordManager : MonoBehaviour
     #endregion
 
         private void CheckPassword(string password)
-    {
-        int length = password.Length;
-
-        if (length == 0)
         {
-            //Debug.Log($"Length = {length} in Area: {name}");
+
+        if (password.Length == 0)
+        {
             return;
         }
-
-        //Debug.Log("Correct call");
 
         if (password == currentArea.Password)
         {
