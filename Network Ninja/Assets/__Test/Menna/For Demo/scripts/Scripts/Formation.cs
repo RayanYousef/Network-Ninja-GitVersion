@@ -18,7 +18,7 @@ public class Formation : MonoBehaviour
     public GameObject indicator;
     public FormationAgent formationAgent;
     public GameObject spawnEffect;
-    public AudioSource onAddSound;
+  //  public AudioSource onAddSound;
     //Circle Properties
     public float radius;
     //Horizontal Line Properties
@@ -35,7 +35,7 @@ public class Formation : MonoBehaviour
     #region Private Variables
     //Private Variables Section
     private List<GameObject> indicatorsList = new List<GameObject>();
-    private List<GameObject> agentsList = new List<GameObject>();
+    [SerializeField] private List<GameObject> agentsList = new List<GameObject>();
     private IShape currentFormationShape;
 
     private CircleFormation circleFormation;
@@ -44,6 +44,10 @@ public class Formation : MonoBehaviour
     private ConeFormation coneFormation;
 
     private bool formShape;
+
+    public List<GameObject> AgentsList { get => agentsList; set => agentsList = value; }
+    public List<GameObject> IndicatorsList { get => indicatorsList; set => indicatorsList = value; }
+    public List<GameObject> AgentsList1 { get => agentsList; set => agentsList = value; }
     #endregion
 
     #region Unity Defined Functions
@@ -84,7 +88,7 @@ public class Formation : MonoBehaviour
                 break;
         }
         
-        SpawnFormationPointsAndAgents(numberToSpawn);
+        //SpawnFormationPointsAndAgents(numberToSpawn);
     }
 
     void Update()
@@ -120,8 +124,9 @@ public class Formation : MonoBehaviour
 
     #region Custom Functions
     //Spawning formation agents and formation transforms - where agents are assigned each transform!!
-    private void SpawnFormationPointsAndAgents(int number)
+    public void SpawnFormationPointsAndAgents(int number)
     {
+        numberToSpawn = number;
         for (int i = 0; i < number; i++)
         {
             GameObject go = GameObject.Instantiate(indicator, Vector3.zero, Quaternion.identity);
@@ -140,8 +145,8 @@ public class Formation : MonoBehaviour
         if (spawnEffect != null)
             Instantiate(spawnEffect, transform.position, Quaternion.identity);
 
-        if (onAddSound != null)
-            onAddSound.Play();
+        //if (onAddSound != null)
+        //    onAddSound.Play();
 
         count = currentFormationShape.AmountToExpand(count);
 
@@ -151,31 +156,72 @@ public class Formation : MonoBehaviour
     }
 
     //Call this function if you want to remove an agent in your existing formation
-    public void RemoveFormationAgent(int count)
+    //public void RemoveFormationAgent(int count)
+    //{
+    //    formShape = false;
+
+    //    //if (onAddSound != null)
+    //    //    onAddSound.Play();
+
+    //    count = currentFormationShape.AmountToExpand(count);
+
+    //    for (int i = 0; i < count; i++)
+    //    {
+    //        //onAddSound.Play();
+    //        GameObject toRemove = indicatorsList[i];
+    //        GameObject toRemoveAgent = agentsList[i];
+    //        toRemove.SetActive(false);
+    //        toRemoveAgent.SetActive(false);
+
+    //        indicatorsList.RemoveAt(i);
+    //        agentsList.RemoveAt(i);
+
+    //        if (spawnEffect != null)
+    //            Instantiate(spawnEffect, toRemoveAgent.transform.position, Quaternion.identity);        
+    //    }
+
+    //    formShape = true;
+    //}
+
+    public void RemoveFormationAgent()
     {
-        formShape = false;
-
-        if (onAddSound != null)
-            onAddSound.Play();
-
-        count = currentFormationShape.AmountToExpand(count);
-
-        for (int i = 0; i < count; i++)
+        if (indicatorsList.Count > 0 && agentsList.Count > 0)
         {
-            onAddSound.Play();
-            GameObject toRemove = indicatorsList[i];
-            GameObject toRemoveAgent = agentsList[i];
-            toRemove.SetActive(false);
-            toRemoveAgent.SetActive(false);
+            //indicatorsList[0].SetActive(false);
+            //agentsList[0].SetActive(false);
 
-            indicatorsList.RemoveAt(i);
-            agentsList.RemoveAt(i);
+            Destroy(indicatorsList[0]);
+            Destroy(agentsList[0]);
 
             if (spawnEffect != null)
-                Instantiate(spawnEffect, toRemoveAgent.transform.position, Quaternion.identity);        
+               Instantiate(spawnEffect, agentsList[0].transform.position, Quaternion.identity);  
+            
+            indicatorsList.RemoveAt(0);
+            agentsList.RemoveAt(0);
         }
 
-        formShape = true;
+    }
+
+    public void clearList()
+    {
+        if(indicatorsList.Count != 0)
+        {
+            foreach (GameObject go in indicatorsList)
+            {
+                Destroy(go);
+            }
+        }
+        if(agentsList.Count != 0)
+        {
+            foreach (GameObject go in agentsList)
+            {
+                if (spawnEffect != null)
+                    Instantiate(spawnEffect, go.transform.position, Quaternion.identity);
+                Destroy(go);
+            }
+        }
+        indicatorsList.Clear();
+        agentsList.Clear();
     }
     #endregion
 }

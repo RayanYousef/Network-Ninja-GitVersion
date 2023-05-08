@@ -105,7 +105,7 @@ public class rUIPassword : MonoBehaviour
         {
             Debug.Log("Correct Password");
             rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
-            rPasswordManager.Instance.FormArmyBasedOnAreaHealth();
+            //rPasswordManager.Instance.CurrentArea.FormArmyBasedOnAreaHealth();
 
         }
         else
@@ -173,7 +173,7 @@ public class rUIPassword : MonoBehaviour
         rPasswordManager.Instance.CurrentArea.AreaType = AreaType.Base;
         rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
         rPasswordManager.Instance.SetAreaHealthBasedOnPassword();
-        rPasswordManager.Instance.FormArmyBasedOnAreaHealth();
+        rPasswordManager.Instance.CurrentArea.FormArmyBasedOnAreaHealth();
         rPasswordManager.Instance.AreasWithSamePasswordAsCurrent();
 
         createPasswordPanel.SetActive(false);
