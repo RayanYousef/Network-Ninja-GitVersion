@@ -13,7 +13,6 @@ public class Health : MonoBehaviour
     public Animator animator;
     public Slider HealthBar;
 
-    public Action<GameObject> OnEnemyKilled;  // Declare the event
 
 
 
