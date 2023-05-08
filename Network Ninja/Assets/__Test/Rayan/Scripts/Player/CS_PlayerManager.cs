@@ -34,12 +34,24 @@ public class CS_PlayerManager : MonoBehaviour
         animController = GetComponentInChildren<CS_AnimatorController>();
         camTarget = GetComponentInChildren<CS_CameraTarget>();
         rb = GetComponentInChildren<Rigidbody>();
-        
+
     }
 
     private void Update()
     {
-            clicksIntervalTimer += Time.deltaTime;
+        clicksIntervalTimer += Time.deltaTime;
+
+        // Old Input System 
+        SendInputDirection(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        SendInputRotation(new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")));
+        SendJumpInputState(Input.GetKeyDown(KeyCode.Space));
+        SendAttackInputState(Input.GetMouseButton(0));
+        SendDashInputState(Input.GetKeyDown(KeyCode.LeftShift));
+
+
+
+
+
     }
 
     #region Main Input Functions
@@ -69,17 +81,17 @@ public class CS_PlayerManager : MonoBehaviour
 
     public void SendDashInputState(bool value)
     {
-        if (value == true && currentState!= CharacterState.Dashing)
+        if (value == true && currentState != CharacterState.Dashing)
         {
             anim.SetTrigger(animController.T_Dash);
         }
     }
     public void SendAttackInputState(bool value)
     {
-        if (value == true && animController.Grounded && clicksIntervalTimer>clicksIntervalTime)
+        if (value == true && animController.Grounded && clicksIntervalTimer > clicksIntervalTime)
         {
             Debug.Log("Attack Clicked");
-            clicksIntervalTimer= 0;
+            clicksIntervalTimer = 0;
             anim.SetInteger(animController.I_Combo, anim.GetInteger(animController.I_Combo) + 1);
         }
     }
@@ -132,7 +144,7 @@ public class CS_PlayerManager : MonoBehaviour
                 break;
 
             case CharacterState.Jumping:
-                rb.constraints = RigidbodyConstraints.FreezeRotation; 
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
                 anim.SetBool(animController.B_Jumping, true);
                 moveController.Jump();
                 break;
@@ -170,10 +182,10 @@ public class CS_PlayerManager : MonoBehaviour
         anim.SetBool(animController.B_Dashing, false);
         anim.SetBool(animController.B_Jumping, false);
         anim.SetBool(animController.B_Attacking, false);
-        anim.SetBool(animController.B_canTransit,false);
+        anim.SetBool(animController.B_canTransit, false);
         //
         rb.drag = drag;
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -184,7 +196,7 @@ public class CS_PlayerManager : MonoBehaviour
             foreach (var contact in contactPoints)
             {
                 var yLength = GetComponent<CapsuleCollider>().bounds.center.y - contact.point.y;
-                if (yLength > GetComponent<CapsuleCollider>().height/2-0.01f)
+                if (yLength > GetComponent<CapsuleCollider>().height / 2 - 0.01f)
                 {
                     Debug.Log("happened");
                     rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;

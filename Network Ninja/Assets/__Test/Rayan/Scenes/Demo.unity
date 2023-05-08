@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06562549, g: 0.12149553, b: 0.22172818, a: 1}
+  m_IndirectSpecularColor: {r: 0.032484718, g: 0.02999772, b: 0.10996802, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -62647,7 +62647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae223d975e365624493c3a5d238fa818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResetButton: {fileID: 1937548242}
+  passwordCanvas: {fileID: 0}
   listOfLevelAreas:
   - {fileID: 6255316750618987311}
   - {fileID: 6255316749902934212}
@@ -64606,7 +64606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &2592824768808829781
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -67024,7 +67024,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5977481141695241985}
   - component: {fileID: 5977481141695241999}
-  - component: {fileID: 5977481141695241986}
   - component: {fileID: 5977481141695241996}
   - component: {fileID: 5977481141695242000}
   - component: {fileID: 5977481141695241997}
@@ -67056,89 +67055,6 @@ Transform:
   m_Father: {fileID: 5977481142207326572}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5977481141695241986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5977481141695241984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 10c0b7f93d1b39e4688fdf962a795f09,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f03013fb-59cf-407b-90f4-d24e5d63c2d1
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1bea88ae-f7df-467b-84c3-64fc2b479573
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 909254ad-81c3-4a8e-b40e-a1aea601b54f
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 30ed05af-a1ca-45db-a018-91f144d8f74c
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6a069e71-0392-42e5-be26-230c263abcb4
-    m_ActionName: UI/Point[/Mouse/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c15f3eba-4bb4-4188-b98c-a582b0b08621
-    m_ActionName: UI/Click[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c7f6f479-bb91-4891-95a8-d740183495aa
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b14af15a-0e4e-4f33-8ebd-935556a918c3
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6f01715b-6f40-4092-9322-919a1c2a0e30
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ec619304-a58c-452f-91d0-2e3ef9ac80e8
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 19aa3ffa-3f25-47d7-86fa-d5c19465c257
-    m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c6147244-f5ee-402c-8807-4a01110ffd14
-    m_ActionName: Player/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a2998c82-1490-4257-bd71-898474410bb5
-    m_ActionName: Player/Dash[/Keyboard/leftShift]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &5977481141695241987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68537,7 +68453,6 @@ MonoBehaviour:
   health: 0
   maxHealth: 0
   password: 
-  mine: 0
   playerInside: 0
   OnEnteringArea:
     m_PersistentCalls:
@@ -68869,7 +68784,6 @@ MonoBehaviour:
   health: 0
   maxHealth: 0
   password: 
-  mine: 0
   playerInside: 0
   OnEnteringArea:
     m_PersistentCalls:
@@ -69291,7 +69205,6 @@ MonoBehaviour:
   health: 0
   maxHealth: 0
   password: 
-  mine: 0
   playerInside: 0
   OnEnteringArea:
     m_PersistentCalls:
@@ -69766,7 +69679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1001 &6255316750378384787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70030,7 +69943,6 @@ MonoBehaviour:
   health: 0
   maxHealth: 0
   password: 
-  mine: 0
   playerInside: 0
   OnEnteringArea:
     m_PersistentCalls:
@@ -72246,6 +72158,8 @@ MonoBehaviour:
   - 
   - 
   - 
+  menuPanel: {fileID: 0}
+  resetBtn: {fileID: 0}
 --- !u!224 &8224981913448302960
 RectTransform:
   m_ObjectHideFlags: 0
