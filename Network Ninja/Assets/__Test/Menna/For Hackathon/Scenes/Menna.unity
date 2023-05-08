@@ -64049,7 +64049,6 @@ MonoBehaviour:
   enemyColor: {r: 1, g: 0, b: 0, a: 0.98039216}
   currentArea: {fileID: 0}
   strength: 0
-  soldiersType: 0
 --- !u!4 &392310444755736394
 Transform:
   m_ObjectHideFlags: 0
@@ -69578,6 +69577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -69598,6 +69602,11 @@ PrefabInstance:
       objectReference: {fileID: 8224981913233876863}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -69613,6 +69622,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8224981913233876863}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnEnteringAreaShowPannels
       objectReference: {fileID: 0}
@@ -69624,6 +69638,16 @@ PrefabInstance:
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: OnEnteringAreaShowPannels
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnEnteringAreaShowPannels
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
@@ -69643,6 +69667,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: rUIPassword, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -69654,6 +69683,11 @@ PrefabInstance:
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -69736,6 +69770,26 @@ PrefabInstance:
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8224981913233876863}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8224981913233876863}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnEnteringAreaShowPannels
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: rUIPassword, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d431039ecc69974cb4c1ec02c9c49ae, type: 3}
 --- !u!4 &6255316749614533561 stripped
@@ -70179,6 +70233,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8224981913233876863}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnEnteringAreaShowPannels
       objectReference: {fileID: 0}
@@ -70195,6 +70254,11 @@ PrefabInstance:
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: OnEnteringAreaShowPannels
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnEnteringAreaShowPannels
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
@@ -70219,6 +70283,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: rUIPassword, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -70235,6 +70304,11 @@ PrefabInstance:
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -70537,7 +70611,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8224981913233876863}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnEnteringAreaShowPannels
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnEnteringAreaShowPannels
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
@@ -70547,7 +70631,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: rUIPassword, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
       propertyPath: OnAllEnemiesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
+      propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -72719,6 +72813,8 @@ MonoBehaviour:
   - 
   menuPanel: {fileID: 741388602}
   resetBtn: {fileID: 0}
+  msgPanel: {fileID: 0}
+  msgTxt: {fileID: 0}
 --- !u!224 &8224981913448302960
 RectTransform:
   m_ObjectHideFlags: 0
