@@ -26,6 +26,10 @@ public class rPasswordManager : MonoBehaviour
     [SerializeField] PasswordStrength strength;
     [SerializeField] Result result;
 
+    [Header("Password Result Details")]
+    [SerializeField] string warnings = null;
+    [SerializeField] string suggestions = null;
+
     [Header("Password Lists")]
     private string[] playerPersonalData;
 
@@ -39,6 +43,8 @@ public class rPasswordManager : MonoBehaviour
     public Color LowHealth { get => lowHealth; }
     public Color EnemyColor { get => enemyColor;}
     public rUIPassword PasswordCanvas { get => passwordCanvas; set => passwordCanvas = value; }
+    public string Warnings { get => warnings; set => warnings = value; }
+    public string Suggestions { get => suggestions; set => suggestions = value; }
 
     private void Awake()
     {
@@ -92,12 +98,20 @@ public class rPasswordManager : MonoBehaviour
         // loadUserPrivateData();
         
         result = Core.EvaluatePassword(currentArea.Password);
+
         if (result.Score == 4)
             strength = PasswordStrength.Strong;
         else if (result.Score == 3 || result.Score == 4)
             strength = PasswordStrength.Moderate;
         else
             strength = PasswordStrength.Weak;
+
+        warnings = result.Feedback.Warning;
+        foreach(string s in result.Feedback.Suggestions)
+        {
+            suggestions += s;
+            suggestions += ". ";
+        }
     }
 
     void loadUserPrivateData()
@@ -131,33 +145,6 @@ public class rPasswordManager : MonoBehaviour
 
         currentArea.MeshColourChanger.LerpBetweenObjectColours(currentArea.Health / maxSoldiersNumber);
     }
-    #region Radial formation
-    //public void FormArmyBasedOnAreaHealth()
-    //{
-    //    int rings = 0;
-    //    if (currentArea.Health <= MaxSoldiersNumber / 4)
-    //        rings = 1;
-    //    else if (currentArea.Health <= MaxSoldiersNumber / 2)
-    //        rings = 2;
-    //    else if (currentArea.Health <= MaxSoldiersNumber)
-    //        rings = 3;
-
-    //    /// later, it'd be better to send to the friendly soliders AI script both
-    //    /// the password strength and complexity and the switch case is done there
-    //    /// that way the functionality is separated and the password script knows nothing about the soliders
-
-    //    ///also we may instantiate the army using StartCoroutine to instantiate one by one
-    //    //RadialFormation rf = currentArea.GetComponentInChildren<RadialFormation>();
-    //    //rf.Amount =(int)currentArea.Health;
-    //    //rf.Rings = rings;
-    //    AlliesSpawner ea = currentArea.GetComponentInChildren<AlliesSpawner>();
-    //    ea.SetPrefabsTypes(soldiersType);
-    //    ea.SetFormation();
-
-    //    //currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
-    //}
-    #endregion
-
         private void CheckPassword(string password)
         {
 

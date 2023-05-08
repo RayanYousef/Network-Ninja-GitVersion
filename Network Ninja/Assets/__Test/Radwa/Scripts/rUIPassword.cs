@@ -14,23 +14,24 @@ public class rUIPassword : MonoBehaviour
 
     [Header("Create Password Panel")]
     [SerializeField] private GameObject createPasswordPanel;
-    [SerializeField] TMP_InputField passwordIF;
-    [SerializeField] Button passwordBtn;
+    TMP_InputField passwordIF;
+    Button passwordBtn;
 
 
     [Header("Check Password Panel")]
     [SerializeField] private GameObject checkPasswordPanel;
-    [SerializeField] Button[] ansBtns;
-    [SerializeField] string[] answers = new string[3];
+    Button[] ansBtns;
+    string[] answers = new string[3];
 
 
     [Header("Menu")]
     [SerializeField] private GameObject menuPanel;
-    [SerializeField] Button resetBtn;
+    Button resetBtn;
 
     [Header("Message Panel")]
-    [SerializeField] private GameObject msgPanel;
-    [SerializeField] private TMP_Text msgTxt;
+    [SerializeField] private GameObject feedbackPanel;
+    private TMP_Text feedbackTxt;
+    private Button OKBtn;
 
     void Start()
     {
@@ -54,12 +55,11 @@ public class rUIPassword : MonoBehaviour
         resetBtn.onClick.AddListener(ShowCreatePasswordPanel);
         resetBtn.onClick.AddListener(ShowHideMenu);
 
-        if(msgPanel != null)
-        {
-            msgPanel.SetActive(false);
-            msgTxt = msgPanel.GetComponentInChildren<TMP_Text>();
-        }
-
+        feedbackPanel.SetActive(false);
+        feedbackTxt = feedbackPanel.GetComponentInChildren<TMP_Text>();
+        OKBtn = feedbackPanel.GetComponentInChildren<Button>();
+        OKBtn.onClick.AddListener(OcClickOKBtn);
+        
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -175,31 +175,37 @@ public class rUIPassword : MonoBehaviour
         rPasswordManager.Instance.CurrentArea.FormArmyBasedOnAreaHealth();
         rPasswordManager.Instance.AreasWithSamePasswordAsCurrent();
 
+
         createPasswordPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+
+        ShowFeedback();
+        
         Time.timeScale = 1f;
         passwordIF.text = null;
         playerInputs.enabled = true;
     }
 
-    public void ShowTips()
+    private void ShowFeedback()
     {
-        string str = "abc";
-        if (!string.IsNullOrEmpty(str))
+        string tempStr = rPasswordManager.Instance.Warnings;
+        if (tempStr.Length > 0)
         {
-            // lerp visibality
+            feedbackTxt.text = tempStr += ".\n";
+            tempStr = rPasswordManager.Instance.Suggestions;
+            if(tempStr.Length > 0)
+            {
+                feedbackTxt.text += tempStr;
+            }
+            feedbackPanel.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
         }
     }
 
-    IEnumerator FadeTo(float aValue, float aTime)
+    public void OcClickOKBtn()
     {
-        float alpha = msgPanel.GetComponent<Renderer>().material.color.a;
-        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
-        {
-            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
-            msgPanel.GetComponent<Renderer>().material.color = newColor;
-            yield return null;
-        }
+        feedbackPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void TakeAns(Button selectedBtn)
@@ -209,7 +215,6 @@ public class rUIPassword : MonoBehaviour
             Debug.Log("Correct Password");
             rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
             //rPasswordManager.Instance.CurrentArea.FormArmyBasedOnAreaHealth();
-
         }
         else
         {
