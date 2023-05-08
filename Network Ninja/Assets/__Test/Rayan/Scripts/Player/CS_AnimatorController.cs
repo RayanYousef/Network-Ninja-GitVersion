@@ -68,7 +68,7 @@ public class CS_AnimatorController : MonoBehaviour
     #region Animation Event
 
     public void PlayFootstepsAudio()
-    {
+    {if(AudioManager.instance!= null)
         AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.Footsteps);
     }
 
