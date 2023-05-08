@@ -130,7 +130,9 @@ public class Formation : MonoBehaviour
         for (int i = 0; i < number; i++)
         {
             GameObject go = GameObject.Instantiate(indicator, Vector3.zero, Quaternion.identity);
+            go.transform.parent = this.transform;
             FormationAgent agent = Instantiate(formationAgent, transform.position , Quaternion.identity);
+            agent.transform.parent = this.transform;
             agent.toFollow = go.transform;
             indicatorsList.Add(go);
             agentsList.Add(agent.gameObject);

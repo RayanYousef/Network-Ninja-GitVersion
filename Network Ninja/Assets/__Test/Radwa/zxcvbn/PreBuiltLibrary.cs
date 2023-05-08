@@ -56,7 +56,7 @@
 //                     //$"zxcvb CrackTimeDisplay for {testPassword} is {result.CrackTimeDisplay.OnlineThrottling100PerHour}.\n"
 //                     ;
 
-//        if(result.Feedback.Warning.Length != 0)
+//        if (result.Feedback.Warning.Length != 0)
 //        {
 //            str += $"zxcvb Feedback Warning for {testPassword} is {result.Feedback.Warning}.\n";
 //        }
@@ -65,7 +65,7 @@
 
 //        if (cnt != 0)
 //        {
-//            for(int i = 0; i < cnt; i++)
+//            for (int i = 0; i < cnt; i++)
 //            {
 //                str += $"zxcvb Feedback Suggestion {i} for {testPassword} is {result.Feedback.Suggestions[i]}.\n";
 //            }
@@ -74,9 +74,9 @@
 //        WriteToFile(fileName, str);
 
 //        //Debug.Log(str);
-//    } 
+//    }
 
-//     public void CheckCurrentAreaPasswordStrength(string password)
+//    public void CheckCurrentAreaPasswordStrength(string password)
 //    {
 //        PasswordStrength strength;
 //        /// load user personal data to check the password against them

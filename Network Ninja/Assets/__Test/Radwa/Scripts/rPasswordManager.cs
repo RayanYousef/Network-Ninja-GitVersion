@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using System.Text.RegularExpressions;
+using Zxcvbn;
 
 
 public enum Soldiers { Melee, Ranged, MeleeRanged, MeleeRangedTank };
@@ -21,15 +22,13 @@ public class rPasswordManager : MonoBehaviour
     [SerializeField] int maxSoldiersNumber = 80;
     [SerializeField] Color maxHealth, halfHealth, lowHealth, enemyColor;
 
-    [Header("Current Area Info")]
     [SerializeField] rArea currentArea;
+    [SerializeField] Result result;
     [SerializeField] PasswordStrength strength;
-    [SerializeField] Soldiers soldiersType;
+    //[SerializeField] Soldiers soldiersType;
 
     [Header("Password Lists")]
     private string[] playerPersonalData;
-    private string[] easyToGuessPasswords = {"pAssword", "passw0rd", "123456789",
-                                             "abcdefghi", "qwerty", "NetworkNinja"};
 
     //
     public static rPasswordManager Instance { get => instance; }
@@ -91,89 +90,103 @@ public class rPasswordManager : MonoBehaviour
     public void CheckCurrentAreaPasswordStrength()
     {
         /// load user personal data to check the password against them
-        ///loadUserPrivateData();
-
-        /// to calculate the strength of the password, the following will be checked
-        /// 1. the length
-        /// 2. the complexity
-        /// 3. personal data (username, birth date, etc..)
-        /// 4. comparing to previous passwords and common used passwords (12345678, qwerty, etc...)
-
-        /// 1. Check length
-        int length = currentArea.Password.Length;
-        int complexity = 0;
-        soldiersType = Soldiers.Melee;
-
-        if (length == 0)
-        {
-            //Debug.Log($"Length = {length} in Area: {name}");
-            return;
-        }
-
-        //Debug.Log("Correct call");
-
-        if (length < 8)
-        {
-            strength = PasswordStrength.Weak;
-        }
-        else if (length < 12)
-        {
+        // loadUserPrivateData();
+        
+        result = Core.EvaluatePassword(currentArea.Password);
+        if (result.Score == 4)
+            strength = PasswordStrength.Strong;
+        else if (result.Score == 3 || result.Score == 4)
             strength = PasswordStrength.Moderate;
-        }
         else
-        {
-            strength = PasswordStrength.Strong;
-        }
-
-        /// 2. Check complexity
-        if (Regex.IsMatch(currentArea.Password, @"[A-Z]"))
-        {
-            complexity++;
-        }
-        if (Regex.IsMatch(currentArea.Password, @"[a-z]"))
-        {
-            complexity++;
-        }
-        if (Regex.IsMatch(currentArea.Password, @"[0-9]"))
-        {
-            if (complexity > 0)
-            {
-                soldiersType = Soldiers.MeleeRanged;
-            }
-            else
-            {
-                soldiersType = Soldiers.Ranged;
-            }
-            complexity++;
-        }
-        if (System.Text.RegularExpressions.Regex.IsMatch(currentArea.Password, @"[!@#$%^&*()_+=\[{\]};:<>|./?,-]"))
-        {
-            soldiersType = Soldiers.MeleeRangedTank;
-            complexity++;
-        }
-
-        if (complexity < 2)
             strength = PasswordStrength.Weak;
-        else if (complexity <= 3)
-            strength = PasswordStrength.Moderate;
-        else if (complexity > 3)
-            strength = PasswordStrength.Strong;
-
-        Debug.Log(complexity);
-
-        /// 3. Check personal data
-        //foreach (string weakPassword in playerPersonalData)
-        //{
-        //    if (password.ToLower().Contains(weakPassword))
-        //    {
-        //        strength = PasswordStrength.Weak;
-        //        FormArmy();
-        //        return;
-        //    }
-        //}
-
-        // 4. Check common used passwords
     }
+
+    //public void OldCheckCurrentAreaPasswordStrength()
+    //{
+    //    /// load user personal data to check the password against them
+    //    ///loadUserPrivateData();
+
+    //    /// to calculate the strength of the password, the following will be checked
+    //    /// 1. the length
+    //    /// 2. the complexity
+    //    /// 3. personal data (username, birth date, etc..)
+    //    /// 4. comparing to previous passwords and common used passwords (12345678, qwerty, etc...)
+
+    //    /// 1. Check length
+    //    int length = currentArea.Password.Length;
+    //    int complexity = 0;
+    //    soldiersType = Soldiers.Melee;
+
+    //    if (length == 0)
+    //    {
+    //        //Debug.Log($"Length = {length} in Area: {name}");
+    //        return;
+    //    }
+
+    //    //Debug.Log("Correct call");
+
+    //    if (length < 8)
+    //    {
+    //        strength = PasswordStrength.Weak;
+    //    }
+    //    else if (length < 12)
+    //    {
+    //        strength = PasswordStrength.Moderate;
+    //    }
+    //    else
+    //    {
+    //        strength = PasswordStrength.Strong;
+    //    }
+
+    //    /// 2. Check complexity
+    //    if (Regex.IsMatch(currentArea.Password, @"[A-Z]"))
+    //    {
+    //        complexity++;
+    //    }
+    //    if (Regex.IsMatch(currentArea.Password, @"[a-z]"))
+    //    {
+    //        complexity++;
+    //    }
+    //    if (Regex.IsMatch(currentArea.Password, @"[0-9]"))
+    //    {
+    //        if (complexity > 0)
+    //        {
+    //            soldiersType = Soldiers.MeleeRanged;
+    //        }
+    //        else
+    //        {
+    //            soldiersType = Soldiers.Ranged;
+    //        }
+    //        complexity++;
+    //    }
+    //    if (System.Text.RegularExpressions.Regex.IsMatch(currentArea.Password, @"[!@#$%^&*()_+=\[{\]};:<>|./?,-]"))
+    //    {
+    //        soldiersType = Soldiers.MeleeRangedTank;
+    //        complexity++;
+    //    }
+
+    //    if (complexity < 2)
+    //        strength = PasswordStrength.Weak;
+    //    else if (complexity <= 3)
+    //        strength = PasswordStrength.Moderate;
+    //    else if (complexity > 3)
+    //        strength = PasswordStrength.Strong;
+
+    //    Debug.Log(complexity);
+
+    //    /// 3. Check personal data
+    //    //foreach (string weakPassword in playerPersonalData)
+    //    //{
+    //    //    if (password.ToLower().Contains(weakPassword))
+    //    //    {
+    //    //        strength = PasswordStrength.Weak;
+    //    //        FormArmy();
+    //    //        return;
+    //    //    }
+    //    //}
+
+    //    // 4. Check common used passwords
+    //}
 
     void loadUserPrivateData()
     {
@@ -189,14 +202,6 @@ public class rPasswordManager : MonoBehaviour
 
     public void SetAreaHealthBasedOnPassword()
     {
-        foreach (string weakPassword in easyToGuessPasswords)
-        {
-            if (currentArea.Password.ToLower().Contains(weakPassword))
-            {
-                strength = PasswordStrength.Weak;
-            }
-        }
-
         switch (strength)
         {
             case PasswordStrength.Weak:
@@ -241,47 +246,6 @@ public class rPasswordManager : MonoBehaviour
     //}
     #endregion
 
-    //public void FormArmyBasedOnAreaHealth()
-    //{
-    //    currentArea.WeakArmy.gameObject.SetActive(false);
-    //    currentArea.ModerateArmy.gameObject.SetActive(false);
-    //    currentArea.StrongArmy.gameObject.SetActive(false);
-
-    //    if (currentArea.Health <= MaxSoldiersNumber / 4)
-    //    {
-    //        currentArea.WeakArmy.gameObject.SetActive(true);
-    //    }
-    //    else if (currentArea.Health <= MaxSoldiersNumber / 2)
-    //    {
-    //        currentArea.WeakArmy.gameObject.SetActive(true);
-    //        currentArea.ModerateArmy.gameObject.SetActive(true);
-
-    //    }
-    //    else if (currentArea.Health <= MaxSoldiersNumber)
-    //    {
-    //        currentArea.WeakArmy.gameObject.SetActive(true);
-    //        currentArea.ModerateArmy.gameObject.SetActive(true);
-    //        currentArea.StrongArmy.gameObject.SetActive(true);
-    //    }
-
-    ///// later, it'd be better to send to the friendly soliders AI script both
-    ///// the password strength and complexity and the switch case is done there
-    ///// that way the functionality is separated and the password script knows nothing about the soliders
-
-    ///// also we may instantiate the army using StartCoroutine to instantiate one by one
-    //        BoxFormation bf = currentArea.GetComponentInChildren<BoxFormation>();
-    //        AlliesSpawner[] allies = currentArea.GetComponentsInChildren<AlliesSpawner>();
-    //        foreach(AlliesSpawner s in allies)
-    //        {
-    //            s.SetPrefabsTypes(soldiersType);
-    //            s.SetFormation();
-    //        }
-
-    //      //  currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
-    //    }
-
-        /// 
-
         private void CheckPassword(string password)
     {
         int length = password.Length;
@@ -301,21 +265,4 @@ public class rPasswordManager : MonoBehaviour
             return;
         }
     }
-
-    //public void AutoTest()
-    //{
-    //    string[] autoTestPasswords = { "pAssw0rd", "12345678", "abcdefghi",
-    //                                    "qwerty", "000000000" , "rrrrrrrrr",
-    //                                    "Daiavoloz", "21102000", "01120273611",
-
-    //                                    "menn@97", "ttch2007", "Ray1993", "Nadzy_3103",
-
-    //                                    "bestNinja_2000", "MyFavColorGreen@001",
-    //                                    "Rayan_93@NetworkNinja"};
-    //    foreach (string testPassword in autoTestPasswords)
-    //    {
-    //        CheckStrength(testPassword);
-    //        Debug.Log($"{testPassword } is { strength}");
-    //    }
-    //} 
 }

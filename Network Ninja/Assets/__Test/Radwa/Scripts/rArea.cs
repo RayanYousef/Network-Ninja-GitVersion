@@ -200,8 +200,6 @@ public class rArea : MonoBehaviour
                 s.SpawnFormationPointsAndAgents(16);
             }
         }
-
-        //  currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
     }
 
     #region Collision and Trigger
