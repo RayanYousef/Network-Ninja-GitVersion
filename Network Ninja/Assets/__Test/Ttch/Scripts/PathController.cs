@@ -25,22 +25,25 @@ public class PathController : MonoBehaviour
 
     public void GateState(GateStates state, Collider other)
     {
-        switch (state)
+        if (other.gameObject.transform.parent.gameObject == player) 
         {
-            case GateStates.Start:
-                {
-                    reversePath = false;
+            switch (state)
+            {
+                case GateStates.Start:
+                    {
+                        reversePath = false;
+                        break;
+                    }
+                case GateStates.End:
+                    {
+                        reversePath = true;
+                        break;
+                    }
+                default:
                     break;
-                }
-            case GateStates.End:
-                {
-                    reversePath = true;
-                    break;
-                }
-            default:
-                break;
+            }
+            StartMovingPlayer();
         }
-        StartMovingPlayer();
     }
 
     public void StartMovingPlayer()
@@ -62,6 +65,8 @@ public class PathController : MonoBehaviour
         Transform currentWayPoint = wayPoints[currentWayPointIndex];
 
         // Move towards the current waypoint
+
+
 
         player.transform.position = Vector3.MoveTowards(
             player.transform.position,
