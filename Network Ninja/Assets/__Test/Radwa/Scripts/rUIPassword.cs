@@ -167,6 +167,14 @@ public class rUIPassword : MonoBehaviour
             return;
         }
 
+        if (passwordIF.text.Length <= 4)
+        {
+            feedbackTxt.text = "The secrect code can't be less than 5 characters.";
+            feedbackPanel.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            return;
+        }
+
         rPasswordManager.Instance.CurrentArea.Password = passwordIF.text;
         rPasswordManager.Instance.CheckCurrentAreaPasswordStrength();
         rPasswordManager.Instance.CurrentArea.AreaType = AreaType.Base;
@@ -205,7 +213,8 @@ public class rUIPassword : MonoBehaviour
     public void OcClickOKBtn()
     {
         feedbackPanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+        if(!createPasswordPanel.activeSelf)
+            Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void TakeAns(Button selectedBtn)
