@@ -58,7 +58,7 @@ public class rUIPassword : MonoBehaviour
         feedbackPanel.SetActive(false);
         feedbackTxt = feedbackPanel.GetComponentInChildren<TMP_Text>();
         OKBtn = feedbackPanel.GetComponentInChildren<Button>();
-        OKBtn.onClick.AddListener(OcClickOKBtn);
+        OKBtn.onClick.AddListener(OnClickOKBtn);
         
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -135,6 +135,7 @@ public class rUIPassword : MonoBehaviour
     }
     public void ShowCreatePasswordPanel()
     {
+        feedbackTxt.text = null;
         playerInputs.enabled = false;
         Time.timeScale = 0f;
 
@@ -210,7 +211,7 @@ public class rUIPassword : MonoBehaviour
         }
     }
 
-    public void OcClickOKBtn()
+    public void OnClickOKBtn()
     {
         feedbackPanel.SetActive(false);
         if(!createPasswordPanel.activeSelf)
