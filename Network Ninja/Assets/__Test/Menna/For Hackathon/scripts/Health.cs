@@ -13,7 +13,6 @@ public class Health : MonoBehaviour
     public Animator animator;
     public Slider HealthBar;
 
-    public Action<GameObject> OnEnemyKilled;  // Declare the event
 
 
 
@@ -46,9 +45,8 @@ public class Health : MonoBehaviour
     public virtual void Die()
     {
         //animation
+        Debug.Log("When enemy died");
         animator.SetTrigger("Death");
-        // Raise the event when the enemy is killed
-        OnEnemyKilled.Invoke(this.gameObject);
         Destroy(gameObject, 1.5f);
 
     }

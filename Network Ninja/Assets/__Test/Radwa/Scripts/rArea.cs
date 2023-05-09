@@ -58,8 +58,8 @@ public class rArea : MonoBehaviour
         areaCollider = GetComponent<Collider>();
         sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
         // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
+        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemiesEachInterval);
-       // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
 
         enemySpawner = GetComponentInChildren<EnemySpawner>();
         FArmyArray = GetComponentsInChildren<Formation>();
@@ -200,8 +200,6 @@ public class rArea : MonoBehaviour
                 s.SpawnFormationPointsAndAgents(16);
             }
         }
-
-        //  currentArea.GetComponent<FriendSpawner>().SpawnFriends(solidersNumbers, soldiersType);
     }
 
     #region Collision and Trigger

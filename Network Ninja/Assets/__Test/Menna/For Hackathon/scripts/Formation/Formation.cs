@@ -53,21 +53,21 @@ public class Formation : MonoBehaviour
     #region Unity Defined Functions
     void Start()
     {
-        //Circle
-        circleFormation = new CircleFormation();
-        circleFormation.radius = radius;
+        ////Circle
+        //circleFormation = new CircleFormation();
+        //circleFormation.radius = radius;
 
-        //Horizontal Line formation
-        horizontalLineFormation = new HorizontalLineFormation();
-        horizontalLineFormation.length = lenght;
+        ////Horizontal Line formation
+        //horizontalLineFormation = new HorizontalLineFormation();
+        //horizontalLineFormation.length = lenght;
 
         //Square
         squareFormation = new SquareFormation();
         squareFormation.sideLength = lenght;
 
-        //Cone
-        coneFormation = new ConeFormation();
-        coneFormation.angle = angle;
+        ////Cone
+        //coneFormation = new ConeFormation();
+        //coneFormation.angle = angle;
 
         //Current Shape
         switch (formationShape)
@@ -130,7 +130,9 @@ public class Formation : MonoBehaviour
         for (int i = 0; i < number; i++)
         {
             GameObject go = GameObject.Instantiate(indicator, Vector3.zero, Quaternion.identity);
-            FormationAgent agent = Instantiate(formationAgent, transform.position , Quaternion.identity);
+            go.transform.parent = this.transform;
+            FormationAgent agent = Instantiate(formationAgent, transform.position, Quaternion.identity);
+            agent.transform.parent = this.transform;
             agent.toFollow = go.transform;
             indicatorsList.Add(go);
             agentsList.Add(agent.gameObject);
