@@ -14,7 +14,7 @@ public class PathController : MonoBehaviour
     private int currentWayPointIndex = 0;
     public float speed = 50f;
 
-    void Update()
+    void FixedUpdate()
     {
 
         if (playerIsOnPath)
@@ -50,7 +50,7 @@ public class PathController : MonoBehaviour
     {
         playerIsOnPath = true;
         currentWayPointIndex = reversePath ? wayPoints.Count - 1 : 0;
-        Debug.Log("Started Moving");
+       // Debug.Log("Started Moving");
     }
 
     public void StopMovingPlayer()
@@ -60,13 +60,14 @@ public class PathController : MonoBehaviour
 
     void MovePlayerAlongPath()
     {
-        Debug.Log("Moving along path");
+        //Debug.Log("Moving along path");
 
         Transform currentWayPoint = wayPoints[currentWayPointIndex];
 
         // Move towards the current waypoint
 
 
+        Debug.Log("Current waypoint is " + currentWayPointIndex);
 
         player.transform.position = Vector3.MoveTowards(
             player.transform.position,
@@ -75,13 +76,14 @@ public class PathController : MonoBehaviour
         );
 
         //Move to the next wayPoint
-        if (player.transform.position == currentWayPoint.position)
+        if (Vector3.Distance(player.transform.position, currentWayPoint.position)<0.5f)
         {
-            Debug.Log("Next");
+
             currentWayPointIndex += reversePath ? -1 : 1;
 
             if (currentWayPointIndex < 0 || currentWayPointIndex >= wayPoints.Count)
             {
+               // Debug.Log("Stopping");
                 StopMovingPlayer();
             }
         }
