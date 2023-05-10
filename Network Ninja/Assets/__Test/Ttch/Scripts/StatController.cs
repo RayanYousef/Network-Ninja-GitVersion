@@ -44,7 +44,7 @@ public class StatController : MonoBehaviour
     }
     public void ApplyDamage(StatController AttackerStats)
     {
-        float dmg = AttackerStats.GetAttackStrength() - this.GetDefense();
+        float dmg = AttackerStats.CalculateAttackStrength() - this.GetDefense();
         currentHealth -= dmg;
     }
     
