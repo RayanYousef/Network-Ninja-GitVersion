@@ -167,7 +167,7 @@ public class StatController : MonoBehaviour
     }
     private float CalculateCooldown(float BaseSkillCooldown)
     {
-        return BaseSkillCooldown * (1 - cooldownReduction / 100);
+        return BaseSkillCooldown * (1 - GetCooldownReduction() / 100);
     }
 
     #endregion
