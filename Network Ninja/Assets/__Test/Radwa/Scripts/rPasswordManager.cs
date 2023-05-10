@@ -27,8 +27,8 @@ public class rPasswordManager : MonoBehaviour
     [SerializeField] Result result;
 
     [Header("Password Result Details")]
-    [SerializeField] string warnings = null;
-    [SerializeField] string suggestions = null;
+    [SerializeField] string currentWarnings = null;
+    [SerializeField] string currentSuggestions = null;
 
     [Header("Password Lists")]
     private string[] playerPersonalData;
@@ -43,8 +43,8 @@ public class rPasswordManager : MonoBehaviour
     public Color LowHealth { get => lowHealth; }
     public Color EnemyColor { get => enemyColor;}
     public rUIPassword PasswordCanvas { get => passwordCanvas; set => passwordCanvas = value; }
-    public string Warnings { get => warnings; set => warnings = value; }
-    public string Suggestions { get => suggestions; set => suggestions = value; }
+    public string Warnings { get => currentWarnings; set => currentWarnings = value; }
+    public string Suggestions { get => currentSuggestions; set => currentSuggestions = value; }
 
     private void Awake()
     {
@@ -106,12 +106,24 @@ public class rPasswordManager : MonoBehaviour
         else
             strength = PasswordStrength.Weak;
 
-        warnings = result.Feedback.Warning;
-        foreach(string s in result.Feedback.Suggestions)
+        currentWarnings = null;
+        currentWarnings = result.Feedback.Warning;
+
+        currentSuggestions = null;
+        ///
+        //foreach(string s in result.Feedback.Suggestions)
+        //{
+        //    suggestions += s;
+        //    suggestions += ". ";
+        //}
+        ///
+        int cnt = result.Feedback.Suggestions.Count;
+        if (cnt > 0)
         {
-            suggestions += s;
-            suggestions += ". ";
+            int i = UnityEngine.Random.Range(0, cnt);
+            currentSuggestions = result.Feedback.Suggestions[i];
         }
+        ///
     }
 
     void loadUserPrivateData()

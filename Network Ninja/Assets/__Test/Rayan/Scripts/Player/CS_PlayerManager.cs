@@ -49,6 +49,7 @@ public class CS_PlayerManager : MonoBehaviour
         SendAttackInputState(Input.GetMouseButton(0));
         SendDashInputState(Input.GetKeyDown(KeyCode.LeftShift));
 
+        if(joyStick!=null)
         SendInputDirection(joyStick.Direction);
 
 

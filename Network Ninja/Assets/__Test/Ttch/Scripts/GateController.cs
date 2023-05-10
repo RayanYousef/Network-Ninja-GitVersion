@@ -25,7 +25,7 @@ public class GateController : MonoBehaviour
     {
         if (spacePressed)
         {
-            pathController.GateState(state, other);
+            pathController.PlayerEnteredPath(state, other);
         }
     }
 }
