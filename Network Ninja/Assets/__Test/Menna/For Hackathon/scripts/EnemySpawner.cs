@@ -7,23 +7,31 @@ using UnityEngine.Events;
 public class EnemySpawner : MonoBehaviour
 {
     Transform player;
+  
 
     public GameObject enemyPrefab;
     public GameObject MiniBossPrefab;
     public Transform objectToSpawnAround;
 
-    public int armySize = 10;
+    public int armySize = 30;
     public float spawnRadius = 10f;
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
     public bool allArmyDied = false;
     public int spawnInterval = 20;
     public int miniBossSize = 4;
-   // public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
+
+    public int enemiesPerSpawn = 5;
+    public int numSpawned = 0;
+    public int numAlive = 0;
+
+    // public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
 
 
     public List<GameObject> enemies;  // A list of all spawned enemies.
     public List<GameObject> MiniBosses;  // A list of all spawned MonoBosses.
+
+    public List<GameObject> enemyPool;
 
     public UnityEvent OnAllMiniBossesKilled;
 
@@ -33,6 +41,19 @@ public class EnemySpawner : MonoBehaviour
         enemies = new List<GameObject>();
         MiniBosses = new List<GameObject>();
         player = GameObjectsManager.Instance.Player.transform;
+
+        //obj pooling
+        enemyPool = new List<GameObject>();
+
+        for (int i = 0; i < armySize; i++)
+        {
+            Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+            GameObject enemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+            enemy.transform.parent = this.transform;
+            enemy.SetActive(false);
+            enemyPool.Add(enemy);
+        }
+
 
         //SpawnEnemies();
         //  enemyPrefab = GameObjectsManager.Instance.EnemyPrefab;
@@ -45,43 +66,66 @@ public class EnemySpawner : MonoBehaviour
         //}
 
     }
-    public void SpawnEnemies()
-    {
-        for (int i = 0; i < armySize; i++)
-        {
-            Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
-            GameObject enemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
-            enemy.transform.parent = this.transform;
-           // enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
-            enemies.Add(enemy);
-        }
 
-      //  StartCoroutine(AvoidEnemies());
+    #region  enemies before obj pooling
+    //public void SpawnEnemies()
+    //{
+    //    for (int i = 0; i < armySize; i++)
+    //    {
+    //        Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+    //        GameObject enemy = Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+    //        enemy.transform.parent = this.transform;
+    //       // enemy.GetComponent<Health>().OnEnemyKilled.AddListener(HandleEnemyKilled);
+    //        enemies.Add(enemy);
+    //    }
+
+    //  //  StartCoroutine(AvoidEnemies());
+
+    //}
 
 
-    }
+    ////spawn enemies each interval of time
+    //public void  SpawnEnemiesEachInterval()
+    //{
+    //    StartCoroutine("spawnMoreEnemies");
+    //}
 
-    //spawn enemies each interval of time
-    public void  SpawnEnemiesEachInterval()
-    {
-        StartCoroutine("spawnMoreEnemies");
-    }
+    //public IEnumerator spawnMoreEnemies()
+    //{
+    //    //condition when player and mini boss in area (player != null && miniboss != null) => while()
+    //    while( MiniBosses.Count !=0)
+    //    {
+    //        SpawnEnemies();
+    //        yield return (new WaitForSeconds(spawnInterval));
+    //    }
+    //    //for(int i = 0; i < 3; i++)
+    //    //{
+    //    //    SpawnEnemies();
+    //    //    yield return (new WaitForSeconds(spawnInterval));
+    //    //}
+    //}
 
-    public IEnumerator spawnMoreEnemies()
-    {
-        //condition when player and mini boss in area (player != null && miniboss != null) => while()
-        while( MiniBosses.Count !=0)
-        {
-            SpawnEnemies();
-            yield return (new WaitForSeconds(spawnInterval));
-        }
-        //for(int i = 0; i < 3; i++)
-        //{
-        //    SpawnEnemies();
-        //    yield return (new WaitForSeconds(spawnInterval));
-        //}
-    }
+    ////spawn enemies each interval of time
+    //public void SpawnEnemiesEachInterval()
+    //{
+    //    StartCoroutine("spawnMoreEnemies");
+    //}
 
+    //public IEnumerator spawnMoreEnemies()
+    //{
+    //    //condition when player and mini boss in area (player != null && miniboss != null) => while()
+    //    while (MiniBosses.Count != 0)
+    //    {
+    //        GameObject enemy = GetEnemyFromPool();
+    //        Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+    //        enemy.transform.position = randomPosition;
+    //        enemy.SetActive(true);
+    //        enemies.Add(enemy);
+    //       // SpawnEnemies();
+    //        yield return (new WaitForSeconds(spawnInterval));
+    //    }
+    //}
+    #endregion
 
 
     // spawn MiniBosses
@@ -94,30 +138,126 @@ public class EnemySpawner : MonoBehaviour
             MiniBoss.transform.parent = this.transform;
             MiniBoss.GetComponent<m_MiniBossHealth>().OnMiniBossKilled += HandleMiniBossKilled;
             MiniBosses.Add(MiniBoss);
-           //Debug.Log("mini boss spawned");
+            //Debug.Log("mini boss spawned");
 
         }
     }
 
 
+    #region
+    public void SpawnEnemies()
+    {
+      //  int enemiesToSpawn = Mathf.Min(enemiesPerSpawn, armySize - numAlive);
+
+        for (int i = 0; i < armySize; i++)
+        {
+            
+            GameObject enemy = GetEnemyFromPool();
+            if (enemy != null)
+            {
+                //Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+                //enemy.transform.position = randomPosition;
+                //enemy.transform.parent = this.transform;
+                enemy.SetActive(true);
+                enemies.Add(enemy);
+              //  enemies.Add(enemy);
+            }
+
+            //numAlive++;
+            //numSpawned++;
+        }
+    }
+
+    
+
+    #region obj pooling for miniboss
+    //public void SpawnMiniBosses()
+    //{
+    //    for (int i = 0; i < miniBossSize; i++)
+    //    {
+    //        GameObject miniboss = GetMiniBossFromPool();
+    //        Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+    //        miniboss.transform.position = randomPosition;
+    //        miniboss.SetActive(true);
+    //        miniboss.GetComponent<m_MiniBossHealth>().OnMiniBossKilled += HandleMiniBossKilled;
+    //        minibossPool.Add(miniboss);
+    //        MiniBosses.Add(miniboss);
+    //    }
+    //}
+
+    //private GameObject GetMiniBossFromPool()
+    //{
+    //    foreach (GameObject miniboss in minibossPool)
+    //    {
+    //        if (!miniboss.activeInHierarchy)
+    //        {
+    //            return miniboss;
+    //        }
+    //    }
+    //    GameObject newMiniBoss = Instantiate(MiniBossPrefab, Vector3.zero, Quaternion.identity);
+    //    newMiniBoss.SetActive(false);
+    //    newMiniBoss.GetComponent<m_MiniBossHealth>().OnMiniBossKilled += HandleMiniBossKilled;
+    //    minibossPool.Add(newMiniBoss);
+    //    return newMiniBoss;
+    //}
+    #endregion
+    public GameObject GetEnemyFromPool()
+    {
+       if (enemyPool.Count > 0)
+        {
+            GameObject enemy = enemyPool[0];
+            enemyPool.RemoveAt(0);
+            return enemy;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void SpawnMoreEnemies()
+    {
+        //for (int i = 0; i < enemyPool.Count ; i++)
+        //{
+            GameObject enemy = GetEnemyFromPool();
+
+        if (enemy != null)
+            {
+                Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+                enemy.transform.position = randomPosition;
+                enemy.transform.parent = this.transform;
+                enemy.SetActive(true);
+                enemies.Add(enemy);
+            }
+
+       // }
+    }
+
+
+    #endregion
+
     //invoke event when all MiniBosses died 
     void HandleMiniBossKilled(GameObject MiniBoss)
     {
+       
         MiniBosses.Remove(MiniBoss);
         if (MiniBosses.Count == 0 && OnAllMiniBossesKilled != null)
         {
-            Debug.Log("All DEAAAAAAAAAAAAAAAAAAAAAAAD");
+          
             foreach (GameObject Enemy in enemies)
             {
-                if(Enemy != null)
+                if (Enemy != null)
                 {
                     Enemy.GetComponent<Health>().Die();
+                    Debug.Log("All DEAAAAAAAAAAAAAAAAAAAAAAAD");
 
                 }
                 // MiniBossPrefab.GetComponent<Animator>().SetTrigger("Death");
                 // Destroy(Enemy);
             }
+            enemyPool.Clear();
             enemies.Clear();
+            
             OnAllMiniBossesKilled.Invoke();
         }
     }

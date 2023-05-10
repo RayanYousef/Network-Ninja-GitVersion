@@ -15,7 +15,7 @@ public class m_MiniBossHealth : Health
         // Raise the event when the enemy is killed
         OnMiniBossKilled.Invoke(this.gameObject);
 
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 2.5f);
 
     }
 

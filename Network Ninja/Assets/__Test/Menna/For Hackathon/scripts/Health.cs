@@ -13,6 +13,8 @@ public class Health : MonoBehaviour
     public Animator animator;
     public Slider HealthBar;
 
+    public EnemySpawner enemySpawner;
+
 
 
 
@@ -20,6 +22,7 @@ public class Health : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+       
         currentHealth = maxHealth;
     }
 
@@ -40,6 +43,9 @@ public class Health : MonoBehaviour
             Debug.Log("Enemy died");
 
             Die();
+            
+
+
         }
     }
     public virtual void Die()
@@ -47,7 +53,34 @@ public class Health : MonoBehaviour
         //animation
         Debug.Log("When enemy died");
         animator.SetTrigger("Death");
-        Destroy(gameObject, 1.5f);
+        // Destroy(gameObject, 4f);
+       // enemySpawner.enemies.Remove(gameObject);
+       
+
+
+
+        // enemySpawner.numAlive--;
+
+        // Check if we need to spawn more enemies
+
+
+    }
+
+    void DeactivateGameObject()
+    {
+
+        gameObject.SetActive(false);
+
+        enemySpawner = GetComponentInParent<EnemySpawner>();
+
+        this.currentHealth = maxHealth;   
+        enemySpawner.enemyPool.Add(gameObject);
+        enemySpawner.enemies.Remove(gameObject);
+
+        if (enemySpawner.MiniBosses.Count > 0)
+        {
+            enemySpawner.SpawnMoreEnemies();
+        }
 
     }
 
