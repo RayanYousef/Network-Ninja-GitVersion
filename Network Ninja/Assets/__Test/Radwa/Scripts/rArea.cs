@@ -39,6 +39,7 @@ public class rArea : MonoBehaviour
     [SerializeField] float healthTimer;
     [SerializeField] float formationRemovingTimer;
 
+
     public string Password { get => password; set => password = value; }
     public float Health
     {
@@ -57,9 +58,10 @@ public class rArea : MonoBehaviour
     {
         areaCollider = GetComponent<Collider>();
         sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
-        // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
-        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemiesEachInterval);
+        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
+
+       // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemiesEachInterval);
 
         enemySpawner = GetComponentInChildren<EnemySpawner>();
         FArmyArray = GetComponentsInChildren<Formation>();
@@ -106,6 +108,9 @@ public class rArea : MonoBehaviour
     {
         if (playerInside == false && password != null)
             UpdateHealth();
+
+
+
     }
 
     private void UpdateHealth()
