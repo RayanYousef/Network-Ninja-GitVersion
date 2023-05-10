@@ -16,6 +16,8 @@ public class StatController : MonoBehaviour
     private float defaultMoveSpeed, moveSpeed;
     [SerializeField]
     private float defaultCooldownReduction, cooldownReduction;
+    [SerializeField]
+    private float defaultLuck, luck;
 
 
 
@@ -69,8 +71,13 @@ public class StatController : MonoBehaviour
         atkDmg = defaultAtkDmg;
     }
 
-    public float GetAttackStrength()
+    public float CalculateAttackStrength()
     {
+        float critChance = Random.Range(0, 1);
+        if(critChance + luck > 0.8f)
+        {
+            return atkDmg * 2;
+        }
         return atkDmg;
     }
 
@@ -165,4 +172,24 @@ public class StatController : MonoBehaviour
 
     #endregion
 
+    #region LuckFunctions
+
+    public void BuffLuck (float changeVal = 0.1f)
+    {
+        luck += changeVal;
+    }
+
+    public void DebuffLuck(float changeVal = 0.1f)
+    {
+        luck -= changeVal;
+    }
+    public void ResetLuckToDefault()
+    {
+        luck = defaultLuck;
+    }
+    public float GetLuck()
+    {
+        return luck;
+    }
+    #endregion
 }
