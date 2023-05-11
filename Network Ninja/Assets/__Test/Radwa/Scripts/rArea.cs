@@ -238,13 +238,6 @@ public class rArea : MonoBehaviour
     #region Collision and Trigger
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent<rTempFriendScript>(out rTempFriendScript friend))
-        {
-            //Destroy(collision.gameObject);
-            collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().gameObject.SetActive(false);
-            collision.gameObject.GetComponent<rTempFriendScript>().gameObject.SetActive(false);
-        }
-
         if (areaType == AreaType.Base && collision.gameObject == GameObjectsManager.Instance.Player)
         {
             playerInside = true;
