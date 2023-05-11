@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class StatController : MonoBehaviour
 {
+
+    [SerializeField]
+     List<Collider> hitObjects = new List<Collider>();
+
+    [SerializeField] 
+    StatsStruct myStats = new StatsStruct();
+
+
     [SerializeField]
     private float maxHealth, currentHealth;
     [SerializeField]
@@ -20,6 +28,20 @@ public class StatController : MonoBehaviour
     private float defaultLuck, luck;
 
 
+    #region Setters And Getters 
+    public float CurrentHealth
+    {
+        get => currentHealth;
+        set
+        {
+            currentHealth = Mathf.Clamp(value, 0, maxHealth);
+        }
+    }
+
+    public StatsStruct MyStats { get => myStats; }
+    public List<Collider> HitObjects { get => hitObjects; set => hitObjects = value; }
+
+    #endregion
 
     private void Awake()
     {
@@ -34,23 +56,12 @@ public class StatController : MonoBehaviour
     #region HealthFunctions
     public void Heal(float value = 20)
     {
-        currentHealth += value;
-        
-        //Current Health can't exceed Max. Health
-        if(currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
+        CurrentHealth += value;
     }
     public void ApplyDamage(StatController AttackerStats)
     {
         float dmg = AttackerStats.CalculateAttackStrength() - this.GetDefense();
-        currentHealth -= dmg;
-    }
-    
-    public float GetHealth()
-    {
-        return currentHealth;
+        CurrentHealth -= dmg;
     }
     #endregion
 
@@ -127,7 +138,8 @@ public class StatController : MonoBehaviour
     #endregion
 
     #region MoveSpeedFunctions
-
+    
+    // Movement Speed Modifier should be small, like 1.2 or 1.5, it will be multiplied by the character stats. 
     public void BuffMoveSpeed(float changeValue = 10)
     {
         moveSpeed += changeValue;
@@ -192,4 +204,5 @@ public class StatController : MonoBehaviour
         return luck;
     }
     #endregion
+
 }
