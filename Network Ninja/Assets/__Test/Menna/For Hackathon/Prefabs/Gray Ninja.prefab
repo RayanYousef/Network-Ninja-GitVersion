@@ -1132,7 +1132,7 @@ Animator:
   m_GameObject: {fileID: 5390064202224389600}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ad2cba78ca1cb8848a1211cd4c21e939, type: 3}
-  m_Controller: {fileID: 9100000, guid: aa909052144720f49a8d02a65455a869, type: 2}
+  m_Controller: {fileID: 9100000, guid: 07a2096e8fdaff5439ea4f4f844ee487, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1154,9 +1154,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!136 &7851048508022711897
 CapsuleCollider:
@@ -1169,9 +1169,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.4123415
-  m_Height: 1.85
+  m_Height: 1.9401393
   m_Direction: 1
-  m_Center: {x: 0.0576517, y: 0.7393755, z: 0.088698894}
+  m_Center: {x: 0.0576517, y: 0.6943059, z: 0.088698894}
 --- !u!195 &-4171135505005684922
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1191,7 +1191,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.11
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6553827573065958365
@@ -1207,7 +1207,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: -4171135505005684922}
-  toFollow: {fileID: 0}
+  anim: {fileID: 0}
+  toFollowIndex: 0
+  toFollow: {x: 0, y: 0, z: 0}
 --- !u!1 &5894173902353367098
 GameObject:
   m_ObjectHideFlags: 0

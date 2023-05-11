@@ -10,10 +10,10 @@ public class GameObjectsManager : MonoBehaviour
 
     [Header("Player")]
     [SerializeField] GameObject player;
-    [Header("Army Prefabs")]
-    [SerializeField] FriendStates meleePrefab;
-    [SerializeField] FriendStates rangedPrefab;
-    [SerializeField] FriendStates tankPrefab;
+    [Header("Ally Prefab")]
+    [SerializeField] FormationAgent allyPrefab;
+    [SerializeField] Formation allyBatalionPrefab;
+    [SerializeField] GameObject spawnEffect;
 
     [Header("Level Objects")]
     [SerializeField] GameObject enemyPrefab;
@@ -27,9 +27,9 @@ public class GameObjectsManager : MonoBehaviour
     public Transform ObjectToSpawnAround { get => objectToSpawnAround; }
    // public Transform[] WayPoints { get => wayPoints; }
     public GameObject Player { get => player; }
-    public FriendStates MeleePrefab { get => meleePrefab; }
-    public FriendStates RangedPrefab { get => rangedPrefab;  }
-    public FriendStates TankPrefab { get => tankPrefab;}
+    public FormationAgent AllyPrefab { get => allyPrefab; }
+    public GameObject SpawnEffect { get => spawnEffect; set => spawnEffect = value; }
+    public Formation AllyBatalionPrefab { get => allyBatalionPrefab; set => allyBatalionPrefab = value; }
 
     private void Awake()
     {
