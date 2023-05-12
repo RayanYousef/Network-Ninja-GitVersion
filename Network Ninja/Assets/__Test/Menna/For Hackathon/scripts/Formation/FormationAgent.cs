@@ -14,13 +14,12 @@ public class FormationAgent : MonoBehaviour
     private bool changeIdle;
     private bool noAnimation = true;
 
-    private void Update()
+    private void Start()
     {
         //transform.localScale = Vector3.one;
         anim = GetComponent<Animator>();
 
         StartCoroutine(AgentMovement());
-
     }
 
     IEnumerator AgentMovement()
