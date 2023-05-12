@@ -19,7 +19,7 @@ public class rPasswordManager : MonoBehaviour
 
     [Header("Password Manager Components")]
     [SerializeField] rArea[] listOfLevelAreas;
-    [SerializeField] int maxSoldiersNumber = 80;
+    [SerializeField] int maxSoldiersNumber = 75;
     [SerializeField] Color maxHealth, halfHealth, lowHealth, enemyColor;
 
     [SerializeField] rArea currentArea;

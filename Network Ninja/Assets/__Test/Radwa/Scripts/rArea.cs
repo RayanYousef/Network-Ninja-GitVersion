@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
-using TMPro;
-using System.Threading;
-using UnityEngine.Rendering.RendererUtils;
-using Unity.VisualScripting;
+using System.Linq;
 
 public enum AreaType { Base, Fight };
 
@@ -25,10 +21,11 @@ public class rArea : MonoBehaviour
     [SerializeField] Collider areaCollider;
     [SerializeField] EnemySpawner enemySpawner;
 
-    public Formation[] FArmyArray;
-    public Formation WeakArmy;
-    public Formation ModerateArmy;
-    public Formation StrongArmy;
+    [SerializeField] private Transform[] alliesSpawnPos;
+    private Formation alliesSpawnerPrefab;
+    [SerializeField] private List<FormationAgent> alliesList = new List<FormationAgent>();
+
+    private int numbOfAlliesInBattalion = 25;
 
     [Header("MiniMap Components")]
     [SerializeField] CS_ChangeObjectsColour meshColourChanger;
@@ -64,10 +61,8 @@ public class rArea : MonoBehaviour
        // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemiesEachInterval);
 
         enemySpawner = GetComponentInChildren<EnemySpawner>();
-        FArmyArray = GetComponentsInChildren<Formation>();
-        WeakArmy = FArmyArray[0];
-        ModerateArmy = FArmyArray[1];
-        StrongArmy = FArmyArray[2];
+
+        alliesSpawnerPrefab = GameObjectsManager.Instance.AllyBatalionPrefab;
 
         meshColourChanger.MaxHealth = rPasswordManager.Instance.MaxHealth;
         meshColourChanger.HalfHealth = rPasswordManager.Instance.HalfHealth;
@@ -97,11 +92,6 @@ public class rArea : MonoBehaviour
         }
 
         maxHealth = rPasswordManager.Instance.MaxSoldiersNumber;
-
-        foreach(Formation army in FArmyArray)
-        {
-            army.gameObject.SetActive(false);
-        }
     }
 
     private void FixedUpdate()
@@ -133,27 +123,7 @@ public class rArea : MonoBehaviour
                 LostArea();
             }
         }
-
-        formationRemovingTimer += Time.deltaTime;
-        if(formationRemovingTimer > 3)
-        {
-            formationRemovingTimer = 0;
-
-            if (Health <= maxHealth / 4 && WeakArmy.AgentsList.Count != 0)
-            {
-                WeakArmy.RemoveFormationAgent();
-            }
-            else if (Health <= maxHealth / 2 && ModerateArmy.AgentsList.Count != 0)
-            {
-                ModerateArmy.RemoveFormationAgent();
-
-
-            }
-            else if (Health <= maxHealth && StrongArmy.AgentsList.Count != 0)
-            {
-                StrongArmy.RemoveFormationAgent();
-            }
-        }
+        
     }
 
     public void LostArea()
@@ -163,60 +133,110 @@ public class rArea : MonoBehaviour
         password = null;
         sharingPasswordWarningIcon.gameObject.SetActive(false);
 
-
-        WeakArmy.clearList();
-        ModerateArmy.clearList();
-        StrongArmy.clearList();
-
+        DestroyAllAllies();
     }
 
+    public void DestroyAllAllies()
+    {
+        foreach(Transform asp in alliesSpawnPos)
+        {
+            Formation battalion = asp.GetComponentInChildren<Formation>();
+            if(battalion != null)
+            {
+                Destroy(battalion.gameObject);
+            }
+        }
+    }
+    public void ShowAlliesBasedOnAreaHealth()
+    {
+        for(int i = 0; i < health; i++)
+        {
+            alliesList[i].gameObject.SetActive(true);
+        }
+    }
     public void FormArmyBasedOnAreaHealth()
     {
-        WeakArmy.gameObject.SetActive(false);
-        ModerateArmy.gameObject.SetActive(false);
-        StrongArmy.gameObject.SetActive(false);
+        Formation allies1, allies2, allies3;
 
         if (Health <= maxHealth / 4)
         {
-          WeakArmy.gameObject.SetActive(true);
+            allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
+            allies1.transform.parent = alliesSpawnPos[0];
+
+            alliesList = allies1.AgentsList;
         }
+
         else if (Health <= maxHealth/ 2)
         {
-            WeakArmy.gameObject.SetActive(true);
-            ModerateArmy.gameObject.SetActive(true);
+            allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
+            allies1.transform.parent = alliesSpawnPos[0];
+
+            allies2 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[1].position, Quaternion.identity);
+            allies2.transform.parent = alliesSpawnPos[1];
+
+            alliesList = allies1.AgentsList.Concat(allies2.AgentsList).ToList();
 
         }
+
         else if (Health <= maxHealth)
         {
-            WeakArmy.gameObject.SetActive(true);
-            ModerateArmy.gameObject.SetActive(true);
-            StrongArmy.gameObject.SetActive(true);
+            allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
+            allies1.transform.parent = alliesSpawnPos[0];
+
+            allies2 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[1].position, Quaternion.identity);
+            allies2.transform.parent = alliesSpawnPos[1];
+            
+            allies3 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[2].position, Quaternion.identity);
+            allies3.transform.parent = alliesSpawnPos[2];
+
+            alliesList = allies1.AgentsList.Concat(allies2.AgentsList.Concat(allies3.AgentsList)).ToList();
         }
+
+
+        //WeakArmy.gameObject.SetActive(false);
+        //ModerateArmy.gameObject.SetActive(false);
+        //StrongArmy.gameObject.SetActive(false);
+
+        //if (Health <= maxHealth / 4)
+        //{
+        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[0]);
+        //    //alliesSpawner.Form(alliesSpawnPos[0], strtIndx, lstIndx);
+        //    //WeakArmy.gameObject.SetActive(true);
+        //}
+        //else if (Health <= maxHealth/ 2)
+        //{
+        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[0]);
+        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[1]);
+        //    //WeakArmy.gameObject.SetActive(true);
+        //    //ModerateArmy.gameObject.SetActive(true);
+        //}
+        //else if (Health <= maxHealth)
+        //{
+        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[1]);
+        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[0]);
+        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[2]);
+        //    //WeakArmy.gameObject.SetActive(true);
+        //    //ModerateArmy.gameObject.SetActive(true);
+        //    //StrongArmy.gameObject.SetActive(true);
+        //}
 
         /// later, it'd be better to send to the friendly soliders AI script both
         /// the password strength and complexity and the switch case is done there
         /// that way the functionality is separated and the password script knows nothing about the soliders
 
         /// also we may instantiate the army using StartCoroutine to instantiate one by one
-        foreach (Formation s in FArmyArray)
-        {
-            if(s.isActiveAndEnabled)
-            {
-                s.SpawnFormationPointsAndAgents(16);
-            }
-        }
+        //foreach (Formation s in FArmyArray)
+        //{
+        //    if(s.isActiveAndEnabled)
+        //    {
+        //        s.SpawnFormationPointsAndAgents(16);
+        //    }
+        //}
     }
 
     #region Collision and Trigger
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent<rTempFriendScript>(out rTempFriendScript friend))
-        {
-            //Destroy(collision.gameObject);
-            collision.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().gameObject.SetActive(false);
-            collision.gameObject.GetComponent<rTempFriendScript>().gameObject.SetActive(false);
-        }
-
         if (areaType == AreaType.Base && collision.gameObject == GameObjectsManager.Instance.Player)
         {
             playerInside = true;
@@ -245,20 +265,14 @@ public class rArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
             rPasswordManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
-            //foreach (GameObject friend in WeakArmy._spawnedUnits)
-            //{
-            //    Destroy(friend.gameObject);
-            //}
 
             foreach (GameObject enemy in enemySpawner.enemies)
             {
                 Destroy(enemy);
             }
-            //WeakArmy._spawnedUnits.Clear();
             enemySpawner.enemies.Clear();
         }
 
@@ -266,7 +280,11 @@ public class rArea : MonoBehaviour
         {
             areaCollider.isTrigger = false;
             playerInside = false;
-           // GetComponentInChildren<AlliesSpawner>().enabled = false;
+
+            for (int i = 0; i < alliesList.Count; i++)
+            {
+                alliesList[i].gameObject.SetActive(false);
+            }
         }
     }
     #endregion

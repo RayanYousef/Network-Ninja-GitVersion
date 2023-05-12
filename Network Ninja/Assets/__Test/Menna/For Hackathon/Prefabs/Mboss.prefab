@@ -2285,7 +2285,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!95 &8624618157843050681
 Animator:
@@ -2296,7 +2296,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8895072523819109860}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 06cca2e71207c00409ffa94a53cdd01f, type: 3}
   m_Controller: {fileID: 9100000, guid: 28a14f5effb4be84e8c4395845acefe5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -2326,7 +2326,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &8182064137278215585
@@ -2370,9 +2370,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2.3
+  m_Height: 2.2394753
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.0302627, z: 0}
 --- !u!114 &-1943140102003597411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2389,6 +2389,7 @@ MonoBehaviour:
   currentHealth: 0
   animator: {fileID: 0}
   HealthBar: {fileID: 5341286764998510006}
+  enemySpawner: {fileID: 0}
 --- !u!1 &9217789365634297403
 GameObject:
   m_ObjectHideFlags: 0
