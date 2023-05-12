@@ -176,6 +176,15 @@ public class rUIPassword : MonoBehaviour
             return;
         }
 
+        if(rPasswordManager.Instance.CurrentArea.AreaType == AreaType.Base)
+        {
+            // if the area is already a base, this means the player is reseting the password
+            // so destroy the allies already there
+            // to save the hassle of checking how many allies the new password should add
+
+            rPasswordManager.Instance.CurrentArea.DestroyAllAllies();
+        }
+
         rPasswordManager.Instance.CurrentArea.Password = passwordIF.text;
         rPasswordManager.Instance.CheckCurrentAreaPasswordStrength();
         rPasswordManager.Instance.CurrentArea.AreaType = AreaType.Base;
@@ -224,7 +233,8 @@ public class rUIPassword : MonoBehaviour
         {
             Debug.Log("Correct Password");
             rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
-            //rPasswordManager.Instance.CurrentArea.FormArmyBasedOnAreaHealth();
+            
+            rPasswordManager.Instance.CurrentArea.ShowAlliesBasedOnAreaHealth();
         }
         else
         {

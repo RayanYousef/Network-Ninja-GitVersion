@@ -28,9 +28,23 @@ public struct StatsStruct
         get => currentHealth;
         set
         {
-            currentHealth = Mathf.Clamp(value, 0, maxHealth);
+            currentHealth = Mathf.Clamp(value, 0, MaxHealth);
         }
     }
+
+    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public float DefaultDefense { get => defaultDefense; set => defaultDefense = value; }
+    public float Defense { get => defense; set => defense = value; }
+    public float DefaultAtkDmg { get => defaultAtkDmg; set => defaultAtkDmg = value; }
+    public float AtkDmg { get => atkDmg; set => atkDmg = value; }
+    public float DefaultAtkSpeed { get => defaultAtkSpeed; set => defaultAtkSpeed = value; }
+    public float AtkSpeed { get => atkSpeed; set => atkSpeed = value; }
+    public float DefaultMoveSpeed { get => defaultMoveSpeed; set => defaultMoveSpeed = value; }
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    public float DefaultCooldownReduction { get => defaultCooldownReduction; set => defaultCooldownReduction = value; }
+    public float CooldownReduction { get => cooldownReduction; set => cooldownReduction = value; }
+    public float DefaultLuck { get => defaultLuck; set => defaultLuck = value; }
+    public float Luck { get => luck; set => luck = value; }
 
     #endregion
 }

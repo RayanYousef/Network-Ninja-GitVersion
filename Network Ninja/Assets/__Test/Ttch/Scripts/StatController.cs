@@ -10,58 +10,28 @@ public class StatController : MonoBehaviour
 
     [SerializeField] 
     StatsStruct myStats = new StatsStruct();
-
-
-    [SerializeField]
-    private float maxHealth, currentHealth;
-    [SerializeField]
-    private float defaultDefense, defense;
-    [SerializeField]
-    private float defaultAtkDmg, atkDmg;
-    [SerializeField]
-    private float defaultAtkSpeed, atkSpeed;
-    [SerializeField]
-    private float defaultMoveSpeed, moveSpeed;
-    [SerializeField]
-    private float defaultCooldownReduction, cooldownReduction;
-    [SerializeField]
-    private float defaultLuck, luck;
-
-
-    #region Setters And Getters 
-    public float CurrentHealth
-    {
-        get => currentHealth;
-        set
-        {
-            currentHealth = Mathf.Clamp(value, 0, maxHealth);
-        }
-    }
-
     public StatsStruct MyStats { get => myStats; }
     public List<Collider> HitObjects { get => hitObjects; set => hitObjects = value; }
 
-    #endregion
-
     private void Awake()
     {
-        currentHealth = maxHealth;
-        defense = defaultDefense;
-        atkDmg = defaultAtkDmg;
-        atkSpeed = defaultAtkSpeed;
-        moveSpeed = defaultMoveSpeed;
-        cooldownReduction = defaultCooldownReduction;
+        myStats.CurrentHealth = myStats.MaxHealth;
+        myStats.Defense = myStats.DefaultDefense;
+        myStats.AtkDmg = myStats.DefaultAtkDmg;
+        myStats.AtkSpeed = myStats.DefaultAtkSpeed;
+        myStats.MoveSpeed = myStats.DefaultMoveSpeed;
+        myStats.CooldownReduction = myStats.DefaultCooldownReduction;
     }
 
     #region HealthFunctions
     public void Heal(float value = 20)
     {
-        CurrentHealth += value;
+        myStats.CurrentHealth += value;
     }
     public void ApplyDamage(StatController AttackerStats)
     {
         float dmg = AttackerStats.CalculateAttackStrength() - this.GetDefense();
-        CurrentHealth -= dmg;
+        myStats.CurrentHealth -= dmg;
     }
     #endregion
 
@@ -69,27 +39,27 @@ public class StatController : MonoBehaviour
     //Apply permenant/temporary buffs or debuffs to attack DAMAGE
     public void BuffAttackStat(float changeValue = 10)
     {
-        atkDmg += changeValue;
+        myStats.AtkDmg += changeValue;
     }
 
     public void DebuffAttackStat(float changeValue = 10)
     {
-        atkDmg -= changeValue;
+        myStats.AtkDmg -= changeValue;
     }
 
     public void ResetAttackToDefault()
     {
-        atkDmg = defaultAtkDmg;
+        myStats.AtkDmg = myStats.DefaultAtkDmg;
     }
 
     public float CalculateAttackStrength()
     {
         float critChance = Random.Range(0, 1);
-        if(critChance + luck > 0.8f)
+        if(critChance + myStats.Luck > 0.8f)
         {
-            return atkDmg * 2;
+            return myStats.AtkDmg * 2;
         }
-        return atkDmg;
+        return myStats.AtkDmg;
     }
 
     #endregion
@@ -98,20 +68,20 @@ public class StatController : MonoBehaviour
     //Apply permenanty/temporary buffs or debuffs to attack SPEED
     public void BuffAttackSpeed(float buffValue = 0.2f)
     {
-        atkSpeed += buffValue;
+        myStats.AtkSpeed += buffValue;
     }
     public void DebuffAttackSpeed(float debuffValue = 0.2f)
     {
-        atkSpeed -= debuffValue;
+        myStats.AtkSpeed -= debuffValue;
     }
     public void ResetAttackSpeedToDefault()
     {
-        atkSpeed = defaultAtkSpeed;
+        myStats.AtkSpeed = myStats.DefaultAtkSpeed;
     }
   
     public float GetAtackSpeed()
     {
-        return atkSpeed;
+        return myStats.AtkSpeed;
     }
     #endregion
 
@@ -119,42 +89,42 @@ public class StatController : MonoBehaviour
     
     public void BuffDefense(float changeValue = 10)
     {
-        defense += changeValue;
+        myStats.Defense += changeValue;
     }
     public void DebuffDefense(float changeValue = 10)
     {
-        defense -= changeValue;
+        myStats.Defense -= changeValue;
     }
 
     public void ResetDefenseToDefault()
     {
-        defense = defaultDefense;
+        myStats.Defense = myStats.DefaultDefense;
     }
 
     public float GetDefense()
     {
-        return defense;
+        return myStats.Defense;
     }
     #endregion
 
     #region MoveSpeedFunctions
     
     // Movement Speed Modifier should be small, like 1.2 or 1.5, it will be multiplied by the character stats. 
-    public void BuffMoveSpeed(float changeValue = 10)
+    public void BuffMoveSpeed(float changeValue = 1.3f)
     {
-        moveSpeed += changeValue;
+        myStats.MoveSpeed += changeValue;
     }
-    public void DebuffMoveSpeed(float changeValue = 5)
+    public void DebuffMoveSpeed(float changeValue = 1.2f)
     {
-        moveSpeed -= changeValue;
+        myStats.MoveSpeed -= changeValue;
     }
     public void ResetMoveSpeedToDefault()
     {
-        moveSpeed = defaultMoveSpeed;
+        myStats.MoveSpeed = myStats.DefaultMoveSpeed;
     }
     public float GetMoveSpeed()
     {
-        return moveSpeed;
+        return myStats.MoveSpeed;
     }
 
     #endregion
@@ -163,19 +133,19 @@ public class StatController : MonoBehaviour
 
     public void BuffCooldownReduction(float changeVal)
     {
-        cooldownReduction *= changeVal;
+        myStats.CooldownReduction *= changeVal;
     }
     public void DebuffCoolDownReduction(float changeVal)
     {
-        cooldownReduction /= changeVal;
+        myStats.CooldownReduction /= changeVal;
     }
     private void ResetCooldownReductionToDefault()
     {
-        cooldownReduction = defaultCooldownReduction;
+        myStats.CooldownReduction = myStats.DefaultCooldownReduction;
     }
     private float GetCooldownReduction()
     {
-        return cooldownReduction;
+        return myStats.CooldownReduction;
     }
     private float CalculateCooldown(float BaseSkillCooldown)
     {
@@ -188,20 +158,20 @@ public class StatController : MonoBehaviour
 
     public void BuffLuck (float changeVal = 0.1f)
     {
-        luck += changeVal;
+        myStats.Luck += changeVal;
     }
 
     public void DebuffLuck(float changeVal = 0.1f)
     {
-        luck -= changeVal;
+        myStats.Luck -= changeVal;
     }
     public void ResetLuckToDefault()
     {
-        luck = defaultLuck;
+        myStats.Luck = myStats.DefaultLuck;
     }
     public float GetLuck()
     {
-        return luck;
+        return myStats.Luck;
     }
     #endregion
 

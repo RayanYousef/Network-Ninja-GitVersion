@@ -18,7 +18,7 @@ public class FriendStates : MonoBehaviour
     private bool IsAttack1;
     private bool IsAttack2;
 
-    FriendSpawner FriendSpawner;
+    //FriendSpawner FriendSpawner;
     EnemySpawner EnemySpawner;
 
     public Transform player;
