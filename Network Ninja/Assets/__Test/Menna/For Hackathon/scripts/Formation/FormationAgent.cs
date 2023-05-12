@@ -8,17 +8,16 @@ public class FormationAgent : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Animator anim;
+    [SerializeField] private Formation battalion;
 
     public int toFollowIndex;
     public Vector3 toFollow;
     private bool changeIdle;
-    private bool noAnimation = true;
 
     private void Start()
     {
-        //transform.localScale = Vector3.one;
+        //transform.localScale = Vector3.one; //0.05
         anim = GetComponent<Animator>();
-
         StartCoroutine(AgentMovement());
     }
 
@@ -28,7 +27,7 @@ public class FormationAgent : MonoBehaviour
         {
             while(Vector3.SqrMagnitude(this.transform.position - toFollow) <= 0.2)
             {
-                toFollow = GetComponentInParent<Formation>().IndicatorsList[toFollowIndex];
+                toFollow = battalion.IndicatorsList[toFollowIndex];
                 agent.SetDestination(toFollow);
                 yield return null;
             }
@@ -42,40 +41,5 @@ public class FormationAgent : MonoBehaviour
                     anim.SetBool("isSecondFightPose", true);
             }
         }
-    }
-
-    private void FixedUpdate()
-    {
-        if (toFollow != null)
-        {
-            toFollow = GetComponentInParent<Formation>().IndicatorsList[toFollowIndex];
-            agent.SetDestination(toFollow);
-        }
-
-        ////  if(animator != null)
-        ////  animator.SetFloat("Move", agent.velocity.magnitude);
-
-        //if(Vector3.SqrMagnitude(this.transform.position - toFollow) <= 0.2)
-        //{
-        //    if(noAnimation)
-        //    {
-        //        changeIdle = (UnityEngine.Random.Range(0, 2) == 1);
-        //        Debug.Log(changeIdle);
-        //        if (changeIdle)
-        //        {
-        //            anim.SetBool("isFirstIdlePose", true);
-        //        }
-        //        else
-        //        {
-        //            anim.SetBool("isSecondIdlePose", true);
-        //        }
-        //        noAnimation = false;
-        //    }
-        //}
-        ////else
-        ////{
-        ////    anim.SetBool("isFirstIdlePose", false);
-        ////    anim.SetBool("isSecondIdlePose", false);
-        ////}
     }
 }

@@ -164,7 +164,6 @@ public class rArea : MonoBehaviour
             allies1.transform.parent = alliesSpawnPos[0];
 
             alliesList = allies1.AgentsList;
-
         }
 
         else if (Health <= maxHealth/ 2)
