@@ -19,7 +19,7 @@ public class rArea : MonoBehaviour
 
     [Header("Area Components")]
     [SerializeField] Collider areaCollider;
-    [SerializeField] EnemySpawner enemySpawner;
+    EnemySpawner enemySpawner;
 
     [SerializeField] private Transform[] alliesSpawnPos;
     private Formation alliesSpawnerPrefab;
@@ -224,11 +224,11 @@ public class rArea : MonoBehaviour
         {
             rPasswordManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
 
-            foreach (GameObject enemy in enemySpawner.enemies)
-            {
-                Destroy(enemy);
-            }
-            enemySpawner.enemies.Clear();
+            //foreach (GameObject enemy in enemySpawner.enemies)
+            //{
+            //    Destroy(enemy);
+            //}
+            //enemySpawner.enemies.Clear();
         }
 
         if (areaType == AreaType.Base && other.gameObject == GameObjectsManager.Instance.Player)

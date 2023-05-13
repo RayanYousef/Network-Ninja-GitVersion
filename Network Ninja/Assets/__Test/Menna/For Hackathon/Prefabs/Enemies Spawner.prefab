@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400e9cde40f12594697d2e6d0d395ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8895072523819109860, guid: 1807d0f8e7aa2f64dbb81153123ea94d,
+  enemyPrefab: {fileID: 8895072523819109860, guid: d64ecf6de6d81264495cfa202ebaa0d1,
     type: 3}
   MiniBossPrefab: {fileID: 8895072523819109860, guid: e1c1de2f01a4bab429d509acdee87d26,
     type: 3}
@@ -57,10 +57,12 @@ MonoBehaviour:
   allArmyDied: 0
   spawnInterval: 5
   miniBossSize: 4
+  enemiesPerSpawn: 5
+  numSpawned: 0
+  numAlive: 0
   enemies: []
   MiniBosses: []
   enemyPool: []
-  minibossPool: []
   OnAllMiniBossesKilled:
     m_PersistentCalls:
       m_Calls:
