@@ -98,9 +98,6 @@ public class rArea : MonoBehaviour
     {
         if (playerInside == false && password != null)
             UpdateHealth();
-
-
-
     }
 
     private void UpdateHealth()
@@ -123,7 +120,6 @@ public class rArea : MonoBehaviour
                 LostArea();
             }
         }
-        
     }
 
     public void LostArea()
@@ -191,47 +187,6 @@ public class rArea : MonoBehaviour
 
             alliesList = allies1.AgentsList.Concat(allies2.AgentsList.Concat(allies3.AgentsList)).ToList();
         }
-
-
-        //WeakArmy.gameObject.SetActive(false);
-        //ModerateArmy.gameObject.SetActive(false);
-        //StrongArmy.gameObject.SetActive(false);
-
-        //if (Health <= maxHealth / 4)
-        //{
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[0]);
-        //    //alliesSpawner.Form(alliesSpawnPos[0], strtIndx, lstIndx);
-        //    //WeakArmy.gameObject.SetActive(true);
-        //}
-        //else if (Health <= maxHealth/ 2)
-        //{
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[0]);
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[1]);
-        //    //WeakArmy.gameObject.SetActive(true);
-        //    //ModerateArmy.gameObject.SetActive(true);
-        //}
-        //else if (Health <= maxHealth)
-        //{
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[1]);
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[0]);
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[2]);
-        //    //WeakArmy.gameObject.SetActive(true);
-        //    //ModerateArmy.gameObject.SetActive(true);
-        //    //StrongArmy.gameObject.SetActive(true);
-        //}
-
-        /// later, it'd be better to send to the friendly soliders AI script both
-        /// the password strength and complexity and the switch case is done there
-        /// that way the functionality is separated and the password script knows nothing about the soliders
-
-        /// also we may instantiate the army using StartCoroutine to instantiate one by one
-        //foreach (Formation s in FArmyArray)
-        //{
-        //    if(s.isActiveAndEnabled)
-        //    {
-        //        s.SpawnFormationPointsAndAgents(16);
-        //    }
-        //}
     }
 
     #region Collision and Trigger
@@ -242,7 +197,7 @@ public class rArea : MonoBehaviour
             playerInside = true;
             rPasswordManager.Instance.CurrentArea = this;
 
-            /// On Entering Area call On Entering Area in UIPassword
+            /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
             OnEnteringArea?.Invoke();
         }
     }
@@ -258,7 +213,7 @@ public class rArea : MonoBehaviour
         {
             playerInside = true;
             rPasswordManager.Instance.CurrentArea = this;
-            // raise event to spawn enemies
+            /// raise event to spawn enemies
             OnEnteringFight?.Invoke();
         }
     }
