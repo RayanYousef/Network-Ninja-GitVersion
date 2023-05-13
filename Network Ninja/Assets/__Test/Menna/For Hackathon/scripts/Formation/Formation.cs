@@ -3,22 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum FormationShape
-{
-    StraightLine,
-    Circle,
-    Square,
-    Cone
-}
-
 public class Formation : MonoBehaviour
 {
     #region Inspector Exposed Variables
-    //[SerializeField] private FormationAgent formationAgent;
     //private GameObject spawnEffect;
 
     public float sideLength;
-
     #endregion
 
     #region Private Variables
