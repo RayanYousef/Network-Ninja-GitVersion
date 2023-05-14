@@ -240,13 +240,14 @@ public class rArea : MonoBehaviour
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
             rPasswordManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
-                        
-            //foreach (GameObject enemy in enemySpawner.enemies)
-            //{
-            //    Destroy(enemy);
-            //}
-            //enemySpawner.enemies.Clear();
         }
+
+        if (areaType == AreaType.Fight && other.gameObject == GameObjectsManager.Instance.Player)
+        {
+            enemySpawner.AddEnemiesInPool();
+            enemySpawner.DisableMiniBosses();
+        }
+
 
         if (areaType == AreaType.Base && other.gameObject == GameObjectsManager.Instance.Player)
         {
