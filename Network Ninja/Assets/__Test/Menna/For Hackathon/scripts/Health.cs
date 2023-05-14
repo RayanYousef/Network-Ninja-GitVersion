@@ -101,7 +101,7 @@ public class Health : MonoBehaviour
     void addForce()
     {
         Debug.Log("Addforce");
-      // rb.AddForce(Vector3.up * forceMagnitude, ForceMode.Impulse);
+       rb.AddForce(Vector3.up * forceMagnitude, ForceMode.Impulse);
     }
 
 }

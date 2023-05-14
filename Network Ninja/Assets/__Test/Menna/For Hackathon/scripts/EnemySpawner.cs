@@ -218,10 +218,14 @@ public class EnemySpawner : MonoBehaviour
     public void AddEnemiesInPool()
     {
         enemies.Clear();
-        foreach(GameObject enemy in enemyPool)
+        foreach(GameObject enemy in enemies)
         { 
-            enemyPool.Add(enemy);
-            enemy.SetActive(false);
+            if (enemy != null)
+            {
+                enemyPool.Add(enemy);
+                enemy.SetActive(false);
+            }
+
         }
     }
     public void SpawnMoreEnemies()
@@ -246,7 +250,11 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (GameObject MiniBoss in MiniBosses)
         {
-           Destroy(MiniBoss);
+            if(MiniBoss != null)
+            {
+                Destroy(MiniBoss);
+
+            }
         }
     }
     #endregion

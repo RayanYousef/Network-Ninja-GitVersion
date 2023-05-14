@@ -30,7 +30,7 @@ public class _Attack : StateMachineBehaviour
     {
         // agent.velocity = Vector3.zero;
 
-        if (Vector3.SqrMagnitude(player.position - RB.transform.position) > attackRange)
+        if (Vector3.Distance(player.position, RB.transform.position) > attackRange)
         {
             Debug.Log("CHASE");
            // animator.SetTrigger("Chase");
