@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
+using Cinemachine;
 
 public enum AreaType { Base, Fight };
 
 public class rArea : MonoBehaviour
 {
+    [Header("Camera")]
+    [SerializeField] private CinemachineVirtualCamera areaCamera;
+
     [Header("Area Info")]
     [SerializeField] AreaType areaType;
     [SerializeField] float health, maxHealth;
@@ -53,6 +57,15 @@ public class rArea : MonoBehaviour
 
     private void Awake()
     {
+        if (areaCamera != null) { }
+        else
+        {
+            areaCamera = GetComponentInChildren<CinemachineVirtualCamera>();
+            //areaCamera.Follow = alliesSpawnPos[0];
+            //areaCamera.LookAt = alliesSpawnPos[0];
+            //areaCamera.enabled = false;
+        }
+
         areaCollider = GetComponent<Collider>();
         sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
@@ -73,9 +86,6 @@ public class rArea : MonoBehaviour
         meshColourChanger.MeshRenderers = Renderers;
 
         sharingPasswordWarningIcon.gameObject.SetActive(false);
-
-
-
     }
     void Start()
     {
@@ -83,14 +93,12 @@ public class rArea : MonoBehaviour
         if (areaType == AreaType.Base)
         {
             areaCollider.isTrigger = false;
-
         }
         else
         {
             areaCollider.isTrigger = true;
             meshColourChanger.ChangeToColour(Color.red);
         }
-
         maxHealth = rPasswordManager.Instance.MaxSoldiersNumber;
     }
 
@@ -187,6 +195,15 @@ public class rArea : MonoBehaviour
 
             alliesList = allies1.AgentsList.Concat(allies2.AgentsList.Concat(allies3.AgentsList)).ToList();
         }
+
+        areaCamera.enabled = true;
+        StartCoroutine(WaitAndSwitchCameraBack());
+    }
+
+    IEnumerator WaitAndSwitchCameraBack()
+    {
+        yield return new WaitForSeconds(5.0f);
+        areaCamera.enabled = false;
     }
 
     #region Collision and Trigger
@@ -223,7 +240,7 @@ public class rArea : MonoBehaviour
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
             rPasswordManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
-
+                        
             //foreach (GameObject enemy in enemySpawner.enemies)
             //{
             //    Destroy(enemy);
