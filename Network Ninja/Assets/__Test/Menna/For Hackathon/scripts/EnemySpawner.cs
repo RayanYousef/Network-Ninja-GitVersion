@@ -215,6 +215,15 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public void AddEnemiesInPool()
+    {
+        enemies.Clear();
+        foreach(GameObject enemy in enemyPool)
+        { 
+            enemyPool.Add(enemy);
+            enemy.SetActive(false);
+        }
+    }
     public void SpawnMoreEnemies()
     {
         //for (int i = 0; i < enemyPool.Count ; i++)
@@ -233,7 +242,13 @@ public class EnemySpawner : MonoBehaviour
        // }
     }
 
-
+    public void DisableMiniBosses()
+    {
+        foreach (GameObject MiniBoss in MiniBosses)
+        {
+           Destroy(MiniBoss);
+        }
+    }
     #endregion
 
     //invoke event when all MiniBosses died 
