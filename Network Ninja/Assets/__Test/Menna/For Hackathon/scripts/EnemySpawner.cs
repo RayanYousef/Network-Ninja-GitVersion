@@ -222,6 +222,7 @@ public class EnemySpawner : MonoBehaviour
         { 
             if (enemy != null)
             {
+                enemies.Remove(enemy);
                 enemyPool.Add(enemy);
                 enemy.SetActive(false);
             }
