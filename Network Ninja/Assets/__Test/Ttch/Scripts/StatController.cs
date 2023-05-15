@@ -21,6 +21,12 @@ public class StatController : MonoBehaviour
         myStats.AtkSpeed = myStats.DefaultAtkSpeed;
         myStats.MoveSpeed = myStats.DefaultMoveSpeed;
         myStats.CooldownReduction = myStats.DefaultCooldownReduction;
+
+        var damageHandlers = GetComponentsInChildren<CS_DamageHandler>();
+        foreach (CS_DamageHandler handler in damageHandlers)
+        {
+            handler.stats = this;
+        }
     }
 
     #region HealthFunctions
