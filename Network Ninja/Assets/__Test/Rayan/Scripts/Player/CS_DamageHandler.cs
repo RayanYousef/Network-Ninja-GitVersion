@@ -64,6 +64,7 @@ public class CS_DamageHandler : MonoBehaviour
     private void OnEnable()
     {
         hitObjects.Clear();
+        if(stats!=null)
         stats.HitObjects.Clear();
     }
 

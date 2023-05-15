@@ -14,12 +14,14 @@ public class CS_AnimatorController : MonoBehaviour
     [SerializeField] float appliedForce;
 
     [Header("Animator Parameters")]
-    [SerializeField] string i_Combo;
+    [SerializeField] string i_Combo_1;
+    [SerializeField] string i_Combo_2;
     [SerializeField] string f_Direction, f_MotionTime, f_animSpeed;
     [SerializeField] string b_Grounded, b_Attacking, b_Dashing, b_Jumping, b_canTransit, t_Dash, t_Jump;
 
     public CS_DamageHandler AttackHandler { get => attackHandler; }
-    public string I_Combo { get => i_Combo; }
+    public string I_Combo_1 { get => i_Combo_1; }
+    public string I_Combo_2 { get => i_Combo_2; set => i_Combo_2 = value; }
     public string F_MotionTime { get => f_MotionTime; }
     public string F_Direction { get => f_Direction; }
     public string F_animSpeed { get => f_animSpeed; }
@@ -50,7 +52,7 @@ public class CS_AnimatorController : MonoBehaviour
         anim.SetBool(b_Grounded, value);
     }
 
-    #region Animation Modifiers
+    #region Animation State Modifiers
     public void SetAnimationMotion(float motionTime)
     {
         anim.SetFloat(f_MotionTime, motionTime);
@@ -64,12 +66,19 @@ public class CS_AnimatorController : MonoBehaviour
 
     #endregion
 
-
-    #region Animation Event
+    #region Animation Events
 
     public void PlayFootstepsAudio()
     {if(AudioManager.instance!= null)
         AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.Footsteps);
+    }
+
+    public void ResetCombo()
+    {
+        anim.SetInteger(I_Combo_1, 0);
+        anim.SetInteger(I_Combo_2, 0);
+        attackHandler.gameObject.SetActive(false);
+
     }
 
     public void CanTransit()
@@ -78,13 +87,21 @@ public class CS_AnimatorController : MonoBehaviour
         attackHandler.gameObject.SetActive(false);
     }
 
+    public void NegateDashing()
+    {
+        anim.SetBool(B_Dashing, false);
+    }
+
+    public void NegateJumping()
+    {
+        anim.SetBool(B_Jumping, false);
+    }
+
     public void ApplyForwardForce(float force)
     {
         GetComponent<Rigidbody>().
             AddForce(transform.forward * (appliedForce + force), ForceMode.Impulse);
   
-
-
     }
 
     public void OnAttackSetFirstPoint()
@@ -107,25 +124,4 @@ public class CS_AnimatorController : MonoBehaviour
     }
 
     #endregion
-    #region Parameters Modifiers
-    public void ResetCombo()
-    {
-        anim.SetInteger(I_Combo, 0);
-        attackHandler.gameObject.SetActive(false);
-
-    }
-
-    public void NegateDashing()
-    {
-        anim.SetBool(B_Dashing, false);
-    }
-
-    public void NegateJumping()
-    {
-        anim.SetBool(B_Jumping, false);
-    }
-
-    #endregion
-
-
 }
