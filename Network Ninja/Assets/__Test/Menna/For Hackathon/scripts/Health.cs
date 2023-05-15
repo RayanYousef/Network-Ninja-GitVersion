@@ -74,10 +74,15 @@ public class Health : MonoBehaviour
 
 
     }
-
+    void triaaaaaaaaaaal()
+    {
+        Debug.Log("Addforce");
+        rb.AddForce(Vector3.up * forceMagnitude, ForceMode.Impulse);
+    }
     void DeactivateGameObject()
     {
-            if (DeathEffect != null)
+
+        if (DeathEffect != null)
         {
             Instantiate(DeathEffect, transform.position, Quaternion.identity);
 
@@ -98,10 +103,8 @@ public class Health : MonoBehaviour
 
     }
 
-    void addForce()
-    {
-        Debug.Log("Addforce");
-       rb.AddForce(Vector3.up * forceMagnitude, ForceMode.Impulse);
-    }
+
+
+
 
 }
