@@ -59,12 +59,12 @@ public class CS_DamageHandler : MonoBehaviour
 
     #region HERE WE NEED EVERYTHING HERE
 
-    private StatController stats;
+    public StatController stats;
 
     private void OnEnable()
     {
         hitObjects.Clear();
-        //stats.HitObjects.Clear();
+        stats.HitObjects.Clear();
     }
 
     public void OnTriggerEnter(Collider other)
