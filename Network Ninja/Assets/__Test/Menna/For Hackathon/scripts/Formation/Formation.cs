@@ -3,25 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum FormationShape
-{
-    StraightLine,
-    Circle,
-    Square,
-    Cone
-}
-
 public class Formation : MonoBehaviour
 {
     #region Inspector Exposed Variables
-    //[SerializeField] private FormationAgent formationAgent;
     //private GameObject spawnEffect;
 
     public float sideLength;
-
-    public int numberToSpawn; //numb Of Allies In Battalion
-    //public int amountToSpawn;
-    //public int amountToRemove;
     #endregion
 
     #region Private Variables
@@ -36,7 +23,7 @@ public class Formation : MonoBehaviour
     #region Unity Defined Functions
     void Start()
     {
-        GetFormationPointsAndAgents(numberToSpawn, this.transform);
+        GetFormationPointsAndAgents(agentsList.Count, this.transform);
         Form(this.transform, indicatorsList);
     }
     #endregion
@@ -66,7 +53,6 @@ public class Formation : MonoBehaviour
 
     public void GetFormationPointsAndAgents(int number, Transform centerPos)
     {
-        numberToSpawn = number;
         for (int i = 0; i < number; i++)
         {
             FormationAgent agent = AgentsList[i];

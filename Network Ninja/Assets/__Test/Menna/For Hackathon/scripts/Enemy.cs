@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     Transform player;
     NavMeshAgent agent;
 
+
     #region //variables for overlap
     ////overlap
     //public float avoidanceRadius = 1f;

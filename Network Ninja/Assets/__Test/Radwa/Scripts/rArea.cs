@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
+using Cinemachine;
 
 public enum AreaType { Base, Fight };
 
 public class rArea : MonoBehaviour
 {
+    [Header("Camera")]
+    [SerializeField] private CinemachineVirtualCamera areaCamera;
+
     [Header("Area Info")]
     [SerializeField] AreaType areaType;
     [SerializeField] float health, maxHealth;
@@ -19,7 +23,7 @@ public class rArea : MonoBehaviour
 
     [Header("Area Components")]
     [SerializeField] Collider areaCollider;
-    [SerializeField] EnemySpawner enemySpawner;
+    EnemySpawner enemySpawner;
 
     [SerializeField] private Transform[] alliesSpawnPos;
     private Formation alliesSpawnerPrefab;
@@ -53,6 +57,15 @@ public class rArea : MonoBehaviour
 
     private void Awake()
     {
+        if (areaCamera != null) { }
+        else
+        {
+            areaCamera = GetComponentInChildren<CinemachineVirtualCamera>();
+            //areaCamera.Follow = alliesSpawnPos[0];
+            //areaCamera.LookAt = alliesSpawnPos[0];
+            //areaCamera.enabled = false;
+        }
+
         areaCollider = GetComponent<Collider>();
         sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
@@ -73,9 +86,6 @@ public class rArea : MonoBehaviour
         meshColourChanger.MeshRenderers = Renderers;
 
         sharingPasswordWarningIcon.gameObject.SetActive(false);
-
-
-
     }
     void Start()
     {
@@ -83,14 +93,12 @@ public class rArea : MonoBehaviour
         if (areaType == AreaType.Base)
         {
             areaCollider.isTrigger = false;
-
         }
         else
         {
             areaCollider.isTrigger = true;
             meshColourChanger.ChangeToColour(Color.red);
         }
-
         maxHealth = rPasswordManager.Instance.MaxSoldiersNumber;
     }
 
@@ -98,9 +106,6 @@ public class rArea : MonoBehaviour
     {
         if (playerInside == false && password != null)
             UpdateHealth();
-
-
-
     }
 
     private void UpdateHealth()
@@ -123,7 +128,6 @@ public class rArea : MonoBehaviour
                 LostArea();
             }
         }
-        
     }
 
     public void LostArea()
@@ -164,7 +168,6 @@ public class rArea : MonoBehaviour
             allies1.transform.parent = alliesSpawnPos[0];
 
             alliesList = allies1.AgentsList;
-
         }
 
         else if (Health <= maxHealth/ 2)
@@ -193,46 +196,14 @@ public class rArea : MonoBehaviour
             alliesList = allies1.AgentsList.Concat(allies2.AgentsList.Concat(allies3.AgentsList)).ToList();
         }
 
+        areaCamera.enabled = true;
+        StartCoroutine(WaitAndSwitchCameraBack());
+    }
 
-        //WeakArmy.gameObject.SetActive(false);
-        //ModerateArmy.gameObject.SetActive(false);
-        //StrongArmy.gameObject.SetActive(false);
-
-        //if (Health <= maxHealth / 4)
-        //{
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[0]);
-        //    //alliesSpawner.Form(alliesSpawnPos[0], strtIndx, lstIndx);
-        //    //WeakArmy.gameObject.SetActive(true);
-        //}
-        //else if (Health <= maxHealth/ 2)
-        //{
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[0]);
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[1]);
-        //    //WeakArmy.gameObject.SetActive(true);
-        //    //ModerateArmy.gameObject.SetActive(true);
-        //}
-        //else if (Health <= maxHealth)
-        //{
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[1]);
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[0]);
-        //    alliesSpawner.SpawnFormationPointsAndAgents(numbOfAlliesInBattalion, alliesSpawnPos[2]);
-        //    //WeakArmy.gameObject.SetActive(true);
-        //    //ModerateArmy.gameObject.SetActive(true);
-        //    //StrongArmy.gameObject.SetActive(true);
-        //}
-
-        /// later, it'd be better to send to the friendly soliders AI script both
-        /// the password strength and complexity and the switch case is done there
-        /// that way the functionality is separated and the password script knows nothing about the soliders
-
-        /// also we may instantiate the army using StartCoroutine to instantiate one by one
-        //foreach (Formation s in FArmyArray)
-        //{
-        //    if(s.isActiveAndEnabled)
-        //    {
-        //        s.SpawnFormationPointsAndAgents(16);
-        //    }
-        //}
+    IEnumerator WaitAndSwitchCameraBack()
+    {
+        yield return new WaitForSeconds(5.0f);
+        areaCamera.enabled = false;
     }
 
     #region Collision and Trigger
@@ -243,7 +214,7 @@ public class rArea : MonoBehaviour
             playerInside = true;
             rPasswordManager.Instance.CurrentArea = this;
 
-            /// On Entering Area call On Entering Area in UIPassword
+            /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
             OnEnteringArea?.Invoke();
         }
     }
@@ -259,7 +230,7 @@ public class rArea : MonoBehaviour
         {
             playerInside = true;
             rPasswordManager.Instance.CurrentArea = this;
-            // raise event to spawn enemies
+            /// raise event to spawn enemies
             OnEnteringFight?.Invoke();
         }
     }
@@ -269,13 +240,14 @@ public class rArea : MonoBehaviour
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
             rPasswordManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
-
-            foreach (GameObject enemy in enemySpawner.enemies)
-            {
-                Destroy(enemy);
-            }
-            enemySpawner.enemies.Clear();
         }
+
+        if (areaType == AreaType.Fight && other.gameObject == GameObjectsManager.Instance.Player)
+        {
+            enemySpawner.AddEnemiesInPool();
+            enemySpawner.DisableMiniBosses();
+        }
+
 
         if (areaType == AreaType.Base && other.gameObject == GameObjectsManager.Instance.Player)
         {

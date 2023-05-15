@@ -9,6 +9,7 @@ public class _Chase : StateMachineBehaviour
 
     public float speed;
     public float attackRange;
+    public float chaseRange;
 
     Rigidbody RB;
     private Transform player;
@@ -38,7 +39,7 @@ public class _Chase : StateMachineBehaviour
         agent.isStopped = true;
         RB.transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        if (Vector3.SqrMagnitude(player.position - RB.transform.position) < attackRange)
+        if (Vector3.Distance(player.position , RB.transform.position) < attackRange)
         {
             Debug.Log("ATTACK");
             // animator.SetTrigger("Attack");
@@ -46,17 +47,17 @@ public class _Chase : StateMachineBehaviour
         }
 
 
-        //if (Vector3.SqrMagnitude(player.transform.position - RB.transform.position) > chaseRange)
-        //{
-        //    Debug.Log("IDLE");
-        //    // animator.SetTrigger("Idle");
-        //    animator.SetBool("IsChasing", false);
-        //}
+        if (Vector3.Distance(player.position, RB.transform.position) > chaseRange)
+        {
+            Debug.Log("IDLE");
+            // animator.SetTrigger("Idle");
+            animator.SetBool("IsChasing", false);
+        }
 
     }
     
 
-
+    
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

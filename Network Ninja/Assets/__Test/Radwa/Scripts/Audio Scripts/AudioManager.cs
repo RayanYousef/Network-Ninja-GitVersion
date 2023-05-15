@@ -8,8 +8,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    [SerializeField] Sound[] musicSounds, sfxSounds;
-    [SerializeField] AudioSource musicSource, sfxSource, pitchVariedsfxSource;
+    public Sound[] musicSounds, sfxSounds;
+    public AudioSource musicSource, sfxSource, pitchVariedsfxSource;
 
     [Header("Keyboard Single Clicks Array")]
     [SerializeField] AudioClip[] clickClips;
@@ -33,7 +33,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        //PlayMusic("Theme");
+       // PlayMusic("MainMenuBG");
+        PlayMusic("BackGround");
     }
 
 
@@ -46,29 +47,39 @@ public class AudioManager : MonoBehaviour
 
         if (s != null)
         {
-            musicSource.PlayOneShot(s.clip, 0.2f);
-            //musicSource.clip = s.clip;
-            //musicSource.Play();
+            // musicSource.PlayOneShot(s.clip, 0.2f);
+            musicSource.clip = s.clip;
+            musicSource.Play();
         }
     }
 
 
-    public void playSFX(string name, float SFXVolume)
+    //public void playSFX(string name, float SFXVolume)
+    //{
+    //    Sound s = Array.Find(sfxSounds, x => x.name == name);
+
+    //    if (s != null)
+    //    {
+    //        if (sfxSource.clip == s.clip && sfxSource.isPlaying)
+    //        {
+    //            return;
+    //        }
+    //        Debug.Log(sfxSource.pitch);
+    //        sfxSource.PlayOneShot(s.clip, SFXVolume);
+    //    }
+    //}
+
+    public void playSFX(string name)
     {
+
         Sound s = Array.Find(sfxSounds, x => x.name == name);
 
         if (s != null)
         {
-            if (sfxSource.clip == s.clip && sfxSource.isPlaying)
-            {
-                return;
-            }
-            Debug.Log(sfxSource.pitch);
-            sfxSource.PlayOneShot(s.clip, SFXVolume);
+            sfxSource.PlayOneShot(s.clip);
         }
+
     }
-
-
     public void PlayVariedPitcheAudio(AudioClip[] audioClipsArray)
     {
         pitchVariedsfxSource.clip = audioClipsArray[UnityEngine.Random.Range(0, clickClips.Length)];

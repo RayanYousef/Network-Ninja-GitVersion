@@ -3,17 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
 
+    private Rigidbody rb;
+    private float forceMagnitude = 10.0f;
+
+    public GameObject DeathEffect;
+
     public int maxHealth = 100;
     public int currentHealth;
     public Animator animator;
     public Slider HealthBar;
-
     public EnemySpawner enemySpawner;
+    
 
 
 
@@ -24,6 +30,8 @@ public class Health : MonoBehaviour
         animator = GetComponent<Animator>();
        
         currentHealth = maxHealth;
+        rb = GetComponent<Rigidbody>();
+
     }
 
     private void Update()
@@ -53,9 +61,10 @@ public class Health : MonoBehaviour
         //animation
         Debug.Log("When enemy died");
         animator.SetTrigger("Death");
+
         // Destroy(gameObject, 4f);
-       // enemySpawner.enemies.Remove(gameObject);
-       
+        // enemySpawner.enemies.Remove(gameObject);
+
 
 
 
@@ -65,9 +74,19 @@ public class Health : MonoBehaviour
 
 
     }
-
+    void triaaaaaaaaaaal()
+    {
+        Debug.Log("Addforce");
+        rb.AddForce(Vector3.up * forceMagnitude, ForceMode.Impulse);
+    }
     void DeactivateGameObject()
     {
+
+        if (DeathEffect != null)
+        {
+            Instantiate(DeathEffect, transform.position, Quaternion.identity);
+
+        }
 
         gameObject.SetActive(false);
 
@@ -83,5 +102,9 @@ public class Health : MonoBehaviour
         }
 
     }
+
+
+
+
 
 }
