@@ -19,25 +19,21 @@ public class GameObjectsManager : MonoBehaviour
     [SerializeField] GameObject spawnEffect;
 
     [Header("Level Objects")]
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] Transform objectToSpawnAround;
-  //  [SerializeField] Transform[] wayPoints;
-
-
+    //[SerializeField] Transform[] wayPoints;
+    [SerializeField] rArea[] listOfLevelAreas;
 
     public static GameObjectsManager Instance { get => instance; }
-    public GameObject EnemyPrefab { get => enemyPrefab; }
-    public Transform ObjectToSpawnAround { get => objectToSpawnAround; }
+
    // public Transform[] WayPoints { get => wayPoints; }
     public GameObject Player { get => player; }
     public CinemachineVirtualCamera PlayerCamera { get => playerCamera; set => playerCamera = value; }
     public FormationAgent AllyPrefab { get => allyPrefab; }
     public GameObject SpawnEffect { get => spawnEffect; set => spawnEffect = value; }
     public Formation AllyBatalionPrefab { get => allyBatalionPrefab; set => allyBatalionPrefab = value; }
+    public rArea[] ListOfLevelAreas { get => listOfLevelAreas; set => listOfLevelAreas = value; }
 
     private void Awake()
     {
-
         if (instance == null)
         {
             instance = this;
@@ -49,9 +45,19 @@ public class GameObjectsManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool CheckAllAreasBaseExceptCurrent()
     {
-
+        foreach(rArea area in listOfLevelAreas)
+        {
+            if(area == rPasswordManager.Instance.CurrentArea)
+            {
+                continue;
+            }
+            if (area.AreaType != AreaType.Base)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

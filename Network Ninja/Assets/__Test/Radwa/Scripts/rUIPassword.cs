@@ -88,7 +88,6 @@ public class rUIPassword : MonoBehaviour
     #region Menu Panel
     void ShowHideMenu()
     {
-
         switch (menuPanel.activeSelf)
         {
             case true:
@@ -122,7 +121,6 @@ public class rUIPassword : MonoBehaviour
 
     public void OnEnteringAreaShowPannels()
     {
-
         switch (rPasswordManager.Instance.CurrentArea.Password != null)
         {
             case true:

@@ -15,11 +15,12 @@ public class rArea : MonoBehaviour
     [Header("Area Info")]
     [SerializeField] AreaType areaType;
     [SerializeField] float health, maxHealth;
+    bool isWinningConditionMet = false;
     [SerializeField] string password;
     [SerializeField] bool playerInside = false;
 
     [Header("Events")]
-    [SerializeField] UnityEvent OnEnteringArea, OnEnteringFight;
+    [SerializeField] UnityEvent OnEnteringArea, OnEnteringFight, OnWinningLvl;
 
     [Header("Area Components")]
     [SerializeField] Collider areaCollider;
@@ -40,6 +41,7 @@ public class rArea : MonoBehaviour
     [SerializeField] float healthTimer;
     [SerializeField] float formationRemovingTimer;
 
+    Formation allies1, allies2, allies3;
 
     public string Password { get => password; set => password = value; }
     public float Health
@@ -61,17 +63,12 @@ public class rArea : MonoBehaviour
         else
         {
             areaCamera = GetComponentInChildren<CinemachineVirtualCamera>();
-            //areaCamera.Follow = alliesSpawnPos[0];
-            //areaCamera.LookAt = alliesSpawnPos[0];
-            //areaCamera.enabled = false;
         }
 
         areaCollider = GetComponent<Collider>();
         sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
-
-       // OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemiesEachInterval);
 
         enemySpawner = GetComponentInChildren<EnemySpawner>();
 
@@ -100,11 +97,13 @@ public class rArea : MonoBehaviour
             meshColourChanger.ChangeToColour(Color.red);
         }
         maxHealth = rPasswordManager.Instance.MaxSoldiersNumber;
+
+        enemySpawner.OnBigBossKilled.AddListener(Winning);
     }
 
     private void FixedUpdate()
     {
-        if (playerInside == false && password != null)
+        if (playerInside == false && password != null && !isWinningConditionMet)
             UpdateHealth();
     }
 
@@ -140,12 +139,29 @@ public class rArea : MonoBehaviour
         DestroyAllAllies();
     }
 
+    public void Winning()
+    {
+        // stop update health
+        isWinningConditionMet = true;
+
+        // current area minimap ..> max health color
+        meshColourChanger.ChangeToColour(rPasswordManager.Instance.MaxHealth);
+        health = rPasswordManager.Instance.MaxSoldiersNumber;
+
+        // Allies Formation
+        FormStrongArmy();
+
+        areaCamera.enabled = true;
+        //StartCoroutine(WinningCutScene());
+    }
+
+    #region Allies Handling Functions
     public void DestroyAllAllies()
     {
-        foreach(Transform asp in alliesSpawnPos)
+        foreach (Transform asp in alliesSpawnPos)
         {
             Formation battalion = asp.GetComponentInChildren<Formation>();
-            if(battalion != null)
+            if (battalion != null)
             {
                 Destroy(battalion.gameObject);
             }
@@ -153,15 +169,13 @@ public class rArea : MonoBehaviour
     }
     public void ShowAlliesBasedOnAreaHealth()
     {
-        for(int i = 0; i < health; i++)
+        for (int i = 0; i < health; i++)
         {
             alliesList[i].gameObject.SetActive(true);
         }
     }
     public void FormArmyBasedOnAreaHealth()
     {
-        Formation allies1, allies2, allies3;
-
         if (Health <= maxHealth / 4)
         {
             allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
@@ -170,7 +184,7 @@ public class rArea : MonoBehaviour
             alliesList = allies1.AgentsList;
         }
 
-        else if (Health <= maxHealth/ 2)
+        else if (Health <= maxHealth / 2)
         {
             allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
             allies1.transform.parent = alliesSpawnPos[0];
@@ -184,27 +198,53 @@ public class rArea : MonoBehaviour
 
         else if (Health <= maxHealth)
         {
-            allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
-            allies1.transform.parent = alliesSpawnPos[0];
-
-            allies2 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[1].position, Quaternion.identity);
-            allies2.transform.parent = alliesSpawnPos[1];
-            
-            allies3 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[2].position, Quaternion.identity);
-            allies3.transform.parent = alliesSpawnPos[2];
-
-            alliesList = allies1.AgentsList.Concat(allies2.AgentsList.Concat(allies3.AgentsList)).ToList();
+            FormStrongArmy();
         }
 
         areaCamera.enabled = true;
         StartCoroutine(WaitAndSwitchCameraBack());
-    }
+    } 
 
+    private void FormStrongArmy()
+    {
+        allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
+        allies1.transform.parent = alliesSpawnPos[0];
+
+        allies2 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[1].position, Quaternion.identity);
+        allies2.transform.parent = alliesSpawnPos[1];
+
+        allies3 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[2].position, Quaternion.identity);
+        allies3.transform.parent = alliesSpawnPos[2];
+
+        alliesList = allies1.AgentsList.Concat(allies2.AgentsList.Concat(allies3.AgentsList)).ToList();
+    }
+    #endregion
+
+    #region Cinemachine Cut Scene
     IEnumerator WaitAndSwitchCameraBack()
     {
         yield return new WaitForSeconds(5.0f);
         areaCamera.enabled = false;
     }
+
+    IEnumerator WinningCutScene()
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        //areaCamera.enabled = false;
+        //foreach (rArea area in GameObjectsManager.Instance.ListOfLevelAreas)
+        //{
+        //    if (area == rPasswordManager.Instance.CurrentArea)
+        //    {
+        //        continue;
+        //    }
+        //    area.areaCamera.enabled = true;
+        //    yield return new WaitForSeconds(3.0f);
+        //}
+        //    this.areaCamera.enabled = true;
+    }
+
+    #endregion
 
     #region Collision and Trigger
     private void OnCollisionEnter(Collision collision)

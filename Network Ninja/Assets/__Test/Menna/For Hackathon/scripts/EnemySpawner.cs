@@ -7,8 +7,11 @@ using UnityEngine.Events;
 public class EnemySpawner : MonoBehaviour
 {
     Transform player;
-  
 
+    [Header("Big Boss")]
+    public GameObject BigBossPrefab;
+  
+    [Header("Enemies")]
     public GameObject enemyPrefab;
     public GameObject MiniBossPrefab;
     public Transform objectToSpawnAround;
@@ -27,14 +30,12 @@ public class EnemySpawner : MonoBehaviour
 
     // public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
 
-
     public List<GameObject> enemies;  // A list of all spawned enemies.
     public List<GameObject> MiniBosses;  // A list of all spawned MonoBosses.
 
     public List<GameObject> enemyPool;
 
-    public UnityEvent OnAllMiniBossesKilled;
-
+    public UnityEvent OnAllMiniBossesKilled, OnBigBossKilled;
 
     void Start()
     {
@@ -127,7 +128,6 @@ public class EnemySpawner : MonoBehaviour
     //}
     #endregion
 
-
     // spawn MiniBosses
     public void SpawnMiniBosses()
     {
@@ -139,8 +139,13 @@ public class EnemySpawner : MonoBehaviour
             MiniBoss.GetComponent<m_MiniBossHealth>().OnMiniBossKilled += HandleMiniBossKilled;
             MiniBosses.Add(MiniBoss);
             //Debug.Log("mini boss spawned");
-
         }
+    }
+
+    public void SpawnBigBoss()
+    {
+        GameObject BigBoss = Instantiate(BigBossPrefab, this.transform.position, Quaternion.identity);
+        BigBoss.transform.parent = this.transform;
     }
 
 
@@ -281,8 +286,21 @@ public class EnemySpawner : MonoBehaviour
             }
             enemyPool.Clear();
             enemies.Clear();
-            
-            OnAllMiniBossesKilled.Invoke();
+
+            bool allAreasBase = GameObjectsManager.Instance.CheckAllAreasBaseExceptCurrent();
+
+            if(allAreasBase)
+            {
+                /// spawn big boss
+                /// in case of emergency... invoke winning event here
+                //OnBigBossKilled?.Invoke();
+                SpawnBigBoss();
+            }
+            else
+            {
+                // rUIPassword listens to this event: OnEnteringAreaShowPannels()
+                OnAllMiniBossesKilled?.Invoke();
+            }  
         }
     }
     #region //trials
