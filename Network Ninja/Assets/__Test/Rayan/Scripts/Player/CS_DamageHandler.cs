@@ -55,24 +55,30 @@ public class CS_DamageHandler : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+
+
+    #region HERE WE NEED EVERYTHING HERE
+
+    private StatController stats;
+
     private void OnEnable()
     {
         hitObjects.Clear();
-
+        //stats.HitObjects.Clear();
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (!hitObjects.Contains(other) &&  other.TryGetComponent<Health>(out Health stats))
+        if (!hitObjects.Contains(other) && other.TryGetComponent<Health>(out Health stats))
         {
             hitObjects.Add(other);
-            if (stats != null && stats.currentHealth>0)
+            if (stats != null && stats.currentHealth > 0)
             {
                 stats.TakeDamage(35);
-                other.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity*2;  
+                other.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity * 2;
             }
-            
+
         }
-    }
+    } 
+    #endregion
 }
