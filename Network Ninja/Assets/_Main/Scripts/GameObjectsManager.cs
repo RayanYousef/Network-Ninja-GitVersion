@@ -18,6 +18,10 @@ public class GameObjectsManager : MonoBehaviour
     [SerializeField] Formation allyBatalionPrefab;
     [SerializeField] GameObject spawnEffect;
 
+    [Header("Boss")]
+    [SerializeField] m_CombatManager combatManager;
+    [SerializeField] m_BossUI_Manager bossUiManager;
+
     [Header("Level Objects")]
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Transform pointInArea1;
@@ -30,6 +34,10 @@ public class GameObjectsManager : MonoBehaviour
     [SerializeField] m_BossUI_Manager bossUiManager;
 
 
+
+    [SerializeField] Transform pointInArea1;
+    [SerializeField] Transform pointInArea2;
+    [SerializeField] Transform pointInArea3;
 
     public static GameObjectsManager Instance { get => instance; }
     public GameObject EnemyPrefab { get => enemyPrefab; }
@@ -45,6 +53,12 @@ public class GameObjectsManager : MonoBehaviour
     public Formation AllyBatalionPrefab { get => allyBatalionPrefab; set => allyBatalionPrefab = value; }
     public m_BossUI_Manager BossUiManager { get => bossUiManager; }
     public m_CombatManager CombatManager{ get => combatManager; }
+
+    public m_BossUI_Manager BossUiManager { get => bossUiManager; }
+    public m_CombatManager CombatManager { get => combatManager; }
+    public Transform PointInArea1 { get => pointInArea1; }
+    public Transform PointInArea2 { get => pointInArea2; }
+    public Transform PointInArea3 { get => pointInArea3; }
 
     private void Awake()
     {
