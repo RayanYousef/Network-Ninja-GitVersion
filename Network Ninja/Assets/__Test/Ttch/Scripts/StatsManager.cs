@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class StatsManager : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class StatsManager : MonoBehaviour
     [SerializeField] 
     StatsStruct myStats = new StatsStruct();
 
+    public Slider HealthBar;
 
 
 
@@ -29,6 +32,8 @@ public class StatsManager : MonoBehaviour
         myStats.AtkSpeed = myStats.DefaultAtkSpeed;
         myStats.MoveSpeed = myStats.DefaultMoveSpeed;
         myStats.CooldownReduction = myStats.DefaultCooldownReduction;
+        HealthBar.maxValue = myStats.MaxHealth;
+        HealthBar.value = myStats.CurrentHealth;
 
         var damageHandlers = CharacterTopMostParent.GetComponentsInChildren<CS_DamageObject>();
         foreach (CS_DamageObject handler in damageHandlers)
@@ -36,25 +41,30 @@ public class StatsManager : MonoBehaviour
             handler.MyStatsManager = this;
         }
     }
+ 
 
     #region HealthFunctions
     public void Heal(float value = 20)
     {
         myStats.CurrentHealth += value;
+        HealthBar.value = myStats.CurrentHealth;
     }
     public void ApplyDamage(StatsManager AttackerStats)
     {
         float dmg = AttackerStats.CalculateAttackStrength() - this.GetDefense();
         myStats.CurrentHealth -= dmg;
+        HealthBar.value = myStats.CurrentHealth;
     }
 
     public void ApplyDamage(float attack=30)
     {
         myStats.CurrentHealth -= attack;
-        if(myStats.CurrentHealth == 0)
+        HealthBar.value = myStats.CurrentHealth;
+        if (myStats.CurrentHealth == 0)
         {
             CharacterTopMostParent.SetActive(false);
         }
+
     }
     #endregion
 
