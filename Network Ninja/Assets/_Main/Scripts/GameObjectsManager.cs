@@ -24,16 +24,8 @@ public class GameObjectsManager : MonoBehaviour
 
     [Header("Level Objects")]
     [SerializeField] GameObject enemyPrefab;
-    [SerializeField] Transform pointInArea1;
-    [SerializeField] Transform pointInArea2;
-    [SerializeField] Transform pointInArea3;
+
     //  [SerializeField] Transform[] wayPoints;
-
-    [Header("Boss")]
-    [SerializeField] m_CombatManager combatManager;
-    [SerializeField] m_BossUI_Manager bossUiManager;
-
-
 
     [SerializeField] Transform pointInArea1;
     [SerializeField] Transform pointInArea2;
@@ -41,9 +33,7 @@ public class GameObjectsManager : MonoBehaviour
 
     public static GameObjectsManager Instance { get => instance; }
     public GameObject EnemyPrefab { get => enemyPrefab; }
-    public Transform PointInArea1 { get => pointInArea1; }
-    public Transform PointInArea2 { get => pointInArea2; }
-    public Transform PointInArea3 { get => pointInArea3; }
+
 
    // public Transform[] WayPoints { get => wayPoints; }
     public GameObject Player { get => player; }
@@ -51,9 +41,6 @@ public class GameObjectsManager : MonoBehaviour
     public FormationAgent AllyPrefab { get => allyPrefab; }
     public GameObject SpawnEffect { get => spawnEffect; set => spawnEffect = value; }
     public Formation AllyBatalionPrefab { get => allyBatalionPrefab; set => allyBatalionPrefab = value; }
-    public m_BossUI_Manager BossUiManager { get => bossUiManager; }
-    public m_CombatManager CombatManager{ get => combatManager; }
-
     public m_BossUI_Manager BossUiManager { get => bossUiManager; }
     public m_CombatManager CombatManager { get => combatManager; }
     public Transform PointInArea1 { get => pointInArea1; }
