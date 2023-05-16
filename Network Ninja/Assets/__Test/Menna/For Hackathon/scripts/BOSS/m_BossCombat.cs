@@ -20,7 +20,7 @@ public class m_BossCombat : MonoBehaviour
     private void Start()
     {
         uimanager = GameObjectsManager.Instance.GetComponent<m_BossUI_Manager>();
-        combatManager = GameObjectsManager.Instance.gameObject.AddComponent<m_CombatManager>();
+        combatManager = GameObjectsManager.Instance.CombatManager;
 
     }
     private void OnTriggerEnter(Collider other)

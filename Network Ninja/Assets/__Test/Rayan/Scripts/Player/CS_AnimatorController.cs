@@ -45,7 +45,7 @@ public class CS_AnimatorController : MonoBehaviour
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
-        damageOBject = GetComponentInChildren<CS_DamageObject>();   
+        //damageOBject = GetComponentInChildren<CS_DamageObject>();   
     }
 
     public void SetGrounded(bool value)

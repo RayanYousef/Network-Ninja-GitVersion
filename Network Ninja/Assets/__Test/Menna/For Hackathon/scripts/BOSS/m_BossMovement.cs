@@ -8,11 +8,11 @@ public class m_BossMovement : MonoBehaviour
 
     Transform player;
     Animator dragonAnim;
-    GameObject Background;
+    GameObject bossHP;
 
     private void Awake()
     {
-        Background = GameObjectsManager.Instantiate(Background);
+        bossHP = GameObjectsManager.Instance.BossHP;
         player = GameObjectsManager.Instance.Player.transform;
         dragonAnim = gameObject.GetComponent<Animator>();
 
@@ -20,7 +20,7 @@ public class m_BossMovement : MonoBehaviour
 
     private void Start()
     {      
-        Background.SetActive(true);
+        bossHP.SetActive(true);
     }
     void Update()
     {

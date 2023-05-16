@@ -32,12 +32,11 @@ public class m_CombatManager : MonoBehaviour
 
     private void Awake()
     {
-        Dragon = GetComponent<GameObject>();
         DragonAnim = Dragon.GetComponent<Animator>();
         bloodVfx = Dragon.GetComponentInChildren<ParticleSystem>();
         bloodVfx2 = Dragon.GetComponentInChildren<ParticleSystem>();
         bloodVfx3 = Dragon.GetComponentInChildren<ParticleSystem>();
-        ui = GameObjectsManager.Instance.GetComponent<m_BossUI_Manager>();
+        ui = GameObjectsManager.Instance.BossUiManager;
     }
     private void Start()
     {
