@@ -29,6 +29,17 @@ public class GameObjectsManager : MonoBehaviour
     [Header("Level Objects")]
     [SerializeField] rArea[] listOfLevelAreas;
     [SerializeField] GameObject enemyPrefab;
+<<<<<<< Updated upstream
+=======
+    [SerializeField] Transform pointInArea1;
+    [SerializeField] Transform pointInArea2;
+    [SerializeField] Transform pointInArea3;
+    //  [SerializeField] Transform[] wayPoints;
+
+    [Header("Boss")]
+    [SerializeField] m_CombatManager combatManager;
+    [SerializeField] m_BossUI_Manager bossUiManager;
+>>>>>>> Stashed changes
 
     //  [SerializeField] Transform[] wayPoints;
 
@@ -38,7 +49,13 @@ public class GameObjectsManager : MonoBehaviour
 
     public static GameObjectsManager Instance { get => instance; }
     public GameObject EnemyPrefab { get => enemyPrefab; }
+<<<<<<< Updated upstream
 
+=======
+    public Transform PointInArea1 { get => pointInArea1; }
+    public Transform PointInArea2 { get => pointInArea2; }
+    public Transform PointInArea3 { get => pointInArea3; }
+>>>>>>> Stashed changes
 
    // public Transform[] WayPoints { get => wayPoints; }
     public GameObject Player { get => player; }
@@ -49,11 +66,15 @@ public class GameObjectsManager : MonoBehaviour
     public GameObject BossHP { get => bossHP;}
     public Formation AllyBatalionPrefab { get => allyBatalionPrefab; set => allyBatalionPrefab = value; }
     public m_BossUI_Manager BossUiManager { get => bossUiManager; }
+<<<<<<< Updated upstream
     public m_CombatManager CombatManager { get => combatManager; }
     //public Transform PointInArea1 { get => pointInArea1; }
     //public Transform PointInArea2 { get => pointInArea2; }
     //public Transform PointInArea3 { get => pointInArea3; }
     public rArea[] ListOfLevelAreas { get => listOfLevelAreas; set => listOfLevelAreas = value; }
+=======
+    public m_CombatManager CombatManager{ get => combatManager; }
+>>>>>>> Stashed changes
 
     private void Awake()
     {

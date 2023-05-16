@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using Cinemachine;
 using Random = UnityEngine.Random;
+<<<<<<< Updated upstream
 using static Unity.VisualScripting.Member;
 using static UnityEngine.ParticleSystem;
 
@@ -30,6 +31,18 @@ public class m_BossMovement : MonoBehaviour
     private void Start()
     {      
         bossHP.SetActive(true);
+=======
+public class m_BossMovement : MonoBehaviour
+{
+
+     Transform player;
+     Animator dragonAnim;
+
+    private void Start()
+    {
+        player = GameObjectsManager.Instance.Player.transform;
+        dragonAnim = gameObject.GetComponent<Animator>();
+>>>>>>> Stashed changes
     }
     void Update()
     {
@@ -38,6 +51,7 @@ public class m_BossMovement : MonoBehaviour
             LookAtPlayer();
         }
     }
+<<<<<<< Updated upstream
 
     void trailActivate()
     {
@@ -122,6 +136,8 @@ public class m_BossMovement : MonoBehaviour
         this.GetComponent<RigBuilder>().enabled = false;
         return true;
     }
+=======
+>>>>>>> Stashed changes
     void LookAtPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
