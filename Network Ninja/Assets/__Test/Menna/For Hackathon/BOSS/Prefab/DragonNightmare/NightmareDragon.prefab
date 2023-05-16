@@ -2271,7 +2271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f8c26f87add2346b000551af356196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DragonAnim: {fileID: 9587272}
 --- !u!1 &193540
 GameObject:
   m_ObjectHideFlags: 0
@@ -2317,6 +2316,7 @@ GameObject:
   - component: {fileID: 267218873}
   - component: {fileID: 267218876}
   - component: {fileID: 267218878}
+  - component: {fileID: 5145656898655402665}
   m_Layer: 0
   m_Name: NightmareDragon
   m_TagString: BOSS
@@ -2334,7 +2334,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 411186}
   - {fileID: 461776}
@@ -2428,6 +2428,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4b994502731644c82e2ea199bb0610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dragonAnim: {fileID: 9587272}
+  trails:
+  - {fileID: 768887225}
+  - {fileID: 1915071718}
+  - {fileID: 453368349}
+--- !u!114 &5145656898655402665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterTopMostParent: {fileID: 0}
+  hitObjects: []
+  myStats:
+    maxHealth: 0
+    currentHealth: 0
+    defaultDefense: 0
+    defense: 0
+    defaultAtkDmg: 0
+    atkDmg: 0
+    defaultAtkSpeed: 0
+    atkSpeed: 0
+    defaultMoveSpeed: 0
+    moveSpeed: 0
+    defaultCooldownReduction: 0
+    cooldownReduction: 0
+    defaultLuck: 0
+    luck: 0
+  HealthBar: {fileID: 0}
 --- !u!1 &194148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2675,7 +2710,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f8c26f87add2346b000551af356196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DragonAnim: {fileID: 9587272}
 --- !u!1 &453368349
 GameObject:
   m_ObjectHideFlags: 0

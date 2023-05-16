@@ -13,6 +13,7 @@ public class m_CombatManager : MonoBehaviour
     [SerializeField] private int DragonHP = 1500;
     [SerializeField] GameObject Dragon;
 
+
     private Animator DragonAnim;
     ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
     bool waiting;
@@ -21,28 +22,31 @@ public class m_CombatManager : MonoBehaviour
     [SerializeField] private int PlayerHP = 500;
     [SerializeField] private int PlayerDamage = 75;
 
+
     //Script References
     m_BossUI_Manager ui;
 
    [SerializeField] UnityEvent BossDie;
 
-
-
-
-
     private void Awake()
     {
-        DragonAnim = Dragon.GetComponent<Animator>();
-        bloodVfx = Dragon.GetComponentInChildren<ParticleSystem>();
-        bloodVfx2 = Dragon.GetComponentInChildren<ParticleSystem>();
-        bloodVfx3 = Dragon.GetComponentInChildren<ParticleSystem>();
-        ui = GameObjectsManager.Instance.BossUiManager;
+
     }
     private void Start()
     {
+
+
+        DragonAnim = Dragon.GetComponent<Animator>();
+        bloodVfx = Dragon.GetComponentsInChildren<ParticleSystem>()[0];
+        bloodVfx2 = Dragon.GetComponentsInChildren<ParticleSystem>()[1];
+        bloodVfx3 = Dragon.GetComponentsInChildren<ParticleSystem>()[2];
+        ui = GameObjectsManager.Instance.BossUiManager;
+
         bloodVfx.Stop();
         bloodVfx2.Stop();
-        bloodVfx3.Stop();      
+        bloodVfx3.Stop();
+
+
     }
 
     private void bleed()
@@ -126,6 +130,7 @@ public class m_CombatManager : MonoBehaviour
         if (getHealth() <= 0f)
         {
             //player die
+
         }
 
     }

@@ -13,6 +13,9 @@ public class m_BossCombat : MonoBehaviour
      m_CombatManager combatManager;
      m_BossUI_Manager uimanager;
      m_BossMovement DragonMovement;
+     StatsManager statsManager;
+    
+    
 
 
     //public Animator PlayerAnim;
@@ -21,19 +24,25 @@ public class m_BossCombat : MonoBehaviour
     {
         uimanager = GameObjectsManager.Instance.BossUiManager;
         combatManager = GameObjectsManager.Instance.CombatManager;
-        DragonMovement = GameObjectsManager.Instance.Boss.GetComponent<m_BossMovement>();
+        DragonMovement = GameObjectsManager.Instance.Boss.GetComponentInChildren<m_BossMovement>();
+        statsManager = GameObjectsManager.Instance.Player.GetComponent<StatsManager>();
 
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (DragonMovement.ClawAttackFast() || DragonMovement.BasicAttackFast() || DragonMovement.HornAttackFast())
+        if (other.gameObject.CompareTag("Player"))
         {
-            if (!DragonMovement.returnFinishedAttack())
+            if (DragonMovement.ClawAttackFast() || DragonMovement.BasicAttackFast() || DragonMovement.HornAttackFast())
             {
-                combatManager.PlayerTakeDamage();
-                //PlayerAnim.SetTrigger("getHit");
-                uimanager.StartCoroutine(uimanager.DoFade());
+                if (!DragonMovement.returnFinishedAttack())
+                {
+                    statsManager.ApplyDamage();
+                   // combatManager.PlayerTakeDamage();
+
+                    //PlayerAnim.SetTrigger("getHit");
+                    uimanager.StartCoroutine(uimanager.DoFade());
+                }
             }
         }
     }

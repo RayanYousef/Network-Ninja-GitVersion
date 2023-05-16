@@ -10,8 +10,9 @@ public class m_BossMovement : MonoBehaviour
 {
 
     Transform player;
-    Animator dragonAnim;
     GameObject bossHP;
+
+    public Animator dragonAnim;
 
 
     private float dragonSlowSpeed = 0.3f;
@@ -22,7 +23,7 @@ public class m_BossMovement : MonoBehaviour
     {
         bossHP = GameObjectsManager.Instance.BossHP;
         player = GameObjectsManager.Instance.Player.transform;
-        dragonAnim = gameObject.GetComponent<Animator>();
+        //dragonAnim =gameObject.GetComponent<Animator>();
 
     }
 
