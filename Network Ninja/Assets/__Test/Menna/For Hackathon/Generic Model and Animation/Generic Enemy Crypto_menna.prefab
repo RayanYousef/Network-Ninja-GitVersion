@@ -2353,8 +2353,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeathEffect: {fileID: 4386811880964202464, guid: cc6aa134581011046a0378c3967dded8,
     type: 3}
-  maxHealth: 100
+  maxHealth: 70
   currentHealth: 0
+  HP: {fileID: 0}
   animator: {fileID: 0}
   HealthBar: {fileID: 5341286764998510006}
   enemySpawner: {fileID: 0}
@@ -2566,6 +2567,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_Value
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5001998288067493444, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
         type: 3}
