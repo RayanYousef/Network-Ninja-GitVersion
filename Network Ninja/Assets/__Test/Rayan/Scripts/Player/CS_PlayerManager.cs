@@ -175,10 +175,10 @@ public class CS_PlayerManager : MonoBehaviour
     {
         //Debug.Log("Exited State:" + exitedState);
 
-        switch (exitedState)
-        {
+        //switch (exitedState)
+        //{
 
-        }
+        //}
     }
     public void ResetParameters()
     {
