@@ -11,6 +11,7 @@ public class rArea : MonoBehaviour
 {
     [Header("Camera")]
     [SerializeField] private CinemachineVirtualCamera areaCamera;
+    [SerializeField] bool switchCamBack = true;
 
     [Header("Area Info")]
     [SerializeField] AreaType areaType;
@@ -202,7 +203,8 @@ public class rArea : MonoBehaviour
         }
 
         areaCamera.enabled = true;
-        StartCoroutine(WaitAndSwitchCameraBack());
+        if(switchCamBack)
+            StartCoroutine(WaitAndSwitchCameraBack());
     } 
 
     private void FormStrongArmy()

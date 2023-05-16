@@ -29,7 +29,7 @@ public class FormationAgent : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (agent.remainingDistance <= 0.1f && !agent.pathPending && !hasAnimation)
+        if (agent.remainingDistance <= 0.25f && !agent.pathPending && !hasAnimation)
         {
             bool changeIdle;
             changeIdle = (UnityEngine.Random.Range(0, 2) == 1);
