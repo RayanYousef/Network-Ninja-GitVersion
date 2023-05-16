@@ -25,7 +25,7 @@ public class rUIPassword : MonoBehaviour
 
 
     [Header("Menu")]
-    [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject resetPasswordPanel;
     Button resetBtn;
 
     [Header("Message Panel")]
@@ -50,10 +50,10 @@ public class rUIPassword : MonoBehaviour
         ansBtns[1].onClick.AddListener(() => { TakeAns(ansBtns[1]); });
         ansBtns[2].onClick.AddListener(() => { TakeAns(ansBtns[2]); });
 
-        menuPanel.SetActive(false);
-        resetBtn = menuPanel.GetComponentInChildren<Button>();
+        resetPasswordPanel.SetActive(false);
+        resetBtn = resetPasswordPanel.GetComponentInChildren<Button>();
         resetBtn.onClick.AddListener(ShowCreatePasswordPanel);
-        resetBtn.onClick.AddListener(ShowHideMenu);
+        resetBtn.onClick.AddListener(ShowHideSideMenu);
 
         feedbackPanel.SetActive(false);
         feedbackTxt = feedbackPanel.GetComponentInChildren<TMP_Text>();
@@ -67,13 +67,13 @@ public class rUIPassword : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            ShowHideMenu();
+            ShowHideSideMenu();
         }
 
         /// prevent input filed from taking arabic text
         passwordIF.text = Regex.Replace(passwordIF.text, @"[^a-zA-Z0-9 !@#$%^&*()_+=\[{\]};:<>|./?,-]", "");
 
-        if (createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf || menuPanel.activeSelf)
+        if (createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf || resetPasswordPanel.activeSelf)
         {
             if(Input.anyKeyDown && passwordIF.isFocused && passwordIF.text.Length != 0)
             {
@@ -86,12 +86,12 @@ public class rUIPassword : MonoBehaviour
     }
 
     #region Menu Panel
-    void ShowHideMenu()
+    void ShowHideSideMenu()
     {
-        switch (menuPanel.activeSelf)
+        switch (resetPasswordPanel.activeSelf)
         {
             case true:
-                menuPanel.SetActive(false);
+                resetPasswordPanel.SetActive(false);
                 if (createPasswordPanel.activeSelf)
                 {
                     return;
@@ -104,7 +104,7 @@ public class rUIPassword : MonoBehaviour
                 {
                     return;
                 }
-                menuPanel.SetActive(true);
+                resetPasswordPanel.SetActive(true);
                 Time.timeScale = 0;
                 Cursor.lockState = CursorLockMode.Confined;
                 break;

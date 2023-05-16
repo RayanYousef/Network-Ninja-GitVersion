@@ -9,6 +9,7 @@ public class InGameMenuUI : MonoBehaviour
 {
     [Header("Winning Panel")]
     [SerializeField] GameObject winningPanel;
+    [SerializeField] GameObject menuPanel;
 
     [Header("Options")]
     [SerializeField] Slider volumeSlider;
@@ -27,6 +28,7 @@ public class InGameMenuUI : MonoBehaviour
     private void Start()
     {
         winningPanel.SetActive(false);
+        menuPanel.SetActive(false);
 
         #region Volume Slider
         volumeSlider.value = 1;
@@ -43,8 +45,16 @@ public class InGameMenuUI : MonoBehaviour
         #endregion
     }
 
-    #region Volume
-    public void changeVolume()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowHideMenu();
+        }
+    }
+
+        #region Volume
+        public void changeVolume()
     {
         AudioListener.volume = volumeSlider.value;
     }
@@ -59,9 +69,25 @@ public class InGameMenuUI : MonoBehaviour
     private void save()
     {
         PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-    } 
+    }
     #endregion
 
+    void ShowHideMenu()
+    {
+        switch (menuPanel.activeSelf)
+        {
+            case true:
+                menuPanel.SetActive(false);
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
+                break;
+            case false:
+                menuPanel.SetActive(true);
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.Confined;
+                break;
+        }
+    }
     public void BackToMainMenu()
     {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
