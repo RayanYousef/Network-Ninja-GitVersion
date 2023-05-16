@@ -23,6 +23,7 @@ public class GameObjectsManager : MonoBehaviour
     [SerializeField] m_BossUI_Manager bossUiManager;
 
     [Header("Level Objects")]
+    [SerializeField] rArea[] listOfLevelAreas;
     [SerializeField] GameObject enemyPrefab;
 
     //  [SerializeField] Transform[] wayPoints;
@@ -46,10 +47,10 @@ public class GameObjectsManager : MonoBehaviour
     public Transform PointInArea1 { get => pointInArea1; }
     public Transform PointInArea2 { get => pointInArea2; }
     public Transform PointInArea3 { get => pointInArea3; }
+    public rArea[] ListOfLevelAreas { get => listOfLevelAreas; set => listOfLevelAreas = value; }
 
     private void Awake()
     {
-
         if (instance == null)
         {
             instance = this;
@@ -61,9 +62,19 @@ public class GameObjectsManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool CheckAllAreasBaseExceptCurrent()
     {
-
+        foreach(rArea area in listOfLevelAreas)
+        {
+            if(area == rPasswordManager.Instance.CurrentArea)
+            {
+                continue;
+            }
+            if(area.AreaType != AreaType.Base)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
