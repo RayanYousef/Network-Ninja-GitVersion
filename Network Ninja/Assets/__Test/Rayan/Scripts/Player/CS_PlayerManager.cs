@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class CS_PlayerManager : MonoBehaviour
@@ -36,6 +37,13 @@ public class CS_PlayerManager : MonoBehaviour
         camTarget = GetComponentInChildren<CS_CameraTarget>();
         rb = GetComponentInChildren<Rigidbody>();
 
+
+    }
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     private void Update()
@@ -43,14 +51,22 @@ public class CS_PlayerManager : MonoBehaviour
         clicksIntervalTimer += Time.deltaTime;
 
         // Old Input System 
-        SendInputDirection(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
-        SendInputRotation(new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")));
-        SendJumpInputState(Input.GetKeyDown(KeyCode.Space));
-        SendAttackInputState(Input.GetMouseButton(0));
-        SendDashInputState(Input.GetKeyDown(KeyCode.LeftShift));
+        //SendInputDirection(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        //SendInputRotation(new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")));
+        //SendJumpInputState(Input.GetKeyDown(KeyCode.Space));
+        //SendAttackInputState(Input.GetMouseButton(0));
+        //SendDashInputState(Input.GetKeyDown(KeyCode.LeftShift));
 
         if(joyStick!=null)
         SendInputDirection(joyStick.Direction);
+
+
+        if(Input.GetKeyDown(KeyCode.LeftAlt))
+            Cursor.lockState = CursorLockMode.None;
+        if(Input.GetKeyUp(KeyCode.LeftAlt))
+            Cursor.lockState = CursorLockMode.Locked;
+
+
 
 
 
@@ -81,6 +97,8 @@ public class CS_PlayerManager : MonoBehaviour
         {
             anim.SetTrigger(animController.T_Jump);
         }
+        else anim.ResetTrigger(animController.T_Jump);
+
     }
 
     public void SendDashInputState(bool value)
@@ -90,48 +108,28 @@ public class CS_PlayerManager : MonoBehaviour
             anim.SetTrigger(animController.T_Dash);
         }
     }
-    public void SendAttackInputState(bool value)
+    public void SendCombo_1(bool value)
     {
-        if (value == true && animController.Grounded && clicksIntervalTimer > clicksIntervalTime)
+        if (currentState != CharacterState.Dashing && value == true && animController.Grounded && clicksIntervalTimer > clicksIntervalTime)
         {
             Debug.Log("Attack Clicked");
             clicksIntervalTimer = 0;
-            anim.SetInteger(animController.I_Combo, anim.GetInteger(animController.I_Combo) + 1);
+            anim.SetInteger(animController.I_Combo_1, anim.GetInteger(animController.I_Combo_1) + 1);
+        }
+    }
+
+    public void SendCombo_2(bool value)
+    {
+        if (currentState != CharacterState.Dashing && value == true && animController.Grounded && clicksIntervalTimer > clicksIntervalTime)
+        {
+            Debug.Log("Attack Clicked");
+            clicksIntervalTimer = 0;
+            anim.SetInteger(animController.I_Combo_2, anim.GetInteger(animController.I_Combo_2) + 1);
         }
     }
     #endregion
 
-    #region Messages from Player Inputs
-    public void OnMove(InputValue value)
-    {
-        SendInputDirection(value.Get<Vector2>());
-        //Debug.Log("MoveTowardsDirection:" + value.Get<Vector2>());
-    }
 
-    public void OnCameraRotation(InputValue value)
-    {
-        SendInputRotation(value.Get<Vector2>());
-        //Debug.Log("CamRotation:" + value.Get<Vector2>());
-    }
-    public void OnJump(InputValue value)
-    {
-        SendJumpInputState(value.isPressed);
-        //Debug.Log("SendJumpInputState:" + value.isPressed);
-    }
-
-    public void OnDash(InputValue value)
-    {
-        SendDashInputState(value.isPressed);
-        //Debug.Log("SendDashInputState:" + value.isPressed);
-    }
-
-    public void OnAttack(InputValue value)
-    {
-        SendAttackInputState(value.isPressed);
-        //Debug.Log("SendDashInputState:" + value.isPressed);
-    }
-
-    #endregion
 
     #region Animator States
     public void OnStateEnter(CharacterState enteredState)
@@ -149,8 +147,8 @@ public class CS_PlayerManager : MonoBehaviour
 
             case CharacterState.Jumping:
                 rb.constraints = RigidbodyConstraints.FreezeRotation;
-                anim.SetBool(animController.B_Jumping, true);
                 moveController.Jump();
+                anim.SetBool(animController.B_Jumping, true);
                 break;
 
             case CharacterState.Dashing:
@@ -160,6 +158,7 @@ public class CS_PlayerManager : MonoBehaviour
 
             case CharacterState.Attacking:
                 anim.SetBool(animController.B_Attacking, true);
+                anim.applyRootMotion= true;
                 break;
 
             case CharacterState.Falling:
@@ -183,6 +182,8 @@ public class CS_PlayerManager : MonoBehaviour
     }
     public void ResetParameters()
     {
+        anim.applyRootMotion = false;
+
         anim.SetBool(animController.B_Dashing, false);
         anim.SetBool(animController.B_Jumping, false);
         anim.SetBool(animController.B_Attacking, false);
@@ -211,5 +212,41 @@ public class CS_PlayerManager : MonoBehaviour
     #endregion
 
 
+    #region Messages from Player Inputs
+    public void OnMove(InputValue value)
+    {
+        SendInputDirection(value.Get<Vector2>());
+        //Debug.Log("MoveTowardsDirection:" + value.Get<Vector2>());
+    }
 
+    public void OnCameraRotation(InputValue value)
+    {
+        SendInputRotation(value.Get<Vector2>());
+        //Debug.Log("CamRotation:" + value.Get<Vector2>());
+    }
+    public void OnJump(InputValue value)
+    {
+        SendJumpInputState(value.isPressed);
+        //Debug.Log("SendJumpInputState:" + value.isPressed);
+    }
+
+    public void OnDash(InputValue value)
+    {
+        SendDashInputState(value.isPressed);
+        //Debug.Log("SendDashInputState:" + value.isPressed);
+    }
+
+    public void OnCombo_1(InputValue value)
+    {
+        SendCombo_1(value.isPressed);
+        //Debug.Log("SendDashInputState:" + value.isPressed);
+    }
+
+    public void OnCombo_2(InputValue value)
+    {
+        SendCombo_2(value.isPressed);
+        //Debug.Log("SendDashInputState:" + value.isPressed);
+    }
+
+    #endregion
 }

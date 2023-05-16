@@ -42,9 +42,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "Combo_1",
                     "type": "Value",
                     "id": "041ad7b5-ed89-4e45-a9a1-0ec30a469442",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Combo_2",
+                    "type": "Value",
+                    "id": "ad0222e3-194b-4005-b72b-e09c44576a62",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -268,7 +277,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Combo_1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd1ada86-9570-4d82-b92d-b4a8937d1fad",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Combo_2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
