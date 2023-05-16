@@ -25,7 +25,7 @@ public class m_BossCombat : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && DragonAnim.GetCurrentAnimatorStateInfo(0).IsName("AttackState"))
+        if (other.gameObject.CompareTag ("Player") && DragonAnim.GetCurrentAnimatorStateInfo(0).IsName("AttackState"))
         {
           
                     combatManager.PlayerTakeDamage();
