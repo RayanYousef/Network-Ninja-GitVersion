@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
 
     IEnumerator RandomlyApplyDamage()
     {
-        float r = UnityEngine.Random.Range(3, 7);
+        float r = UnityEngine.Random.Range(1, 3);
         yield return new WaitForSeconds(r);
         TakeDamage(maxHealth);
     }
