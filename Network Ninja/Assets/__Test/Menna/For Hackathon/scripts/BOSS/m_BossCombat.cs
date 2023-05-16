@@ -12,27 +12,29 @@ public class m_BossCombat : MonoBehaviour
 
      m_CombatManager combatManager;
      m_BossUI_Manager uimanager;
+     m_BossMovement DragonMovement;
 
-  
-    [SerializeField] Animator DragonAnim;
+
     //public Animator PlayerAnim;
   
     private void Start()
     {
-        uimanager = GameObjectsManager.Instance.GetComponent<m_BossUI_Manager>();
+        uimanager = GameObjectsManager.Instance.BossUiManager;
         combatManager = GameObjectsManager.Instance.CombatManager;
+        DragonMovement = GameObjectsManager.Instance.Boss.GetComponent<m_BossMovement>();
+
 
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag ("Player") && DragonAnim.GetCurrentAnimatorStateInfo(0).IsName("AttackState"))
+        if (DragonMovement.ClawAttackFast() || DragonMovement.BasicAttackFast() || DragonMovement.HornAttackFast())
         {
-          
-                    combatManager.PlayerTakeDamage();
-                    //PlayerAnim.SetTrigger("getHit");
-                    uimanager.StartCoroutine(uimanager.DoFade());
-                
-            
+            if (!DragonMovement.returnFinishedAttack())
+            {
+                combatManager.PlayerTakeDamage();
+                //PlayerAnim.SetTrigger("getHit");
+                uimanager.StartCoroutine(uimanager.DoFade());
+            }
         }
     }
 }

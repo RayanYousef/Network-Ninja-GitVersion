@@ -22,6 +22,7 @@ public class GameObjectsManager : MonoBehaviour
     [SerializeField] m_CombatManager combatManager;
     [SerializeField] m_BossUI_Manager bossUiManager;
     [SerializeField] GameObject bossHP;
+    [SerializeField] GameObject boss;
 
 
 
@@ -41,6 +42,7 @@ public class GameObjectsManager : MonoBehaviour
 
    // public Transform[] WayPoints { get => wayPoints; }
     public GameObject Player { get => player; }
+    public GameObject Boss { get => boss; }
     public CinemachineVirtualCamera PlayerCamera { get => playerCamera; set => playerCamera = value; }
     public FormationAgent AllyPrefab { get => allyPrefab; }
     public GameObject SpawnEffect { get => spawnEffect; set => spawnEffect = value; }
