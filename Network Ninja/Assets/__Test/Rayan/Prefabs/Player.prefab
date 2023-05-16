@@ -1264,7 +1264,6 @@ GameObject:
   - component: {fileID: 4925132746858222287}
   - component: {fileID: 1564617241237696115}
   - component: {fileID: 2023766754}
-  - component: {fileID: 2023766753}
   m_Layer: 0
   m_Name: Damage_Collider
   m_TagString: Untagged
@@ -1300,8 +1299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitObjects: []
-  stats: {fileID: 0}
+  myStatsManager: {fileID: 0}
   weaponTip: {fileID: 6516665798729649045}
   firstPoint: {x: 0, y: 0, z: 0}
   secondPoint: {x: 0, y: 0, z: 0}
@@ -1322,24 +1320,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &2023766753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5697694058882828405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitObjects: []
-  stats: {fileID: 1456825627}
-  weaponTip: {fileID: 6516665798729649045}
-  firstPoint: {x: 0, y: 0, z: 0}
-  secondPoint: {x: 0, y: 0, z: 0}
-  speed: 10
 --- !u!1 &5842969261490695603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,8 +1458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b53ad1a6910ec4884f20d77332798e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 20
-  targetRotationSmoothTime: 0.2
+  rotationSpeed: 5
+  targetRotationSmoothTime: 0.15
   minAngle: -30
   maxAngle: 45
   playerVirtualCamera: {fileID: 0}
@@ -1751,7 +1731,7 @@ GameObject:
   - component: {fileID: 5977481142853276194}
   - component: {fileID: 5977481142853276193}
   - component: {fileID: 5977481142853276204}
-  - component: {fileID: 1456825627}
+  - component: {fileID: 1488868405}
   m_Layer: 0
   m_Name: Moving Object
   m_TagString: Untagged
@@ -1790,9 +1770,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  attackHandler: {fileID: 2023766753}
+  attackHandler: {fileID: 0}
   appliedForce: 20
-  i_Combo: Combo_1
+  i_Combo_1: Combo_1
+  i_Combo_2: Combo_2
   f_Direction: Direction
   f_MotionTime: MotionTime
   f_animSpeed: Animationspeed
@@ -1899,7 +1880,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 19c00296f2651ec42bddd50d6bba7827, type: 2}
   m_CullingMode: 2
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1986,10 +1967,11 @@ MonoBehaviour:
   animController: {fileID: 0}
   camTarget: {fileID: 0}
   rb: {fileID: 0}
+  joyStick: {fileID: 0}
   drag: 10
   clicksIntervalTime: 0.2
   currentState: 0
---- !u!114 &1456825627
+--- !u!114 &1488868405
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1998,13 +1980,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 5977481142853276207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9420ebd662cd0546a0f0b8aa7d271ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
-  health: 0
-  maxHealth: 200
-  attack: 10
+  CharacterTopMostParent: {fileID: 5977481141217125452}
+  hitObjects: []
+  myStats:
+    maxHealth: 100
+    currentHealth: 100
+    defaultDefense: 1
+    defense: 1
+    defaultAtkDmg: 1
+    atkDmg: 0
+    defaultAtkSpeed: 1
+    atkSpeed: 1
+    defaultMoveSpeed: 1
+    moveSpeed: 1
+    defaultCooldownReduction: 1
+    cooldownReduction: 1
+    defaultLuck: 1
+    luck: 1
 --- !u!1 &5977481143026708640
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,7 +2128,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
