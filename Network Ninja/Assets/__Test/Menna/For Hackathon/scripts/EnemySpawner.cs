@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class EnemySpawner : MonoBehaviour
 {
     Transform player;
+    Canvas BossCanvas;
 
     [Header("Big Boss")]
     public GameObject BigBossPrefab;
@@ -42,6 +43,7 @@ public class EnemySpawner : MonoBehaviour
         MiniBosses = new List<GameObject>();
         player = GameObjectsManager.Instance.Player.transform;
 
+        
         //obj pooling
         enemyPool = new List<GameObject>();
 
@@ -145,6 +147,7 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject BigBoss = Instantiate(BigBossPrefab, this.transform.position, Quaternion.identity);
         BigBoss.transform.parent = this.transform;
+
     }
 
 

@@ -6,13 +6,21 @@ using Random = UnityEngine.Random;
 public class m_BossMovement : MonoBehaviour
 {
 
-     Transform player;
-     Animator dragonAnim;
+    Transform player;
+    Animator dragonAnim;
+    GameObject Background;
 
-    private void Start()
+    private void Awake()
     {
+        Background = GameObjectsManager.Instantiate(Background);
         player = GameObjectsManager.Instance.Player.transform;
         dragonAnim = gameObject.GetComponent<Animator>();
+
+    }
+
+    private void Start()
+    {      
+        Background.SetActive(true);
     }
     void Update()
     {

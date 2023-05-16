@@ -11200,6 +11200,9 @@ MonoBehaviour:
   Dragon: {fileID: 193776, guid: edd34a89cfe571f4ca766dcca2459bbe, type: 3}
   PlayerHP: 500
   PlayerDamage: 75
+  BossDie:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &491796074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17536,11 +17539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitObjects: []
-  weaponTip: {fileID: 6516665797706581690}
-  firstPoint: {x: 0, y: 0, z: 0}
-  secondPoint: {x: 0, y: 0, z: 0}
-  speed: 10
+  myStatsManager: {fileID: 0}
 --- !u!1001 &902601751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44902,6 +44901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e9667b61b9a404a8aa815d49bbc121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winningPanel: {fileID: 0}
   volumeSlider: {fileID: 1490244770}
   MainMenu: mainMenu
 --- !u!114 &1569433610
@@ -66675,11 +66675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passwordCanvas: {fileID: 8224981913233876863}
-  listOfLevelAreas:
-  - {fileID: 6255316750618987311}
-  - {fileID: 6255316749902934212}
-  - {fileID: 6255316750254913928}
-  - {fileID: 6255316749818515613}
   maxSoldiersNumber: 60
   maxHealth: {r: 0, g: 1, b: 0.91709113, a: 0.98039216}
   halfHealth: {r: 0.99985135, g: 1, b: 0, a: 0.98039216}
@@ -66741,13 +66736,15 @@ MonoBehaviour:
     type: 3}
   spawnEffect: {fileID: 4386811880964202464, guid: d6561a57ab0403b4eb362e93683f53b0,
     type: 3}
+  combatManager: {fileID: 489873936}
+  bossUiManager: {fileID: 1538231082}
+  bossCanvas: {fileID: 1538231085}
+  listOfLevelAreas: []
   enemyPrefab: {fileID: 8895072523819109860, guid: 56bef56baeed4554ba8ca874af2cf7a9,
     type: 3}
   pointInArea1: {fileID: 6255316749528891356}
   pointInArea2: {fileID: 6255316750241713394}
   pointInArea3: {fileID: 6255316749614533561}
-  combatManager: {fileID: 489873936}
-  bossUiManager: {fileID: 1538231082}
 --- !u!4 &392310445230200889
 Transform:
   m_ObjectHideFlags: 0
@@ -67902,11 +67899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitObjects: []
-  weaponTip: {fileID: 6516665797706581690}
-  firstPoint: {x: 0, y: 0, z: 0}
-  secondPoint: {x: 0, y: 0, z: 0}
-  speed: 10
+  myStatsManager: {fileID: 0}
 --- !u!65 &1575081123101895313
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -70279,9 +70272,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  attackHandler: {fileID: 900397006}
+  damageOBject: {fileID: 0}
   appliedForce: 20
-  i_Combo: Combo_1
+  i_Combo_1: 
+  i_Combo_2: 
   f_Direction: Direction
   f_MotionTime: MotionTime
   f_animSpeed: Animationspeed
@@ -71432,6 +71426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaCamera: {fileID: 1123654651}
+  switchCamBack: 1
   areaType: 1
   health: 0
   maxHealth: 0
@@ -71453,6 +71448,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   OnEnteringFight:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWinningLvl:
     m_PersistentCalls:
       m_Calls: []
   areaCollider: {fileID: 0}
@@ -71642,6 +71640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaCamera: {fileID: 2097424749}
+  switchCamBack: 1
   areaType: 1
   health: 0
   maxHealth: 0
@@ -71663,6 +71662,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   OnEnteringFight:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWinningLvl:
     m_PersistentCalls:
       m_Calls: []
   areaCollider: {fileID: 0}
@@ -71948,6 +71950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaCamera: {fileID: 542915613}
+  switchCamBack: 1
   areaType: 0
   health: 0
   maxHealth: 0
@@ -71969,6 +71972,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   OnEnteringFight:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWinningLvl:
     m_PersistentCalls:
       m_Calls: []
   areaCollider: {fileID: 0}
@@ -72402,6 +72408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaCamera: {fileID: 1870855033}
+  switchCamBack: 1
   areaType: 1
   health: 0
   maxHealth: 0
@@ -72423,6 +72430,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   OnEnteringFight:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWinningLvl:
     m_PersistentCalls:
       m_Calls: []
   areaCollider: {fileID: 0}
