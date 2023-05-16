@@ -100,7 +100,7 @@ public class m_CombatManager : MonoBehaviour
             DragonAnim.SetBool("dead", true);
             DragonAnim.SetBool("isAttacking", false);
             DragonAnim.SetBool("isChasing", false);
-            BossDie.Invoke();
+            BossDie?.Invoke();
         }
 
     }
