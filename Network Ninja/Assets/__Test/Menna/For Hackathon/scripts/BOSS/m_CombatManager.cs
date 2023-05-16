@@ -13,10 +13,7 @@ public class m_CombatManager : MonoBehaviour
     [SerializeField] private int DragonHP = 1500;
     [SerializeField] GameObject Dragon;
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
     private Animator DragonAnim;
     ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
     bool waiting;
@@ -25,16 +22,12 @@ public class m_CombatManager : MonoBehaviour
     [SerializeField] private int PlayerHP = 500;
     [SerializeField] private int PlayerDamage = 75;
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
     //Script References
     m_BossUI_Manager ui;
 
    [SerializeField] UnityEvent BossDie;
 
-<<<<<<< Updated upstream
     private void Awake()
     {
 
@@ -54,26 +47,6 @@ public class m_CombatManager : MonoBehaviour
         bloodVfx3.Stop();
 
 
-=======
-
-
-
-
-    private void Awake()
-    {
-        Dragon = GetComponent<GameObject>();
-        DragonAnim = Dragon.GetComponent<Animator>();
-        bloodVfx = Dragon.GetComponentInChildren<ParticleSystem>();
-        bloodVfx2 = Dragon.GetComponentInChildren<ParticleSystem>();
-        bloodVfx3 = Dragon.GetComponentInChildren<ParticleSystem>();
-        ui = GameObjectsManager.Instance.GetComponent<m_BossUI_Manager>();
-    }
-    private void Start()
-    {
-        bloodVfx.Stop();
-        bloodVfx2.Stop();
-        bloodVfx3.Stop();      
->>>>>>> Stashed changes
     }
 
     private void bleed()
@@ -130,11 +103,7 @@ public class m_CombatManager : MonoBehaviour
             DragonAnim.SetBool("dead", true);
             DragonAnim.SetBool("isAttacking", false);
             DragonAnim.SetBool("isChasing", false);
-<<<<<<< Updated upstream
             BossDie?.Invoke();
-=======
-            BossDie.Invoke();
->>>>>>> Stashed changes
         }
 
     }
@@ -161,10 +130,7 @@ public class m_CombatManager : MonoBehaviour
         if (getHealth() <= 0f)
         {
             //player die
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
         }
 
     }

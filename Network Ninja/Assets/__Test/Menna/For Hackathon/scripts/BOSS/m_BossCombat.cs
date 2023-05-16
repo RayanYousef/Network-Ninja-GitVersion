@@ -12,37 +12,25 @@ public class m_BossCombat : MonoBehaviour
 
      m_CombatManager combatManager;
      m_BossUI_Manager uimanager;
-<<<<<<< Updated upstream
      m_BossMovement DragonMovement;
      StatsManager statsManager;
     
     
 
 
-=======
-
-  
-    [SerializeField] Animator DragonAnim;
->>>>>>> Stashed changes
     //public Animator PlayerAnim;
   
     private void Start()
     {
-<<<<<<< Updated upstream
         uimanager = GameObjectsManager.Instance.BossUiManager;
         combatManager = GameObjectsManager.Instance.CombatManager;
         DragonMovement = GameObjectsManager.Instance.Boss.GetComponentInChildren<m_BossMovement>();
         statsManager = GameObjectsManager.Instance.Player.GetComponent<StatsManager>();
 
-=======
-        uimanager = GameObjectsManager.Instance.GetComponent<m_BossUI_Manager>();
-        combatManager = GameObjectsManager.Instance.gameObject.AddComponent<m_CombatManager>();
->>>>>>> Stashed changes
 
     }
     private void OnTriggerEnter(Collider other)
     {
-<<<<<<< Updated upstream
         if (other.gameObject.CompareTag("Player"))
         {
             if (DragonMovement.ClawAttackFast() || DragonMovement.BasicAttackFast() || DragonMovement.HornAttackFast())
@@ -56,16 +44,6 @@ public class m_BossCombat : MonoBehaviour
                     uimanager.StartCoroutine(uimanager.DoFade());
                 }
             }
-=======
-        if (other.gameObject.tag == "Player" && DragonAnim.GetCurrentAnimatorStateInfo(0).IsName("AttackState"))
-        {
-          
-                    combatManager.PlayerTakeDamage();
-                    //PlayerAnim.SetTrigger("getHit");
-                    uimanager.StartCoroutine(uimanager.DoFade());
-                
-            
->>>>>>> Stashed changes
         }
     }
 }
