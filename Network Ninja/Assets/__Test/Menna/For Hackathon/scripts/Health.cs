@@ -14,24 +14,30 @@ public class Health : MonoBehaviour
 
     public GameObject DeathEffect;
 
-    public int maxHealth = 100;
+    public int maxHealth;
     public int currentHealth;
+    public Slider HP;
     public Animator animator;
     public Slider HealthBar;
     public EnemySpawner enemySpawner;
     
 
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
        
         currentHealth = maxHealth;
+        HP = GetComponentInChildren<Slider>();
+        HP.maxValue = maxHealth;
         rb = GetComponent<Rigidbody>();
+        StartCoroutine(RandomlyApplyDamage());
+    }
 
+    IEnumerator RandomlyApplyDamage()
+    {
+        float r = UnityEngine.Random.Range(3, 7);
+        yield return new WaitForSeconds(r);
+        TakeDamage(maxHealth);
     }
 
     private void Update()
@@ -51,9 +57,6 @@ public class Health : MonoBehaviour
             Debug.Log("Enemy died");
 
             Die();
-            
-
-
         }
     }
     public virtual void Die()

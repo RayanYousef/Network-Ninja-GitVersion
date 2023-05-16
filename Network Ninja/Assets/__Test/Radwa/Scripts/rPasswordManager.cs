@@ -18,7 +18,7 @@ public class rPasswordManager : MonoBehaviour
     [SerializeField] rUIPassword passwordCanvas;
 
     [Header("Password Manager Components")]
-    [SerializeField] rArea[] listOfLevelAreas;
+    rArea[] listOfLevelAreas;
     [SerializeField] int maxSoldiersNumber = 75;
     [SerializeField] Color maxHealth, halfHealth, lowHealth, enemyColor;
 
@@ -59,7 +59,12 @@ public class rPasswordManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    
+    private void Start()
+    {
+        listOfLevelAreas = GameObjectsManager.Instance.ListOfLevelAreas;
+    }
+
+
     public void AreasWithSamePasswordAsCurrent()
     {
 

@@ -22,10 +22,11 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //transform.localScale = Vector3.one * 0.05f;
+
         player = GameObjectsManager.Instance.Player.transform;
         //player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
-
     }
 
     // Update is called once per frame
@@ -33,7 +34,6 @@ public class Enemy : MonoBehaviour
     {
         transform.LookAt(player);
         agent.SetDestination(player.position);
-        
     }
 
     #region //overlap
