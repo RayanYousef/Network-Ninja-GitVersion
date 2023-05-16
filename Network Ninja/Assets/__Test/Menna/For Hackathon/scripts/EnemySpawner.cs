@@ -30,7 +30,6 @@ public class EnemySpawner : MonoBehaviour
 
     public List<GameObject> enemies;  // A list of all spawned enemies.
     public List<GameObject> MiniBosses;  // A list of all spawned MonoBosses.
-
     public List<GameObject> enemyPool;
 
     public UnityEvent OnAllMiniBossesKilled;
