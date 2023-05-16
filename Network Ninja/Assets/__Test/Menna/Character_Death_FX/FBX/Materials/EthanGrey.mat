@@ -10,6 +10,7 @@ Material:
   m_Name: EthanGrey
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords:
+  - _ALPHABLEND_ON
   - _EMISSION
   m_InvalidKeywords:
   - _LIGHTMAPPING_STATIC_LIGHTMAPS
@@ -18,7 +19,7 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -80,7 +81,7 @@ Material:
     - _DetailAlbedoMultiplier: 2
     - _DetailMode: 0
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EmissionScale: 1
     - _EmissionScaleUI: 1
     - _GlossMapScale: 0.141
@@ -94,16 +95,16 @@ Material:
     - _Shininess: 0.141
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 0.141
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _UVPrim: 0
     - _UVSec: 0
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: -0.000000074505806}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0.99999994}
     - _EmissionColorUI: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
     - _ReflectColor: {r: 1, g: 1, b: 1, a: 0.5}
-    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _SpecColor: {r: 1, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 0.24264705, g: 0.24264705, b: 0.24264705, a: 1}
   m_BuildTextureStacks: []

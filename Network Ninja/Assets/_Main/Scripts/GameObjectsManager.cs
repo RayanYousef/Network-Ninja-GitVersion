@@ -23,14 +23,17 @@ public class GameObjectsManager : MonoBehaviour
     [SerializeField] m_BossUI_Manager bossUiManager;
 
     [Header("Level Objects")]
-    //[SerializeField] Transform[] wayPoints;
-    [SerializeField] rArea[] listOfLevelAreas;
+    [SerializeField] GameObject enemyPrefab;
+
+    //  [SerializeField] Transform[] wayPoints;
 
     [SerializeField] Transform pointInArea1;
     [SerializeField] Transform pointInArea2;
     [SerializeField] Transform pointInArea3;
 
     public static GameObjectsManager Instance { get => instance; }
+    public GameObject EnemyPrefab { get => enemyPrefab; }
+
 
    // public Transform[] WayPoints { get => wayPoints; }
     public GameObject Player { get => player; }
@@ -38,8 +41,6 @@ public class GameObjectsManager : MonoBehaviour
     public FormationAgent AllyPrefab { get => allyPrefab; }
     public GameObject SpawnEffect { get => spawnEffect; set => spawnEffect = value; }
     public Formation AllyBatalionPrefab { get => allyBatalionPrefab; set => allyBatalionPrefab = value; }
-    public rArea[] ListOfLevelAreas { get => listOfLevelAreas; set => listOfLevelAreas = value; }
-
     public m_BossUI_Manager BossUiManager { get => bossUiManager; }
     public m_CombatManager CombatManager { get => combatManager; }
     public Transform PointInArea1 { get => pointInArea1; }
@@ -48,6 +49,7 @@ public class GameObjectsManager : MonoBehaviour
 
     private void Awake()
     {
+
         if (instance == null)
         {
             instance = this;
@@ -59,19 +61,9 @@ public class GameObjectsManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public bool CheckAllAreasBaseExceptCurrent()
+    // Update is called once per frame
+    void Update()
     {
-        foreach(rArea area in listOfLevelAreas)
-        {
-            if(area == rPasswordManager.Instance.CurrentArea)
-            {
-                continue;
-            }
-            if (area.AreaType != AreaType.Base)
-            {
-                return false;
-            }
-        }
-        return true;
+
     }
 }
