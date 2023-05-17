@@ -137,7 +137,7 @@ public class EnemySpawner : MonoBehaviour
             Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
             GameObject MiniBoss = Instantiate(MiniBossPrefab, randomPosition, Quaternion.identity);
             MiniBoss.transform.parent = this.transform;
-            MiniBoss.GetComponentInChildren<m_MiniBossHealth>().OnMiniBossKilled += HandleMiniBossKilled;
+            MiniBoss.GetComponent<m_MiniBossHealth>().OnMiniBossKilled += HandleMiniBossKilled;
             MiniBosses.Add(MiniBoss);
             //Debug.Log("mini boss spawned");
         }
@@ -279,7 +279,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 if (Enemy != null)
                 {
-                    Enemy.GetComponentInChildren<Health>().Die();
+                    Enemy.GetComponent<Health>().Die();
                     Debug.Log("All DEAAAAAAAAAAAAAAAAAAAAAAAD");
 
                 }

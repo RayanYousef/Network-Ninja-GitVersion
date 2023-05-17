@@ -263,7 +263,6 @@ public class rArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Enter Area");
         if (areaType == AreaType.Base)
             rPasswordManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
         else

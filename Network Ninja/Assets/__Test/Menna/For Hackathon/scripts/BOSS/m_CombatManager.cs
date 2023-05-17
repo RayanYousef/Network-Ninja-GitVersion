@@ -40,7 +40,7 @@ public class m_CombatManager : MonoBehaviour
         bloodVfx = Dragon.GetComponentsInChildren<ParticleSystem>()[0];
         bloodVfx2 = Dragon.GetComponentsInChildren<ParticleSystem>()[1];
         bloodVfx3 = Dragon.GetComponentsInChildren<ParticleSystem>()[2];
-       // ui = GameObjectsManager.Instance.BossUiManager;
+        ui = GameObjectsManager.Instance.BossUiManager;
 
         bloodVfx.Stop();
         bloodVfx2.Stop();
