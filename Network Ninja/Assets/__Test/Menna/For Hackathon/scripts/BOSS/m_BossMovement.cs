@@ -10,7 +10,7 @@ public class m_BossMovement : MonoBehaviour
 {
 
     Transform player;
-    GameObject bossHP;
+    //[SerializeField] GameObject bossHP;
 
     public Animator dragonAnim;
 
@@ -21,7 +21,7 @@ public class m_BossMovement : MonoBehaviour
     public GameObject[] trails;
     private void Awake()
     {
-        bossHP = GameObjectsManager.Instance.BossHP;
+        //bossHP = GameObjectsManager.Instance.BossHP;
         player = GameObjectsManager.Instance.Player.transform;
         //dragonAnim =gameObject.GetComponent<Animator>();
 
@@ -29,7 +29,7 @@ public class m_BossMovement : MonoBehaviour
 
     private void Start()
     {      
-        bossHP.SetActive(true);
+        //bossHP.SetActive(true);
     }
     void Update()
     {

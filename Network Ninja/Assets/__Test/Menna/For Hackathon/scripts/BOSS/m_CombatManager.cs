@@ -92,6 +92,7 @@ public class m_CombatManager : MonoBehaviour
     {
         if (DragonHP > 0)
         {
+            //Dragon.GetComponent<StatsManager>().ApplyDamage(PlayerDamage);
             DragonHP -= PlayerDamage;
             ui.UpdateHealthBar(1500, getDragonHP());
             bleed();
