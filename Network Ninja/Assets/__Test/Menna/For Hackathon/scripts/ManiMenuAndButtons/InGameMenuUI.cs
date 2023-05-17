@@ -27,15 +27,18 @@ public class InGameMenuUI : MonoBehaviour
 
     private void Start()
     {
+        if(winningPanel != null)
         winningPanel.SetActive(false);
+        if(menuPanel!= null)
         menuPanel.SetActive(false);
+
 
         #region Volume Slider
         volumeSlider.value = 1;
 
         if (!PlayerPrefs.HasKey("musicVolume"))
         {
-            PlayerPrefs.GetFloat("musicVolume", 0.5f);
+            PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
             Load();
         }
         else

@@ -4,17 +4,28 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+
+public enum CharacterTeam
+{
+    None,Player, Enemy
+}
 public class StatsManager : MonoBehaviour
 {
     [Header("CharacterTopMostParent")]
-    [SerializeField] GameObject CharacterTopMostParent;
+    [SerializeField]
+    GameObject CharacterTopMostParent;
 
     [SerializeField]
-     List<Collider> hitObjects = new List<Collider>();
+    List<Collider> hitObjects = new List<Collider>();
 
-    [SerializeField] 
+    [SerializeField]
     StatsStruct myStats = new StatsStruct();
 
+    [SerializeField]
+    public CharacterTeam Team= CharacterTeam.None;
+
+    [SerializeField]
+    CS_DamageObject[] damageObjects;
     public Slider HealthBar;
 
 
@@ -32,16 +43,33 @@ public class StatsManager : MonoBehaviour
         myStats.AtkSpeed = myStats.DefaultAtkSpeed;
         myStats.MoveSpeed = myStats.DefaultMoveSpeed;
         myStats.CooldownReduction = myStats.DefaultCooldownReduction;
-        HealthBar.maxValue = myStats.MaxHealth;
-        HealthBar.value = myStats.CurrentHealth;
-
-        var damageHandlers = CharacterTopMostParent.GetComponentsInChildren<CS_DamageObject>();
-        foreach (CS_DamageObject handler in damageHandlers)
+        if (HealthBar != null)
         {
-            handler.MyStatsManager = this;
+            HealthBar.maxValue = myStats.MaxHealth;
+            HealthBar.value = myStats.CurrentHealth;
+        }
+
+        damageObjects = CharacterTopMostParent.GetComponentsInChildren<CS_DamageObject>();
+        foreach (CS_DamageObject damageObject in damageObjects)
+        {
+            damageObject.MyStatsManager = this;
         }
     }
- 
+
+    public void EnableWeaponDamage()
+    {
+        foreach (CS_DamageObject damageObject in damageObjects)
+        {
+            damageObject.enabled = true;
+        }
+    }
+    public void DisableWeaponDamage()
+    {
+        foreach (CS_DamageObject damageObject in damageObjects)
+        {
+            damageObject.enabled = false;
+        }
+    }
 
     #region HealthFunctions
     public void Heal(float value = 20)
@@ -53,12 +81,14 @@ public class StatsManager : MonoBehaviour
     {
         float dmg = AttackerStats.CalculateAttackStrength() - this.GetDefense();
         myStats.CurrentHealth -= dmg;
+        if(HealthBar!=null) 
         HealthBar.value = myStats.CurrentHealth;
     }
 
     public void ApplyDamage(float attack=30)
     {
         myStats.CurrentHealth -= attack;
+        if(HealthBar!= null)
         HealthBar.value = myStats.CurrentHealth;
         if (myStats.CurrentHealth == 0)
         {

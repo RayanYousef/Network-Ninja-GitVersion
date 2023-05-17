@@ -67,13 +67,32 @@ public class CS_DamageObject : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (myStatsManager != null && !myStatsManager.HitObjects.Contains(other) && other.TryGetComponent<StatsManager>(out StatsManager otherStatsManager))
+        //if (myStatsManager != null && !myStatsManager.HitObjects.Contains(other) && other.TryGetComponent<StatsManager>(out StatsManager otherStatsManager))
+        //{
+        //    myStatsManager.HitObjects.Add(other);
+        //    if (otherStatsManager.Stats.CurrentHealth > 0 && otherStatsManager!= myStatsManager)
+        //    {
+        //        if(otherStatsManager.Team != myStatsManager.Team) { }
+        //        otherStatsManager.ApplyDamage(35);
+        //        //other.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity * 2;
+        //    }
+
+        //}
+
+        if (myStatsManager != null && !myStatsManager.HitObjects.Contains(other) && other.TryGetComponent<Health>(out Health otherHealth) && other.TryGetComponent<StatsManager>(out StatsManager otherStatsManager))
         {
             myStatsManager.HitObjects.Add(other);
-            if (otherStatsManager.Stats.CurrentHealth > 0)
+            if (otherHealth.currentHealth >0  && otherStatsManager.Team != myStatsManager.Team)
             {
-                otherStatsManager.ApplyDamage(35);
-                other.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity * 2;
+
+                if (otherStatsManager.Team == CharacterTeam.Enemy)
+                {
+                    other.GetComponent<Rigidbody>().velocity = myStatsManager.GetComponent<Rigidbody>().velocity * 2;
+                    otherHealth.TakeDamage(100);
+                }
+                else
+                    otherHealth.TakeDamage(5);
+
             }
 
         }

@@ -27,10 +27,11 @@ public class Health : MonoBehaviour
         animator = GetComponent<Animator>();
        
         currentHealth = maxHealth;
+        if(HP== null)
         HP = GetComponentInChildren<Slider>();
         HP.maxValue = maxHealth;
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(RandomlyApplyDamage());
+        //StartCoroutine(RandomlyApplyDamage());
     }
 
     IEnumerator RandomlyApplyDamage()
@@ -42,14 +43,18 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
+        if(HealthBar != null)
         HealthBar.value = currentHealth; 
     }
+
 
     //Health and damage
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         Debug.Log("take damage");
+
+        if(animator!= null)
         animator.Play("TakeDamage");
 
         if (currentHealth <= 0)
@@ -63,7 +68,8 @@ public class Health : MonoBehaviour
     {
         //animation
         Debug.Log("When enemy died");
-        animator.SetTrigger("Death");
+        if(animator!= null)
+        animator.SetTrigger("Death");   
 
         // Destroy(gameObject, 4f);
         // enemySpawner.enemies.Remove(gameObject);

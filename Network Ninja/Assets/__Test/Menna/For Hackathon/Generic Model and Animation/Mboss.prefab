@@ -2246,6 +2246,7 @@ GameObject:
   - component: {fileID: 8182064137278215647}
   - component: {fileID: 6129130833574463453}
   - component: {fileID: -1943140102003597411}
+  - component: {fileID: 4966539176951288786}
   m_Layer: 0
   m_Name: Mboss
   m_TagString: Untagged
@@ -2392,6 +2393,38 @@ MonoBehaviour:
   animator: {fileID: 0}
   HealthBar: {fileID: 5341286764998510006}
   enemySpawner: {fileID: 0}
+--- !u!114 &4966539176951288786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8895072523819109860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterTopMostParent: {fileID: 8895072523819109860}
+  hitObjects: []
+  myStats:
+    maxHealth: 0
+    currentHealth: 0
+    defaultDefense: 0
+    defense: 0
+    defaultAtkDmg: 0
+    atkDmg: 0
+    defaultAtkSpeed: 0
+    atkSpeed: 0
+    defaultMoveSpeed: 0
+    moveSpeed: 0
+    defaultCooldownReduction: 0
+    cooldownReduction: 0
+    defaultLuck: 0
+    luck: 0
+  Team: 2
+  damageObjects: []
+  HealthBar: {fileID: 0}
 --- !u!1 &9217789365634297403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2696,3 +2729,35 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8624618157282400613}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7778058422391879356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2036183831279874009, guid: a3039e61bc1ae674da208314c1fdf3ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 8624618157282400613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &914945360353366829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778058422391879356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myStatsManager: {fileID: 0}
+--- !u!65 &2090392739125749374
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778058422391879356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9010932, y: 0.3666952, z: 1.521273}
+  m_Center: {x: 0.7962813, y: 1.4112505, z: 0.24514273}

@@ -8,7 +8,7 @@ public class CS_AnimatorController : MonoBehaviour
 
     [Header("GameObject Components")]
     [SerializeField] Animator anim;
-    [SerializeField] CS_DamageObject damageOBject;
+    [SerializeField] CS_DamageObject damageObject;
 
     [Header("Applied Force To Animation")]
     [SerializeField] float appliedForce;
@@ -19,7 +19,7 @@ public class CS_AnimatorController : MonoBehaviour
     [SerializeField] string f_Direction, f_MotionTime, f_animSpeed;
     [SerializeField] string b_Grounded, b_Attacking, b_Dashing, b_Jumping, b_canTransit, t_Dash, t_Jump;
 
-    public CS_DamageObject AttackHandler { get => damageOBject; }
+    public CS_DamageObject AttackHandler { get => damageObject; }
     public string I_Combo_1 { get => i_Combo_1; }
     public string I_Combo_2 { get => i_Combo_2; set => i_Combo_2 = value; }
     public string F_MotionTime { get => f_MotionTime; }
@@ -45,7 +45,7 @@ public class CS_AnimatorController : MonoBehaviour
     void Awake()
     {
         anim = GetComponentInChildren<Animator>();
-        //damageOBject = GetComponentInChildren<CS_DamageObject>();   
+        damageObject = GetComponentInChildren<CS_DamageObject>();   
     }
 
     public void SetGrounded(bool value)
@@ -79,19 +79,22 @@ public class CS_AnimatorController : MonoBehaviour
         anim.SetInteger(I_Combo_1, 0);
         anim.SetInteger(I_Combo_2, 0);
         anim.SetBool(b_Attacking, false);
-        //attackHandler.gameObject.SetActive(false);
+        if(damageObject!=null)
+        damageObject.gameObject.SetActive(false);
 
     }
 
     public void CanTransit()
     {
         anim.SetBool(b_canTransit, true);
-        damageOBject.gameObject.SetActive(false);
+        if (damageObject != null)
+            damageObject.gameObject.SetActive(false);
     }
 
     public void EnableDamageObject()
     {
-        damageOBject.gameObject.SetActive(true);
+        if (damageObject != null)
+            damageObject.gameObject.SetActive(true);
     }
 
     public void NegateDashing()
@@ -126,7 +129,7 @@ public class CS_AnimatorController : MonoBehaviour
 
         }
 
-        damageOBject.gameObject.SetActive(true);
+        damageObject.gameObject.SetActive(true);
         //attackHandler.ProjectOnAxis(projectionAxis, transform.forward, GetComponent<Collider>().bounds.center);
     }
 

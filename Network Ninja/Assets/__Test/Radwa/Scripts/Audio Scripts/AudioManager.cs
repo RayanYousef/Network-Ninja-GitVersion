@@ -35,6 +35,7 @@ public class AudioManager : MonoBehaviour
     {
        // PlayMusic("MainMenuBG");
         PlayMusic("BackGround");
+        musicSource.volume = 1.0f;  
     }
 
 
@@ -51,6 +52,7 @@ public class AudioManager : MonoBehaviour
             musicSource.clip = s.clip;
             musicSource.Play();
         }
+
     }
 
 
