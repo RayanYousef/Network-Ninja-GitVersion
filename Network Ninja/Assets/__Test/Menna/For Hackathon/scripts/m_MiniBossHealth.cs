@@ -10,13 +10,23 @@ public class m_MiniBossHealth : Health
     public override void Die()
     {
         //animation
+        if (animator != null)
         animator.SetTrigger("Death");
-
+        Destroy(collider);
         // Raise the event when the enemy is killed
         OnMiniBossKilled.Invoke(this.gameObject);
 
-        Destroy(gameObject, 2.5f);
 
     }
 
+    public override void DeactivateGameObject()
+    {
+        if (DeathEffect != null)
+        {
+            Instantiate(DeathEffect, transform.position, Quaternion.identity);
+
+        }
+        Destroy(gameObject);
+
+    }
 }

@@ -3506,8 +3506,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5511731136443486765}
-  m_LocalRotation: {x: 0.0000000020725204, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6, z: -4}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6000004, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3613,7 +3613,7 @@ GameObject:
   - component: {fileID: 5511731136458899837}
   m_Layer: 0
   m_Name: Player Our Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4053,6 +4053,8 @@ MonoBehaviour:
     cooldownReduction: 1
     defaultLuck: 1
     luck: 1
+  Team: 0
+  damageObjects: []
   HealthBar: {fileID: 0}
 --- !u!1 &5511731137007318235
 GameObject:
@@ -4758,7 +4760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myStatsManager: {fileID: 0}
+  myStatsManager: {fileID: 2200533065262854411}
 --- !u!54 &2200533064723996636
 Rigidbody:
   m_ObjectHideFlags: 0

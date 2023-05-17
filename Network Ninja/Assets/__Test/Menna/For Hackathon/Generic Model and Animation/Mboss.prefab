@@ -2286,7 +2286,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!95 &8624618157843050681
 Animator:
@@ -2386,11 +2386,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b97634a36198746b63aebc712a4c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeathEffect: {fileID: 0}
-  maxHealth: 350
-  currentHealth: 0
-  HP: {fileID: 0}
-  animator: {fileID: 0}
+  DeathEffect: {fileID: 4386811880964202464, guid: cc6aa134581011046a0378c3967dded8,
+    type: 3}
+  maxHealth: 400
+  currentHealth: 400
+  HP: {fileID: 5341286764998510006}
+  animator: {fileID: 8624618157843050681}
   HealthBar: {fileID: 5341286764998510006}
   enemySpawner: {fileID: 0}
 --- !u!114 &4966539176951288786
@@ -2735,19 +2736,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8624618157282400613}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &914945360353366829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7778058422391879356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myStatsManager: {fileID: 0}
 --- !u!65 &2090392739125749374
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2761,3 +2749,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9010932, y: 0.3666952, z: 1.521273}
   m_Center: {x: 0.7962813, y: 1.4112505, z: 0.24514273}
+--- !u!114 &914945360353366829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778058422391879356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myStatsManager: {fileID: 0}

@@ -2354,7 +2354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeathEffect: {fileID: 4386811880964202464, guid: cc6aa134581011046a0378c3967dded8,
     type: 3}
-  maxHealth: 70
+  maxHealth: 100
   currentHealth: 0
   HP: {fileID: 0}
   animator: {fileID: 0}
@@ -2388,7 +2388,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &6099832819183312230
 MonoBehaviour:
@@ -2421,7 +2421,7 @@ MonoBehaviour:
     luck: 1
   Team: 2
   damageObjects: []
-  HealthBar: {fileID: 0}
+  HealthBar: {fileID: 5341286764998510006}
 --- !u!1 &9217789365634297403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,6 +2615,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851661147487260098, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6526453199053227586, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
         type: 3}

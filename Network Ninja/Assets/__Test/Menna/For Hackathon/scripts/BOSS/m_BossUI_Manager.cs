@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class m_BossUI_Manager : MonoBehaviour
 {
-    [SerializeField] private Image healthBarSprite;
+    [SerializeField] private Slider healthBarSprite;
 
     [SerializeField] private Image bloodSplatter;
     [SerializeField] private Color transparentColor;
@@ -20,7 +20,7 @@ public class m_BossUI_Manager : MonoBehaviour
     }
     public void UpdateHealthBar(float maxHealth, float currentHealth)
     {
-        healthBarSprite.fillAmount = currentHealth / maxHealth;
+        healthBarSprite.value = currentHealth / maxHealth;
     }
     public IEnumerator DoFade()
     {

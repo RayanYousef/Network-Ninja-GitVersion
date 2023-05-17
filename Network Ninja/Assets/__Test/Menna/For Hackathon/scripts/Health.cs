@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
@@ -12,6 +13,7 @@ public class Health : MonoBehaviour
     private Rigidbody rb;
     private float forceMagnitude = 10.0f;
 
+
     public GameObject DeathEffect;
 
     public int maxHealth;
@@ -20,7 +22,8 @@ public class Health : MonoBehaviour
     public Animator animator;
     public Slider HealthBar;
     public EnemySpawner enemySpawner;
-    
+    public Collider collider;
+
 
     void Start()
     {
@@ -32,6 +35,7 @@ public class Health : MonoBehaviour
         HP.maxValue = maxHealth;
         rb = GetComponent<Rigidbody>();
         //StartCoroutine(RandomlyApplyDamage());
+        collider = GetComponent<Collider>();
     }
 
     IEnumerator RandomlyApplyDamage()
@@ -44,7 +48,7 @@ public class Health : MonoBehaviour
     private void Update()
     {
         if(HealthBar != null)
-        HealthBar.value = currentHealth; 
+        HealthBar.value = currentHealth ; 
     }
 
 
@@ -68,27 +72,16 @@ public class Health : MonoBehaviour
     {
         //animation
         Debug.Log("When enemy died");
+        Destroy(collider);
         if(animator!= null)
         animator.SetTrigger("Death");   
-
-        // Destroy(gameObject, 4f);
-        // enemySpawner.enemies.Remove(gameObject);
-
-
-
-
-        // enemySpawner.numAlive--;
-
-        // Check if we need to spawn more enemies
-
-
     }
     void triaaaaaaaaaaal()
     {
         Debug.Log("Addforce");
         rb.AddForce(Vector3.up * forceMagnitude, ForceMode.Impulse);
     }
-    void DeactivateGameObject()
+    public virtual void DeactivateGameObject()
     {
 
         if (DeathEffect != null)
@@ -101,7 +94,7 @@ public class Health : MonoBehaviour
 
         enemySpawner = GetComponentInParent<EnemySpawner>();
 
-        this.currentHealth = maxHealth;   
+        this.currentHealth = maxHealth;  
         enemySpawner.enemyPool.Add(gameObject);
         enemySpawner.enemies.Remove(gameObject);
 
