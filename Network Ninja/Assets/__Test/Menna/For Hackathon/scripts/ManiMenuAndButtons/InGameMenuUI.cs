@@ -4,30 +4,38 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class InGameMenuUI : MonoBehaviour
 {
     [Header("Winning Panel")]
-    [SerializeField] GameObject winningPanel;
+    [SerializeField] GameObject winningLosingPanel;
     [SerializeField] GameObject menuPanel;
 
     [Header("Options")]
     [SerializeField] Slider volumeSlider;
     public string MainMenu;
 
-    #region Winning Panel
+    #region Winning/Losing Panel
     public void WinningUI()
     {
         rPasswordManager.Instance.CurrentArea.MeshColourChanger.ChangeToColour(rPasswordManager.Instance.MaxHealth);
-        winningPanel.SetActive(true);
+        winningLosingPanel.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         //Time.timeScale = 0;
+    }
+
+    public void LosingUI()
+    {
+        winningLosingPanel.SetActive(true);
+        winningLosingPanel.GetComponentInChildren<TMP_Text>().text = "You Lost!";
+        Cursor.lockState = CursorLockMode.Confined;
     }
     #endregion
 
     private void Start()
     {
-        winningPanel.SetActive(false);
+        winningLosingPanel.SetActive(false);
         menuPanel.SetActive(false);
 
         #region Volume Slider
