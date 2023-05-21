@@ -298,8 +298,8 @@ public class EnemySpawner : MonoBehaviour
                 /// spawn big boss
                 /// in case of emergency... invoke winning event here
                 //OnBigBossKilled?.Invoke();
-              //  SpawnBigBoss();
-                GameManager.Instance.EndStage(true);
+                SpawnBigBoss();
+               // GameManager.Instance.EndStage(true);
             }
             else
             {
