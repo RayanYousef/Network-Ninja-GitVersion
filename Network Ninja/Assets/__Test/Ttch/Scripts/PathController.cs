@@ -1,12 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PathController : MonoBehaviour
 {
     public GameObject player;
     public Transform startPoint;
     public Transform endPoint;
+
     public List<Transform> wayPoints = new List<Transform>();
+
+    public float defaultblendtime = 2;
+
+    public CinemachineBrain brain;
+
+    //List of cameras that change the view based on waypoint
+    public List<CinemachineVirtualCamera> WaypointCameras = new List<CinemachineVirtualCamera>();
+    
+    
 
     public bool reversePath = false;
     private bool playerIsOnPath = false;
@@ -23,6 +34,7 @@ public class PathController : MonoBehaviour
 
         if (playerIsOnPath&& currentWayPointIndex >= 0 && currentWayPointIndex <= wayPoints.Count - 1)
         {
+            brain.m_DefaultBlend.m_Time = 0;
             MoveObjectTowards(player, ChooseDestination());
         }
     }
@@ -41,6 +53,11 @@ public class PathController : MonoBehaviour
     {
         Transform currentWayPoint = wayPoints[currentWayPointIndex];
         distance = Vector3.Distance(player.transform.position, currentWayPoint.position);
+        CinemachineVirtualCamera currentCamera = WaypointCameras[currentWayPointIndex];
+
+        //Enable camera and remove blend time or instantaneous change
+        currentCamera.enabled = true;
+        brain.m_DefaultBlend.m_Time = 0;
 
         if (Vector3.Distance(player.transform.position, currentWayPoint.position) < 2)
         {
@@ -49,6 +66,11 @@ public class PathController : MonoBehaviour
                 currentWayPointIndex += reversePath ? -1 : 1;
             }
             else playerIsOnPath = false;
+            foreach (CinemachineVirtualCamera cam in WaypointCameras)
+            {
+                brain.m_DefaultBlend.m_Time = defaultblendtime;
+                cam.enabled = false;
+            }
 
         }
 
