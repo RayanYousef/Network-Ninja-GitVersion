@@ -17,6 +17,7 @@ public class CS_PlayerManager : MonoBehaviour
     [SerializeField] CS_AnimatorController animController;
     [SerializeField] CS_CameraTarget camTarget;
     [SerializeField] Rigidbody rb;
+    [SerializeField] PlayerInput Inputs;
     [SerializeField] FixedJoystick joyStick;
 
     [Header("Variables")]
@@ -29,11 +30,11 @@ public class CS_PlayerManager : MonoBehaviour
     bool AndroidBuild = false;
 
     public CharacterState AnimatorCurrentState { get => currentState; }
-    public Animator Anim { get => anim;}
+    public Animator Anim { get => anim; }
     public CS_MovementController MoveController { get => moveController; }
-    public CS_AnimatorController AnimController { get => animController;  }
-    public CS_CameraTarget CamTarget { get => camTarget;  }
-    public Rigidbody Rb { get => rb;}
+    public CS_AnimatorController AnimController { get => animController; }
+    public CS_CameraTarget CamTarget { get => camTarget; }
+    public Rigidbody Rb { get => rb; }
 
     private void Awake()
     {
@@ -47,7 +48,7 @@ public class CS_PlayerManager : MonoBehaviour
         rb = playerTopMostParent.GetComponentInChildren<Rigidbody>();
 
         moveController.PlayerManager = this;
-        animController.PlayerManager = this;    
+        animController.PlayerManager = this;
 
 
     }
@@ -69,13 +70,13 @@ public class CS_PlayerManager : MonoBehaviour
         //SendAttackInputState(Input.GetMouseButton(0));
         //SendDashInputState(Input.GetKeyDown(KeyCode.LeftShift));
 
-        if(joyStick!=null)
-        SendInputDirection(joyStick.Direction);
+        if (joyStick != null)
+            SendInputDirection(joyStick.Direction);
 
 
-        if(Input.GetKeyDown(KeyCode.LeftAlt))
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
             Cursor.lockState = CursorLockMode.None;
-        if(Input.GetKeyUp(KeyCode.LeftAlt))
+        if (Input.GetKeyUp(KeyCode.LeftAlt))
             Cursor.lockState = CursorLockMode.Locked;
 
     }
@@ -162,7 +163,7 @@ public class CS_PlayerManager : MonoBehaviour
 
             case CharacterState.Attacking:
                 anim.SetBool(animController.B_Attacking, true);
-                anim.applyRootMotion= true;
+                anim.applyRootMotion = true;
                 break;
 
             case CharacterState.Falling:
@@ -252,4 +253,15 @@ public class CS_PlayerManager : MonoBehaviour
     }
 
     #endregion
+
+    public void ControllerState(bool value)
+    {
+        Inputs.enabled = value;
+    }
+
+    public void ColliderState(bool value)
+    {
+        this.enabled = value;
+        GetComponent<Collider>().enabled = value;
+    }
 }

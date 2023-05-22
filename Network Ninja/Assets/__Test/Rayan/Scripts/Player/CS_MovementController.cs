@@ -79,7 +79,7 @@ public class CS_MovementController : MonoBehaviour
                 break;
         }
 
-        if (playerManager.AnimController.Grounded == false && playerManager.AnimatorCurrentState!= CharacterState.Dashing)
+        if (PlayerManager.enabled && playerManager.AnimController.Grounded == false && playerManager.AnimatorCurrentState!= CharacterState.Dashing)
             FallingUpdate();
 
     }
