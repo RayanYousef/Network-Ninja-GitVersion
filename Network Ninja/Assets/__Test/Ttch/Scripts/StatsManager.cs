@@ -54,6 +54,7 @@ public class StatsManager : MonoBehaviour
         foreach (CS_DamageObject damageObject in damageObjects)
         {
             damageObject.MyStatsManager = this;
+            damageObject.gameObject.SetActive(false);
         }
     }
 
