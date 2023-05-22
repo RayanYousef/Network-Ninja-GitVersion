@@ -2360,6 +2360,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   HealthBar: {fileID: 5341286764998510006}
   enemySpawner: {fileID: 0}
+  collider: {fileID: 0}
 --- !u!136 &6129130833574463453
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2386,7 +2387,7 @@ Rigidbody:
   m_Drag: 5000
   m_AngularDrag: 50
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
@@ -2402,15 +2403,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterTopMostParent: {fileID: 8895072523819109860}
+  parent: {fileID: 8895072523819109860}
   hitObjects: []
   myStats:
+    OnHealthUpdated:
+      m_PersistentCalls:
+        m_Calls: []
     maxHealth: 100
     currentHealth: 100
     defaultDefense: 100
     defense: 1
-    defaultAtkDmg: 1
-    atkDmg: 1
+    defaultAtk: 0
+    atk: 0
     defaultAtkSpeed: 1
     atkSpeed: 1
     defaultMoveSpeed: 1
@@ -2758,3 +2762,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myStatsManager: {fileID: 6099832819183312230}
+  weaponName: minionSlash
