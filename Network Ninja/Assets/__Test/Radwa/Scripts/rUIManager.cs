@@ -5,7 +5,7 @@ using UnityEngine;
 public class rUIManager : MonoBehaviour
 {
     [SerializeField] private rUIPassword uiPassword;
-    [SerializeField] private InGameMenuUI inGameMenuUI;
+    [SerializeField] private m_InGameMenuUI inGameMenuUI;
     void Start()
     {
         

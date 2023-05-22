@@ -2242,7 +2242,6 @@ GameObject:
   - component: {fileID: 8182064137278215644}
   - component: {fileID: 8624618157843050681}
   - component: {fileID: 8182064137278215584}
-  - component: {fileID: 8182064137278215585}
   - component: {fileID: 6129130833574463453}
   - component: {fileID: -1943140102003597411}
   - component: {fileID: 4878532736797014061}
@@ -2329,18 +2328,6 @@ NavMeshAgent:
   m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8182064137278215585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8895072523819109860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aafe31c00b5c33a419219ad7ba15f5d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &6129130833574463453
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2369,7 +2356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeathEffect: {fileID: 4386811880964202464, guid: cc6aa134581011046a0378c3967dded8,
     type: 3}
-  animator: {fileID: 8624618157843050681}
+  animator: {fileID: 0}
 --- !u!114 &4878532736797014061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2388,8 +2375,8 @@ MonoBehaviour:
     OnHealthUpdated:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8182064137278215585}
-          m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        - m_Target: {fileID: -1943140102003597411}
+          m_TargetAssemblyTypeName: m_EnemyManager, Assembly-CSharp
           m_MethodName: showHealth
           m_Mode: 1
           m_Arguments:
@@ -2764,5 +2751,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myStatsManager: {fileID: 4878532736797014061}
+  myStatsManager: {fileID: 0}
   weaponName: minionSlash

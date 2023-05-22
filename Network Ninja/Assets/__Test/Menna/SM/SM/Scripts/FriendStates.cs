@@ -229,7 +229,7 @@ public class FriendStates : MonoBehaviour
 
 //void Start()
 //{
-//    //armyList = new List<Transform>(GameObject.FindGameObjectsWithTag("Enemy"));
+//    //armyList = new List<Transform>(GameObject.FindGameObjectsWithTag("m_EnemyManager"));
 //    //enemyArmyList = new List<Transform>(GameObject.FindGameObjectsWithTag("Player"));
 
 

@@ -2217,7 +2217,6 @@ GameObject:
   m_Component:
   - component: {fileID: 430462}
   - component: {fileID: 2076925395}
-  - component: {fileID: 2076925394}
   - component: {fileID: 17075473835194095}
   m_Layer: 0
   m_Name: R_Hand
@@ -2260,18 +2259,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 345.79214, y: 37.027714, z: 145.94461}
   m_Center: {x: -146.90985, y: 0.9668716, z: -3.4511244}
---- !u!114 &2076925394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193072}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92f8c26f87add2346b000551af356196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &17075473835194095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2284,7 +2271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myStatsManager: {fileID: 5145656898655402665}
+  myStatsManager: {fileID: 0}
+  weaponName: 
 --- !u!1 &193540
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,8 +2318,7 @@ GameObject:
   - component: {fileID: 267218873}
   - component: {fileID: 267218876}
   - component: {fileID: 267218878}
-  - component: {fileID: 5145656898655402665}
-  - component: {fileID: 7670119219119364575}
+  - component: {fileID: 2817058304721173039}
   m_Layer: 0
   m_Name: NightmareDragon
   m_TagString: BOSS
@@ -2449,7 +2436,7 @@ MonoBehaviour:
   - {fileID: 768887225}
   - {fileID: 1915071718}
   - {fileID: 453368349}
---- !u!114 &5145656898655402665
+--- !u!114 &2817058304721173039
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2461,46 +2448,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterTopMostParent: {fileID: 193776}
+  parent: {fileID: 193776}
   hitObjects: []
   myStats:
-    maxHealth: 0
-    currentHealth: 0
-    defaultDefense: 0
-    defense: 0
-    defaultAtkDmg: 0
-    atkDmg: 0
-    defaultAtkSpeed: 0
-    atkSpeed: 0
-    defaultMoveSpeed: 0
-    moveSpeed: 0
-    defaultCooldownReduction: 0
-    cooldownReduction: 0
-    defaultLuck: 0
-    luck: 0
+    OnHealthUpdated:
+      m_PersistentCalls:
+        m_Calls: []
+    maxHealth: 100
+    currentHealth: 100
+    defaultDefense: 100
+    defense: 1
+    defaultAtk: 0
+    atk: 0
+    defaultAtkSpeed: 1
+    atkSpeed: 1
+    defaultMoveSpeed: 1
+    moveSpeed: 1
+    defaultCooldownReduction: 1
+    cooldownReduction: 1
+    defaultLuck: 1
+    luck: 1
   Team: 2
   damageObjects: []
   HealthBar: {fileID: 3901031695250854379}
---- !u!114 &7670119219119364575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f510669d93d137f4bbf211df415ad10d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DeathEffect: {fileID: 8354898387414537923}
-  maxHealth: 1500
-  currentHealth: 1500
-  HP: {fileID: 3901031695250854379}
-  animator: {fileID: 9587272}
-  HealthBar: {fileID: 3901031695250854379}
-  enemySpawner: {fileID: 0}
-  collider: {fileID: 0}
 --- !u!1 &194148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,7 +2669,6 @@ GameObject:
   m_Component:
   - component: {fileID: 499006}
   - component: {fileID: 608761482}
-  - component: {fileID: 608761481}
   - component: {fileID: 9122863156791780086}
   m_Layer: 0
   m_Name: Jaw01
@@ -2737,18 +2706,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 185.37694, y: 104.23108, z: 84.22425}
   m_Center: {x: -55.91591, y: -49.408424, z: 2.872686}
---- !u!114 &608761481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199424}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92f8c26f87add2346b000551af356196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9122863156791780086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2761,7 +2718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myStatsManager: {fileID: 5145656898655402665}
+  myStatsManager: {fileID: 0}
+  weaponName: 
 --- !u!1 &453368349
 GameObject:
   m_ObjectHideFlags: 0

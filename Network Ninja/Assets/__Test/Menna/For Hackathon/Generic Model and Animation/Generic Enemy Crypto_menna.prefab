@@ -2256,11 +2256,10 @@ GameObject:
   - component: {fileID: 8086905795538786142}
   - component: {fileID: 8624618157843050681}
   - component: {fileID: 8182064137278215584}
-  - component: {fileID: 8182064137278215585}
-  - component: {fileID: 8182064137278215646}
   - component: {fileID: 6129130833574463453}
   - component: {fileID: 4177161413908230858}
   - component: {fileID: 6099832819183312230}
+  - component: {fileID: 5592875079967321722}
   m_Layer: 0
   m_Name: Generic Enemy Crypto_menna
   m_TagString: Untagged
@@ -2328,39 +2327,6 @@ NavMeshAgent:
   m_BaseOffset: 0.09
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8182064137278215585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8895072523819109860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aafe31c00b5c33a419219ad7ba15f5d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8182064137278215646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8895072523819109860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f510669d93d137f4bbf211df415ad10d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DeathEffect: {fileID: 4386811880964202464, guid: cc6aa134581011046a0378c3967dded8,
-    type: 3}
-  maxHealth: 100
-  currentHealth: 0
-  HP: {fileID: 0}
-  animator: {fileID: 0}
-  HealthBar: {fileID: 5341286764998510006}
-  enemySpawner: {fileID: 0}
-  collider: {fileID: 0}
 --- !u!136 &6129130833574463453
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2409,9 +2375,9 @@ MonoBehaviour:
     OnHealthUpdated:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8182064137278215585}
-          m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-          m_MethodName: showHealth
+        - m_Target: {fileID: 5592875079967321722}
+          m_TargetAssemblyTypeName: m_EnemyManager, Assembly-CSharp
+          m_MethodName: Die
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2421,9 +2387,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 8182064137278215646}
-          m_TargetAssemblyTypeName: Health, Assembly-CSharp
-          m_MethodName: Die
+        - m_Target: {fileID: 5592875079967321722}
+          m_TargetAssemblyTypeName: m_EnemyManager, Assembly-CSharp
+          m_MethodName: showHealth
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2450,6 +2416,21 @@ MonoBehaviour:
   Team: 2
   damageObjects: []
   HealthBar: {fileID: 5341286764998510006}
+--- !u!114 &5592875079967321722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8895072523819109860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae8b5c7ea8e4544783c6eb42daf09be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeathEffect: {fileID: 4386811880964202464, guid: d6561a57ab0403b4eb362e93683f53b0,
+    type: 3}
+  animator: {fileID: 0}
 --- !u!1 &9217789365634297403
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class m_MiniBossHealth : Health
+public class m_MiniBoss : m_EnemyManager
 {
     public Action<GameObject> OnMiniBossKilled;  // Declare the event
 
@@ -24,8 +24,7 @@ public class m_MiniBossHealth : Health
             Instantiate(DeathEffect, transform.position, Quaternion.identity);
 
         }
-       // gameObject.SetActive(false);
-        Destroy(gameObject);
 
+        Destroy(gameObject);
     }
 }
