@@ -7,8 +7,7 @@ public class CS_AnimatorController : MonoBehaviour
 {
 
     [Header("GameObject Components")]
-    [SerializeField] Animator anim;
-    [SerializeField] CS_DamageObject damageObject;
+    [SerializeField] CS_PlayerManager playerManager;
 
     [Header("Applied Force To Animation")]
     [SerializeField] float appliedForce;
@@ -19,7 +18,7 @@ public class CS_AnimatorController : MonoBehaviour
     [SerializeField] string f_Direction, f_MotionTime, f_animSpeed;
     [SerializeField] string b_Grounded, b_Attacking, b_Dashing, b_Jumping, b_canTransit, t_Dash, t_Jump;
 
-    public CS_DamageObject AttackHandler { get => damageObject; }
+    public CS_PlayerManager PlayerManager { get => playerManager; set => playerManager = value; }
     public string I_Combo_1 { get => i_Combo_1; }
     public string I_Combo_2 { get => i_Combo_2; set => i_Combo_2 = value; }
     public string F_MotionTime { get => f_MotionTime; }
@@ -36,32 +35,23 @@ public class CS_AnimatorController : MonoBehaviour
 
     public bool Grounded
     {
-        get => anim.GetBool(b_Grounded);
-    }
-
-
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        anim = GetComponentInChildren<Animator>();
-        damageObject = GetComponentInChildren<CS_DamageObject>();   
+        get => PlayerManager.Anim.GetBool(b_Grounded);
     }
 
     public void SetGrounded(bool value)
     {
-        anim.SetBool(b_Grounded, value);
+        PlayerManager.Anim.SetBool(b_Grounded, value);
     }
 
     #region Animation State Modifiers
     public void SetAnimationMotion(float motionTime)
     {
-        anim.SetFloat(f_MotionTime, motionTime);
+        PlayerManager.Anim.SetFloat(f_MotionTime, motionTime);
     }
 
     public void SetAnimationSpeed(float speed)
     {
-        anim.SetFloat(f_animSpeed, speed);
+        PlayerManager.Anim.SetFloat(f_animSpeed, speed);
     }
 
 
@@ -76,35 +66,24 @@ public class CS_AnimatorController : MonoBehaviour
 
     public void ResetCombo()
     {
-        anim.SetInteger(I_Combo_1, 0);
-        anim.SetInteger(I_Combo_2, 0);
-        anim.SetBool(b_Attacking, false);
-        if(damageObject!=null)
-        damageObject.gameObject.SetActive(false);
-
+        PlayerManager.Anim.SetInteger(I_Combo_1, 0);
+        PlayerManager.Anim.SetInteger(I_Combo_2, 0);
+        PlayerManager.Anim.SetBool(b_Attacking, false);
     }
 
     public void CanTransit()
     {
-        anim.SetBool(b_canTransit, true);
-        if (damageObject != null)
-            damageObject.gameObject.SetActive(false);
-    }
-
-    public void EnableDamageObject()
-    {
-        if (damageObject != null)
-            damageObject.gameObject.SetActive(true);
+        PlayerManager.Anim.SetBool(b_canTransit, true);
     }
 
     public void NegateDashing()
     {
-        anim.SetBool(B_Dashing, false);
+        PlayerManager.Anim.SetBool(B_Dashing, false);
     }
 
     public void NegateJumping()
     {
-        anim.SetBool(B_Jumping, false);
+        PlayerManager.Anim.SetBool(B_Jumping, false);
     }
 
     public void ApplyForwardForce(float force)
@@ -112,25 +91,6 @@ public class CS_AnimatorController : MonoBehaviour
         GetComponent<Rigidbody>().
             AddForce(transform.forward * (appliedForce + force), ForceMode.Impulse);
   
-    }
-
-    public void OnAttackSetFirstPoint()
-    {
-       // attackHandler.SetFirstPoint();  
-    }
-
-    public void OnAttackSetPointTwo(ProjectOnPlaneAxis axis)
-    {
-        Vector3 projectionAxis= Vector3.zero;
-        switch(axis)
-        {
-            case ProjectOnPlaneAxis.forward: projectionAxis = transform.forward; break;
-            case ProjectOnPlaneAxis.right: projectionAxis = transform.right; break;
-
-        }
-
-        damageObject.gameObject.SetActive(true);
-        //attackHandler.ProjectOnAxis(projectionAxis, transform.forward, GetComponent<Collider>().bounds.center);
     }
 
     #endregion

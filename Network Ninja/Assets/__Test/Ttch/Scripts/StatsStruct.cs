@@ -11,7 +11,7 @@ public struct StatsStruct
     [SerializeField]
     private float defaultDefense, defense;
     [SerializeField]
-    private float defaultAtkDmg, atkDmg;
+    private float defaultAtk, atk;
     [SerializeField]
     private float defaultAtkSpeed, atkSpeed;
     [SerializeField]
@@ -35,8 +35,8 @@ public struct StatsStruct
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
     public float DefaultDefense { get => defaultDefense; set => defaultDefense = value; }
     public float Defense { get => defense; set => defense = value; }
-    public float DefaultAtkDmg { get => defaultAtkDmg; set => defaultAtkDmg = value; }
-    public float AtkDmg { get => atkDmg; set => atkDmg = value; }
+    public float DefaultAtk { get => defaultAtk; set => defaultAtk = value; }
+    public float Atk { get => atk; set => atk = value; }
     public float DefaultAtkSpeed { get => defaultAtkSpeed; set => defaultAtkSpeed = value; }
     public float AtkSpeed { get => atkSpeed; set => atkSpeed = value; }
     public float DefaultMoveSpeed { get => defaultMoveSpeed; set => defaultMoveSpeed = value; }

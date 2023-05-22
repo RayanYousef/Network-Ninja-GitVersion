@@ -3366,6 +3366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myStatsManager: {fileID: 0}
+  weaponName: 
 --- !u!1 &5511731136420740094
 GameObject:
   m_ObjectHideFlags: 0
@@ -3480,6 +3481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myStatsManager: {fileID: 0}
+  weaponName: 
 --- !u!1 &5511731136443486765
 GameObject:
   m_ObjectHideFlags: 0
@@ -3782,7 +3784,6 @@ GameObject:
   - component: {fileID: 5511731136970995481}
   - component: {fileID: 5511731136970995484}
   - component: {fileID: 5511731136970995487}
-  - component: {fileID: 5511731136970995474}
   - component: {fileID: 2200533065262854411}
   m_Layer: 0
   m_Name: Moving Object
@@ -3822,8 +3823,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 494735d999425bb49811d919ee9c2e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
   damageObject: {fileID: 0}
+  playerManager: {fileID: 0}
   appliedForce: 20
   i_Combo_1: Combo_1
   i_Combo_2: Combo_2
@@ -3983,8 +3984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5511731136970995484}
-  playerManager: {fileID: 5511731136970995474}
-  animController: {fileID: 5511731136970995486}
+  playerManager: {fileID: 0}
   playerCam: {fileID: 5511731137280471348}
   dashDuration: 0.2
   defaultDashForce: 500
@@ -4003,27 +4003,6 @@ MonoBehaviour:
   appliedJumpForce: 105
   dashTimer: 0.13999999
   jumpTimer: 0.21999997
---- !u!114 &5511731136970995474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511731136970995473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd60e984a0c4ba4ab4eb92808b1e6ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  moveController: {fileID: 0}
-  animController: {fileID: 0}
-  camTarget: {fileID: 0}
-  rb: {fileID: 0}
-  joyStick: {fileID: 0}
-  drag: 10
-  clicksIntervalTime: 0.2
-  currentState: 0
 --- !u!114 &2200533065262854411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4036,7 +4015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterTopMostParent: {fileID: 5511731136458899826}
+  parent: {fileID: 0}
   hitObjects: []
   myStats:
     maxHealth: 100
@@ -4761,6 +4740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myStatsManager: {fileID: 2200533065262854411}
+  weaponName: 
 --- !u!54 &2200533064723996636
 Rigidbody:
   m_ObjectHideFlags: 0

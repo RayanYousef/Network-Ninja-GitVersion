@@ -11,22 +11,17 @@ public enum CharacterTeam
 }
 public class StatsManager : MonoBehaviour
 {
-    [Header("CharacterTopMostParent")]
-    [SerializeField]
-    GameObject CharacterTopMostParent;
+    [Header("Parent Of This Object")]
+    [SerializeField] GameObject parent;
 
-    [SerializeField]
-    List<Collider> hitObjects = new List<Collider>();
+    [SerializeField] List<Collider> hitObjects = new List<Collider>();
 
-    [SerializeField]
-    StatsStruct myStats = new StatsStruct();
+    [SerializeField] StatsStruct myStats = new StatsStruct();
 
-    [SerializeField]
-    public CharacterTeam Team= CharacterTeam.None;
+    [SerializeField] public CharacterTeam Team= CharacterTeam.None;
 
-    [SerializeField]
-    CS_DamageObject[] damageObjects;
-    public Slider HealthBar;
+    [SerializeField] CS_DamageObject[] damageObjects;
+    [SerializeField] Slider HealthBar;
 
 
 
@@ -39,37 +34,65 @@ public class StatsManager : MonoBehaviour
     {
         myStats.CurrentHealth = myStats.MaxHealth;
         myStats.Defense = myStats.DefaultDefense;
-        myStats.AtkDmg = myStats.DefaultAtkDmg;
+        myStats.Atk = myStats.DefaultAtk;
         myStats.AtkSpeed = myStats.DefaultAtkSpeed;
         myStats.MoveSpeed = myStats.DefaultMoveSpeed;
         myStats.CooldownReduction = myStats.DefaultCooldownReduction;
+
         if (HealthBar != null)
         {
             HealthBar.maxValue = myStats.MaxHealth;
             HealthBar.value = myStats.CurrentHealth;
         }
 
-        damageObjects = CharacterTopMostParent.GetComponentsInChildren<CS_DamageObject>();
+        // Set Parent to this if parent field was null
+        if (parent == null)
+            parent = gameObject;
+
+        // Damaging Objects are every child of this game object that contains the script CS_DamageObject.
+        damageObjects = parent.GetComponentsInChildren<CS_DamageObject>();
         foreach (CS_DamageObject damageObject in damageObjects)
         {
             damageObject.MyStatsManager = this;
         }
     }
 
-    public void EnableWeaponDamage()
+    #region Enable/Disable Damage Collider Based on Animation Event
+    public void EnableAllWeapons()
     {
         foreach (CS_DamageObject damageObject in damageObjects)
         {
+            damageObject.gameObject.SetActive(true);
+        }
+    }
+    public void DisableAllWeapons()
+    {
+        foreach (CS_DamageObject damageObject in damageObjects)
+        {
+            damageObject.gameObject.SetActive(false);
+        }
+    }
+
+    public void EnableWeaponWithName(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in damageObjects)
+        {
+            if(damageObject.WeaponName == WeaponName)
             damageObject.enabled = true;
         }
     }
-    public void DisableWeaponDamage()
+
+    public void DisableWeaponWithName(string WeaponName)
     {
         foreach (CS_DamageObject damageObject in damageObjects)
         {
-            damageObject.enabled = false;
+            if (damageObject.WeaponName == WeaponName)
+                damageObject.enabled = false;
         }
     }
+
+
+    #endregion
 
     #region HealthFunctions
     public void Heal(float value = 20)
@@ -83,6 +106,7 @@ public class StatsManager : MonoBehaviour
         myStats.CurrentHealth -= dmg;
         if(HealthBar!=null) 
         HealthBar.value = myStats.CurrentHealth;
+        Debug.Log(myStats.CurrentHealth);
     }
 
     public void ApplyDamage(float attack=30)
@@ -92,7 +116,7 @@ public class StatsManager : MonoBehaviour
         HealthBar.value = myStats.CurrentHealth;
         if (myStats.CurrentHealth == 0)
         {
-            CharacterTopMostParent.SetActive(false);
+            parent.SetActive(false);
         }
 
     }
@@ -102,17 +126,17 @@ public class StatsManager : MonoBehaviour
     //Apply permenant/temporary buffs or debuffs to attack DAMAGE
     public void BuffAttackStat(float changeValue = 10)
     {
-        myStats.AtkDmg += changeValue;
+        myStats.Atk += changeValue;
     }
 
     public void DebuffAttackStat(float changeValue = 10)
     {
-        myStats.AtkDmg -= changeValue;
+        myStats.Atk -= changeValue;
     }
 
     public void ResetAttackToDefault()
     {
-        myStats.AtkDmg = myStats.DefaultAtkDmg;
+        myStats.Atk = myStats.DefaultAtk;
     }
 
     public float CalculateAttackStrength()
@@ -120,9 +144,9 @@ public class StatsManager : MonoBehaviour
         float critChance = Random.Range(0, 1);
         if(critChance + myStats.Luck > 0.8f)
         {
-            return myStats.AtkDmg * 2;
+            return myStats.Atk * 2;
         }
-        return myStats.AtkDmg;
+        return myStats.Atk;
     }
 
     #endregion

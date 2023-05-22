@@ -11,6 +11,7 @@ public class CS_PlayerManager : MonoBehaviour
 
 
     [Header("Components")]
+    [SerializeField] GameObject playerTopMostParent;
     [SerializeField] Animator anim;
     [SerializeField] CS_MovementController moveController;
     [SerializeField] CS_AnimatorController animController;
@@ -28,14 +29,25 @@ public class CS_PlayerManager : MonoBehaviour
     bool AndroidBuild = false;
 
     public CharacterState AnimatorCurrentState { get => currentState; }
+    public Animator Anim { get => anim;}
+    public CS_MovementController MoveController { get => moveController; }
+    public CS_AnimatorController AnimController { get => animController;  }
+    public CS_CameraTarget CamTarget { get => camTarget;  }
+    public Rigidbody Rb { get => rb;}
 
     private void Awake()
     {
-        anim = GetComponentInChildren<Animator>();
-        moveController = GetComponentInChildren<CS_MovementController>();
-        animController = GetComponentInChildren<CS_AnimatorController>();
-        camTarget = GetComponentInChildren<CS_CameraTarget>();
-        rb = GetComponentInChildren<Rigidbody>();
+        if (playerTopMostParent == null)
+            playerTopMostParent = gameObject;
+
+        anim = playerTopMostParent.GetComponentInChildren<Animator>();
+        moveController = playerTopMostParent.GetComponentInChildren<CS_MovementController>();
+        animController = playerTopMostParent.GetComponentInChildren<CS_AnimatorController>();
+        camTarget = playerTopMostParent.GetComponentInChildren<CS_CameraTarget>();
+        rb = playerTopMostParent.GetComponentInChildren<Rigidbody>();
+
+        moveController.PlayerManager = this;
+        animController.PlayerManager = this;    
 
 
     }
@@ -65,12 +77,6 @@ public class CS_PlayerManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         if(Input.GetKeyUp(KeyCode.LeftAlt))
             Cursor.lockState = CursorLockMode.Locked;
-
-
-
-
-
-
 
     }
 
@@ -128,8 +134,6 @@ public class CS_PlayerManager : MonoBehaviour
         }
     }
     #endregion
-
-
 
     #region Animator States
     public void OnStateEnter(CharacterState enteredState)
@@ -210,7 +214,6 @@ public class CS_PlayerManager : MonoBehaviour
         }
     }
     #endregion
-
 
     #region Messages from Player Inputs
     public void OnMove(InputValue value)
