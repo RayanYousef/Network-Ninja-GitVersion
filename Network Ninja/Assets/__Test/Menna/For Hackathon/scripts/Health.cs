@@ -18,12 +18,12 @@ public class Health : MonoBehaviour
 
     public float maxHealth;
     //public int currentHealth;
-    public Slider HP;
+   // public Slider HP;
     public Animator animator;
-    public Slider HealthBar;
+    //public Slider HealthBar;
     public EnemySpawner enemySpawner;
     public Collider collider;
-    StatsManager statsManager;
+   // StatsManager statsManager;
     float currentHealth;
 
 
@@ -32,7 +32,8 @@ public class Health : MonoBehaviour
         collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        //currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
+
+        currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
         //maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
         //if (HP== null)
         //{
@@ -61,21 +62,21 @@ public class Health : MonoBehaviour
 
 
     //Health and damage
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        Debug.Log("take damage");
+    //public void TakeDamage(int damage)
+    //{
+    //    currentHealth -= damage;
+    //    Debug.Log("take damage");
 
-        if(animator!= null)
-        animator.Play("TakeDamage");
+    //    if(animator!= null)
+    //    animator.Play("TakeDamage");
 
-        if (currentHealth <= 0)
-        {
-            Debug.Log("Enemy died");
+    //    if (currentHealth <= 0)
+    //    {
+    //        Debug.Log("Enemy died");
 
-            Die();
-        }
-    }
+    //        Die();
+    //    }
+    //}
     public virtual void Die()
     {
         //animation
@@ -103,7 +104,7 @@ public class Health : MonoBehaviour
 
 
         //this.currentHealth = maxHealth;
-        currentHealth = GetComponent<StatsManager>().Stats.MaxHealth;
+       // currentHealth = GetComponent<StatsManager>().Stats.MaxHealth;
 
         enemySpawner.enemyPool.Add(gameObject);
         enemySpawner.enemies.Remove(gameObject);
