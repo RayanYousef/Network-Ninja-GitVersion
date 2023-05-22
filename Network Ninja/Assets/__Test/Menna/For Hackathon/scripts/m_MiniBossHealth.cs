@@ -15,8 +15,6 @@ public class m_MiniBossHealth : Health
         Destroy(collider);
         // Raise the event when the enemy is killed
         OnMiniBossKilled.Invoke(this.gameObject);
-
-
     }
 
     public override void DeactivateGameObject()
@@ -26,7 +24,8 @@ public class m_MiniBossHealth : Health
             Instantiate(DeathEffect, transform.position, Quaternion.identity);
 
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+       // Destroy(gameObject);
 
     }
 }

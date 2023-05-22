@@ -21,7 +21,7 @@ public class EnemyWeapon : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(pos, attackRange, attackMask);
         foreach (Collider col in hitColliders)
         {
-            col.GetComponent<Health>().TakeDamage(attackDamage);
+           // col.GetComponent<Health>().TakeDamage(attackDamage);
         }
     }
 
