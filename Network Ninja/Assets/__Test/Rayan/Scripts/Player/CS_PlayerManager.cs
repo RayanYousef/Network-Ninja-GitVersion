@@ -254,14 +254,17 @@ public class CS_PlayerManager : MonoBehaviour
 
     #endregion
 
+    #region Public Functions
+
     public void ControllerState(bool value)
     {
         Inputs.enabled = value;
     }
-
     public void ColliderState(bool value)
     {
         this.enabled = value;
         GetComponent<Collider>().enabled = value;
     }
+
+    #endregion
 }
