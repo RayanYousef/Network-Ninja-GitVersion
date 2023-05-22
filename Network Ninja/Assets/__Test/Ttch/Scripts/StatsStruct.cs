@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [Serializable]
 public struct StatsStruct
 {
+    [SerializeField] UnityEvent<float> OnHealthUpdated;
+
     [SerializeField]
     private float maxHealth, currentHealth;
     [SerializeField]
@@ -29,6 +32,7 @@ public struct StatsStruct
         set
         {
             currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+            OnHealthUpdated?.Invoke(currentHealth);
         }
     }
 

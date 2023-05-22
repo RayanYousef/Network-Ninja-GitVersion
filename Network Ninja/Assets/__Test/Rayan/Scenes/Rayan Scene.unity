@@ -332,7 +332,6 @@ GameObject:
   - component: {fileID: 148116009}
   - component: {fileID: 148116010}
   - component: {fileID: 1423978382}
-  - component: {fileID: 5977481142045496383}
   m_Layer: 0
   m_Name: Moving Object
   m_TagString: Untagged
@@ -3418,6 +3417,9 @@ MonoBehaviour:
   parent: {fileID: 0}
   hitObjects: []
   myStats:
+    OnHealthUpdated:
+      m_PersistentCalls:
+        m_Calls: []
     maxHealth: 5000
     currentHealth: 0
     defaultDefense: 0
@@ -6935,6 +6937,9 @@ MonoBehaviour:
   parent: {fileID: 1784570951}
   hitObjects: []
   myStats:
+    OnHealthUpdated:
+      m_PersistentCalls:
+        m_Calls: []
     maxHealth: 100
     currentHealth: 100
     defaultDefense: 1
@@ -6950,38 +6955,6 @@ MonoBehaviour:
     defaultLuck: 1
     luck: 1
   Team: 1
-  damageObjects: []
-  HealthBar: {fileID: 0}
---- !u!114 &5977481142045496383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 148116004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 0}
-  hitObjects: []
-  myStats:
-    maxHealth: 100
-    currentHealth: 0
-    defaultDefense: 0
-    defense: 1
-    defaultAtk: 0
-    atk: 0
-    defaultAtkSpeed: 0
-    atkSpeed: 0
-    defaultMoveSpeed: 0
-    moveSpeed: 0
-    defaultCooldownReduction: 0
-    cooldownReduction: 0
-    defaultLuck: 0
-    luck: 0
-  Team: 0
   damageObjects: []
   HealthBar: {fileID: 0}
 --- !u!4 &6000407479403480841

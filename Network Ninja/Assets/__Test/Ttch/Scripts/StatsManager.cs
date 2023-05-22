@@ -78,7 +78,7 @@ public class StatsManager : MonoBehaviour
         foreach (CS_DamageObject damageObject in damageObjects)
         {
             if(damageObject.WeaponName == WeaponName)
-            damageObject.enabled = true;
+                damageObject.gameObject.SetActive(true);
         }
     }
 
@@ -87,7 +87,7 @@ public class StatsManager : MonoBehaviour
         foreach (CS_DamageObject damageObject in damageObjects)
         {
             if (damageObject.WeaponName == WeaponName)
-                damageObject.enabled = false;
+                damageObject.gameObject.SetActive(false);
         }
     }
 
