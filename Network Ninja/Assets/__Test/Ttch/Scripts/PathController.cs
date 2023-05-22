@@ -82,10 +82,9 @@ public class PathController : MonoBehaviour
     }
 
 
-    public void PlayerEnteredPath(GateStates state, Collider other)
+    public void PlayerEnteredPath(GateStates state)
     {
-        if (other.gameObject.transform.parent.gameObject == player)
-        {
+       
             switch (state)
             {
                 case GateStates.Start:
@@ -103,6 +102,6 @@ public class PathController : MonoBehaviour
             }
             playerIsOnPath = true;
             currentWayPointIndex = reversePath ? wayPoints.Count - 1 : 0;
-        }
+        
     }
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -10,7 +11,8 @@ public enum GateStates
 public class GateController : MonoBehaviour
 {
     [SerializeField] GateStates state;
-    public bool spacePressed;
+    public bool buttonPressed;
+    public bool playerIsHere;
     PathController pathController;
 
     private void Start()
@@ -19,13 +21,23 @@ public class GateController : MonoBehaviour
     }
     private void Update()
     {
-        spacePressed = Input.GetKey(KeyCode.Space);
-    }
-    void OnTriggerStay(Collider other)
-    {
-        if (spacePressed)
+
+        buttonPressed = Input.GetKey(KeyCode.E);
+        if (playerIsHere == true && buttonPressed)
         {
-            pathController.PlayerEnteredPath(state, other);
+            pathController.PlayerEnteredPath(state);
         }
+
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == GameObjectsManager.Instance.Player)
+            playerIsHere = true;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == GameObjectsManager.Instance.Player)
+            playerIsHere = false;
     }
 }
