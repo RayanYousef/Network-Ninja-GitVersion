@@ -27,8 +27,25 @@ public class StatsManager : MonoBehaviour
 
     #region Setter and Getters
     public StatsStruct Stats { get => myStats; }
-    public List<Collider> HitObjects { get => hitObjects; set => hitObjects = value; } 
+    public List<Collider> HitObjects { get => hitObjects; set => hitObjects = value; }
     #endregion
+
+    private void OnDisable()
+    {
+        myStats.CurrentHealth = myStats.MaxHealth;
+        myStats.Defense = myStats.DefaultDefense;
+        myStats.Atk = myStats.DefaultAtk;
+        myStats.AtkSpeed = myStats.DefaultAtkSpeed;
+        myStats.MoveSpeed = myStats.DefaultMoveSpeed;
+        myStats.CooldownReduction = myStats.DefaultCooldownReduction;
+
+        if (HealthBar != null)
+        {
+            HealthBar.maxValue = myStats.MaxHealth;
+            HealthBar.value = myStats.CurrentHealth;
+        }
+
+    }
 
     private void Awake()
     {

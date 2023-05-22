@@ -31,13 +31,13 @@ public class Health : MonoBehaviour
     {
         collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
-        currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
-        maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
         animator = GetComponent<Animator>();
-        if(HP== null)
-        {
-            HP = GetComponent<StatsManager>().HealthBar;
-        }
+        //currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
+        //maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
+        //if (HP== null)
+        //{
+        //    HP = GetComponent<StatsManager>().HealthBar;
+        //}
 
         // currentHealth = maxHealth;
         //if(HP== null)
