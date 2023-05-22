@@ -11495,7 +11495,7 @@ PrefabInstance:
     - target: {fileID: 5977481143078867957, guid: 18ec71b734f4bb54ea44c16dba2058d3,
         type: 3}
       propertyPath: m_DefaultBlend.m_Time
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5977481143078867957, guid: 18ec71b734f4bb54ea44c16dba2058d3,
         type: 3}
@@ -28439,7 +28439,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 1
-  spacePressed: 0
+  buttonPressed: 0
+  playerIsHere: 0
 --- !u!65 &1571381164
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30973,7 +30974,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  spacePressed: 0
+  buttonPressed: 0
+  playerIsHere: 0
 --- !u!65 &1707877062
 BoxCollider:
   m_ObjectHideFlags: 0
