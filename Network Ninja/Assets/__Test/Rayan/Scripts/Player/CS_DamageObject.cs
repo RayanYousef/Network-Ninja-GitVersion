@@ -40,7 +40,7 @@ public class CS_DamageObject : MonoBehaviour
                     otherStatsManager.ApplyDamage(myStatsManager);
                     if (other!= myStatsManager.gameObject)
                         if(other.TryGetComponent<Rigidbody>(out Rigidbody rb))
-                        other.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity * 2;
+                        other.GetComponent<Rigidbody>().velocity = myStatsManager.GetComponent<Rigidbody>().velocity * 2;
                 }
             }
 

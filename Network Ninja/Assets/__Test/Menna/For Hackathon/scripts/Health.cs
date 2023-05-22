@@ -16,39 +16,47 @@ public class Health : MonoBehaviour
 
     public GameObject DeathEffect;
 
-    public int maxHealth;
-    public int currentHealth;
+    public float maxHealth;
+    //public int currentHealth;
     public Slider HP;
     public Animator animator;
     public Slider HealthBar;
     public EnemySpawner enemySpawner;
     public Collider collider;
+    StatsManager statsManager;
+    float currentHealth;
 
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-       
-        currentHealth = maxHealth;
-        if(HP== null)
-        HP = GetComponentInChildren<Slider>();
-        HP.maxValue = maxHealth;
-        rb = GetComponent<Rigidbody>();
-        //StartCoroutine(RandomlyApplyDamage());
         collider = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
+        currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
+        maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
+        animator = GetComponent<Animator>();
+        if(HP== null)
+        {
+            HP = GetComponent<StatsManager>().HealthBar;
+        }
+
+        // currentHealth = maxHealth;
+        //if(HP== null)
+        //HP = GetComponentInChildren<Slider>();
+        //HP.maxValue = maxHealth;
+        //StartCoroutine(RandomlyApplyDamage());
     }
 
     IEnumerator RandomlyApplyDamage()
     {
         float r = UnityEngine.Random.Range(1, 3);
         yield return new WaitForSeconds(r);
-        TakeDamage(maxHealth);
+       // TakeDamage(maxHealth);
     }
 
     private void Update()
     {
-        if(HealthBar != null)
-        HealthBar.value = currentHealth ; 
+        //if(HealthBar != null)
+        //HealthBar.value = currentHealth ; 
     }
 
 
@@ -89,12 +97,14 @@ public class Health : MonoBehaviour
             Instantiate(DeathEffect, transform.position, Quaternion.identity);
 
         }
+        enemySpawner = GetComponentInParent<EnemySpawner>();
 
         gameObject.SetActive(false);
 
-        enemySpawner = GetComponentInParent<EnemySpawner>();
 
-        this.currentHealth = maxHealth;  
+        //this.currentHealth = maxHealth;
+        currentHealth = GetComponent<StatsManager>().Stats.MaxHealth;
+
         enemySpawner.enemyPool.Add(gameObject);
         enemySpawner.enemies.Remove(gameObject);
 
@@ -104,9 +114,4 @@ public class Health : MonoBehaviour
         }
 
     }
-
-
-
-
-
 }

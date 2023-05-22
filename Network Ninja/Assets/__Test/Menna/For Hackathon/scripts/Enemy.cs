@@ -36,23 +36,11 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(player.position);
     }
 
-    #region //overlap
-    //private void FixedUpdate()
-    //{
-    //    // Detect overlapping colliders within the specified radius
-    //    overlappingColliders = Physics.OverlapSphere(transform.position, avoidanceRadius, overlapLayer);
+    public void showHealth()
+    {
+        Debug.Log(GetComponent<StatsManager>().Stats.CurrentHealth + gameObject.name);
+    }
 
-    //    // Apply force to avoid overlapping with other colliders
-    //    foreach (Collider collider in overlappingColliders)
-    //    {
-    //        if (collider.gameObject != gameObject) // Ignore self
-    //        {
-    //            Vector3 avoidanceDirection = transform.position - collider.transform.position;
-    //            Vector3 avoidanceForceVector = avoidanceDirection.normalized * avoidanceForce;
-    //            GetComponent<Rigidbody>().AddForce(avoidanceForceVector);
-    //        }
-    //    }
-    //}
-    #endregion
+
 
 }
