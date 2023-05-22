@@ -16,13 +16,13 @@ public class Health : MonoBehaviour
 
     public GameObject DeathEffect;
 
-    public float maxHealth;
+     float maxHealth;
     //public int currentHealth;
    // public Slider HP;
     public Animator animator;
     //public Slider HealthBar;
-    public EnemySpawner enemySpawner;
-    public Collider collider;
+     EnemySpawner enemySpawner;
+     Collider collider;
    // StatsManager statsManager;
     float currentHealth;
 
@@ -34,7 +34,7 @@ public class Health : MonoBehaviour
         animator = GetComponent<Animator>();
 
         currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
-        //maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
+        maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
         //if (HP== null)
         //{
         //    HP = GetComponent<StatsManager>().HealthBar;

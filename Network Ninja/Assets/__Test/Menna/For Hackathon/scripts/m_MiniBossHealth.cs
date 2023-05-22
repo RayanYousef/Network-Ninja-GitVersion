@@ -12,7 +12,7 @@ public class m_MiniBossHealth : Health
         //animation
         if (animator != null)
         animator.SetTrigger("Death");
-        Destroy(collider);
+        Destroy(GetComponent<Collider>());
         // Raise the event when the enemy is killed
         OnMiniBossKilled.Invoke(this.gameObject);
     }
@@ -24,8 +24,8 @@ public class m_MiniBossHealth : Health
             Instantiate(DeathEffect, transform.position, Quaternion.identity);
 
         }
-        gameObject.SetActive(false);
-       // Destroy(gameObject);
+       // gameObject.SetActive(false);
+        Destroy(gameObject);
 
     }
 }

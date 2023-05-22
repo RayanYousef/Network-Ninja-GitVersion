@@ -2243,7 +2243,6 @@ GameObject:
   - component: {fileID: 8624618157843050681}
   - component: {fileID: 8182064137278215584}
   - component: {fileID: 8182064137278215585}
-  - component: {fileID: 8182064137278215647}
   - component: {fileID: 6129130833574463453}
   - component: {fileID: -1943140102003597411}
   - component: {fileID: 4878532736797014061}
@@ -2284,7 +2283,7 @@ Rigidbody:
   m_Drag: 5000
   m_AngularDrag: 50
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
@@ -2342,24 +2341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aafe31c00b5c33a419219ad7ba15f5d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8182064137278215647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8895072523819109860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af3138c20b1af04cb12463a63475b85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDamage: 20
-  attackOffset: {x: 0, y: 0, z: 0}
-  attackRange: 1
-  attackMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!136 &6129130833574463453
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2388,13 +2369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeathEffect: {fileID: 4386811880964202464, guid: cc6aa134581011046a0378c3967dded8,
     type: 3}
-  maxHealth: 400
-  currentHealth: 400
-  HP: {fileID: 5341286764998510006}
   animator: {fileID: 8624618157843050681}
-  HealthBar: {fileID: 5341286764998510006}
-  enemySpawner: {fileID: 0}
-  collider: {fileID: 0}
 --- !u!114 &4878532736797014061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2789,5 +2764,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myStatsManager: {fileID: 0}
-  weaponName: 
+  myStatsManager: {fileID: 4878532736797014061}
+  weaponName: minionSlash
