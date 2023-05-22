@@ -8,6 +8,11 @@ using UnityEngine.InputSystem;
 public class CS_CameraTarget : MonoBehaviour
 {
 
+    [Header("Target To Look At")]
+    [SerializeField] Transform lookAtTarget;
+    [SerializeField] bool lockTarget;
+
+
     [Header("Camera Behavior Vars")]
     [SerializeField] float rotationSpeed;
     [SerializeField] float targetRotationSmoothTime, minAngle, maxAngle;
@@ -20,14 +25,16 @@ public class CS_CameraTarget : MonoBehaviour
     float yaw, pitch;
 
     public Vector2 DeltaValues
-    {
-        //get => deltaValues;
-        set => deltaValues = value;
-    }
+    { set => deltaValues = value; }
+    public Transform LookAtTarget { get => lookAtTarget; set => lookAtTarget = value; }
+    public bool LockTarget { get => lockTarget; set => lockTarget = value; }
 
     private void FixedUpdate()
     {
         RotateObject(deltaValues);
+
+        if (lockTarget)
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lookAtTarget.position - transform.position), Time.deltaTime * rotationSpeed);
     }
 
     public void RotateObject(Vector2 mouseDelta)

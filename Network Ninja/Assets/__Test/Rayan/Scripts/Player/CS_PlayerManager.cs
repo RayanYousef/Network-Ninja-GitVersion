@@ -17,7 +17,7 @@ public class CS_PlayerManager : MonoBehaviour
     [SerializeField] CS_AnimatorController animController;
     [SerializeField] CS_CameraTarget camTarget;
     [SerializeField] Rigidbody rb;
-    [SerializeField] PlayerInput Inputs;
+    [SerializeField] PlayerInput PlayerInputs;
     [SerializeField] FixedJoystick joyStick;
 
     [Header("Variables")]
@@ -49,6 +49,8 @@ public class CS_PlayerManager : MonoBehaviour
 
         moveController.PlayerManager = this;
         animController.PlayerManager = this;
+
+        PlayerInputs = GetComponent<PlayerInput>();
 
 
     }
@@ -258,7 +260,7 @@ public class CS_PlayerManager : MonoBehaviour
 
     public void ControllerState(bool value)
     {
-        Inputs.enabled = value;
+        PlayerInputs.enabled = value;
     }
     public void ColliderState(bool value)
     {
