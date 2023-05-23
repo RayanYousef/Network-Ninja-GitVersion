@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -32,12 +33,19 @@ public class GateController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == GameObjectsManager.Instance.Player)
+        {
             playerIsHere = true;
+            pathController.prompt.enabled = true;
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject == GameObjectsManager.Instance.Player)
+        {
             playerIsHere = false;
+            pathController.prompt.enabled = false;
+
+        }
     }
 }
