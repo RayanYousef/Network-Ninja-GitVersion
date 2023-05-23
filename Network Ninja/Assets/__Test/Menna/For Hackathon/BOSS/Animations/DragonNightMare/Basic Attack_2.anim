@@ -88544,9 +88544,10 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: EnableWeaponDamage
-    data: 
-    objectReferenceParameter: {fileID: 0}
+    functionName: EnableWeaponWithName
+    data: BossAttack
+    objectReferenceParameter: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
@@ -88575,9 +88576,10 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.1
-    functionName: DisableWeaponDamage
-    data: 
-    objectReferenceParameter: {fileID: 0}
+    functionName: DisableWeaponWithName
+    data: BossAttack
+    objectReferenceParameter: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
