@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using TMPro;
 
 public class PathController : MonoBehaviour
 {
@@ -16,8 +17,11 @@ public class PathController : MonoBehaviour
 
     //List of cameras that change the view based on waypoint
     public List<CinemachineVirtualCamera> WaypointCameras = new List<CinemachineVirtualCamera>();
-    
-    
+
+    //UI Prompt Text
+    public TextMeshProUGUI prompt;
+     
+
 
     public bool reversePath = false;
     private bool playerIsOnPath = false;
