@@ -20,7 +20,7 @@ public class GameObjectsManager : MonoBehaviour
 
     [Header("Boss")]
     [SerializeField] m_CombatManager combatManager;
-    [SerializeField] m_BossUI_Manager bossUiManager;
+   // [SerializeField] m_BossUI_Manager bossUiManager;
     [SerializeField] GameObject boss;
 
 
@@ -38,7 +38,7 @@ public class GameObjectsManager : MonoBehaviour
     public FormationAgent AllyPrefab { get => allyPrefab; }
     public GameObject SpawnEffect { get => spawnEffect; set => spawnEffect = value; }
     public Formation AllyBatalionPrefab { get => allyBatalionPrefab; set => allyBatalionPrefab = value; }
-    public m_BossUI_Manager BossUiManager { get => bossUiManager; }
+   // public m_BossUI_Manager BossUiManager { get => bossUiManager; }
     public m_CombatManager CombatManager { get => combatManager; }
  
     public rArea[] ListOfLevelAreas { get => listOfLevelAreas; set => listOfLevelAreas = value; }

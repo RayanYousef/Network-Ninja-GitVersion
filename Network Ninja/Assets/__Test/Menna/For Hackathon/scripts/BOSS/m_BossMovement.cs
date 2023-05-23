@@ -5,31 +5,64 @@ using Cinemachine;
 using Random = UnityEngine.Random;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.ParticleSystem;
+using UnityEngine.Events;
+using UnityEngine.UI;
+
 
 public class m_BossMovement : MonoBehaviour
 {
 
-    Transform player;
+
     //[SerializeField] GameObject bossHP;
 
+
+    public GameObject[] trails;
     public Animator dragonAnim;
 
+   // private GameObject Dragon;
+    private Animator DragonAnim;
 
     private float dragonSlowSpeed = 0.3f;
     private float dragonFastSpeed = 1.5f;
     private bool finishedAttack;
-    public GameObject[] trails;
+    private Transform player;
+
+    ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
+
+
+    [SerializeField] UnityEvent BossDie;
+
+    [SerializeField] private Image bloodSplatter;
+    [SerializeField] private Color transparentColor;
+    [SerializeField] private Color color;
+
+
+
+
     private void Awake()
     {
+       // Dragon = GameObjectsManager.Instance.Boss;
+        DragonAnim = GetComponent<Animator>();
+
         //bossHP = GameObjectsManager.Instance.BossHP;
         player = GameObjectsManager.Instance.Player.transform;
         //dragonAnim =gameObject.GetComponent<Animator>();
 
+        DragonAnim = GetComponent<Animator>();
+        bloodVfx = GetComponentsInChildren<ParticleSystem>()[0];
+        bloodVfx2 = GetComponentsInChildren<ParticleSystem>()[1];
+        bloodVfx3 =GetComponentsInChildren<ParticleSystem>()[2];
+
+        color = new Color(188f, 0f, 0f, 1f);
+        transparentColor = new Color(0f, 0f, 0f, 0f);
+
     }
 
     private void Start()
-    {      
+    {
         //bossHP.SetActive(true);
+
+        player.GetComponent<StatsManager>().onTakingDamage.AddListener(bloodPanelForPlayerDamage);
     }
     void Update()
     {
@@ -116,6 +149,24 @@ public class m_BossMovement : MonoBehaviour
     {
         return finishedAttack;
     }
+
+    public void OnHealthUpdatedFunction()
+    {
+        if (GetComponent<StatsManager>().Stats.CurrentHealth == 0)
+        {
+            Die();
+
+        }
+    }
+
+    public void Die()
+    {
+        DragonAnim.SetBool("dead", true);
+        DragonAnim.SetBool("isAttacking", false);
+        DragonAnim.SetBool("isChasing", false);
+        GameManager.Instance.EndStage(true);
+        BossDie?.Invoke();
+    }
     public bool death()
     {
         dragonAnim.speed = dragonFastSpeed;
@@ -128,5 +179,48 @@ public class m_BossMovement : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2f);
 
+    }
+
+    public void bleed()
+    {
+        int bloodNumber = Random.Range(0, 2);
+
+        switch (bloodNumber)
+        {
+            case 0:
+                bloodVfx.Play();
+                Debug.Log(bloodVfx);
+                break;
+            case 1:
+                bloodVfx2.Play();
+                Debug.Log(bloodVfx2);
+                break;
+            case 3:
+                bloodVfx3.Play();
+                Debug.Log(bloodVfx3);
+                break;
+        }
+    }
+
+    public IEnumerator DoFade()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 5f)
+        {
+            bloodSplatter.color = Color.Lerp(color, transparentColor, (elapsedTime / 5));
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+    }
+
+    public void bloodPanelForPlayerDamage()
+    {
+        if(gameObject)
+        {
+            StartCoroutine(DoFade());
+
+        }
     }
 }

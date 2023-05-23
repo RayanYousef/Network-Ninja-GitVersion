@@ -1205,66 +1205,6 @@ Transform:
   m_Father: {fileID: 8248186765704776601}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 12.805513, y: 13.739632, z: 1.8437221}
---- !u!1 &4738815014379842429
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2015674255946127752}
-  - component: {fileID: 7081187028097454314}
-  - component: {fileID: 1241511040453322252}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2015674255946127752
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4738815014379842429}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3231520776188954078}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7081187028097454314
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4738815014379842429}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6007288, y: 0.3666952, z: 2.2819095}
-  m_Center: {x: 0.7962814, y: 1.4112505, z: 0.24514268}
---- !u!114 &1241511040453322252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4738815014379842429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myStatsManager: {fileID: 6099832819183312230}
-  weaponName: minionSlash
 --- !u!1 &4775646653844315282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,7 +2389,7 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 5592875079967321722}
           m_TargetAssemblyTypeName: m_EnemyManager, Assembly-CSharp
-          m_MethodName: Die
+          m_MethodName: OnHealthUpdatedFunction
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2461,9 +2401,9 @@ MonoBehaviour:
           m_CallState: 2
     maxHealth: 100
     currentHealth: 100
-    defaultDefense: 100
-    defense: 1
-    defaultAtk: 0
+    defaultDefense: 0
+    defense: 0
+    defaultAtk: 5
     atk: 0
     defaultAtkSpeed: 1
     atkSpeed: 1
@@ -2722,15 +2662,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8624618158010691082}
     m_Modifications:
+    - target: {fileID: 1241511040453322252, guid: a3039e61bc1ae674da208314c1fdf3ab,
+        type: 3}
+      propertyPath: myStatsManager
+      value: 
+      objectReference: {fileID: 6099832819183312230}
     - target: {fileID: 2036183831279874009, guid: a3039e61bc1ae674da208314c1fdf3ab,
         type: 3}
       propertyPath: m_Name
       value: sword_Prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 2036183831279874009, guid: a3039e61bc1ae674da208314c1fdf3ab,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6586628265643482299, guid: a3039e61bc1ae674da208314c1fdf3ab,
         type: 3}
@@ -2795,22 +2735,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8624618157282400613}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7778058422391879356 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2036183831279874009, guid: a3039e61bc1ae674da208314c1fdf3ab,
-    type: 3}
-  m_PrefabInstance: {fileID: 8624618157282400613}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &593732029588012976
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7778058422391879356}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6007288, y: 0.3666952, z: 2.2819095}
-  m_Center: {x: 0.7962814, y: 1.4112505, z: 0.24514268}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -22,6 +23,7 @@ public class StatsManager : MonoBehaviour
 
     [SerializeField] CS_DamageObject[] damageObjects;
     [SerializeField] Slider HealthBar;
+    public UnityEvent onTakingDamage;
 
 
 
@@ -125,19 +127,11 @@ public class StatsManager : MonoBehaviour
         if(HealthBar!=null) 
         HealthBar.value = myStats.CurrentHealth;
         Debug.Log(myStats.CurrentHealth);
-    }
-
-    public void ApplyDamage(float attack=30)
-    {
-        myStats.CurrentHealth -= attack;
-        if(HealthBar!= null)
-        HealthBar.value = myStats.CurrentHealth;
-        if (myStats.CurrentHealth == 0)
-        {
-            parent.SetActive(false);
-        }
+        onTakingDamage?.Invoke();
 
     }
+
+
     #endregion
 
     #region AttackStrengthFunctions

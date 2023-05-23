@@ -407,7 +407,6 @@ GameObject:
   - component: {fileID: 7902939402413671830}
   - component: {fileID: 7902939402413671817}
   - component: {fileID: 7902939402413671816}
-  - component: {fileID: 7902939402413671819}
   m_Layer: 7
   m_Name: BossHealthbar_Canvas
   m_TagString: Untagged
@@ -500,23 +499,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7902939402413671819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7902939402413671821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d3c2f0e81c847448c4306642c517c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBarSprite: {fileID: 7902939401285612652}
-  bloodSplatter: {fileID: 7902939402759282076}
-  transparentColor: {r: 0, g: 0, b: 0, a: 0}
-  color: {r: 0.46226418, g: 0, b: 0, a: 0}
-  combatManager: {fileID: 0}
 --- !u!1 &7902939402759282078
 GameObject:
   m_ObjectHideFlags: 0
