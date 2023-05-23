@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class m_InGameMenuUI : MonoBehaviour
+public class m_InGameUI : MonoBehaviour
 {
     [Header("Winning Panel")]
     [SerializeField] GameObject winningPanel;
