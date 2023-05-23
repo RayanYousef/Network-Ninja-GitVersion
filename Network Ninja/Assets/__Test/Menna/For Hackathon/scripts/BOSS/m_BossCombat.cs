@@ -11,7 +11,7 @@ public class m_BossCombat : MonoBehaviour
     [Header("Dragon Animataions")]
 
      m_CombatManager combatManager;
-     m_BossUI_Manager uimanager;
+    // m_BossUI_Manager uimanager;
      m_BossMovement DragonMovement;
      StatsManager statsManager;
     
@@ -22,7 +22,7 @@ public class m_BossCombat : MonoBehaviour
   
     private void Start()
     {
-        uimanager = GameObjectsManager.Instance.BossUiManager;
+       // uimanager = GameObjectsManager.Instance.BossUiManager;
         combatManager = GameObjectsManager.Instance.CombatManager;
         DragonMovement = GameObjectsManager.Instance.Boss.GetComponentInChildren<m_BossMovement>();
         statsManager = GameObjectsManager.Instance.Player.GetComponent<StatsManager>();
@@ -37,11 +37,11 @@ public class m_BossCombat : MonoBehaviour
             {
                 if (!DragonMovement.returnFinishedAttack())
                 {
-                    statsManager.ApplyDamage();
+                    //statsManager.ApplyDamage();
                    // combatManager.PlayerTakeDamage();
 
                     //PlayerAnim.SetTrigger("getHit");
-                    uimanager.StartCoroutine(uimanager.DoFade());
+                   // uimanager.StartCoroutine(uimanager.DoFade());
                 }
             }
         }

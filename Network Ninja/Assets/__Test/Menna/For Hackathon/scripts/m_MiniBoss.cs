@@ -9,7 +9,7 @@ public class m_MiniBoss : m_EnemyManager
     public Action<GameObject> OnMiniBossKilled;  // Declare the event
 
 
-    public void OnHealthUpdatedFunction()
+    public override void OnHealthUpdatedFunction()
     {
         if (GetComponent<StatsManager>().Stats.CurrentHealth == 0)
             Die();

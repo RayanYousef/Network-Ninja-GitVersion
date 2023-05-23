@@ -24,7 +24,7 @@ public class m_CombatManager : MonoBehaviour
 
 
     //Script References
-    m_BossUI_Manager ui;
+   // m_BossUI_Manager ui;
 
    [SerializeField] UnityEvent BossDie;
 
@@ -35,12 +35,11 @@ public class m_CombatManager : MonoBehaviour
     private void Start()
     {
 
-
         DragonAnim = Dragon.GetComponent<Animator>();
         bloodVfx = Dragon.GetComponentsInChildren<ParticleSystem>()[0];
         bloodVfx2 = Dragon.GetComponentsInChildren<ParticleSystem>()[1];
         bloodVfx3 = Dragon.GetComponentsInChildren<ParticleSystem>()[2];
-        ui = GameObjectsManager.Instance.BossUiManager;
+      //  ui = GameObjectsManager.Instance.BossUiManager;
 
         bloodVfx.Stop();
         bloodVfx2.Stop();
@@ -94,7 +93,7 @@ public class m_CombatManager : MonoBehaviour
         {
             //Dragon.GetComponent<StatsManager>().ApplyDamage(PlayerDamage);
             DragonHP -= PlayerDamage;
-            ui.UpdateHealthBar(1500, getDragonHP());
+          //  ui.UpdateHealthBar(1500, getDragonHP());
             bleed();
             setDragonHP(DragonHP);
 

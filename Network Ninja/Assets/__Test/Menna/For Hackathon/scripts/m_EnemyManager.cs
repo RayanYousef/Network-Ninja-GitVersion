@@ -56,6 +56,12 @@ public class m_EnemyManager : MonoBehaviour
         Debug.Log(GetComponent<StatsManager>().Stats.CurrentHealth + gameObject.name);
     }
 
+    public virtual void OnHealthUpdatedFunction()
+    {
+        if (GetComponent<StatsManager>().Stats.CurrentHealth == 0)
+            Die();
+    }
+
     public virtual void Die()
     {
         //animation

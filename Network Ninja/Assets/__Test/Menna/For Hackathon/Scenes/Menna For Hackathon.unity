@@ -66212,10 +66212,76 @@ PrefabInstance:
       propertyPath: HealthBar
       value: 
       objectReference: {fileID: 1445692764}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: myStats.atk
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: myStats.defense
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: myStats.maxHealth
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: myStats.defaultAtk
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: myStats.currentHealth
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: myStats.defaultDefense
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: onTakingDamage.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: onTakingDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: onTakingDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 267218878, guid: edd34a89cfe571f4ca766dcca2459bbe,
+        type: 3}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: onTakingDamage.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: onTakingDamage.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: bloodPanelForPlayerDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: onTakingDamage.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: m_BossMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000050092332448487, guid: 44267bfe704f52f4490c15bf4e8e24bb,
+        type: 3}
+      propertyPath: onTakingDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7311399589588224657, guid: 44267bfe704f52f4490c15bf4e8e24bb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7311399589588224657, guid: 44267bfe704f52f4490c15bf4e8e24bb,
         type: 3}
@@ -67579,8 +67645,7 @@ MonoBehaviour:
   spawnEffect: {fileID: 4386811880964202464, guid: d6561a57ab0403b4eb362e93683f53b0,
     type: 3}
   combatManager: {fileID: 692672857}
-  bossUiManager: {fileID: 0}
-  boss: {fileID: 8436750506358372731, guid: 1001b8e0d57e07148b52fe7325e52292, type: 3}
+  boss: {fileID: 193776, guid: edd34a89cfe571f4ca766dcca2459bbe, type: 3}
   listOfLevelAreas:
   - {fileID: 6255316750618987311}
   - {fileID: 6255316749902934212}
@@ -68874,7 +68939,7 @@ Transform:
   - {fileID: 1936497499}
   - {fileID: 3094775259309030857}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2592824768246562524
 GameObject:

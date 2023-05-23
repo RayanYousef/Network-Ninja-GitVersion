@@ -36,7 +36,7 @@ public class CS_DamageObject : MonoBehaviour
             if (otherStatsManager.Stats.CurrentHealth > 0 && otherStatsManager != myStatsManager)
             {
                 if (otherStatsManager.Team != myStatsManager.Team)
-                {
+                {   
                     otherStatsManager.ApplyDamage(myStatsManager);
                     if (other!= myStatsManager.gameObject)
                         if(other.TryGetComponent<Rigidbody>(out Rigidbody rb))
