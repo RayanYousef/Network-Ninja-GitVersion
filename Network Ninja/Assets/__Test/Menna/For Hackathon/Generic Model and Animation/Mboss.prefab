@@ -446,6 +446,66 @@ Transform:
   m_Father: {fileID: 3926837294839943948}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 33.808853, y: 4.177614, z: 15.271971}
+--- !u!1 &2191357891634298528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5663044143174147156}
+  - component: {fileID: 2465062743006848371}
+  - component: {fileID: 2072494468465010442}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5663044143174147156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2191357891634298528}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3231520776188954078}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2465062743006848371
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2191357891634298528}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9010932, y: 0.3666952, z: 1.521273}
+  m_Center: {x: 0.7962813, y: 1.4112505, z: 0.24514273}
+--- !u!114 &2072494468465010442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2191357891634298528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myStatsManager: {fileID: 3653226974019152531}
+  weaponName: minionSlash
 --- !u!1 &2300595414480661418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2789,17 +2849,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9010932, y: 0.3666952, z: 1.521273}
   m_Center: {x: 0.7962813, y: 1.4112505, z: 0.24514273}
---- !u!114 &914945360353366829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7778058422391879356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myStatsManager: {fileID: 0}
-  weaponName: minionSlash

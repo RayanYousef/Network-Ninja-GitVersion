@@ -24834,7 +24834,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2441910060115052822}
   - component: {fileID: 2441910061838206395}
-  - component: {fileID: 2441910061838206394}
   - component: {fileID: 2440883165918375559}
   m_Layer: 0
   m_Name: R_Hand
@@ -24877,18 +24876,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 345.79214, y: 37.027714, z: 145.94461}
   m_Center: {x: -146.90985, y: 0.9668716, z: -3.4511244}
---- !u!114 &2441910061838206394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2441910060114782808}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92f8c26f87add2346b000551af356196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2440883165918375559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24901,7 +24888,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myStatsManager: {fileID: 7388828006988276417}
+  myStatsManager: {fileID: 6609754676705090845}
+  weaponName: BossAttack
 --- !u!1 &2441910060114783340
 GameObject:
   m_ObjectHideFlags: 0
@@ -24947,8 +24935,7 @@ GameObject:
   - component: {fileID: 2441910060028770257}
   - component: {fileID: 2441910060028770260}
   - component: {fileID: 2441910060028770262}
-  - component: {fileID: 7388828006988276417}
-  - component: {fileID: 5445648587442307511}
+  - component: {fileID: 6609754676705090845}
   m_Layer: 0
   m_Name: NightmareDragon
   m_TagString: BOSS
@@ -25066,7 +25053,7 @@ MonoBehaviour:
   - {fileID: 2441910060596498897}
   - {fileID: 2441910061962851470}
   - {fileID: 2441910060232671861}
---- !u!114 &7388828006988276417
+--- !u!114 &6609754676705090845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -25078,46 +25065,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterTopMostParent: {fileID: 2441910060114783384}
+  parent: {fileID: 2441910060114783384}
   hitObjects: []
   myStats:
-    maxHealth: 0
-    currentHealth: 0
-    defaultDefense: 0
-    defense: 0
-    defaultAtkDmg: 0
-    atkDmg: 0
-    defaultAtkSpeed: 0
-    atkSpeed: 0
-    defaultMoveSpeed: 0
-    moveSpeed: 0
-    defaultCooldownReduction: 0
-    cooldownReduction: 0
-    defaultLuck: 0
-    luck: 0
+    OnHealthUpdated:
+      m_PersistentCalls:
+        m_Calls: []
+    maxHealth: 100
+    currentHealth: 100
+    defaultDefense: 100
+    defense: 1
+    defaultAtk: 0
+    atk: 0
+    defaultAtkSpeed: 1
+    atkSpeed: 1
+    defaultMoveSpeed: 1
+    moveSpeed: 1
+    defaultCooldownReduction: 1
+    cooldownReduction: 1
+    defaultLuck: 1
+    luck: 1
   Team: 2
   damageObjects: []
   HealthBar: {fileID: 1711464527619246467}
---- !u!114 &5445648587442307511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2441910060114783384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f510669d93d137f4bbf211df415ad10d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DeathEffect: {fileID: 5913762401018777259}
-  maxHealth: 1500
-  currentHealth: 1500
-  HP: {fileID: 1711464527619246467}
-  animator: {fileID: 2441910060105372192}
-  HealthBar: {fileID: 1711464527619246467}
-  enemySpawner: {fileID: 0}
-  collider: {fileID: 0}
 --- !u!1 &2441910060114783756
 GameObject:
   m_ObjectHideFlags: 0
@@ -26690,7 +26660,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2441910060115117398}
   - component: {fileID: 2441910060722564834}
-  - component: {fileID: 2441910060722564833}
   - component: {fileID: 6879675006046468766}
   m_Layer: 0
   m_Name: Jaw01
@@ -26728,18 +26697,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 185.37694, y: 104.23108, z: 84.22425}
   m_Center: {x: -55.91591, y: -49.408424, z: 2.872686}
---- !u!114 &2441910060722564833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2441910060114891624}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92f8c26f87add2346b000551af356196, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6879675006046468766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26752,7 +26709,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701b076da35b6d6459cf839ffc5e6381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myStatsManager: {fileID: 7388828006988276417}
+  myStatsManager: {fileID: 6609754676705090845}
+  weaponName: BossAttack
 --- !u!1 &2441910060114893132
 GameObject:
   m_ObjectHideFlags: 0
