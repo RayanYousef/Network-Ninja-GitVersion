@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class rUIManager : MonoBehaviour
 {
-    [SerializeField] private rUIPassword uiPassword;
-    [SerializeField] private m_InGameUI inGameMenuUI;
-    void Start()
-    {
-        
-    }
+    public static rUIManager instance;
 
-    void Update()
+    [SerializeField] private rUIPassword uiPassword;
+
+    [SerializeField] private m_InGameUI inGameUI;
+
+    public static rUIManager Instance { get => instance; }
+    public rUIPassword UiPassword { get => uiPassword; set => uiPassword = value; }
+    public m_InGameUI InGameUI { get => inGameUI; set => inGameUI = value; }
+
+    private void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
