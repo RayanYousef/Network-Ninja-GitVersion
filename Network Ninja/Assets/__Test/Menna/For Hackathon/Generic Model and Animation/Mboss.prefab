@@ -2243,8 +2243,8 @@ GameObject:
   - component: {fileID: 8624618157843050681}
   - component: {fileID: 8182064137278215584}
   - component: {fileID: 6129130833574463453}
-  - component: {fileID: -1943140102003597411}
-  - component: {fileID: 4878532736797014061}
+  - component: {fileID: 3653226974019152531}
+  - component: {fileID: 1955257605544046199}
   m_Layer: 0
   m_Name: Mboss
   m_TagString: Untagged
@@ -2342,22 +2342,7 @@ CapsuleCollider:
   m_Height: 2.2394753
   m_Direction: 1
   m_Center: {x: 0, y: 1.0302627, z: 0}
---- !u!114 &-1943140102003597411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8895072523819109860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6b97634a36198746b63aebc712a4c9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DeathEffect: {fileID: 4386811880964202464, guid: cc6aa134581011046a0378c3967dded8,
-    type: 3}
-  animator: {fileID: 0}
---- !u!114 &4878532736797014061
+--- !u!114 &3653226974019152531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2375,7 +2360,7 @@ MonoBehaviour:
     OnHealthUpdated:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: -1943140102003597411}
+        - m_Target: {fileID: 1955257605544046199}
           m_TargetAssemblyTypeName: m_EnemyManager, Assembly-CSharp
           m_MethodName: showHealth
           m_Mode: 1
@@ -2387,9 +2372,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: -1943140102003597411}
-          m_TargetAssemblyTypeName: m_MiniBossHealth, Assembly-CSharp
-          m_MethodName: Die
+        - m_Target: {fileID: 1955257605544046199}
+          m_TargetAssemblyTypeName: m_MiniBoss, Assembly-CSharp
+          m_MethodName: OnHealthUpdatedFunction
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2399,8 +2384,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    maxHealth: 100
-    currentHealth: 100
+    maxHealth: 400
+    currentHealth: 400
     defaultDefense: 100
     defense: 1
     defaultAtk: 0
@@ -2416,6 +2401,21 @@ MonoBehaviour:
   Team: 2
   damageObjects: []
   HealthBar: {fileID: 5341286764998510006}
+--- !u!114 &1955257605544046199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8895072523819109860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b97634a36198746b63aebc712a4c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeathEffect: {fileID: 4386811880964202464, guid: d6561a57ab0403b4eb362e93683f53b0,
+    type: 3}
+  animator: {fileID: 0}
 --- !u!1 &9217789365634297403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,6 +2604,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_MaxValue
       value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1955257605544046199}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Die
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: m_MiniBoss, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: m_MiniBoss, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299978836940381529, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5001998288067493444, guid: 7b665dfe7a14cee42a62bc10d8fc9ab8,
         type: 3}

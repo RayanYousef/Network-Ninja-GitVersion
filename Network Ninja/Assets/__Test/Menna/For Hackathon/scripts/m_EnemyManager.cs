@@ -33,7 +33,7 @@ public class m_EnemyManager : MonoBehaviour
     #endregion
 
     // Start is called before the first frame update
-    void Start()
+   public  void Start()
     {
         player = GameObjectsManager.Instance.Player.transform;
         agent = GetComponent<NavMeshAgent>();
