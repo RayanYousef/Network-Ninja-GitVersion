@@ -58,7 +58,7 @@ public class StatsManager : MonoBehaviour
     private void Awake()
     {
         //Set multiplier based on difficulty
-        
+        SetDifficultyMultiplier(difficulty);
         //Apply multiplier on default values first
         ApplyDifficultyMultiplier();
 
@@ -92,7 +92,7 @@ public class StatsManager : MonoBehaviour
     #region Difficulty Functions
 
 
-    void SetDifficultyMultiplier()
+    void SetDifficultyMultiplier(Difficulty difficulty)
     {
         switch(difficulty)
         {
@@ -114,11 +114,13 @@ public class StatsManager : MonoBehaviour
     {
         if (this.Team == CharacterTeam.Enemy)
         {
+
             myStats.MaxHealth = myStats.MaxHealth * difficultyMultiplier;
             myStats.DefaultDefense = myStats.DefaultDefense * difficultyMultiplier;
             myStats.DefaultAtk = myStats.DefaultAtk * difficultyMultiplier;
             myStats.DefaultMoveSpeed = myStats.DefaultMoveSpeed * difficultyMultiplier;
             myStats.DefaultCooldownReduction = myStats.DefaultCooldownReduction * difficultyMultiplier;
+
         }
     }
 
