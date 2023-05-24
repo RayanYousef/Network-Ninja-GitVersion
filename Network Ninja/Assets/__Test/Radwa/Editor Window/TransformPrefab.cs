@@ -13,11 +13,11 @@ public class TransformPrefab : EditorWindow
 
     private void OnGUI()
     {
-        GUILayout.Label("Building Prefab", EditorStyles.boldLabel);
+        ////GUILayout.Label("Prefab", EditorStyles.boldLabel);
 
         EditorGUI.BeginChangeCheck();
 
-        buildingPrefab = (GameObject)EditorGUILayout.ObjectField("", buildingPrefab, typeof(GameObject), false);
+        buildingPrefab = (GameObject)EditorGUILayout.ObjectField("Prefab", buildingPrefab, typeof(GameObject), false);
 
         if (EditorGUI.EndChangeCheck())
         {
@@ -41,9 +41,11 @@ public class TransformPrefab : EditorWindow
                 instantiatedPrefab.transform.rotation = obj.transform.rotation;
                 instantiatedPrefab.transform.localScale = obj.transform.localScale;
 
+                Undo.DestroyObjectImmediate(obj.gameObject);
                 DestroyImmediate(obj.gameObject);
 
                 Undo.RegisterCreatedObjectUndo(instantiatedPrefab, "Prefab Replacement");
+                
             }
         }
     }
