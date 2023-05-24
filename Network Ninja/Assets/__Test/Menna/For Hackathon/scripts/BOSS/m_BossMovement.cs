@@ -170,7 +170,7 @@ public class m_BossMovement : MonoBehaviour
     public bool death()
     {
         dragonAnim.speed = dragonFastSpeed;
-        this.GetComponent<RigBuilder>().enabled = false;
+        //this.GetComponent<RigBuilder>().enabled = false;
         return true;
     }
     void LookAtPlayer()
