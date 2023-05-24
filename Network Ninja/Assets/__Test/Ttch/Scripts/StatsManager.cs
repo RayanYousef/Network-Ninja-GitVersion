@@ -10,6 +10,10 @@ public enum CharacterTeam
 {
     None,Player, Enemy
 }
+public enum Difficulty
+{
+    Easy, Normal, Hard
+}
 public class StatsManager : MonoBehaviour
 {
     [Header("Parent Of This Object")]
@@ -25,7 +29,9 @@ public class StatsManager : MonoBehaviour
     [SerializeField] Slider HealthBar;
     public UnityEvent onTakingDamage;
 
-
+    [Header("Difficulty")]
+    [SerializeField] public Difficulty difficulty = Difficulty.Normal;
+    public float difficultyMultiplier;
 
     #region Setter and Getters
     public StatsStruct Stats { get => myStats; }
@@ -51,6 +57,12 @@ public class StatsManager : MonoBehaviour
 
     private void Awake()
     {
+        //Set multiplier based on difficulty
+        
+        //Apply multiplier on default values first
+        ApplyDifficultyMultiplier();
+
+        //Then set the current stats based on those altered values
         myStats.CurrentHealth = myStats.MaxHealth;
         myStats.Defense = myStats.DefaultDefense;
         myStats.Atk = myStats.DefaultAtk;
@@ -77,6 +89,42 @@ public class StatsManager : MonoBehaviour
         }
     }
 
+    #region Difficulty Functions
+
+
+    void SetDifficultyMultiplier()
+    {
+        switch(difficulty)
+        {
+            case Difficulty.Easy:
+                difficultyMultiplier = 0.5f;
+                break;
+            case Difficulty.Normal:
+                difficultyMultiplier = 1f;
+                break;
+            case Difficulty.Hard:
+                difficultyMultiplier = 2f;
+                break;
+            default:
+                difficultyMultiplier = 1f;
+                break;         
+        }
+    }
+    void ApplyDifficultyMultiplier()
+    {
+        if (this.Team == CharacterTeam.Enemy)
+        {
+            myStats.MaxHealth = myStats.MaxHealth * difficultyMultiplier;
+            myStats.DefaultDefense = myStats.DefaultDefense * difficultyMultiplier;
+            myStats.DefaultAtk = myStats.DefaultAtk * difficultyMultiplier;
+            myStats.DefaultMoveSpeed = myStats.DefaultMoveSpeed * difficultyMultiplier;
+            myStats.DefaultCooldownReduction = myStats.DefaultCooldownReduction * difficultyMultiplier;
+        }
+    }
+
+
+
+    #endregion
     #region Enable/Disable Damage Collider Based on Animation Event
     public void EnableAllWeapons()
     {

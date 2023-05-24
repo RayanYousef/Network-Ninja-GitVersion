@@ -35,7 +35,7 @@ public class GateController : MonoBehaviour
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
             playerIsHere = true;
-            pathController.prompt.enabled = true;
+            rUIManager.instance.InGameUI.prompt.enabled = true;
         }
     }
 
@@ -44,7 +44,7 @@ public class GateController : MonoBehaviour
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
             playerIsHere = false;
-            pathController.prompt.enabled = false;
+            rUIManager.instance.InGameUI.prompt.enabled = false;
 
         }
     }
