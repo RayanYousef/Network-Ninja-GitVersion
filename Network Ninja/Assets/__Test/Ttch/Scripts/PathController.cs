@@ -18,8 +18,6 @@ public class PathController : MonoBehaviour
     //List of cameras that change the view based on waypoint
     public List<CinemachineVirtualCamera> WaypointCameras = new List<CinemachineVirtualCamera>();
 
-    //UI Prompt Text
-    public TextMeshProUGUI prompt;
      
 
 

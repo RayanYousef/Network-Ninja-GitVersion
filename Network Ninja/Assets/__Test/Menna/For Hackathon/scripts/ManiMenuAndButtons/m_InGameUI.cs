@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,10 @@ public class m_InGameUI : MonoBehaviour
     [Header("Options")]
     [SerializeField] Slider volumeSlider;
     public string MainMenu;
+
+    [Header("Transition")]
+    public TextMeshProUGUI prompt;
+
 
     #region Winning Panel
     public void WinningUI()
