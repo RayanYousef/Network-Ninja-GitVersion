@@ -63,6 +63,9 @@ public class m_BossMovement : MonoBehaviour
         //bossHP.SetActive(true);
 
         player.GetComponent<StatsManager>().onTakingDamage.AddListener(bloodPanelForPlayerDamage);
+        trailDeactivate();
+
+
     }
     void Update()
     {

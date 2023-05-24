@@ -9,6 +9,7 @@ public class m_BossPatrolState : StateMachineBehaviour
     float timer;
     float chaseRange = 15;
     Transform player;
+    Transform Boss;
     bool isChasing = false;
     NavMeshAgent agent;
 
@@ -26,6 +27,7 @@ public class m_BossPatrolState : StateMachineBehaviour
         //player = GameObject.FindGameObjectWithTag("Player").transform;
 
         player = GameObjectsManager.Instance.Player.transform;
+        Boss = GameObjectsManager.Instance.Boss.transform;
 
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = 1.5f;
@@ -34,7 +36,7 @@ public class m_BossPatrolState : StateMachineBehaviour
        // GameObject go= GameObject.FindGameObjectWithTag("waypoints");
         for(int i =0; i<3; i++)
         {
-            Vector3 randomPosition = player.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+            Vector3 randomPosition = Boss.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
             waypoints.Add(randomPosition);
         }
 
@@ -66,7 +68,8 @@ public class m_BossPatrolState : StateMachineBehaviour
         if (isChasing == true)
         {
             return true;
-        }return false;
+        }
+        return false;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
