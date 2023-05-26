@@ -13,6 +13,7 @@ public class CS_CameraManager : MonoBehaviour
     [SerializeField] CinemachineBrain cameraBrain;
     [SerializeField] CinemachineVirtualCamera mainVirtualCamera;
     [SerializeField] CinemachineVirtualCamera lockVirtualCamera;
+    [SerializeField] float lerpTime;
 
 
     [Header("Targets To Follow")]
@@ -21,7 +22,7 @@ public class CS_CameraManager : MonoBehaviour
 
     [Header("Lock Function Vars")]
     [SerializeField] List<GameObject> listOfTargets = new List<GameObject>();
-    [SerializeField] Transform lockTarget;
+    [SerializeField] Transform lockedTarget;
     [SerializeField] int targetIndex;
     [SerializeField] float lockRotationSpeed,lockTimer;
     [SerializeField] bool lockedOn;
@@ -52,10 +53,11 @@ public class CS_CameraManager : MonoBehaviour
                 case true:
                     if (listOfTargets.Count > 0)
                     {
+                        cameraBrain.m_DefaultBlend.m_Time = lerpTime;
                         lockVirtualCamera.enabled = true;
                         mainVirtualCamera.enabled = false;
-
-                        lockTarget = listOfTargets[targetIndex % listOfTargets.Count].transform;
+                        SetTarget();
+                            
                     }
                     else
                     {
@@ -66,6 +68,7 @@ public class CS_CameraManager : MonoBehaviour
                     break;
 
                 case false:
+                    cameraBrain.m_DefaultBlend.m_Time = lerpTime;
                     mainVirtualCamera.enabled = true;
                     lockVirtualCamera.enabled = false;
                     break;
@@ -79,8 +82,7 @@ public class CS_CameraManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab)) 
         {
             targetIndex++;
-            if(listOfTargets.Count>0)
-            lockTarget = listOfTargets[targetIndex % listOfTargets.Count].transform;
+            SetTarget();
         }
 
     }
@@ -88,13 +90,19 @@ public class CS_CameraManager : MonoBehaviour
     {
 
         followTargetLock.position = followTargetNormal.position = transform.position;
-
+        
         if (LockedOn && listOfTargets.Count>0)
         {
+            if(lockedTarget.gameObject.activeInHierarchy==false &&listOfTargets.Contains(lockedTarget.gameObject))
+            {
+                listOfTargets.Remove(lockedTarget.gameObject);
+                LockedOn= false;
+            }
+
             //followTargetLock.LookAt(lockTarget);
             followTargetLock.rotation= Quaternion.RotateTowards( 
                 followTargetLock.rotation,
-                Quaternion.LookRotation(lockTarget.position - followTargetLock.position),
+                Quaternion.LookRotation(lockedTarget.position - followTargetLock.position),
                 lockRotationSpeed*Time.deltaTime);
 
             if (lockTimer>cameraBrain.m_DefaultBlend.BlendTime)
@@ -151,6 +159,14 @@ public class CS_CameraManager : MonoBehaviour
             RotateObjectQuaternionClamping(deltaValues, followTargetNormal);
     }
 
+
+    private void SetTarget()
+    {
+
+        // On Destroy Remove Target from the list or else a null reference will find his way to you.
+        if (listOfTargets.Count > 0 && listOfTargets[targetIndex % listOfTargets.Count] != null)
+            lockedTarget = listOfTargets[targetIndex % listOfTargets.Count].transform;
+    }
 
 
     #region Main Rotation Function
