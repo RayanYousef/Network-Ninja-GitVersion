@@ -15,7 +15,8 @@ public class CS_PlayerManager : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] CS_MovementController moveController;
     [SerializeField] CS_AnimatorController animController;
-    [SerializeField] CS_CameraTarget camTarget;
+    [SerializeField] CS_LookAtClosestTarget lookAtClosestTarget;
+    [SerializeField] CS_CameraManager camTarget;
     [SerializeField] Rigidbody rb;
     [SerializeField] PlayerInput PlayerInputs;
     [SerializeField] FixedJoystick joyStick;
@@ -33,7 +34,7 @@ public class CS_PlayerManager : MonoBehaviour
     public Animator Anim { get => anim; }
     public CS_MovementController MoveController { get => moveController; }
     public CS_AnimatorController AnimController { get => animController; }
-    public CS_CameraTarget CamTarget { get => camTarget; }
+    public CS_CameraManager CamTarget { get => camTarget; }
     public Rigidbody Rb { get => rb; }
 
     private void Awake()
@@ -44,9 +45,10 @@ public class CS_PlayerManager : MonoBehaviour
         anim = playerTopMostParent.GetComponentInChildren<Animator>();
         moveController = playerTopMostParent.GetComponentInChildren<CS_MovementController>();
         animController = playerTopMostParent.GetComponentInChildren<CS_AnimatorController>();
-        camTarget = playerTopMostParent.GetComponentInChildren<CS_CameraTarget>();
+        lookAtClosestTarget = playerTopMostParent.GetComponentInChildren<CS_LookAtClosestTarget>();
+        if(camTarget== null)    
+        camTarget = playerTopMostParent.GetComponentInChildren<CS_CameraManager>();
         rb = playerTopMostParent.GetComponentInChildren<Rigidbody>();
-
         moveController.PlayerManager = this;
         animController.PlayerManager = this;
 
@@ -166,6 +168,7 @@ public class CS_PlayerManager : MonoBehaviour
             case CharacterState.Attacking:
                 anim.SetBool(animController.B_Attacking, true);
                 anim.applyRootMotion = true;
+                lookAtClosestTarget.RotateTowardsClosestEnemy();
                 break;
 
             case CharacterState.Falling:

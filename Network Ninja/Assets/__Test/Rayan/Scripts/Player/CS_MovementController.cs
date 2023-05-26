@@ -109,7 +109,7 @@ public class CS_MovementController : MonoBehaviour
     {
 
         Vector3 newDirection = playerCam.transform.TransformDirection(inputDirection);
-        newDirection.y = 0; newDirection.Normalize();
+        newDirection.y = 0; newDirection.Normalize()    ;
         if (newDirection != Vector3.zero)
             transform.rotation = Quaternion.RotateTowards(transform.rotation,
                 Quaternion.LookRotation(newDirection), Time.deltaTime * rotationSpeed);
