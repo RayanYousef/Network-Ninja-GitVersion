@@ -5,7 +5,7 @@ using TMPro;
 
 public class PathController : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     public Transform startPoint;
     public Transform endPoint;
 
@@ -13,7 +13,7 @@ public class PathController : MonoBehaviour
 
     public float defaultblendtime = 2;
 
-    public CinemachineBrain brain;
+    private CinemachineBrain brain;
 
     //List of cameras that change the view based on waypoint
     public List<CinemachineVirtualCamera> WaypointCameras = new List<CinemachineVirtualCamera>();
@@ -30,6 +30,11 @@ public class PathController : MonoBehaviour
     public float speed = 50f;
 
 
+    private void Start()
+    {
+        player = GameObjectsManager.Instance.Player;
+        brain = GameObjectsManager.Instance.CameraBrain;
+    }
 
     void FixedUpdate()
     {
