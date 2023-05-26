@@ -57,7 +57,12 @@ public class CS_CameraManager : MonoBehaviour
 
                         lockTarget = listOfTargets[targetIndex % listOfTargets.Count].transform;
                     }
-                    else lockedOn= false;
+                    else
+                    {
+                        lockedOn = false;
+                        mainVirtualCamera.enabled = true;
+                        lockVirtualCamera.enabled = false;
+                    }
                     break;
 
                 case false:
