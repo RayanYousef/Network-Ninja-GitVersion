@@ -292,7 +292,7 @@ public class EnemySpawner : MonoBehaviour
             enemyPool.Clear();
             enemies.Clear();
 
-            bool allAreasBase = GameObjectsManager.Instance.CheckAllAreasBaseExceptCurrent();
+            bool allAreasBase = rAreasManager.Instance.CheckAllAreasBaseExceptCurrent();
 
             if(allAreasBase)
             {

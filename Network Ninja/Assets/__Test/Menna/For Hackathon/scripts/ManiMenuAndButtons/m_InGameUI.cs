@@ -23,7 +23,7 @@ public class m_InGameUI : MonoBehaviour
     #region Winning Panel
     public void WinningUI()
     {
-        rPasswordManager.Instance.CurrentArea.MeshColourChanger.ChangeToColour(rPasswordManager.Instance.MaxHealth);
+        rAreasManager.Instance.CurrentArea.MeshColourChanger.ChangeToColour(rAreasManager.Instance.MaxHealth);
         winningPanel.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         //Time.timeScale = 0;

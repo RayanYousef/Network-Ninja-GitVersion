@@ -9,16 +9,16 @@ using System.Text.RegularExpressions;
 using Zxcvbn;
 
 
-public enum Soldiers { Melee, Ranged, MeleeRanged, MeleeRangedTank };
+//public enum Soldiers { Melee, Ranged, MeleeRanged, MeleeRangedTank };
 public enum PasswordStrength { Weak, Moderate, Strong };
 
-public class rPasswordManager : MonoBehaviour
+public class rAreasManager : MonoBehaviour
 {
-    private static rPasswordManager instance;
+    private static rAreasManager instance;
     [SerializeField] rUIPassword passwordCanvas;
 
     [Header("Password Manager Components")]
-    rArea[] listOfLevelAreas;
+    [SerializeField] rArea[] listOfLevelAreas;
     [SerializeField] int maxSoldiersNumber = 75;
     [SerializeField] Color maxHealth, halfHealth, lowHealth, enemyColor;
 
@@ -34,7 +34,7 @@ public class rPasswordManager : MonoBehaviour
     private string[] playerPersonalData;
 
     //
-    public static rPasswordManager Instance { get => instance; }
+    public static rAreasManager Instance { get => instance; }
     public rArea CurrentArea { get { return currentArea; } set => currentArea = value; }
 
     public int MaxSoldiersNumber { get => maxSoldiersNumber; }
@@ -45,6 +45,8 @@ public class rPasswordManager : MonoBehaviour
     public rUIPassword PasswordCanvas { get => passwordCanvas; set => passwordCanvas = value; }
     public string Warnings { get => currentWarnings; set => currentWarnings = value; }
     public string Suggestions { get => currentSuggestions; set => currentSuggestions = value; }
+    public rArea[] ListOfLevelAreas { get => listOfLevelAreas; set => listOfLevelAreas = value; }
+
 
     private void Awake()
     {
@@ -57,11 +59,6 @@ public class rPasswordManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
-    }
-
-    private void Start()
-    {
-        listOfLevelAreas = GameObjectsManager.Instance.ListOfLevelAreas;
     }
 
 
@@ -115,20 +112,13 @@ public class rPasswordManager : MonoBehaviour
         currentWarnings = result.Feedback.Warning;
 
         currentSuggestions = null;
-        ///
-        //foreach(string s in result.Feedback.Suggestions)
-        //{
-        //    suggestions += s;
-        //    suggestions += ". ";
-        //}
-        ///
+
         int cnt = result.Feedback.Suggestions.Count;
         if (cnt > 0)
         {
             int i = UnityEngine.Random.Range(0, cnt);
             currentSuggestions = result.Feedback.Suggestions[i];
         }
-        ///
     }
 
     void loadUserPrivateData()
@@ -162,19 +152,35 @@ public class rPasswordManager : MonoBehaviour
 
         currentArea.MeshColourChanger.LerpBetweenObjectColours(currentArea.Health / maxSoldiersNumber);
     }
-        private void CheckPassword(string password)
-        {
+    private void CheckPassword(string password)
+    {
 
-        if (password.Length == 0)
-        {
-            return;
-        }
+    if (password.Length == 0)
+    {
+        return;
+    }
 
-        if (password == currentArea.Password)
+    if (password == currentArea.Password)
+    {
+        Debug.Log("Correct Password");
+        currentArea.GetComponent<Collider>().isTrigger = true;
+        return;
+    }
+    }
+
+    public bool CheckAllAreasBaseExceptCurrent()
+    {
+        foreach (rArea area in listOfLevelAreas)
         {
-            Debug.Log("Correct Password");
-            currentArea.GetComponent<Collider>().isTrigger = true;
-            return;
+            if (area == rAreasManager.Instance.CurrentArea)
+            {
+                continue;
+            }
+            if (area.AreaType != AreaType.Base)
+            {
+                return false;
+            }
         }
+        return true;
     }
 }
