@@ -35,7 +35,8 @@ public class m_MiniBoss : m_EnemyManager
             Instantiate(DeathEffect, transform.position, Quaternion.identity);
         }
 
-        Destroy(gameObject);
+        //  Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
   
