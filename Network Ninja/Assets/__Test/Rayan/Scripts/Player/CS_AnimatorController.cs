@@ -74,6 +74,7 @@ public class CS_AnimatorController : MonoBehaviour
     public void CanTransit()
     {
         PlayerManager.Anim.SetBool(b_canTransit, true);
+        PlayerManager.MyStats.DisableAllWeapons();
     }
 
     public void NegateDashing()
