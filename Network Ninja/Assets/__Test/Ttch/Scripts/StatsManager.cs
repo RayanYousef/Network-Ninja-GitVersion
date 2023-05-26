@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -8,6 +9,10 @@ using UnityEngine.UI;
 public enum CharacterTeam
 {
     None,Player, Enemy
+}
+public enum Difficulty
+{
+    Easy, Normal, Hard
 }
 public class StatsManager : MonoBehaviour
 {
@@ -22,8 +27,11 @@ public class StatsManager : MonoBehaviour
 
     [SerializeField] CS_DamageObject[] damageObjects;
     [SerializeField] Slider HealthBar;
+    public UnityEvent onTakingDamage;
 
-
+    [Header("Difficulty")]
+    [SerializeField] public Difficulty difficulty = Difficulty.Normal;
+    public float difficultyMultiplier;
 
     #region Setter and Getters
     public StatsStruct Stats { get => myStats; }
@@ -49,6 +57,12 @@ public class StatsManager : MonoBehaviour
 
     private void Awake()
     {
+        //Set multiplier based on difficulty
+        SetDifficultyMultiplier(difficulty);
+        //Apply multiplier on default values first
+        ApplyDifficultyMultiplier();
+
+        //Then set the current stats based on those altered values
         myStats.CurrentHealth = myStats.MaxHealth;
         myStats.Defense = myStats.DefaultDefense;
         myStats.Atk = myStats.DefaultAtk;
@@ -75,6 +89,44 @@ public class StatsManager : MonoBehaviour
         }
     }
 
+    #region Difficulty Functions
+
+
+    void SetDifficultyMultiplier(Difficulty difficulty)
+    {
+        switch(difficulty)
+        {
+            case Difficulty.Easy:
+                difficultyMultiplier = 0.5f;
+                break;
+            case Difficulty.Normal:
+                difficultyMultiplier = 1f;
+                break;
+            case Difficulty.Hard:
+                difficultyMultiplier = 2f;
+                break;
+            default:
+                difficultyMultiplier = 1f;
+                break;         
+        }
+    }
+    void ApplyDifficultyMultiplier()
+    {
+        if (this.Team == CharacterTeam.Enemy)
+        {
+
+            myStats.MaxHealth = myStats.MaxHealth * difficultyMultiplier;
+            myStats.DefaultDefense = myStats.DefaultDefense * difficultyMultiplier;
+            myStats.DefaultAtk = myStats.DefaultAtk * difficultyMultiplier;
+            myStats.DefaultMoveSpeed = myStats.DefaultMoveSpeed * difficultyMultiplier;
+            myStats.DefaultCooldownReduction = myStats.DefaultCooldownReduction * difficultyMultiplier;
+
+        }
+    }
+
+
+
+    #endregion
     #region Enable/Disable Damage Collider Based on Animation Event
     public void EnableAllWeapons()
     {
@@ -125,19 +177,11 @@ public class StatsManager : MonoBehaviour
         if(HealthBar!=null) 
         HealthBar.value = myStats.CurrentHealth;
         Debug.Log(myStats.CurrentHealth);
-    }
-
-    public void ApplyDamage(float attack=30)
-    {
-        myStats.CurrentHealth -= attack;
-        if(HealthBar!= null)
-        HealthBar.value = myStats.CurrentHealth;
-        if (myStats.CurrentHealth == 0)
-        {
-            parent.SetActive(false);
-        }
+        onTakingDamage?.Invoke();
 
     }
+
+
     #endregion
 
     #region AttackStrengthFunctions

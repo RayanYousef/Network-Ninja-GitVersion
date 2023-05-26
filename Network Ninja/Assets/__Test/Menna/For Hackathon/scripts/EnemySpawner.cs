@@ -21,15 +21,9 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRadius = 10f;
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
-    public bool allArmyDied = false;
-    public int spawnInterval = 20;
     public int miniBossSize = 4;
 
-    public int enemiesPerSpawn = 5;
-    public int numSpawned = 0;
-    public int numAlive = 0;
 
-    // public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
 
     public List<GameObject> enemies;  // A list of all spawned enemies.
     public List<GameObject> MiniBosses;  // A list of all spawned MonoBosses.
@@ -37,6 +31,13 @@ public class EnemySpawner : MonoBehaviour
 
     public UnityEvent OnAllMiniBossesKilled, OnBigBossKilled;
 
+
+    // public int spawnInterval = 20;
+    //public int enemiesPerSpawn = 5;
+    //public int numSpawned = 0;
+    //public int numAlive = 0;
+    //public bool allArmyDied = false;
+    // public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
     void Start()
     {
         enemies = new List<GameObject>();
@@ -137,7 +138,7 @@ public class EnemySpawner : MonoBehaviour
             Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
             GameObject MiniBoss = Instantiate(MiniBossPrefab, randomPosition, Quaternion.identity);
             MiniBoss.transform.parent = this.transform;
-            MiniBoss.GetComponent<m_MiniBossHealth>().OnMiniBossKilled += HandleMiniBossKilled;
+            MiniBoss.GetComponent<m_MiniBoss>().OnMiniBossKilled += HandleMiniBossKilled;
             MiniBosses.Add(MiniBoss);
             //Debug.Log("mini boss spawned");
         }
@@ -186,7 +187,7 @@ public class EnemySpawner : MonoBehaviour
     //        Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
     //        miniboss.transform.position = randomPosition;
     //        miniboss.SetActive(true);
-    //        miniboss.GetComponent<m_MiniBossHealth>().OnMiniBossKilled += HandleMiniBossKilled;
+    //        miniboss.GetComponent<m_MiniBoss>().OnMiniBossKilled += HandleMiniBossKilled;
     //        minibossPool.Add(miniboss);
     //        MiniBosses.Add(miniboss);
     //    }
@@ -203,7 +204,7 @@ public class EnemySpawner : MonoBehaviour
     //    }
     //    GameObject newMiniBoss = Instantiate(MiniBossPrefab, Vector3.zero, Quaternion.identity);
     //    newMiniBoss.SetActive(false);
-    //    newMiniBoss.GetComponent<m_MiniBossHealth>().OnMiniBossKilled += HandleMiniBossKilled;
+    //    newMiniBoss.GetComponent<m_MiniBoss>().OnMiniBossKilled += HandleMiniBossKilled;
     //    minibossPool.Add(newMiniBoss);
     //    return newMiniBoss;
     //}
@@ -281,12 +282,12 @@ public class EnemySpawner : MonoBehaviour
             {
                 if (Enemy != null)
                 {
-                    Enemy.GetComponent<Health>().Die();
+                    Enemy.GetComponent<m_EnemyManager>().Die();
                     Debug.Log("All DEAAAAAAAAAAAAAAAAAAAAAAAD");
 
                 }
                 // MiniBossPrefab.GetComponent<Animator>().SetTrigger("Death");
-                // Destroy(Enemy);
+                // Destroy(m_EnemyManager);
             }
             enemyPool.Clear();
             enemies.Clear();

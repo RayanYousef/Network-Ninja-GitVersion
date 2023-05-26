@@ -40,6 +40,6 @@ public class m_BossAttackState : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
-        animator.SetFloat("attacks", attackOptions[ChooseDragonAttack()]);
+       // animator.SetFloat("attacks", attackOptions[ChooseDragonAttack()]);
     }
 }
