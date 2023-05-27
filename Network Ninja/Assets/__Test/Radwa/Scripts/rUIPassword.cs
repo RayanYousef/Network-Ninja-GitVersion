@@ -121,7 +121,7 @@ public class rUIPassword : MonoBehaviour
 
     public void OnEnteringAreaShowPannels()
     {
-        switch (rPasswordManager.Instance.CurrentArea.Password != null)
+        switch (rAreasManager.Instance.CurrentArea.Password != null)
         {
             case true:
                 ShowCheckPasswordPanel();
@@ -146,7 +146,7 @@ public class rUIPassword : MonoBehaviour
     {
         playerInputs.enabled = false;
         Time.timeScale = 0f;
-        string correctAns = rPasswordManager.Instance.CurrentArea.Password;
+        string correctAns = rAreasManager.Instance.CurrentArea.Password;
         Debug.Log($"Correct Answer is {correctAns}");
 
         /// generate 2 answers shuffled from the correct answer
@@ -174,25 +174,25 @@ public class rUIPassword : MonoBehaviour
             return;
         }
 
-        if(rPasswordManager.Instance.CurrentArea.AreaType == AreaType.Base)
+        if(rAreasManager.Instance.CurrentArea.AreaType == AreaType.Base)
         {
             // if the area is already a base, this means the player is reseting the password
             // so destroy the allies already there
             // to save the hassle of checking how many allies the new password should add
 
-            rPasswordManager.Instance.CurrentArea.DestroyAllAllies();
+            rAreasManager.Instance.CurrentArea.DestroyAllAllies();
         }
 
-        rPasswordManager.Instance.CurrentArea.Password = passwordIF.text;
-        rPasswordManager.Instance.CheckCurrentAreaPasswordStrength();
-        rPasswordManager.Instance.CurrentArea.AreaType = AreaType.Base;
-        rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
+        rAreasManager.Instance.CurrentArea.Password = passwordIF.text;
+        rAreasManager.Instance.CheckCurrentAreaPasswordStrength();
+        rAreasManager.Instance.CurrentArea.AreaType = AreaType.Base;
+        rAreasManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
 
 
 
-        rPasswordManager.Instance.SetAreaHealthBasedOnPassword();
-        rPasswordManager.Instance.CurrentArea.FormArmyBasedOnAreaHealth();
-        rPasswordManager.Instance.AreasWithSamePasswordAsCurrent();
+        rAreasManager.Instance.SetAreaHealthBasedOnPassword();
+        rAreasManager.Instance.CurrentArea.FormArmyBasedOnAreaHealth();
+        rAreasManager.Instance.AreasWithSamePasswordAsCurrent();
 
 
         createPasswordPanel.SetActive(false);
@@ -207,11 +207,11 @@ public class rUIPassword : MonoBehaviour
 
     private void ShowFeedback()
     {
-        string tempStr = rPasswordManager.Instance.Warnings;
+        string tempStr = rAreasManager.Instance.Warnings;
         if (tempStr.Length > 0)
         {
             feedbackTxt.text = tempStr += ".\n";
-            tempStr = rPasswordManager.Instance.Suggestions;
+            tempStr = rAreasManager.Instance.Suggestions;
             if(tempStr.Length > 0)
             {
                 feedbackTxt.text += tempStr;
@@ -233,9 +233,9 @@ public class rUIPassword : MonoBehaviour
         if (selectedBtn.GetComponent<rAnswerButton>().IsCorrect)
         {
             Debug.Log("Correct Password");
-            rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
+            rAreasManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
             
-            rPasswordManager.Instance.CurrentArea.ShowAlliesBasedOnAreaHealth();
+            rAreasManager.Instance.CurrentArea.ShowAlliesBasedOnAreaHealth();
         }
         else
         {

@@ -35,9 +35,9 @@ public class AlliesSpawner : MonoBehaviour {
         _parent.transform.parent = this.transform;
     }
 
-    private void Update() {
-        //SetFormation();
-    }
+    //private void Update() {
+    //    //SetFormation();
+    //}
 
     public void SetFormation() {
         _points = Formation.EvaluatePoints().ToList();
@@ -56,27 +56,32 @@ public class AlliesSpawner : MonoBehaviour {
         }
     }
 
-    public void SetPrefabsTypes(Soldiers soldiersType)
-    {
-        switch (soldiersType)
-        {
-            case Soldiers.Melee:
-                meleeChance = 1;
-                break;
-            case Soldiers.Ranged:
-                rangedChance = 1;
-                break;
-            case Soldiers.MeleeRanged:
-                meleeChance = 0.6f;
-                rangedChance = 0.4f;
-                break;
-            case Soldiers.MeleeRangedTank:
-                meleeChance = 0.5f;
-                rangedChance = 0.3f;
-                tankChance = 0.2f;
-                break;
-        }
-    }
+
+    #region Allies Types
+    // for now we don't need this function, but latter we might spawn 2 helpers for the player
+
+    //public void SetPrefabsTypes(Soldiers soldiersType)
+    //{
+    //    switch (soldiersType)
+    //    {
+    //        case Soldiers.Melee:
+    //            meleeChance = 1;
+    //            break;
+    //        case Soldiers.Ranged:
+    //            rangedChance = 1;
+    //            break;
+    //        case Soldiers.MeleeRanged:
+    //            meleeChance = 0.6f;
+    //            rangedChance = 0.4f;
+    //            break;
+    //        case Soldiers.MeleeRangedTank:
+    //            meleeChance = 0.5f;
+    //            rangedChance = 0.3f;
+    //            tankChance = 0.2f;
+    //            break;
+    //    }
+    //} 
+    #endregion
 
     private void Spawn(IEnumerable<Vector3> points) {
         foreach (var pos in points)
