@@ -8,7 +8,6 @@ public class CS_MovementController : MonoBehaviour
     [Header("Components on this GameObject")]
     [SerializeField] Rigidbody rb;
     [SerializeField] CS_PlayerManager playerManager;
-    [SerializeField] CS_AnimatorController animController;
 
     [Header("Components on Other GameObjects")]
     [SerializeField] Camera playerCam;
@@ -38,11 +37,11 @@ public class CS_MovementController : MonoBehaviour
     public Vector3 InputDirection { get => inputDirection; set => inputDirection = value; }
     public float DashDuration { get => dashDuration; }
     public float AppliedGravityForce { get => appliedGravityForce; set => appliedGravityForce = value; }
+    public CS_PlayerManager PlayerManager { get => playerManager; set => playerManager = value; }
 
     private void Awake()
     {
         rb = GetComponentInChildren<Rigidbody>();
-        animController = GetComponentInChildren<CS_AnimatorController>();
         // NOTE THAT THE Camera SHOULD BE UNDER THE SAME PARENT!
         playerCam = transform.parent.GetComponentInChildren<Camera>();
 
@@ -80,7 +79,7 @@ public class CS_MovementController : MonoBehaviour
                 break;
         }
 
-        if (animController.Grounded == false && playerManager.AnimatorCurrentState!= CharacterState.Dashing)
+        if (PlayerManager.enabled && playerManager.AnimController.Grounded == false && playerManager.AnimatorCurrentState!= CharacterState.Dashing)
             FallingUpdate();
 
     }
@@ -110,7 +109,7 @@ public class CS_MovementController : MonoBehaviour
     {
 
         Vector3 newDirection = playerCam.transform.TransformDirection(inputDirection);
-        newDirection.y = 0; newDirection.Normalize();
+        newDirection.y = 0; newDirection.Normalize()    ;
         if (newDirection != Vector3.zero)
             transform.rotation = Quaternion.RotateTowards(transform.rotation,
                 Quaternion.LookRotation(newDirection), Time.deltaTime * rotationSpeed);
@@ -131,11 +130,11 @@ public class CS_MovementController : MonoBehaviour
         if (dashTimer < dashDuration)
         {
             rb.AddForce(transform.forward * appliedDashForce * Time.deltaTime, ForceMode.Impulse);
-            animController.SetAnimationMotion(Mathf.Clamp(dashTimer / dashDuration, 0, 0.3f));
+            playerManager.AnimController.SetAnimationMotion(Mathf.Clamp(dashTimer / dashDuration, 0, 0.3f));
         }
         else
         {
-            animController.NegateDashing();
+            playerManager.AnimController.NegateDashing();
             return;
         }
         if (appliedDashForce > 0)
@@ -157,12 +156,12 @@ public class CS_MovementController : MonoBehaviour
         if (jumpTimer < jumpDuration)
         {
             rb.AddForce(transform.up * appliedJumpForce * Time.deltaTime, ForceMode.Impulse);
-            animController.SetAnimationMotion(Mathf.Clamp(jumpTimer / jumpDuration, 0, 1));
+            playerManager.AnimController.SetAnimationMotion(Mathf.Clamp(jumpTimer / jumpDuration, 0, 1));
 
         }
         else
         {
-            animController.NegateJumping();
+            playerManager.AnimController.NegateJumping();
             return;
         }
         if (appliedJumpForce > 0)

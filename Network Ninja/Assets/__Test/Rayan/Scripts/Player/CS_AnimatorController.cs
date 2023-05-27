@@ -5,21 +5,24 @@ using UnityEngine.ProBuilder;
 
 public class CS_AnimatorController : MonoBehaviour
 {
+    public enum DamageObjectDirection { ForwardUp,ForwardDown,BackwardUp,BackwardDown }
 
     [Header("GameObject Components")]
-    [SerializeField] Animator anim;
-    [SerializeField] CS_DamageHandler attackHandler;
+    [SerializeField] CS_PlayerManager playerManager;
+    [SerializeField] Transform forwardUp,forwardDown,backwardUp,backwardDown;
 
     [Header("Applied Force To Animation")]
     [SerializeField] float appliedForce;
 
     [Header("Animator Parameters")]
-    [SerializeField] string i_Combo;
+    [SerializeField] string i_Combo_1;
+    [SerializeField] string i_Combo_2;
     [SerializeField] string f_Direction, f_MotionTime, f_animSpeed;
     [SerializeField] string b_Grounded, b_Attacking, b_Dashing, b_Jumping, b_canTransit, t_Dash, t_Jump;
 
-    public CS_DamageHandler AttackHandler { get => attackHandler; }
-    public string I_Combo { get => i_Combo; }
+    public CS_PlayerManager PlayerManager { get => playerManager; set => playerManager = value; }
+    public string I_Combo_1 { get => i_Combo_1; }
+    public string I_Combo_2 { get => i_Combo_2; set => i_Combo_2 = value; }
     public string F_MotionTime { get => f_MotionTime; }
     public string F_Direction { get => f_Direction; }
     public string F_animSpeed { get => f_animSpeed; }
@@ -34,42 +37,125 @@ public class CS_AnimatorController : MonoBehaviour
 
     public bool Grounded
     {
-        get => anim.GetBool(b_Grounded);
-    }
-
-
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        anim = GetComponentInChildren<Animator>();
+        get => PlayerManager.Anim.GetBool(b_Grounded);
     }
 
     public void SetGrounded(bool value)
     {
-        anim.SetBool(b_Grounded, value);
+        PlayerManager.Anim.SetBool(b_Grounded, value);
     }
 
-    #region Animation Modifiers
+    #region Animation State Modifiers
     public void SetAnimationMotion(float motionTime)
     {
-        anim.SetFloat(f_MotionTime, motionTime);
+        PlayerManager.Anim.SetFloat(f_MotionTime, motionTime);
     }
 
     public void SetAnimationSpeed(float speed)
     {
-        anim.SetFloat(f_animSpeed, speed);
+        PlayerManager.Anim.SetFloat(f_animSpeed, speed);
     }
 
 
     #endregion
 
+    #region Animation Events
 
-    #region Animation Event
+    public void ResetCombo()
+    {
+            PlayerManager.Anim.SetInteger(I_Combo_1, 0);
+            PlayerManager.Anim.SetInteger(I_Combo_2, 0);
+            PlayerManager.Anim.SetBool(b_Attacking, false);
+    }
+
     public void CanTransit()
     {
-        anim.SetBool(b_canTransit, true);
-        attackHandler.gameObject.SetActive(false);
+            PlayerManager.Anim.SetBool(b_canTransit, true);
+        PlayerManager.PStatsManager.DisableAllWeapons();
+    }
+
+    #region Damage Object Rotation and Position
+
+    public void EnableWeapon(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+                damageObject.gameObject.SetActive(true);
+            }
+        }
+    }
+    public void EnableWeaponForwardUp(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+
+                damageObject.gameObject.SetActive(true);
+                damageObject.gameObject.transform.position = forwardUp.position;
+                damageObject.gameObject.transform.rotation = forwardUp.rotation;
+            }
+        }
+    }
+    public void EnableWeaponForwardDown(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+
+                damageObject.gameObject.SetActive(true);
+                damageObject.gameObject.transform.position = forwardDown.position;
+                damageObject.gameObject.transform.rotation = forwardDown.rotation;
+            }
+        }
+    }
+
+    public void EnableWeaponBackwardUp(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+
+                damageObject.gameObject.SetActive(true);
+                damageObject.gameObject.transform.position = backwardUp.position;
+                damageObject.gameObject.transform.rotation = backwardUp.rotation;
+            }
+        }
+    }
+
+    public void EnableWeaponBackwardDown(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+
+                damageObject.gameObject.SetActive(true);
+                damageObject.gameObject.transform.position = backwardDown.position;
+                damageObject.gameObject.transform.rotation = backwardDown.rotation;
+            }
+        }
+    }
+
+    #endregion
+    public void NegateDashing()
+    {
+        PlayerManager.Anim.SetBool(B_Dashing, false);
+    }
+
+    public void NegateJumping()
+    {
+        PlayerManager.Anim.SetBool(B_Jumping, false);
+    }
+
+    public void PlayFootstepsAudio()
+    {
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.Footsteps);
     }
 
     public void ApplyForwardForce(float force)
@@ -77,49 +163,7 @@ public class CS_AnimatorController : MonoBehaviour
         GetComponent<Rigidbody>().
             AddForce(transform.forward * (appliedForce + force), ForceMode.Impulse);
   
-
-
-    }
-
-    public void OnAttackSetFirstPoint()
-    {
-        attackHandler.SetFirstPoint();  
-    }
-
-    public void OnAttackSetPointTwo(ProjectOnPlaneAxis axis)
-    {
-        Vector3 projectionAxis= Vector3.zero;
-        switch(axis)
-        {
-            case ProjectOnPlaneAxis.forward: projectionAxis = transform.forward; break;
-            case ProjectOnPlaneAxis.right: projectionAxis = transform.right; break;
-
-        }
-
-        attackHandler.gameObject.SetActive(true);
-        attackHandler.ProjectOnAxis(projectionAxis, transform.forward, GetComponent<Collider>().bounds.center);
     }
 
     #endregion
-    #region Parameters Modifiers
-    public void ResetCombo()
-    {
-        anim.SetInteger(I_Combo, 0);
-        attackHandler.gameObject.SetActive(false);
-
-    }
-
-    public void NegateDashing()
-    {
-        anim.SetBool(B_Dashing, false);
-    }
-
-    public void NegateJumping()
-    {
-        anim.SetBool(B_Jumping, false);
-    }
-
-    #endregion
-
-
 }
