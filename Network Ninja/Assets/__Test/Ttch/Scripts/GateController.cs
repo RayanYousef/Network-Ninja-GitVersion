@@ -33,20 +33,20 @@ public class GateController : MonoBehaviour
         {
             //if(nextArea == null)
             //{
+                pathController.PlayerEnteredPath(state);
+            //}
+            //rAreasManager.Instance.NextArea = this.nextArea;
+
+            //if (nextArea.AreaType == AreaType.Fight)
+            //{
+            //    rAreasManager.Instance.CurrentArea.PlayerInside = false;
             //    pathController.PlayerEnteredPath(state);
             //}
-            rAreasManager.Instance.NextArea = this.nextArea;
-
-            if (nextArea.AreaType == AreaType.Fight)
-            {
-                rAreasManager.Instance.CurrentArea.PlayerInside = false;
-                pathController.PlayerEnteredPath(state);
-            }
-            else
-            {
-                /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
-                rAreasManager.Instance.NextArea.OnEnteringArea?.Invoke();
-            }
+            //else
+            //{
+            //    /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
+            //    rAreasManager.Instance.NextArea.OnEnteringArea?.Invoke();
+            //}
         }
 
     }
