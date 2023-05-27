@@ -14,6 +14,12 @@ public class CS_DisableParticleOnEnd : MonoBehaviour
     private void FixedUpdate()
     {
         if(particle.isPlaying==false)
-            gameObject.SetActive(false);
+            DisableGameObject();
+
+    }
+
+    private void DisableGameObject()
+    {
+        gameObject.SetActive(false);
     }
 }

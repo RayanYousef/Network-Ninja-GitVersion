@@ -63,12 +63,9 @@ public class CS_AnimatorController : MonoBehaviour
 
     public void ResetCombo()
     {
-        if (PlayerManager.Anim.GetAnimatorTransitionInfo(0).duration == 0)
-        {
             PlayerManager.Anim.SetInteger(I_Combo_1, 0);
             PlayerManager.Anim.SetInteger(I_Combo_2, 0);
             PlayerManager.Anim.SetBool(b_Attacking, false);
-        }
     }
 
     public void CanTransit()
@@ -78,6 +75,17 @@ public class CS_AnimatorController : MonoBehaviour
     }
 
     #region Damage Object Rotation and Position
+
+    public void EnableWeapon(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+                damageObject.gameObject.SetActive(true);
+            }
+        }
+    }
     public void EnableWeaponForwardUp(string WeaponName)
     {
         foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
