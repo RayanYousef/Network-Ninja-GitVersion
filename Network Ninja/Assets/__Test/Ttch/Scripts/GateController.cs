@@ -21,6 +21,7 @@ public class GateController : MonoBehaviour
 
     public GateStates State { get => state; set => state = value; }
     public PathController PathController { get => pathController; set => pathController = value; }
+    public rArea NextArea { get => nextArea; set => nextArea = value; }
 
     private void Start()
     {
@@ -31,22 +32,19 @@ public class GateController : MonoBehaviour
         buttonPressed = Input.GetKey(KeyCode.E);
         if (playerIsHere == true && buttonPressed)
         {
-            //if(nextArea == null)
-            //{
-                pathController.PlayerEnteredPath(state);
-            //}
-            //rAreasManager.Instance.NextArea = this.nextArea;
+            GameObjectsManager.Instance.CurrentGate.NextArea = this.nextArea;
 
-            //if (nextArea.AreaType == AreaType.Fight)
-            //{
-            //    rAreasManager.Instance.CurrentArea.PlayerInside = false;
-            //    pathController.PlayerEnteredPath(state);
-            //}
-            //else
-            //{
-            //    /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
-            //    rAreasManager.Instance.NextArea.OnEnteringArea?.Invoke();
-            //}
+            if (nextArea.AreaType == AreaType.Fight)
+            {
+                rAreasManager.Instance.CurrentArea.PlayerInside = false;
+                pathController.PlayerEnteredPath(state);
+            }
+            else
+            {
+                rUIManager.instance.UiPassword.ShowCheckPasswordPanel();
+                /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
+                //GameObjectsManager.Instance.CurrentGate.NextArea.OnEnteringArea?.Invoke();
+            }
         }
 
     }

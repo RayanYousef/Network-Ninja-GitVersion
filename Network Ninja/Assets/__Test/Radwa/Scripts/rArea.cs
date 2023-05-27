@@ -23,7 +23,7 @@ public class rArea : MonoBehaviour
 
 
     [Header("Events")]
-    [SerializeField] public UnityEvent OnEnteringArea, OnEnteringFight, OnWinningLvl;
+    [SerializeField] public UnityEvent OnEnteringFight;
 
     [Header("Area Components")]
     //[SerializeField] Collider areaCollider;
@@ -299,8 +299,11 @@ public class rArea : MonoBehaviour
                 rAreasManager.Instance.CurrentArea = this;
 
                 /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
-                if(password == null)
-                    OnEnteringArea?.Invoke();
+                if (password == null)
+                {
+                    rUIManager.instance.UiPassword.ShowCreatePasswordPanel();
+                    //OnEnteringArea?.Invoke();
+                }
             }
         }
     }

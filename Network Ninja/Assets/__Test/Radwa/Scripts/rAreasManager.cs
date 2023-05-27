@@ -23,7 +23,7 @@ public class rAreasManager : MonoBehaviour
     [SerializeField] Color maxHealth, halfHealth, lowHealth, enemyColor;
 
     [SerializeField] rArea currentArea;
-    [SerializeField] rArea nextArea;
+   // [SerializeField] rArea nextArea;
     [SerializeField] PasswordStrength strength;
     [SerializeField] Result result;
 
@@ -37,7 +37,7 @@ public class rAreasManager : MonoBehaviour
     //
     public static rAreasManager Instance { get => instance; }
     public rArea CurrentArea { get { return currentArea; } set => currentArea = value; }
-    public rArea NextArea { get => nextArea; set => nextArea = value; }
+   // public rArea NextArea { get => nextArea; set => nextArea = value; }
 
     public int MaxSoldiersNumber { get => maxSoldiersNumber; }
     public Color MaxHealth { get => maxHealth; }
