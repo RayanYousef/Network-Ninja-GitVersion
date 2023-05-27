@@ -39,7 +39,6 @@ public class CS_DamageObject : MonoBehaviour
                 {
                     //Apply Hitstop
                     otherStatsManager.ApplyDamage(myStatsManager);
-                    other.GetComponent<HitStopHandler>().AnimationStop(0.5f, 0.2f);
                     if (other!= myStatsManager.gameObject)
                         if(other.TryGetComponent<Rigidbody>(out Rigidbody rb))
                         other.GetComponent<Rigidbody>().velocity = myStatsManager.GetComponent<Rigidbody>().velocity * 2;
