@@ -1,39 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GameObjectsManager : MonoBehaviour
 {
 
     private static GameObjectsManager instance;
-    //
+
 
     [Header("Player")]
     [SerializeField] GameObject player;
-    [Header("Army Prefabs")]
-    [SerializeField] FriendStates meleePrefab;
-    [SerializeField] FriendStates rangedPrefab;
-    [SerializeField] FriendStates tankPrefab;
+    [SerializeField] public CinemachineBrain cameraBrain;
+    [SerializeField] CinemachineVirtualCamera playerCamera;
 
-    [Header("Level Objects")]
-    [SerializeField] GameObject enemyPrefab;
-    [SerializeField] Transform objectToSpawnAround;
-  //  [SerializeField] Transform[] wayPoints;
+    [Header("Ally Prefab")]
+    [SerializeField] FormationAgent allyPrefab;
+    [SerializeField] Formation allyBatalionPrefab;
+    [SerializeField] GameObject spawnEffect;
+
+    [Header("Boss")]
+    [SerializeField] m_CombatManager combatManager;
+   // [SerializeField] m_BossUI_Manager bossUiManager;
+    [SerializeField] GameObject boss;
 
 
 
     public static GameObjectsManager Instance { get => instance; }
-    public GameObject EnemyPrefab { get => enemyPrefab; }
-    public Transform ObjectToSpawnAround { get => objectToSpawnAround; }
-   // public Transform[] WayPoints { get => wayPoints; }
+
+
     public GameObject Player { get => player; }
-    public FriendStates MeleePrefab { get => meleePrefab; }
-    public FriendStates RangedPrefab { get => rangedPrefab;  }
-    public FriendStates TankPrefab { get => tankPrefab;}
+    public GameObject Boss { get => boss; }
+    public CinemachineVirtualCamera PlayerCamera { get => playerCamera; set => playerCamera = value; }
+    public FormationAgent AllyPrefab { get => allyPrefab; }
+    public GameObject SpawnEffect { get => spawnEffect; set => spawnEffect = value; }
+    public Formation AllyBatalionPrefab { get => allyBatalionPrefab; set => allyBatalionPrefab = value; }
+   // public m_BossUI_Manager BossUiManager { get => bossUiManager; }
+    public m_CombatManager CombatManager { get => combatManager; }
+    public CinemachineBrain CameraBrain { get => cameraBrain; set => cameraBrain = value; }
 
     private void Awake()
     {
-
         if (instance == null)
         {
             instance = this;
@@ -45,9 +52,5 @@ public class GameObjectsManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 }
