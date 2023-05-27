@@ -8,6 +8,7 @@ public class CS_AnimatorController : MonoBehaviour
 
     [Header("GameObject Components")]
     [SerializeField] CS_PlayerManager playerManager;
+    [SerializeField] Transform SwordTipUpward,SwordTipDownward;
 
     [Header("Applied Force To Animation")]
     [SerializeField] float appliedForce;
@@ -59,11 +60,6 @@ public class CS_AnimatorController : MonoBehaviour
 
     #region Animation Events
 
-    public void PlayFootstepsAudio()
-    {if(AudioManager.instance!= null)
-        AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.Footsteps);
-    }
-
     public void ResetCombo()
     {
         PlayerManager.Anim.SetInteger(I_Combo_1, 0);
@@ -74,7 +70,15 @@ public class CS_AnimatorController : MonoBehaviour
     public void CanTransit()
     {
         PlayerManager.Anim.SetBool(b_canTransit, true);
-        PlayerManager.MyStats.DisableAllWeapons();
+    }
+
+    public void EnableWeaponWithName(string WeaponName)
+    {
+        //foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager)
+        //{
+        //    if (damageObject.WeaponName == WeaponName)
+        //        damageObject.gameObject.SetActive(true);
+        //}
     }
 
     public void NegateDashing()
@@ -85,6 +89,12 @@ public class CS_AnimatorController : MonoBehaviour
     public void NegateJumping()
     {
         PlayerManager.Anim.SetBool(B_Jumping, false);
+    }
+
+    public void PlayFootstepsAudio()
+    {
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.Footsteps);
     }
 
     public void ApplyForwardForce(float force)

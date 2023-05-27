@@ -17,7 +17,7 @@ public class CS_PlayerManager : MonoBehaviour
     [SerializeField] CS_AnimatorController animController;
     [SerializeField] CS_LookAtClosestTarget lookAtClosestTarget;
     [SerializeField] CS_CameraManager camTarget;
-    [SerializeField] StatsManager myStats;
+    [SerializeField] StatsManager pStatsManager;
     [SerializeField] Rigidbody rb;
     [SerializeField] PlayerInput PlayerInputs;
     [SerializeField] FixedJoystick joyStick;
@@ -37,13 +37,13 @@ public class CS_PlayerManager : MonoBehaviour
     public CS_AnimatorController AnimController { get => animController; }
     public CS_CameraManager CamTarget { get => camTarget; }
     public Rigidbody Rb { get => rb; }
-    public StatsManager MyStats { get => myStats;}
+    public StatsManager PStatsManager { get => pStatsManager;}
 
     private void Awake()
     {
         if (playerTopMostParent == null)
             playerTopMostParent = gameObject;
-        if(myStats==null) myStats = GetComponentInChildren<StatsManager>();
+        if(pStatsManager==null) pStatsManager = GetComponentInChildren<StatsManager>();
 
         anim = playerTopMostParent.GetComponentInChildren<Animator>();
         moveController = playerTopMostParent.GetComponentInChildren<CS_MovementController>();
