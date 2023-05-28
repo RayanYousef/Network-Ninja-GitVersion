@@ -7,12 +7,11 @@ public class m_EnemyManager : MonoBehaviour
 {
     private Transform player;
     private NavMeshAgent agent;
-    private Rigidbody rb;
-    private Collider collider;
     private float currentHealth;
     private float maxHealth;
 
-
+    public Rigidbody rb;
+    public Collider collider;
     public GameObject DeathEffect;
     public Animator animator;
     public EnemySpawner enemySpawner;
@@ -71,13 +70,21 @@ public class m_EnemyManager : MonoBehaviour
     {
         //animation
         Debug.Log("When enemy died");
-        Destroy(collider);
+      //  Destroy(collider);
         if (animator != null)
+        {
             animator.SetTrigger("Death");
+
+        }
+        collider.enabled = false;
+        rb.isKinematic = false;
     }
 
     public virtual void DeactivateGameObject()
     {
+
+        collider.enabled = false;
+        rb.isKinematic = false;
 
         if (DeathEffect != null)
         {
@@ -94,6 +101,8 @@ public class m_EnemyManager : MonoBehaviour
         if (enemySpawner.MiniBosses.Count > 0)
         {
             enemySpawner.SpawnMoreEnemies();
+            collider.enabled = true;
+            rb.isKinematic = true;
         }
 
     }

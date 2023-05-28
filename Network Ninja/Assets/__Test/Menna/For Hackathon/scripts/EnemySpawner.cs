@@ -44,7 +44,8 @@ public class EnemySpawner : MonoBehaviour
         MiniBosses = new List<GameObject>();
         player = GameObjectsManager.Instance.Player.transform;
 
-        
+        OnAllMiniBossesKilled.AddListener(rUIManager.instance.UiPassword.ShowCreatePasswordPanel);
+
         //obj pooling
         enemyPool = new List<GameObject>();
 
@@ -249,8 +250,8 @@ public class EnemySpawner : MonoBehaviour
                 enemy.transform.position = randomPosition;
                 enemy.transform.parent = this.transform;
                 enemy.SetActive(true);
-                enemy.AddComponent<CapsuleCollider>();
-                enemies.Add(enemy);
+            // enemy.AddComponent<CapsuleCollider>();
+            enemies.Add(enemy);
            
             }
 

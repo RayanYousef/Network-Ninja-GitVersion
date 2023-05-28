@@ -8,7 +8,6 @@ public class m_MiniBoss : m_EnemyManager
 {
     public Action<GameObject> OnMiniBossKilled;  // Declare the event
 
-
     public override void OnHealthUpdatedFunction()
     {
         if (GetComponent<StatsManager>().Stats.CurrentHealth == 0)
@@ -19,11 +18,19 @@ public class m_MiniBoss : m_EnemyManager
 
 
             //animation
-            if (animator != null)
-                animator.SetTrigger("Death");
-            Destroy(GetComponent<Collider>());
-            // Raise the event when the enemy is killed
-            OnMiniBossKilled.Invoke(this.gameObject);
+         if (animator != null)
+        {
+            animator.SetTrigger("Death");
+
+        }
+        //  Destroy(GetComponent<Collider>());
+
+        collider.enabled = false;
+        rb.isKinematic = false;
+
+
+        // Raise the event when the enemy is killed
+        OnMiniBossKilled.Invoke(this.gameObject);
        
 
     }
