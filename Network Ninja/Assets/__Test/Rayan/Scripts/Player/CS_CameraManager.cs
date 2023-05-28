@@ -292,7 +292,9 @@ public class CS_CameraManager : MonoBehaviour
             SetTarget();
         }
 
-        if (other.gameObject.TryGetComponent<Animator>(out Animator anim))
+        if (other.gameObject.TryGetComponent<Animator>(out Animator anim)
+            &&
+            other.gameObject.TryGetComponent<StatsManager>(out StatsManager stats))
         {
             if (PlayerManager.UltimateOn)
             {
@@ -313,7 +315,8 @@ public class CS_CameraManager : MonoBehaviour
                 LockedOn = false;
         }
 
-        if (other.gameObject.TryGetComponent<Animator>(out Animator anim))
+        if (other.gameObject.TryGetComponent<Animator>(out Animator anim) &&
+            other.gameObject.TryGetComponent<StatsManager>(out StatsManager stats))
         {
             anim.speed = 1;
             anim.GetComponent<NavMeshAgent>().isStopped = false;
