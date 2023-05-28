@@ -74,11 +74,12 @@ public class CS_DamageObject : MonoBehaviour
                         handler.GetComponent<HitStopHandler>().AnimationStop(0.5f, 0f);
 
 
+                    if(playerManager!=null)
                         foreach (var particle in playerManager.HitEffects)
                         {
                             if (particle.gameObject.activeInHierarchy==false)
                             {
-                                particle.transform.position = other.transform.position;
+                                particle.transform.position = other.bounds.center;
                                 particle.gameObject.SetActive(true);
                                 return;
                             }

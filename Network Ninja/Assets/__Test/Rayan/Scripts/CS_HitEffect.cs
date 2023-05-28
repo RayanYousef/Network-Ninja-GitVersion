@@ -30,7 +30,7 @@ public class CS_HitEffect : MonoBehaviour
                 {
                     audioSource.volume = volume;
                     audioSource.clip = SFXClip;
-                    audioSource.pitch = pitch;
+                    audioSource.pitch = Random.Range(1f, 2f);
                     audioSource.Play();
                     return;
                 }
