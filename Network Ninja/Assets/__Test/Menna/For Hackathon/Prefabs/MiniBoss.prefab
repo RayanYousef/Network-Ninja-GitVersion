@@ -903,7 +903,7 @@ NavMeshAgent:
   m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 10
+  m_StoppingDistance: 3.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1017,6 +1017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b97634a36198746b63aebc712a4c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frictionCoefficient: 2
   rb: {fileID: 0}
   collider: {fileID: 0}
   DeathEffect: {fileID: 4386811880964202464, guid: d6561a57ab0403b4eb362e93683f53b0,

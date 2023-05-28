@@ -77,7 +77,6 @@ public class m_BossMovement : MonoBehaviour
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
 
-        StopEnemeies();
 
 
     }
@@ -237,16 +236,7 @@ public class m_BossMovement : MonoBehaviour
         if(gameObject)
         {
             StartCoroutine(DoFade());
-
         }
     }
 
-    public void StopEnemeies()
-    {
-        agent.enabled = false;
-    }
-    public void MoveEnemies()
-    {
-        agent.enabled = true;
-    }
 }

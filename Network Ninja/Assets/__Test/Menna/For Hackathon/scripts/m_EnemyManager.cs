@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class m_EnemyManager : MonoBehaviour
 {
+    [SerializeField] float frictionCoefficient = 2.0f;
+
     private Transform player;
     private NavMeshAgent agent;
     private float currentHealth;
@@ -17,6 +19,7 @@ public class m_EnemyManager : MonoBehaviour
     public EnemySpawner enemySpawner;
     public float waitTime = 10.0f;
     public bool isWaiting;
+
 
 
 
@@ -46,6 +49,10 @@ public class m_EnemyManager : MonoBehaviour
         collider = GetComponent<Collider>();
         currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
         maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
+
+        //PREVENT SLIDING
+        Vector3 frictionForce = -rb.velocity * frictionCoefficient;
+        rb.AddForce(frictionForce, ForceMode.Acceleration);
 
     }
 
