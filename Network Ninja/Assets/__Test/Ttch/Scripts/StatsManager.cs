@@ -14,6 +14,8 @@ public enum Difficulty
 {
     Easy, Normal, Hard
 }
+
+
 public class StatsManager : MonoBehaviour
 {
     [Header("Parent Of This Object")]
