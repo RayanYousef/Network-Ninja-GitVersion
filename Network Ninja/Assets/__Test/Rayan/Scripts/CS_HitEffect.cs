@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CS_DisableParticleOnEnd : MonoBehaviour
+public class CS_HitEffect : MonoBehaviour
 {
-    [SerializeField]ParticleSystem particle;
-    [SerializeField]AudioClip SFXClip;
+    [SerializeField] ParticleSystem particle;
+    [SerializeField] AudioClip SFXClip;
     [SerializeField, Range(-3, 3)] float pitch = 1;
     [SerializeField, Range(0, 1)] float volume = 1;
     // Start is called before the first frame update
     void Awake()
     {
-        particle= GetComponentInChildren<ParticleSystem>();
+        particle = GetComponentInChildren<ParticleSystem>();
     }
 
     private void FixedUpdate()
     {
-        if(particle.isPlaying==false)
+        if (particle.isPlaying == false)
             DisableGameObject();
 
     }

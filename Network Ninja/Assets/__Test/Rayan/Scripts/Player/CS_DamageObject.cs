@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Events;
 
 
@@ -12,6 +11,7 @@ public class CS_DamageObject : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] StatsManager myStatsManager;
+    [SerializeField] CS_PlayerManager playerManager;
 
     [Header("SFX")]
     [SerializeField] AudioClip SFXClip;
@@ -27,6 +27,7 @@ public class CS_DamageObject : MonoBehaviour
         get => myStatsManager; set
         {
             if (myStatsManager == null) myStatsManager = value;
+            playerManager = myStatsManager.GetComponent<CS_PlayerManager>();
         }
     }
 
@@ -72,6 +73,17 @@ public class CS_DamageObject : MonoBehaviour
                     if (otherStatsManager.TryGetComponent<HitStopHandler>(out HitStopHandler handler))
                         handler.GetComponent<HitStopHandler>().AnimationStop(0.5f, 0f);
 
+
+                        foreach (var particle in playerManager.HitEffects)
+                        {
+                            if (particle.gameObject.activeInHierarchy==false)
+                            {
+                                particle.transform.position = other.transform.position;
+                                particle.gameObject.SetActive(true);
+                                return;
+                            }
+
+                        }
 
                     otherStatsManager.ApplyDamage(myStatsManager);
                     if (other != myStatsManager.gameObject)
