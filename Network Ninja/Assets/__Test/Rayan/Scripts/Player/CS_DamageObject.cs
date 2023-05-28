@@ -33,7 +33,8 @@ public class CS_DamageObject : MonoBehaviour
         myStatsManager.HitObjects.Clear();
 
         if(AudioManager.instance!=null)
-        AudioManager.instance.sfxSource.PlayOneShot(SFXClip);
+        AudioManager.instance.sfxSource.clip= SFXClip;
+        AudioManager.instance.sfxSource.Play();
 
     }
   
