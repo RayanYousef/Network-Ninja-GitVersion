@@ -35,22 +35,21 @@ public class m_InGameUI : MonoBehaviour
         winningPanel.SetActive(false);
         if(menuPanel!= null)
         menuPanel.SetActive(false);
-        volumeSlider.value = 0.5f;
 
 
-        #region Volume Slider
-        volumeSlider.value = 1;
+    //    #region Volume Slider
+    //    volumeSlider.value = 1;
 
-        if (!PlayerPrefs.HasKey("musicVolume"))
-        {
-            PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-            Load();
-        }
-        else
-        {
-            Load();
-        } 
-        #endregion
+    //    if (!PlayerPrefs.HasKey("musicVolume"))
+    //    {
+    //        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
+    //        Load();
+    //    }
+    //    else
+    //    {
+    //        Load();
+    //    } 
+    //    #endregion
     }
 
     private void Update()
