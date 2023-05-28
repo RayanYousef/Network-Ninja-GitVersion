@@ -14,6 +14,7 @@ public class CS_PlayerManager : MonoBehaviour
         
     [Header("Components")]
     public GameObject PlayerTopMostParent;
+    public CS_HitEffect[] HitEffects;
     [SerializeField] Animator anim;
     [SerializeField] CS_MovementController moveController;
     [SerializeField] CS_AnimatorController animController;
@@ -97,6 +98,9 @@ public class CS_PlayerManager : MonoBehaviour
         animController.PlayerManager = this;
 
         PlayerInputs = GetComponent<PlayerInput>();
+
+
+        HitEffects = PlayerTopMostParent.GetComponentsInChildren<CS_HitEffect>();
 
 
     }
