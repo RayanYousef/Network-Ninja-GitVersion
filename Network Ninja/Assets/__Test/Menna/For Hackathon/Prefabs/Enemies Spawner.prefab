@@ -51,11 +51,11 @@ MonoBehaviour:
   MiniBossPrefab: {fileID: 5305931202414142652, guid: daaa1a0a52df63a429c5d9b42be0cd64,
     type: 3}
   objectToSpawnAround: {fileID: 5956289530070099838}
-  armySize: 100
+  armySize: 5
   spawnRadius: 20
   minDistanceFromObject: 5
   maxDistanceFromObject: 10
-  miniBossSize: 10
+  miniBossSize: 2
   enemies: []
   MiniBosses: []
   enemyPool: []
@@ -64,7 +64,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: rUIPassword, Assembly-CSharp
-        m_MethodName: OnEnteringAreaShowPannels
+        m_MethodName: ShowCreatePasswordPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -76,16 +76,4 @@ MonoBehaviour:
         m_CallState: 2
   OnBigBossKilled:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InGameMenuUI, Assembly-CSharp
-        m_MethodName: WinningUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []

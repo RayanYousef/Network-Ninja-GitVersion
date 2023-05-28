@@ -264,7 +264,8 @@ public class EnemySpawner : MonoBehaviour
         {
             if(MiniBoss != null)
             {
-                Destroy(MiniBoss);
+                //Destroy(MiniBoss);
+                MiniBoss.gameObject.SetActive(false);
 
             }
         }

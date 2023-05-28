@@ -6,8 +6,8 @@ public class m_BossChaseState : StateMachineBehaviour
 {
     NavMeshAgent agent;
     Transform player;
-    [SerializeField] int ChaseRange =15;
-    [SerializeField] int AttackRange=3;
+    [SerializeField] int ChaseRange ;
+    [SerializeField] int AttackRange;
     
 
 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

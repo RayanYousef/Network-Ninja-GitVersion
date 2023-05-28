@@ -35,6 +35,7 @@ public class m_InGameUI : MonoBehaviour
         winningPanel.SetActive(false);
         if(menuPanel!= null)
         menuPanel.SetActive(false);
+        volumeSlider.value = 0.5f;
 
 
         #region Volume Slider

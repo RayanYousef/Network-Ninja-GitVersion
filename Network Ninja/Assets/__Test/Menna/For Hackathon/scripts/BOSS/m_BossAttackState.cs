@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class m_BossAttackState : StateMachineBehaviour
 {
-    [SerializeField] int AttackRange =3;
+    [SerializeField] int AttackRange;
 
     Transform player;
     private float[] attackOptions = new float[] { 0f, 0.5f, 1f };
@@ -13,10 +13,7 @@ public class m_BossAttackState : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // player = GameObject.FindGameObjectWithTag("Player").transform;
-
         player = GameObjectsManager.Instance.Player.transform;
-
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -40,6 +37,6 @@ public class m_BossAttackState : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
-       // animator.SetFloat("attacks", attackOptions[ChooseDragonAttack()]);
+        animator.SetFloat("attacks", attackOptions[ChooseDragonAttack()]);
     }
 }
