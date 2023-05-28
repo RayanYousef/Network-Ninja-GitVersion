@@ -15,6 +15,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip[] clickClips;
     [SerializeField] AudioClip[] footsteps;
 
+    [Header("SFX Audio Sources")]
+    [SerializeField] GameObject audioSourcesParent;
+    public List<AudioSource> audioSources= new List<AudioSource>();
+
     public AudioClip[] ClickClips { get => clickClips; set => clickClips = value; }
     public AudioClip[] Footsteps { get => footsteps; set => footsteps = value; }
 
@@ -36,6 +40,9 @@ public class AudioManager : MonoBehaviour
        // PlayMusic("MainMenuBG");
         PlayMusic("BackGround");
         musicSource.volume = 1.0f;  
+
+        foreach(var audioSource in audioSourcesParent.GetComponentsInChildren<AudioSource>())
+            audioSources.Add(audioSource);
     }
 
 
