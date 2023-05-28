@@ -151,6 +151,7 @@ public class rArea : MonoBehaviour
         areaType = AreaType.Fight;
         password = null;
         sharingPasswordWarningIcon.gameObject.SetActive(false);
+        meshColourChanger.ChangeToColour(Color.red);
 
         DestroyAllAllies();
     }
@@ -281,6 +282,8 @@ public class rArea : MonoBehaviour
             else
             {
                 playerInside = true;
+                rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
+
                 if (rAreasManager.Instance.CurrentArea == this)
                 {
                     return;
@@ -301,6 +304,7 @@ public class rArea : MonoBehaviour
     {
         if (collision.gameObject == GameObjectsManager.Instance.Player)
         {
+            playerInside = false;
             if (rAreasManager.Instance.CurrentArea == this)
             {
                 return;
