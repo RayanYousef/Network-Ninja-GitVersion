@@ -73,11 +73,16 @@ public class CS_DamageObject : MonoBehaviour
                     if (otherStatsManager.TryGetComponent<HitStopHandler>(out HitStopHandler handler))
                         handler.GetComponent<HitStopHandler>().AnimationStop(0.5f, 0f);
 
+                    otherStatsManager.ApplyDamage(myStatsManager);
+                    if (other != myStatsManager.gameObject)
+                        if (other.TryGetComponent<Rigidbody>(out Rigidbody rb))
+                            other.GetComponent<Rigidbody>().velocity = myStatsManager.GetComponent<Rigidbody>().velocity * 2;
 
-                    if(playerManager!=null)
+
+                    if (playerManager != null)
                         foreach (var particle in playerManager.HitEffects)
                         {
-                            if (particle.gameObject.activeInHierarchy==false)
+                            if (particle.gameObject.activeInHierarchy == false)
                             {
                                 particle.transform.position = other.bounds.center;
                                 particle.gameObject.SetActive(true);
@@ -85,11 +90,6 @@ public class CS_DamageObject : MonoBehaviour
                             }
 
                         }
-
-                    otherStatsManager.ApplyDamage(myStatsManager);
-                    if (other != myStatsManager.gameObject)
-                        if (other.TryGetComponent<Rigidbody>(out Rigidbody rb))
-                            other.GetComponent<Rigidbody>().velocity = myStatsManager.GetComponent<Rigidbody>().velocity * 2;
                 }
             }
 
