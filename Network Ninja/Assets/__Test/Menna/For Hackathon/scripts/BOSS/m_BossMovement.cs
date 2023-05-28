@@ -26,6 +26,7 @@ public class m_BossMovement : MonoBehaviour
     private float dragonFastSpeed = 1.5f;
     private bool finishedAttack;
     private Transform player;
+    private Rigidbody rb;
 
     ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
 
@@ -35,6 +36,8 @@ public class m_BossMovement : MonoBehaviour
     [SerializeField] private Image bloodSplatter;
     [SerializeField] private Color transparentColor;
     [SerializeField] private Color color;
+    [SerializeField] float frictionCoefficient = 2.0f;
+
 
 
 
@@ -55,6 +58,7 @@ public class m_BossMovement : MonoBehaviour
 
         color = new Color(188f, 0f, 0f, 1f);
         transparentColor = new Color(0f, 0f, 0f, 0f);
+        rb = GetComponent<Rigidbody>();
 
     }
 
@@ -64,6 +68,9 @@ public class m_BossMovement : MonoBehaviour
 
         player.GetComponent<StatsManager>().onTakingDamage.AddListener(bloodPanelForPlayerDamage);
         trailDeactivate();
+        // prevent sliding
+        Vector3 frictionForce = -rb.velocity * frictionCoefficient;
+        rb.AddForce(frictionForce, ForceMode.Acceleration);
 
 
     }
