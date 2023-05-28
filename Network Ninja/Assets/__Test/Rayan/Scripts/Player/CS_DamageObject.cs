@@ -11,7 +11,10 @@ public class CS_DamageObject : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] StatsManager myStatsManager;
+
+    [Header("SFX")]
     [SerializeField] AudioClip SFXClip;
+    [SerializeField, Range(-3,3)] float pitch=1;
 
     [Header("Variables")]
     [SerializeField] float skillMultiplier=1;
@@ -32,10 +35,18 @@ public class CS_DamageObject : MonoBehaviour
         if(myStatsManager!=null)
         myStatsManager.HitObjects.Clear();
 
-        if(AudioManager.instance!=null)
-        AudioManager.instance.sfxSource.clip= SFXClip;
-        if (AudioManager.instance.sfxSource.clip!=null)
-        AudioManager.instance.sfxSource.Play();
+        if(SFXClip!=null && AudioManager.instance!=null)
+        foreach (var audioSource in AudioManager.instance.audioSources)
+        {
+            if (audioSource.isPlaying==false)
+            {
+                audioSource.clip= SFXClip;
+                audioSource.pitch=pitch;
+                audioSource.Play();
+                    return;
+            }
+
+        }
 
     }
   
