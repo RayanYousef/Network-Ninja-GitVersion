@@ -36,6 +36,7 @@ public class StatsManager : MonoBehaviour
     #region Setter and Getters
     public StatsStruct Stats { get => myStats; }
     public List<Collider> HitObjects { get => hitObjects; set => hitObjects = value; }
+    public CS_DamageObject[] DamageObjects { get => damageObjects;}
     #endregion
 
     private void OnDisable()

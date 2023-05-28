@@ -15,7 +15,9 @@ public class CS_PlayerManager : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] CS_MovementController moveController;
     [SerializeField] CS_AnimatorController animController;
-    [SerializeField] CS_CameraTarget camTarget;
+    [SerializeField] CS_LookAtClosestTarget lookAtClosestTarget;
+    [SerializeField] CS_CameraManager camTarget;
+    [SerializeField] StatsManager pStatsManager;
     [SerializeField] Rigidbody rb;
     [SerializeField] PlayerInput PlayerInputs;
     [SerializeField] FixedJoystick joyStick;
@@ -33,20 +35,25 @@ public class CS_PlayerManager : MonoBehaviour
     public Animator Anim { get => anim; }
     public CS_MovementController MoveController { get => moveController; }
     public CS_AnimatorController AnimController { get => animController; }
-    public CS_CameraTarget CamTarget { get => camTarget; }
+    public CS_CameraManager CamTarget { get => camTarget; }
     public Rigidbody Rb { get => rb; }
+    public StatsManager PStatsManager { get => pStatsManager;}
 
     private void Awake()
     {
         if (playerTopMostParent == null)
             playerTopMostParent = gameObject;
+        if(pStatsManager==null) pStatsManager = GetComponentInChildren<StatsManager>();
 
         anim = playerTopMostParent.GetComponentInChildren<Animator>();
         moveController = playerTopMostParent.GetComponentInChildren<CS_MovementController>();
         animController = playerTopMostParent.GetComponentInChildren<CS_AnimatorController>();
-        camTarget = playerTopMostParent.GetComponentInChildren<CS_CameraTarget>();
-        rb = playerTopMostParent.GetComponentInChildren<Rigidbody>();
+        lookAtClosestTarget = playerTopMostParent.GetComponentInChildren<CS_LookAtClosestTarget>();
 
+        if(camTarget== null)    
+        camTarget = playerTopMostParent.GetComponentInChildren<CS_CameraManager>();
+
+        rb = playerTopMostParent.GetComponentInChildren<Rigidbody>();
         moveController.PlayerManager = this;
         animController.PlayerManager = this;
 
@@ -166,6 +173,7 @@ public class CS_PlayerManager : MonoBehaviour
             case CharacterState.Attacking:
                 anim.SetBool(animController.B_Attacking, true);
                 anim.applyRootMotion = true;
+                lookAtClosestTarget.RotateTowardsClosestEnemy();
                 break;
 
             case CharacterState.Falling:
@@ -211,7 +219,7 @@ public class CS_PlayerManager : MonoBehaviour
                 if (yLength > GetComponent<CapsuleCollider>().height / 2 - 0.01f)
                 {
                     Debug.Log("happened");
-                    rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+                  //  rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                 }
             }
         }

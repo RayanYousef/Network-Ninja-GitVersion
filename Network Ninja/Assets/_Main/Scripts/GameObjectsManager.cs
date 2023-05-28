@@ -7,10 +7,11 @@ public class GameObjectsManager : MonoBehaviour
 {
 
     private static GameObjectsManager instance;
-    
+
 
     [Header("Player")]
     [SerializeField] GameObject player;
+    [SerializeField] public CinemachineBrain cameraBrain;
     [SerializeField] CinemachineVirtualCamera playerCamera;
 
     [Header("Ally Prefab")]
@@ -20,14 +21,12 @@ public class GameObjectsManager : MonoBehaviour
 
     [Header("Boss")]
     [SerializeField] m_CombatManager combatManager;
-   // [SerializeField] m_BossUI_Manager bossUiManager;
+    // [SerializeField] m_BossUI_Manager bossUiManager;
     [SerializeField] GameObject boss;
 
-
-
-    [Header("Level Objects")]
-    [SerializeField] rArea[] listOfLevelAreas;
-
+    [Header("Current Gate")]
+    //[SerializeField] PathController currentPathController;
+    [SerializeField] GateController currentGate;
 
     public static GameObjectsManager Instance { get => instance; }
 
@@ -40,8 +39,10 @@ public class GameObjectsManager : MonoBehaviour
     public Formation AllyBatalionPrefab { get => allyBatalionPrefab; set => allyBatalionPrefab = value; }
    // public m_BossUI_Manager BossUiManager { get => bossUiManager; }
     public m_CombatManager CombatManager { get => combatManager; }
- 
-    public rArea[] ListOfLevelAreas { get => listOfLevelAreas; set => listOfLevelAreas = value; }
+    public CinemachineBrain CameraBrain { get => cameraBrain; set => cameraBrain = value; }
+    public GateController CurrentGate { get => currentGate; set => currentGate = value; }
+
+    //public PathController CurrentPathController { get => currentPathController; set => currentPathController = value; }
 
     private void Awake()
     {
@@ -56,19 +57,5 @@ public class GameObjectsManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public bool CheckAllAreasBaseExceptCurrent()
-    {
-        foreach(rArea area in listOfLevelAreas)
-        {
-            if(area == rPasswordManager.Instance.CurrentArea)
-            {
-                continue;
-            }
-            if(area.AreaType != AreaType.Base)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+    
 }

@@ -13,7 +13,9 @@ public class FormationAgent : MonoBehaviour
     public int toFollowIndex;
     public Vector3 toFollow;
 
-    private bool hasAnimation = false;
+    int changeIdle;
+
+    float timer;
 
     private void Start()
     {
@@ -29,16 +31,34 @@ public class FormationAgent : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (agent.remainingDistance <= 0.25f && !agent.pathPending && !hasAnimation)
+        if (changeIdle > 0)
+            return;
+        timer += Time.deltaTime;
+
+        Debug.Log("d:" + agent.remainingDistance);
+        if (agent.remainingDistance <= 0.1f && !agent.pathPending && changeIdle == 0 && timer > 1)
         {
-            bool changeIdle;
-            changeIdle = (UnityEngine.Random.Range(0, 2) == 1);
-            Debug.Log(changeIdle);
-            if (changeIdle)
+            ChangeAnimation();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (changeIdle != 0)
+            ChangeAnimation();
+    }
+
+    void ChangeAnimation()
+    {
+        changeIdle = Random.Range(1, 3);
+        switch(changeIdle)
+        {
+            case 1:
                 anim.SetBool("isFirstFightPose", true);
-            else
+                break;
+            case 2:
                 anim.SetBool("isSecondFightPose", true);
-            hasAnimation = true;
+                break;
         }
     }
 }

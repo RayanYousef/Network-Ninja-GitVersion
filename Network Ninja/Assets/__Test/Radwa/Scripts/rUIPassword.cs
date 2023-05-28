@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 public class rUIPassword : MonoBehaviour
 {
-    [SerializeField] PlayerInput playerInputs;
+    //[SerializeField] PlayerInput playerInputs;
 
     [Header("Create Password Panel")]
     [SerializeField] private GameObject createPasswordPanel;
@@ -35,7 +35,7 @@ public class rUIPassword : MonoBehaviour
 
     void Start()
     {
-        playerInputs = GameObjectsManager.Instance.Player.GetComponent<PlayerInput>();
+        //playerInputs = GameObjectsManager.Instance.Player.GetComponent<PlayerInput>();
 
         createPasswordPanel.SetActive(false);
         passwordIF = createPasswordPanel.GetComponentInChildren<TMP_InputField>();
@@ -59,8 +59,6 @@ public class rUIPassword : MonoBehaviour
         feedbackTxt = feedbackPanel.GetComponentInChildren<TMP_Text>();
         OKBtn = feedbackPanel.GetComponentInChildren<Button>();
         OKBtn.onClick.AddListener(OnClickOKBtn);
-        
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -97,7 +95,6 @@ public class rUIPassword : MonoBehaviour
                     return;
                 }
                 Time.timeScale = 1;
-                Cursor.lockState = CursorLockMode.Locked;
                 break;
             case false:
                 if (createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf)
@@ -106,7 +103,6 @@ public class rUIPassword : MonoBehaviour
                 }
                 resetPasswordPanel.SetActive(true);
                 Time.timeScale = 0;
-                Cursor.lockState = CursorLockMode.Confined;
                 break;
         }
     }
@@ -119,34 +115,21 @@ public class rUIPassword : MonoBehaviour
     #endregion
     #region UI Panels
 
-    public void OnEnteringAreaShowPannels()
-    {
-        switch (rPasswordManager.Instance.CurrentArea.Password != null)
-        {
-            case true:
-                ShowCheckPasswordPanel();
-                break;
-            case false:
-                ShowCreatePasswordPanel();
-                break;
-        }
-    }
     public void ShowCreatePasswordPanel()
     {
         feedbackTxt.text = null;
-        playerInputs.enabled = false;
+        //playerInputs.enabled = false;
         Time.timeScale = 0f;
 
         createPasswordPanel.SetActive(true);
         //passwordIF.Select();
-        Cursor.lockState = CursorLockMode.Confined;
     }
 
-     void ShowCheckPasswordPanel()
+    public void ShowCheckPasswordPanel()
     {
-        playerInputs.enabled = false;
+        //playerInputs.enabled = false;
         Time.timeScale = 0f;
-        string correctAns = rPasswordManager.Instance.CurrentArea.Password;
+        string correctAns = GameObjectsManager.Instance.CurrentGate.NextArea.Password;
         Debug.Log($"Correct Answer is {correctAns}");
 
         /// generate 2 answers shuffled from the correct answer
@@ -154,7 +137,6 @@ public class rUIPassword : MonoBehaviour
         SetAnswersToButtons(correctAns);
 
         checkPasswordPanel.SetActive(true);
-        Cursor.lockState = CursorLockMode.Confined;
     }
     #endregion
 
@@ -170,62 +152,56 @@ public class rUIPassword : MonoBehaviour
         {
             feedbackTxt.text = "The secrect code can't be less than 5 characters.";
             feedbackPanel.SetActive(true);
-            Cursor.lockState = CursorLockMode.Confined;
             return;
         }
 
-        if(rPasswordManager.Instance.CurrentArea.AreaType == AreaType.Base)
+        if(rAreasManager.Instance.CurrentArea.AreaType == AreaType.Base)
         {
             // if the area is already a base, this means the player is reseting the password
             // so destroy the allies already there
             // to save the hassle of checking how many allies the new password should add
 
-            rPasswordManager.Instance.CurrentArea.DestroyAllAllies();
+            rAreasManager.Instance.CurrentArea.DestroyAllAllies();
         }
 
-        rPasswordManager.Instance.CurrentArea.Password = passwordIF.text;
-        rPasswordManager.Instance.CheckCurrentAreaPasswordStrength();
-        rPasswordManager.Instance.CurrentArea.AreaType = AreaType.Base;
-        rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
+        rAreasManager.Instance.CurrentArea.Password = passwordIF.text;
+        rAreasManager.Instance.CheckCurrentAreaPasswordStrength();
+        rAreasManager.Instance.CurrentArea.AreaType = AreaType.Base;
+        rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
 
 
-
-        rPasswordManager.Instance.SetAreaHealthBasedOnPassword();
-        rPasswordManager.Instance.CurrentArea.FormArmyBasedOnAreaHealth();
-        rPasswordManager.Instance.AreasWithSamePasswordAsCurrent();
+        rAreasManager.Instance.SetAreaHealthBasedOnPassword();
+        rAreasManager.Instance.CurrentArea.FormArmyBasedOnAreaHealth();
+        rAreasManager.Instance.AreasWithSamePasswordAsCurrent();
 
 
         createPasswordPanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
 
         ShowFeedback();
         
         Time.timeScale = 1f;
         passwordIF.text = null;
-        playerInputs.enabled = true;
+        //playerInputs.enabled = true;
     }
 
     private void ShowFeedback()
     {
-        string tempStr = rPasswordManager.Instance.Warnings;
+        string tempStr = rAreasManager.Instance.Warnings;
         if (tempStr.Length > 0)
         {
             feedbackTxt.text = tempStr += ".\n";
-            tempStr = rPasswordManager.Instance.Suggestions;
+            tempStr = rAreasManager.Instance.Suggestions;
             if(tempStr.Length > 0)
             {
                 feedbackTxt.text += tempStr;
             }
             feedbackPanel.SetActive(true);
-            Cursor.lockState = CursorLockMode.Confined;
         }
     }
 
     public void OnClickOKBtn()
     {
         feedbackPanel.SetActive(false);
-        if(!createPasswordPanel.activeSelf)
-            Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void TakeAns(Button selectedBtn)
@@ -233,9 +209,10 @@ public class rUIPassword : MonoBehaviour
         if (selectedBtn.GetComponent<rAnswerButton>().IsCorrect)
         {
             Debug.Log("Correct Password");
-            rPasswordManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
-            
-            rPasswordManager.Instance.CurrentArea.ShowAlliesBasedOnAreaHealth();
+
+            //rAreasManager.Instance.NextArea.ShowAlliesBasedOnAreaHealth();
+            GameObjectsManager.Instance.CurrentGate.NextArea.ShowAlliesBasedOnAreaHealth();
+            GameObjectsManager.Instance.CurrentGate.PathController.PlayerEnteredPath(GameObjectsManager.Instance.CurrentGate.State);
         }
         else
         {
@@ -243,9 +220,8 @@ public class rUIPassword : MonoBehaviour
         }
 
         checkPasswordPanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
-        playerInputs.enabled = true;
+        //playerInputs.enabled = true;
     }
     #endregion
 

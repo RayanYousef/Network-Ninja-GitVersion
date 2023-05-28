@@ -5,9 +5,11 @@ using UnityEngine.ProBuilder;
 
 public class CS_AnimatorController : MonoBehaviour
 {
+    public enum DamageObjectDirection { ForwardUp,ForwardDown,BackwardUp,BackwardDown }
 
     [Header("GameObject Components")]
     [SerializeField] CS_PlayerManager playerManager;
+    [SerializeField] Transform forwardUp,forwardDown,backwardUp,backwardDown;
 
     [Header("Applied Force To Animation")]
     [SerializeField] float appliedForce;
@@ -59,23 +61,87 @@ public class CS_AnimatorController : MonoBehaviour
 
     #region Animation Events
 
-    public void PlayFootstepsAudio()
-    {if(AudioManager.instance!= null)
-        AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.Footsteps);
-    }
-
     public void ResetCombo()
     {
-        PlayerManager.Anim.SetInteger(I_Combo_1, 0);
-        PlayerManager.Anim.SetInteger(I_Combo_2, 0);
-        PlayerManager.Anim.SetBool(b_Attacking, false);
+            PlayerManager.Anim.SetInteger(I_Combo_1, 0);
+            PlayerManager.Anim.SetInteger(I_Combo_2, 0);
+            PlayerManager.Anim.SetBool(b_Attacking, false);
     }
 
     public void CanTransit()
     {
-        PlayerManager.Anim.SetBool(b_canTransit, true);
+            PlayerManager.Anim.SetBool(b_canTransit, true);
+        PlayerManager.PStatsManager.DisableAllWeapons();
     }
 
+    #region Damage Object Rotation and Position
+
+    public void EnableWeapon(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+                damageObject.gameObject.SetActive(true);
+            }
+        }
+    }
+    public void EnableWeaponForwardUp(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+
+                damageObject.gameObject.SetActive(true);
+                damageObject.gameObject.transform.position = forwardUp.position;
+                damageObject.gameObject.transform.rotation = forwardUp.rotation;
+            }
+        }
+    }
+    public void EnableWeaponForwardDown(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+
+                damageObject.gameObject.SetActive(true);
+                damageObject.gameObject.transform.position = forwardDown.position;
+                damageObject.gameObject.transform.rotation = forwardDown.rotation;
+            }
+        }
+    }
+
+    public void EnableWeaponBackwardUp(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+
+                damageObject.gameObject.SetActive(true);
+                damageObject.gameObject.transform.position = backwardUp.position;
+                damageObject.gameObject.transform.rotation = backwardUp.rotation;
+            }
+        }
+    }
+
+    public void EnableWeaponBackwardDown(string WeaponName)
+    {
+        foreach (CS_DamageObject damageObject in PlayerManager.PStatsManager.DamageObjects)
+        {
+            if (damageObject.WeaponName == WeaponName)
+            {
+
+                damageObject.gameObject.SetActive(true);
+                damageObject.gameObject.transform.position = backwardDown.position;
+                damageObject.gameObject.transform.rotation = backwardDown.rotation;
+            }
+        }
+    }
+
+    #endregion
     public void NegateDashing()
     {
         PlayerManager.Anim.SetBool(B_Dashing, false);
@@ -84,6 +150,12 @@ public class CS_AnimatorController : MonoBehaviour
     public void NegateJumping()
     {
         PlayerManager.Anim.SetBool(B_Jumping, false);
+    }
+
+    public void PlayFootstepsAudio()
+    {
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.Footsteps);
     }
 
     public void ApplyForwardForce(float force)
