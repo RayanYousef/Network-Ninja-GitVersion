@@ -36,8 +36,8 @@ public class _Chase : StateMachineBehaviour
         Vector3 target = agent.destination;
         //  Seek(player.transform.position);
         RB.transform.LookAt(target);
-        agent.isStopped = true;
-        RB.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        //agent.isStopped = true;
+       // RB.transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         if (Vector3.Distance(player.position , RB.transform.position) < attackRange)
         {
