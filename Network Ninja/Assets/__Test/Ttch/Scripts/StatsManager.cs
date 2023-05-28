@@ -10,10 +10,6 @@ public enum CharacterTeam
 {
     None,Player, Enemy
 }
-public enum Difficulty
-{
-    Easy, Normal, Hard
-}
 
 
 public class StatsManager : MonoBehaviour
@@ -130,6 +126,7 @@ public class StatsManager : MonoBehaviour
 
 
     #endregion
+            
     #region Enable/Disable Damage Collider Based on Animation Event
     public void EnableAllWeapons()
     {

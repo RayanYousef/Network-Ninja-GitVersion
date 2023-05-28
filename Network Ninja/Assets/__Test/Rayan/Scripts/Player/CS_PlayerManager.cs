@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -103,6 +104,7 @@ public class CS_PlayerManager : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        pStatsManager.Stats.OnHealthUpdated.AddListener(LostGameHealthZero);
 
     }
 
@@ -127,7 +129,6 @@ public class CS_PlayerManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
 
     }
-
     private void FixedUpdate()
     {
         if (ultimateTimer < ultimateCoolDown && ultimateOn == false)
@@ -139,7 +140,11 @@ public class CS_PlayerManager : MonoBehaviour
             UltimateOn = false;
     }
 
-
+    public void LostGameHealthZero(float value)
+    {
+        if (value <= 0)
+            GameManager.Instance.CurrentGameState = GameState.Lost;
+    }
 
     #region Animator States
     public void OnStateEnter(CharacterState enteredState)
@@ -229,9 +234,6 @@ public class CS_PlayerManager : MonoBehaviour
         }
     }
     #endregion
-
-
-
 
     #region Main Input Functions
     public void SendInputDirection(Vector2 value)
