@@ -54,7 +54,7 @@ public class m_EnemyManager : MonoBehaviour
     {
         Vector3 enemyToPlayer = new Vector3 (player.position.x, transform.position.y, player.position.z);
         transform.LookAt(enemyToPlayer);
-        agent.SetDestination(player.position);
+      //  agent.SetDestination(player.position);
       
     }
 
