@@ -2,30 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
-using TMPro;
-using System.Threading;
-using UnityEngine.Rendering.RendererUtils;
-using Unity.VisualScripting;
+using System.Linq;
+using Cinemachine;
 
 public enum AreaType { Base, Fight };
 
 public class rArea : MonoBehaviour
 {
+    [Header("Camera")]
+    [SerializeField] private CinemachineVirtualCamera areaCamera;
+    [SerializeField] bool switchCamBack = true;
+
     [Header("Area Info")]
     [SerializeField] AreaType areaType;
     [SerializeField] float health, maxHealth;
+    bool isWinningConditionMet = false;
     [SerializeField] string password;
-    [SerializeField] bool mine = false;
     [SerializeField] bool playerInside = false;
 
     [Header("Events")]
-    [SerializeField] UnityEvent OnEnteringArea, OnEnteringFight;
+    [SerializeField] UnityEvent OnEnteringArea, OnEnteringFight, OnWinningLvl;
 
     [Header("Area Components")]
     [SerializeField] Collider areaCollider;
-    [SerializeField] EnemySpawner enemySpawner;
-    [SerializeField] ExampleArmy friendSpawner;
+    EnemySpawner enemySpawner;
+
+    [SerializeField] private Transform[] alliesSpawnPos;
+    private Formation alliesSpawnerPrefab;
+    [SerializeField] private List<FormationAgent> alliesList = new List<FormationAgent>();
+
+    private int numbOfAlliesInBattalion = 25;
 
     [Header("MiniMap Components")]
     [SerializeField] CS_ChangeObjectsColour meshColourChanger;
@@ -34,6 +40,9 @@ public class rArea : MonoBehaviour
 
     [Header("Script Internal Variables")]
     [SerializeField] float healthTimer;
+    [SerializeField] float formationRemovingTimer;
+
+    Formation allies1, allies2, allies3;
 
     public string Password { get => password; set => password = value; }
     public float Health
@@ -45,30 +54,36 @@ public class rArea : MonoBehaviour
             if (health == 0) LostArea();
         }
     }
-    public bool Mine { get => mine; set => mine = value; }
     public AreaType AreaType { get => areaType; set => areaType = value; }
     public CS_ChangeObjectsColour MeshColourChanger { get => meshColourChanger; }
     public SpriteRenderer SharingPasswordWarningIcon { get => sharingPasswordWarningIcon; }
 
     private void Awake()
     {
+        if (areaCamera != null) { }
+        else
+        {
+            areaCamera = GetComponentInChildren<CinemachineVirtualCamera>();
+        }
+
         areaCollider = GetComponent<Collider>();
         sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
+        OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
 
         enemySpawner = GetComponentInChildren<EnemySpawner>();
-        friendSpawner = GetComponentInChildren<ExampleArmy>();
 
-        meshColourChanger.MaxHealth = rPasswordManager.Instance.MaxHealth;
-        meshColourChanger.HalfHealth = rPasswordManager.Instance.HalfHealth;
-        meshColourChanger.LowHealth = rPasswordManager.Instance.LowHealth;
+        alliesSpawnerPrefab = GameObjectsManager.Instance.AllyBatalionPrefab;
+
+        meshColourChanger.MaxHealth = rAreasManager.Instance.MaxHealth;
+        meshColourChanger.HalfHealth = rAreasManager.Instance.HalfHealth;
+        meshColourChanger.LowHealth = rAreasManager.Instance.LowHealth;
 
         Renderer[] Renderers = new Renderer[1];
         Renderers[0] = GetComponentsInChildren<Renderer>()[1];
         meshColourChanger.MeshRenderers = Renderers;
 
         sharingPasswordWarningIcon.gameObject.SetActive(false);
-
     }
     void Start()
     {
@@ -76,20 +91,20 @@ public class rArea : MonoBehaviour
         if (areaType == AreaType.Base)
         {
             areaCollider.isTrigger = false;
-
         }
         else
         {
             areaCollider.isTrigger = true;
             meshColourChanger.ChangeToColour(Color.red);
         }
+        maxHealth = rAreasManager.Instance.MaxSoldiersNumber;
 
-        maxHealth = rPasswordManager.Instance.MaxSoldiersNumber;
+        enemySpawner.OnBigBossKilled.AddListener(Winning);
     }
 
     private void FixedUpdate()
     {
-        if (playerInside == false)
+        if (playerInside == false && password != null && !isWinningConditionMet)
             UpdateHealth();
     }
 
@@ -109,7 +124,7 @@ public class rArea : MonoBehaviour
 
             if (health == 0 && password != null)
             {
-                rPasswordManager.Instance.OnHealthZeroDestroyAreasWithSamePassword(this);
+                rAreasManager.Instance.OnHealthZeroDestroyAreasWithSamePassword(this);
                 LostArea();
             }
         }
@@ -121,85 +136,172 @@ public class rArea : MonoBehaviour
         areaCollider.isTrigger = true;
         password = null;
         sharingPasswordWarningIcon.gameObject.SetActive(false);
+
+        DestroyAllAllies();
     }
 
+    public void Winning()
+    {
+        // stop update health
+        isWinningConditionMet = true;
+
+        // current area minimap ..> max health color
+        meshColourChanger.ChangeToColour(rAreasManager.Instance.MaxHealth);
+        health = rAreasManager.Instance.MaxSoldiersNumber;
+
+        // Allies Formation
+        FormStrongArmy();
+
+        areaCamera.enabled = true;
+        //StartCoroutine(WinningCutScene());
+    }
+
+    #region Allies Handling Functions
+    public void DestroyAllAllies()
+    {
+        foreach (Transform asp in alliesSpawnPos)
+        {
+            Formation battalion = asp.GetComponentInChildren<Formation>();
+            if (battalion != null)
+            {
+                Destroy(battalion.gameObject);
+            }
+        }
+    }
+    public void ShowAlliesBasedOnAreaHealth()
+    {
+        for (int i = 0; i < health; i++)
+        {
+            alliesList[i].gameObject.SetActive(true);
+        }
+    }
+    public void FormArmyBasedOnAreaHealth()
+    {
+        if (Health <= maxHealth / 4)
+        {
+            allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
+            allies1.transform.parent = alliesSpawnPos[0];
+
+            alliesList = allies1.AgentsList;
+        }
+
+        else if (Health <= maxHealth / 2)
+        {
+            allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
+            allies1.transform.parent = alliesSpawnPos[0];
+
+            allies2 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[1].position, Quaternion.identity);
+            allies2.transform.parent = alliesSpawnPos[1];
+
+            alliesList = allies1.AgentsList.Concat(allies2.AgentsList).ToList();
+
+        }
+
+        else if (Health <= maxHealth)
+        {
+            FormStrongArmy();
+        }
+
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+        areaCamera.enabled = true;
+        if(switchCamBack)
+            StartCoroutine(WaitAndSwitchCameraBack());
+    } 
+
+    private void FormStrongArmy()
+    {
+        allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
+        allies1.transform.parent = alliesSpawnPos[0];
+
+        allies2 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[1].position, Quaternion.identity);
+        allies2.transform.parent = alliesSpawnPos[1];
+
+        allies3 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[2].position, Quaternion.identity);
+        allies3.transform.parent = alliesSpawnPos[2];
+
+        alliesList = allies1.AgentsList.Concat(allies2.AgentsList.Concat(allies3.AgentsList)).ToList();
+    }
+    #endregion
+
+    #region Cinemachine Cut Scene
+    IEnumerator WaitAndSwitchCameraBack()
+    {
+        yield return new WaitForSeconds(5.0f);
+        areaCamera.enabled = false;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+    }
+
+    IEnumerator WinningCutScene()
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        //areaCamera.enabled = false;
+        //foreach (rArea area in GameObjectsManager.Instance.ListOfLevelAreas)
+        //{
+        //    if (area == rPasswordManager.Instance.CurrentArea)
+        //    {
+        //        continue;
+        //    }
+        //    area.areaCamera.enabled = true;
+        //    yield return new WaitForSeconds(3.0f);
+        //}
+        //    this.areaCamera.enabled = true;
+    }
+
+    #endregion
 
     #region Collision and Trigger
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent<rTempFriendScript>(out rTempFriendScript friend))
-        {
-            Destroy(collision.gameObject);
-        }
-
         if (areaType == AreaType.Base && collision.gameObject == GameObjectsManager.Instance.Player)
         {
             playerInside = true;
-            rPasswordManager.Instance.CurrentArea = this;
+            rAreasManager.Instance.CurrentArea = this;
 
-            /// On Entering Area call On Entering Area in UIPassword
+            /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
             OnEnteringArea?.Invoke();
-
-            //if (areaType == AreaType.Base)
-            //{
-            //    /// On Entering Area call On Entering Area in UIPassword
-            //    OnEnteringArea?.Invoke();
-            //}
-            //else
-            //{
-            //    if (mine)
-            //    {
-            //        areaCollider.isTrigger = true;
-            //    }
-            //    else
-            //    {
-
-            //        // spawn enemies
-            //    }
-            //}
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (areaType == AreaType.Base)
-            rPasswordManager.Instance.ResetPasswordButtonInteractbility(true);
+            rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
         else
-            rPasswordManager.Instance.ResetPasswordButtonInteractbility(false);
+            rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
 
         if (areaType == AreaType.Fight && other.gameObject == GameObjectsManager.Instance.Player)
         {
             playerInside = true;
-            // raise event to spawn enemies
-            rPasswordManager.Instance.CurrentArea = this;
+            rAreasManager.Instance.CurrentArea = this;
+            /// raise event to spawn enemies
             OnEnteringFight?.Invoke();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
-            rPasswordManager.Instance.ResetPasswordButtonInteractbility(false);
-            foreach (GameObject friend in friendSpawner._spawnedUnits)
-            {
-                Destroy(friend.gameObject);
-            }
-
-            foreach (GameObject enemy in enemySpawner.enemies)
-            {
-                Destroy(enemy);
-            }
-            friendSpawner._spawnedUnits.Clear();
-            enemySpawner.enemies.Clear();
+            rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
         }
+
+        if (areaType == AreaType.Fight && other.gameObject == GameObjectsManager.Instance.Player)
+        {
+            enemySpawner.AddEnemiesInPool();
+            enemySpawner.DisableMiniBosses();
+        }
+
 
         if (areaType == AreaType.Base && other.gameObject == GameObjectsManager.Instance.Player)
         {
             areaCollider.isTrigger = false;
             playerInside = false;
-            GetComponentInChildren<ExampleArmy>().enabled = false;
+
+            for (int i = 0; i < alliesList.Count; i++)
+            {
+                alliesList[i].gameObject.SetActive(false);
+            }
         }
     }
     #endregion
