@@ -22,15 +22,15 @@ public class _Idle : StateMachineBehaviour
         agent.velocity = Vector3.zero;
         agent.speed = 0;
         //  RB.velocity = Vector3.zero;
-        agent.SetDestination(player.position);
+       // agent.SetDestination(player.position);
 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        RB.transform.LookAt(player);
-        agent.SetDestination(player.position);
+      //  RB.transform.LookAt(player);
+      //  agent.SetDestination(player.position);
         if (Vector3.Distance(player.position , RB.transform.position) < chaseRange)
         {
             Debug.Log("CHASE");

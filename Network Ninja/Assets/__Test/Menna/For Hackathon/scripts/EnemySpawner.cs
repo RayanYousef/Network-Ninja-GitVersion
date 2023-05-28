@@ -170,11 +170,9 @@ public class EnemySpawner : MonoBehaviour
                 //enemy.transform.parent = this.transform;
                 enemy.SetActive(true);
                 enemies.Add(enemy);
-              //  enemies.Add(enemy);
             }
 
-            //numAlive++;
-            //numSpawned++;
+
         }
     }
 
