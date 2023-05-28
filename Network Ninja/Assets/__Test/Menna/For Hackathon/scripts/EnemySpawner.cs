@@ -22,6 +22,7 @@ public class EnemySpawner : MonoBehaviour
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
     public int miniBossSize = 4;
+    public float delayBeforeSpawnBoss = 3f; // Delay in seconds before spawning the boss
 
 
 
@@ -301,8 +302,8 @@ public class EnemySpawner : MonoBehaviour
                 /// spawn big boss
                 /// in case of emergency... invoke winning event here
                 //OnBigBossKilled?.Invoke();
-                SpawnBigBoss();
-               // GameManager.Instance.EndStage(true);
+                StartCoroutine(SpawnBossCoroutine());
+                // GameManager.Instance.EndStage(true);
             }
             else
             {
@@ -310,6 +311,14 @@ public class EnemySpawner : MonoBehaviour
                 OnAllMiniBossesKilled?.Invoke();
             }  
         }
+    }
+
+    IEnumerator SpawnBossCoroutine()
+    {
+        yield return new WaitForSeconds(delayBeforeSpawnBoss);
+
+        // Spawn the boss
+        SpawnBigBoss();
     }
     #region //trials
     //IEnumerator AvoidEnemies()
