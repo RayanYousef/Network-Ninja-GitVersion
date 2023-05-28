@@ -2169,7 +2169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1043334830
 Transform:
   m_ObjectHideFlags: 0
@@ -2197,9 +2197,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4577,36 +4577,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 633933085135273835, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: f8ca6df6f45b09e4fb63a8f0313e3bc9, type: 3}
-    - target: {fileID: 1004449566501797169, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1004449567474112605, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675089825930968254, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: difficultyMultiplier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675089825930968254, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: damageObjects.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2851272366202147953, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5029212637801860295, guid: d1343ce0abc5ad3488c18860a399b97b,
         type: 3}
       propertyPath: m_Name
@@ -4667,36 +4637,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5029212637940532782, guid: d1343ce0abc5ad3488c18860a399b97b,
+    - target: {fileID: 5029212639643187528, guid: d1343ce0abc5ad3488c18860a399b97b,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5029212638261597707, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5029212638596730851, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5029212638794400919, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5029212639435245595, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5029212639643187525, guid: d1343ce0abc5ad3488c18860a399b97b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: SFXClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f8ca6df6f45b09e4fb63a8f0313e3bc9, type: 3}
     - target: {fileID: 5029212639697173373, guid: d1343ce0abc5ad3488c18860a399b97b,
         type: 3}
       propertyPath: m_LocalPosition.x

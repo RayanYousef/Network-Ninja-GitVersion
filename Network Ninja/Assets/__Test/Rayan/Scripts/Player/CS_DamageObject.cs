@@ -34,6 +34,7 @@ public class CS_DamageObject : MonoBehaviour
 
         if(AudioManager.instance!=null)
         AudioManager.instance.sfxSource.clip= SFXClip;
+        if (AudioManager.instance.sfxSource.clip!=null)
         AudioManager.instance.sfxSource.Play();
 
     }
