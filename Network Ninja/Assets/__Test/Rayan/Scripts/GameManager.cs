@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     [SerializeField] GameState currentGameState;
     [SerializeField] Difficulty difficulty;
-    [SerializeField] bool bossEntered;
+     public bool bossEntered;
 
     [Header("Panels")]
     [SerializeField] GameObject WinningPanel, LosePanel;
