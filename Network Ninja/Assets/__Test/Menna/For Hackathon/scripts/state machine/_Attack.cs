@@ -27,7 +27,8 @@ public class _Attack : StateMachineBehaviour
         agent.velocity = Vector3.zero;
 
         enemyManager = animator.GetComponent<m_EnemyManager>();
-        waitingCoroutine = animator.gameObject.GetComponent<MonoBehaviour>().StartCoroutine(enemyManager.WaitForBreakCoroutine(animator));
+
+      //  waitingCoroutine = animator.gameObject.GetComponent<MonoBehaviour>().StartCoroutine(enemyManager.WaitForBreakCoroutine(animator));
 
 
 
@@ -37,12 +38,12 @@ public class _Attack : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         // agent.velocity = Vector3.zero;
 
         if (Vector3.Distance(player.position, RB.transform.position) > attackRange)
         {
             Debug.Log("CHASE");
-           // animator.SetTrigger("Chase");
             animator.SetBool("IsAttacking", false);           
         }
 
@@ -55,12 +56,13 @@ public class _Attack : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // animator.ResetTrigger("Chase");
-        if (waitingCoroutine != null)
-        {
-            animator.gameObject.GetComponent<MonoBehaviour>().StopCoroutine(waitingCoroutine);
-            waitingCoroutine = null;
-        }
+        //INTERVAL TRIALS
+
+        //if (waitingCoroutine != null)
+        //{
+        //    animator.gameObject.GetComponent<MonoBehaviour>().StopCoroutine(waitingCoroutine);
+        //    waitingCoroutine = null;
+        //}
     }
 
 
