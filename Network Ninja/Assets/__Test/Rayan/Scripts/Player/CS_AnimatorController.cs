@@ -18,7 +18,7 @@ public class CS_AnimatorController : MonoBehaviour
     [SerializeField] string i_Combo_1;
     [SerializeField] string i_Combo_2;
     [SerializeField] string f_Direction, f_MotionTime, f_animSpeed;
-    [SerializeField] string b_Grounded, b_Attacking, b_Dashing, b_Jumping, b_canTransit, t_Dash, t_Jump;
+    [SerializeField] string b_Grounded, b_Attacking, b_Ultimate, b_Dashing, b_Jumping, b_canTransit, t_Dash, t_Jump,t_Ultimate;
 
     public CS_PlayerManager PlayerManager { get => playerManager; set => playerManager = value; }
     public string I_Combo_1 { get => i_Combo_1; }
@@ -30,15 +30,18 @@ public class CS_AnimatorController : MonoBehaviour
     public string B_Attacking { get => b_Attacking; }
     public string B_Grounded { get => b_Grounded; }
     public string B_Jumping { get => b_Jumping; }
+    public string B_Ultimate { get => b_Ultimate; }
     public string B_Dashing { get => b_Dashing; }
     public string T_Jump { get => t_Jump; }
     public string T_Dash { get => t_Dash; }
+    public string T_Ultimate { get => t_Ultimate; }
 
 
     public bool Grounded
     {
         get => PlayerManager.Anim.GetBool(b_Grounded);
     }
+
 
     public void SetGrounded(bool value)
     {

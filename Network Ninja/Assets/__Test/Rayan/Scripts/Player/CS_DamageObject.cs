@@ -6,26 +6,36 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-
+[RequireComponent(typeof(AudioSource))]
 public class CS_DamageObject : MonoBehaviour
 {
-    [Header("My Stats")]
+    [Header("Components")]
     [SerializeField] StatsManager myStatsManager;
+    [SerializeField] AudioSource audioSource;
 
-    [Header("Tag")]
+    [Header("Variables")]
+    [SerializeField] float skillMultiplier=1;
     [SerializeField] string weaponName;
 
     public StatsManager MyStatsManager { get => myStatsManager; set { 
             if(myStatsManager==null) myStatsManager = value; } }
 
     public string WeaponName { get => weaponName; }
-
+    private void Start()
+    {
+        audioSource= GetComponent<AudioSource>();
+        audioSource.playOnAwake= false;
+        audioSource.loop= false;
+    }
 
     #region Logic
     private void OnEnable()
     {
         if(myStatsManager!=null)
         myStatsManager.HitObjects.Clear();
+
+        if (audioSource != null && audioSource.clip!=null)
+            audioSource.Play();
     }
   
     public void OnTriggerEnter(Collider other)
@@ -41,6 +51,7 @@ public class CS_DamageObject : MonoBehaviour
                     //Apply Hitstop
                     if (otherStatsManager.TryGetComponent<HitStopHandler>(out HitStopHandler handler))
                         handler.GetComponent<HitStopHandler>().AnimationStop(0.5f, 0f);
+
 
                     otherStatsManager.ApplyDamage(myStatsManager);
                     if (other!= myStatsManager.gameObject)

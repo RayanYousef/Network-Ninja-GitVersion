@@ -53,7 +53,7 @@ public class CS_MovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        switch (playerManager.AnimatorCurrentState)
+        switch (playerManager.CurrentState)
         {
             case CharacterState.Idling:
                 break;
@@ -77,17 +77,28 @@ public class CS_MovementController : MonoBehaviour
             case CharacterState.Falling:
                 MoveTowardsDirection(movementSpeed);
                 break;
+
         }
 
-        if (PlayerManager.enabled && playerManager.AnimController.Grounded == false && playerManager.AnimatorCurrentState!= CharacterState.Dashing)
+        if (PlayerManager.enabled && playerManager.AnimController.Grounded == false && playerManager.CurrentState!= CharacterState.Dashing)
             FallingUpdate();
 
     }
 
     private void LateUpdate()
     {
-        RotateTowardsDirection();
+        switch (playerManager.CurrentState == CharacterState.Ultimate && playerManager.CameraManager.LockedOn)
+        {
+            case true:
+                RotateTowardsDirection(playerManager.CameraManager.LockedTarget);
 
+                break;
+
+            case false:
+                if(playerManager.CurrentState != CharacterState.Ultimate)
+                RotateTowardsDirection();
+                break;
+        }
     }
 
     public void FallingUpdate()
@@ -113,6 +124,18 @@ public class CS_MovementController : MonoBehaviour
         if (newDirection != Vector3.zero)
             transform.rotation = Quaternion.RotateTowards(transform.rotation,
                 Quaternion.LookRotation(newDirection), Time.deltaTime * rotationSpeed);
+    }
+
+    private void RotateTowardsDirection(Transform TargetObject)
+    {
+
+        if (playerManager.CameraManager.ListOfTargets.Count > 0)
+        {
+            Vector3 direction = TargetObject.position - transform.position;
+            direction.y = 0; direction.Normalize();
+            if (direction != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(direction);
+        }
     }
     #endregion
 
