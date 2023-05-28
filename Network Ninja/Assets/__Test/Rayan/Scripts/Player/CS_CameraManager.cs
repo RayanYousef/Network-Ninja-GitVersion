@@ -294,9 +294,11 @@ public class CS_CameraManager : MonoBehaviour
 
         if (other.gameObject.TryGetComponent<Animator>(out Animator anim))
         {
-            if(PlayerManager.UltimateOn)
-            anim.speed = slowAnimationRate;
-            anim.GetComponent<NavMeshAgent>().isStopped = true;
+            if (PlayerManager.UltimateOn)
+            {
+                anim.speed = slowAnimationRate;
+                anim.GetComponent<NavMeshAgent>().isStopped = true;
+            }
 
         }
 
