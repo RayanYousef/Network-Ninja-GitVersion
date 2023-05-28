@@ -26,7 +26,6 @@ public class rArea : MonoBehaviour
     [SerializeField] public UnityEvent OnEnteringFight;
 
     [Header("Area Components")]
-    //[SerializeField] Collider areaCollider;
     EnemySpawner enemySpawner;
 
     [SerializeField] private Transform[] alliesSpawnPos;
@@ -88,7 +87,6 @@ public class rArea : MonoBehaviour
             areaCamera = GetComponentInChildren<CinemachineVirtualCamera>();
         }
 
-        //areaCollider = GetComponent<Collider>();
         sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
@@ -114,15 +112,7 @@ public class rArea : MonoBehaviour
         {
             meshColourChanger.ChangeToColour(Color.red);
         }
-        //if (areaType == AreaType.Base)
-        //{
-        //    //areaCollider.isTrigger = false;
-        //}
-        //else
-        //{
-        //    //areaCollider.isTrigger = true;
-        //    meshColourChanger.ChangeToColour(Color.red);
-        //}
+
         maxHealth = rAreasManager.Instance.MaxSoldiersNumber;
 
         enemySpawner.OnBigBossKilled.AddListener(Winning);
@@ -159,7 +149,6 @@ public class rArea : MonoBehaviour
     public void LostArea()
     {
         areaType = AreaType.Fight;
-        //areaCollider.isTrigger = true;
         password = null;
         sharingPasswordWarningIcon.gameObject.SetActive(false);
 
@@ -316,66 +305,10 @@ public class rArea : MonoBehaviour
             {
                 return;
             }
-
             rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
-
-            
         }
     }
 
-    //    private void OnCollisionEnter(Collision collision)
-    //    {
-    //        if (areaType == AreaType.Base && collision.gameObject == GameObjectsManager.Instance.Player)
-    //        {
-    //            playerInside = true;
-    //            rAreasManager.Instance.CurrentArea = this;
-
-    //            /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
-    //            OnEnteringArea?.Invoke();
-    //        }
-    //    }
-
-    //    private void OnTriggerEnter(Collider other)
-    //    {
-    //        if (areaType == AreaType.Base)
-    //            rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
-    //        else
-    //            rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
-
-    //        if (areaType == AreaType.Fight && other.gameObject == GameObjectsManager.Instance.Player)
-    //        {
-    //            playerInside = true;
-    //            rAreasManager.Instance.CurrentArea = this;
-    //            /// raise event to spawn enemies
-    //            OnEnteringFight?.Invoke();
-    //        }
-    //    }
-
-    //    private void OnTriggerExit(Collider other)
-    //    {
-    //        if (other.gameObject == GameObjectsManager.Instance.Player)
-    //        {
-    //            rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
-    //        }
-
-    //        if (areaType == AreaType.Fight && other.gameObject == GameObjectsManager.Instance.Player)
-    //        {
-    //            enemySpawner.AddEnemiesInPool();
-    //            enemySpawner.DisableMiniBosses();
-    //        }
-
-
-    //        if (areaType == AreaType.Base && other.gameObject == GameObjectsManager.Instance.Player)
-    //        {
-    //            areaCollider.isTrigger = false;
-    //            playerInside = false;
-
-    //            for (int i = 0; i < alliesList.Count; i++)
-    //            {
-    //                alliesList[i].gameObject.SetActive(false);
-    //            }
-    //        }
-    //    }
     #endregion
 
 }

@@ -156,17 +156,16 @@ public class rAreasManager : MonoBehaviour
     private void CheckPassword(string password)
     {
 
-    if (password.Length == 0)
-    {
-        return;
-    }
+        if (password.Length == 0)
+        {
+            return;
+        }
 
-    if (password == currentArea.Password)
-    {
-        Debug.Log("Correct Password");
-        //currentArea.GetComponent<Collider>().isTrigger = true;
-        return;
-    }
+        if (password == currentArea.Password)
+        {
+            Debug.Log("Correct Password");
+            return;
+        }
     }
 
     public bool CheckAllAreasBaseExceptCurrent()
