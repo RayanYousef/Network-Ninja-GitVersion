@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [Serializable]
 public struct StatsStruct
 {
-    [SerializeField] UnityEvent<float> OnHealthUpdated;
+    [SerializeField] public UnityEvent<float> OnHealthUpdated;
 
     [SerializeField]
     private float maxHealth, currentHealth;

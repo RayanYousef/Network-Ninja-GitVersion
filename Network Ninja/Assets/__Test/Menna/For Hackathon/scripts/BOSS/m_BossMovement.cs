@@ -174,7 +174,7 @@ public class m_BossMovement : MonoBehaviour
         DragonAnim.SetBool("dead", true);
         DragonAnim.SetBool("isAttacking", false);
         DragonAnim.SetBool("isChasing", false);
-        GameManager.Instance.EndStage(true);
+        GameManager.Instance.CurrentGameState = GameState.Won;
         BossDie?.Invoke();
     }
     public bool death()
