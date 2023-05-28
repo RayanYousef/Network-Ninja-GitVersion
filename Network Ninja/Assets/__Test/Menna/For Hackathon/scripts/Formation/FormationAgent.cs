@@ -36,7 +36,7 @@ public class FormationAgent : MonoBehaviour
         timer += Time.deltaTime;
 
         Debug.Log("d:" + agent.remainingDistance);
-        if (agent.remainingDistance <= 0.1f && !agent.pathPending && changeIdle == 0 && timer > 1)
+        if (agent.remainingDistance <= 0.05f && !agent.pathPending && changeIdle == 0 && timer > 1)
         {
             ChangeAnimation();
         }
