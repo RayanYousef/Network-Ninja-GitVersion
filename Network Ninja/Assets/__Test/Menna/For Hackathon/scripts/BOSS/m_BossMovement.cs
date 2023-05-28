@@ -7,6 +7,8 @@ using static Unity.VisualScripting.Member;
 using static UnityEngine.ParticleSystem;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.AI;
+
 
 
 public class m_BossMovement : MonoBehaviour
@@ -27,6 +29,7 @@ public class m_BossMovement : MonoBehaviour
     private bool finishedAttack;
     private Transform player;
     private Rigidbody rb;
+    private NavMeshAgent agent;
 
     ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
 
@@ -59,6 +62,8 @@ public class m_BossMovement : MonoBehaviour
         color = new Color(188f, 0f, 0f, 1f);
         transparentColor = new Color(0f, 0f, 0f, 0f);
         rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
+
 
     }
 
@@ -71,6 +76,8 @@ public class m_BossMovement : MonoBehaviour
         // prevent sliding
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
+
+        StopEnemeies();
 
 
     }
@@ -232,5 +239,14 @@ public class m_BossMovement : MonoBehaviour
             StartCoroutine(DoFade());
 
         }
+    }
+
+    public void StopEnemeies()
+    {
+        agent.enabled = false;
+    }
+    public void MoveEnemies()
+    {
+        agent.enabled = true;
     }
 }

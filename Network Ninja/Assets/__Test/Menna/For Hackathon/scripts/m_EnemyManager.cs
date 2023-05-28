@@ -46,6 +46,7 @@ public class m_EnemyManager : MonoBehaviour
         collider = GetComponent<Collider>();
         currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
         maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
+
     }
 
     // Update is called once per frame
@@ -53,7 +54,8 @@ public class m_EnemyManager : MonoBehaviour
     {
         Vector3 enemyToPlayer = new Vector3 (player.position.x, transform.position.y, player.position.z);
         transform.LookAt(enemyToPlayer);
-        //agent.SetDestination(player.position);
+      //  agent.SetDestination(player.position);
+      
     }
 
     public void showHealth()
@@ -140,12 +142,6 @@ public class m_EnemyManager : MonoBehaviour
 
     }
 
-    public void StopEnemeies()
-    {
-        animator.enabled = false;
-    }
-    public void MoveEnemies()
-    {
-        animator.enabled = true;
-    }
+ 
+
 }
