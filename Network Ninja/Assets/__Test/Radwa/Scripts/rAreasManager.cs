@@ -19,10 +19,11 @@ public class rAreasManager : MonoBehaviour
 
     [Header("Password Manager Components")]
     [SerializeField] rArea[] listOfLevelAreas;
-    [SerializeField] int maxSoldiersNumber = 75;
+    int maxSoldiersNumber = 75;
     [SerializeField] Color maxHealth, halfHealth, lowHealth, enemyColor;
 
     [SerializeField] rArea currentArea;
+   // [SerializeField] rArea nextArea;
     [SerializeField] PasswordStrength strength;
     [SerializeField] Result result;
 
@@ -36,6 +37,7 @@ public class rAreasManager : MonoBehaviour
     //
     public static rAreasManager Instance { get => instance; }
     public rArea CurrentArea { get { return currentArea; } set => currentArea = value; }
+   // public rArea NextArea { get => nextArea; set => nextArea = value; }
 
     public int MaxSoldiersNumber { get => maxSoldiersNumber; }
     public Color MaxHealth { get => maxHealth; }
@@ -46,7 +48,6 @@ public class rAreasManager : MonoBehaviour
     public string Warnings { get => currentWarnings; set => currentWarnings = value; }
     public string Suggestions { get => currentSuggestions; set => currentSuggestions = value; }
     public rArea[] ListOfLevelAreas { get => listOfLevelAreas; set => listOfLevelAreas = value; }
-
 
     private void Awake()
     {
@@ -138,11 +139,11 @@ public class rAreasManager : MonoBehaviour
         switch (strength)
         {
             case PasswordStrength.Weak:
-                currentArea.Health = MaxSoldiersNumber / 4;
+                currentArea.Health = 25;
                 break;
 
             case PasswordStrength.Moderate:
-                currentArea.Health = MaxSoldiersNumber / 2;
+                currentArea.Health = 50;
                 break;
 
             case PasswordStrength.Strong:
@@ -163,7 +164,7 @@ public class rAreasManager : MonoBehaviour
     if (password == currentArea.Password)
     {
         Debug.Log("Correct Password");
-        currentArea.GetComponent<Collider>().isTrigger = true;
+        //currentArea.GetComponent<Collider>().isTrigger = true;
         return;
     }
     }
@@ -183,4 +184,5 @@ public class rAreasManager : MonoBehaviour
         }
         return true;
     }
+
 }

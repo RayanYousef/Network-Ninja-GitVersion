@@ -119,18 +119,28 @@ public class rUIPassword : MonoBehaviour
     #endregion
     #region UI Panels
 
-    public void OnEnteringAreaShowPannels()
-    {
-        switch (rAreasManager.Instance.CurrentArea.Password != null)
-        {
-            case true:
-                ShowCheckPasswordPanel();
-                break;
-            case false:
-                ShowCreatePasswordPanel();
-                break;
-        }
-    }
+    //public void ToCreatePassword()
+    //{
+    //    ShowCreatePasswordPanel();
+    //}
+
+    //public void ToCheckPassword()
+    //{
+    //    ShowCheckPasswordPanel();
+    //}
+
+    //public void OnEnteringAreaShowPannels()
+    //{
+    //    switch (GameObjectsManager.Instance.CurrentGate.NextArea.Password != null)
+    //    {
+    //        case true:
+    //            ShowCheckPasswordPanel();
+    //            break;
+    //        case false:
+    //            ShowCreatePasswordPanel();
+    //            break;
+    //    }
+    //}
     public void ShowCreatePasswordPanel()
     {
         feedbackTxt.text = null;
@@ -142,11 +152,11 @@ public class rUIPassword : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
     }
 
-     void ShowCheckPasswordPanel()
+    public void ShowCheckPasswordPanel()
     {
         playerInputs.enabled = false;
         Time.timeScale = 0f;
-        string correctAns = rAreasManager.Instance.CurrentArea.Password;
+        string correctAns = GameObjectsManager.Instance.CurrentGate.NextArea.Password;
         Debug.Log($"Correct Answer is {correctAns}");
 
         /// generate 2 answers shuffled from the correct answer
@@ -186,7 +196,7 @@ public class rUIPassword : MonoBehaviour
         rAreasManager.Instance.CurrentArea.Password = passwordIF.text;
         rAreasManager.Instance.CheckCurrentAreaPasswordStrength();
         rAreasManager.Instance.CurrentArea.AreaType = AreaType.Base;
-        rAreasManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
+        //rAreasManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
 
 
 
@@ -233,9 +243,11 @@ public class rUIPassword : MonoBehaviour
         if (selectedBtn.GetComponent<rAnswerButton>().IsCorrect)
         {
             Debug.Log("Correct Password");
-            rAreasManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
-            
-            rAreasManager.Instance.CurrentArea.ShowAlliesBasedOnAreaHealth();
+            //rAreasManager.Instance.CurrentArea.GetComponent<Collider>().isTrigger = true;
+
+            //rAreasManager.Instance.NextArea.ShowAlliesBasedOnAreaHealth();
+            GameObjectsManager.Instance.CurrentGate.NextArea.ShowAlliesBasedOnAreaHealth();
+            GameObjectsManager.Instance.CurrentGate.PathController.PlayerEnteredPath(GameObjectsManager.Instance.CurrentGate.State);
         }
         else
         {

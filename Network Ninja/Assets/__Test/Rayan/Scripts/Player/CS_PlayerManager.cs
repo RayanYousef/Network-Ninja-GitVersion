@@ -219,7 +219,7 @@ public class CS_PlayerManager : MonoBehaviour
                 if (yLength > GetComponent<CapsuleCollider>().height / 2 - 0.01f)
                 {
                     Debug.Log("happened");
-                    rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+                  //  rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                 }
             }
         }
