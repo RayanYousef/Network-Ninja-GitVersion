@@ -75,14 +75,14 @@ public class m_BossMovement : MonoBehaviour
         }
     }
 
-    void trailActivate()
+    public void trailActivate()
     {
         foreach (GameObject trail in trails)
         {
             trail.SetActive(true);
         }
     }
-    void trailDeactivate()
+    public void trailDeactivate()
     {
         foreach (GameObject trail in trails)
         {

@@ -5,9 +5,9 @@ using UnityEngine;
 public class m_BossIdleState : StateMachineBehaviour
 {
     float timer;
-    float chaseRange = 15;
+     [SerializeField] float chaseRange;
     Transform player;
-    
+  
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

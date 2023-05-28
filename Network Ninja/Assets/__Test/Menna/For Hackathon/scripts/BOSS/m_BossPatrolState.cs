@@ -7,13 +7,12 @@ using UnityEngine.AI;
 public class m_BossPatrolState : StateMachineBehaviour
 {
     float timer;
-    float chaseRange = 15;
     Transform player;
     Transform Boss;
     bool isChasing = false;
     NavMeshAgent agent;
 
-
+    public float chaseRange;
     public float spawnRadius = 20f;
     public float minDistanceFromObject = 15f;
     public float maxDistanceFromObject = 25f;
@@ -36,7 +35,7 @@ public class m_BossPatrolState : StateMachineBehaviour
        // GameObject go= GameObject.FindGameObjectWithTag("waypoints");
         for(int i =0; i<3; i++)
         {
-            Vector3 randomPosition = Boss.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+            Vector3 randomPosition = player.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
             waypoints.Add(randomPosition);
         }
 
