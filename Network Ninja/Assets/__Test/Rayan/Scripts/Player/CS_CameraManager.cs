@@ -185,6 +185,7 @@ public class CS_CameraManager : MonoBehaviour
             if(target.TryGetComponent<Animator>(out Animator anim))
             {
                 anim.speed = slowAnimationRate;
+                anim.GetComponent<NavMeshAgent>().isStopped = true;
 
             }
 
@@ -198,7 +199,7 @@ public class CS_CameraManager : MonoBehaviour
             if (target.TryGetComponent<Animator>(out Animator anim))
             {
                 anim.speed = 1;
-                target.GetComponent<NavMeshAgent>().speed = 3.5f;
+                anim.GetComponent<NavMeshAgent>().isStopped = false;
 
             }
 
@@ -295,6 +296,8 @@ public class CS_CameraManager : MonoBehaviour
         {
             if(PlayerManager.UltimateOn)
             anim.speed = slowAnimationRate;
+            anim.GetComponent<NavMeshAgent>().isStopped = true;
+
         }
 
     }
@@ -311,6 +314,8 @@ public class CS_CameraManager : MonoBehaviour
         if (other.gameObject.TryGetComponent<Animator>(out Animator anim))
         {
             anim.speed = 1;
+            anim.GetComponent<NavMeshAgent>().isStopped = false;
+
         }
 
     }
