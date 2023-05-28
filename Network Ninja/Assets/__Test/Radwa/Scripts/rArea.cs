@@ -272,6 +272,11 @@ public class rArea : MonoBehaviour
     {
         if (collision.gameObject == GameObjectsManager.Instance.Player)
         {
+            if (rAreasManager.Instance.CurrentArea == this)
+            {
+                return;
+            }
+
             if (areaType == AreaType.Fight)
             {
                 rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
@@ -284,10 +289,10 @@ public class rArea : MonoBehaviour
                 playerInside = true;
                 rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
 
-                if (rAreasManager.Instance.CurrentArea == this)
-                {
-                    return;
-                }
+                //if (rAreasManager.Instance.CurrentArea == this)
+                //{
+                //    return;
+                //}
                 rAreasManager.Instance.CurrentArea = this;
 
                 /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
