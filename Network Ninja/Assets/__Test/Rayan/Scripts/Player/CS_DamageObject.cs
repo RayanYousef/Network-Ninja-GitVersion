@@ -11,7 +11,7 @@ public class CS_DamageObject : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] StatsManager myStatsManager;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip SFXClip;
 
     [Header("Variables")]
     [SerializeField] float skillMultiplier=1;
@@ -23,9 +23,7 @@ public class CS_DamageObject : MonoBehaviour
     public string WeaponName { get => weaponName; }
     private void Start()
     {
-        audioSource= GetComponent<AudioSource>();
-        audioSource.playOnAwake= false;
-        audioSource.loop= false;
+
     }
 
     #region Logic
@@ -34,8 +32,9 @@ public class CS_DamageObject : MonoBehaviour
         if(myStatsManager!=null)
         myStatsManager.HitObjects.Clear();
 
-        if (audioSource != null && audioSource.clip!=null)
-            audioSource.Play();
+        if(AudioManager.instance!=null)
+        AudioManager.instance.sfxSource.PlayOneShot(SFXClip);
+
     }
   
     public void OnTriggerEnter(Collider other)
