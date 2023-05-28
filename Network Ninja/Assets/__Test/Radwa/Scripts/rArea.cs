@@ -242,7 +242,7 @@ public class rArea : MonoBehaviour
     #region Cinemachine Cut Scene
     IEnumerator WaitAndSwitchCameraBack()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(4.5f);
         areaCamera.enabled = false;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
     }
