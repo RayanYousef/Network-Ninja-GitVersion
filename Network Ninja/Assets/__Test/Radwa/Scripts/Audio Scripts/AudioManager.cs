@@ -63,20 +63,20 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    //public void playSFX(string name, float SFXVolume)
-    //{
-    //    Sound s = Array.Find(sfxSounds, x => x.name == name);
+    public void playSFX(string name, float SFXVolume)
+    {
+        Sound s = Array.Find(sfxSounds, x => x.name == name);
 
-    //    if (s != null)
-    //    {
-    //        if (sfxSource.clip == s.clip && sfxSource.isPlaying)
-    //        {
-    //            return;
-    //        }
-    //        Debug.Log(sfxSource.pitch);
-    //        sfxSource.PlayOneShot(s.clip, SFXVolume);
-    //    }
-    //}
+        if (s != null)
+        {
+            if (sfxSource.clip == s.clip && sfxSource.isPlaying)
+            {
+                return;
+            }
+            Debug.Log(sfxSource.pitch);
+            sfxSource.PlayOneShot(s.clip, SFXVolume);
+        }
+    }
 
     public void playSFX(string name)
     {
@@ -92,7 +92,7 @@ public class AudioManager : MonoBehaviour
     public void PlayVariedPitcheAudio(AudioClip[] audioClipsArray)
     {
         pitchVariedsfxSource.clip = audioClipsArray[UnityEngine.Random.Range(0, clickClips.Length)];
-        pitchVariedsfxSource.volume = UnityEngine.Random.Range(0.5f, 1f);
+        pitchVariedsfxSource.volume = UnityEngine.Random.Range(0.05f, 0.2f);
         pitchVariedsfxSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
 
         pitchVariedsfxSource.PlayOneShot(pitchVariedsfxSource.clip);
