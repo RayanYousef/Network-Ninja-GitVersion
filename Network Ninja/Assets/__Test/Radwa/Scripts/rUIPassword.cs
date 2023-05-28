@@ -167,6 +167,7 @@ public class rUIPassword : MonoBehaviour
         rAreasManager.Instance.CurrentArea.Password = passwordIF.text;
         rAreasManager.Instance.CheckCurrentAreaPasswordStrength();
         rAreasManager.Instance.CurrentArea.AreaType = AreaType.Base;
+        rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
 
 
         rAreasManager.Instance.SetAreaHealthBasedOnPassword();
