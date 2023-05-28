@@ -25,7 +25,6 @@ public class m_InGameUI : MonoBehaviour
     {
         rAreasManager.Instance.CurrentArea.MeshColourChanger.ChangeToColour(rAreasManager.Instance.MaxHealth);
         winningPanel.SetActive(true);
-        Cursor.lockState = CursorLockMode.Confined;
         //Time.timeScale = 0;
     }
     #endregion
@@ -87,12 +86,10 @@ public class m_InGameUI : MonoBehaviour
             case true:
                 menuPanel.SetActive(false);
                 Time.timeScale = 1;
-                Cursor.lockState = CursorLockMode.Locked;
                 break;
             case false:
                 menuPanel.SetActive(true);
                 Time.timeScale = 0;
-                Cursor.lockState = CursorLockMode.Confined;
                 break;
         }
     }

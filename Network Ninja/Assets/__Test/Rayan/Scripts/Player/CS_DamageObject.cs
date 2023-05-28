@@ -27,17 +27,21 @@ public class CS_DamageObject : MonoBehaviour
         if(myStatsManager!=null)
         myStatsManager.HitObjects.Clear();
     }
-
+  
     public void OnTriggerEnter(Collider other)
     {
         if (myStatsManager != null && !myStatsManager.HitObjects.Contains(other) && other.TryGetComponent<StatsManager>(out StatsManager otherStatsManager))
         {
+     
             myStatsManager.HitObjects.Add(other);
             if (otherStatsManager.Stats.CurrentHealth > 0 && otherStatsManager != myStatsManager)
             {
                 if (otherStatsManager.Team != myStatsManager.Team)
                 {
                     //Apply Hitstop
+                    if (otherStatsManager.TryGetComponent<HitStopHandler>(out HitStopHandler handler))
+                        handler.GetComponent<HitStopHandler>().AnimationStop(0.5f, 0f);
+
                     otherStatsManager.ApplyDamage(myStatsManager);
                     if (other!= myStatsManager.gameObject)
                         if(other.TryGetComponent<Rigidbody>(out Rigidbody rb))

@@ -24,6 +24,10 @@ public class Formation : MonoBehaviour
     void Start()
     {
         GetFormationPointsAndAgents(agentsList.Count, this.transform);
+        foreach(FormationAgent a in agentsList)
+        {
+            a.gameObject.SetActive(true);
+        }
         Form(this.transform, indicatorsList);
     }
     #endregion

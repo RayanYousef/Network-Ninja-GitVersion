@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 530088180354203545}
   - component: {fileID: 8314150133674303776}
   - component: {fileID: 6340454892029486735}
-  - component: {fileID: 1824883684}
-
+  - component: {fileID: 222542084414020149}
+  - component: {fileID: 8822484863733289333}
   m_Layer: 6
   m_Name: Gate
   m_TagString: Untagged
@@ -99,8 +99,8 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.39324218, y: 7.364454, z: 6.087375}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &1824883684
-SphereCollider:
+--- !u!65 &222542084414020149
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -110,5 +110,21 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.682227
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 6, y: 0.3, z: 6}
+  m_Center: {x: -0.0000019073486, y: -3.55, z: -0.0000076293945}
+--- !u!114 &8822484863733289333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4630355616483481054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c6a015c1424e4f4e9a152c832167095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  buttonPressed: 0
+  playerIsHere: 0
+  nextArea: {fileID: 0}
