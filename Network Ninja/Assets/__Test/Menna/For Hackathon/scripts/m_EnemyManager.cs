@@ -7,15 +7,18 @@ public class m_EnemyManager : MonoBehaviour
 {
     private Transform player;
     private NavMeshAgent agent;
-    private Rigidbody rb;
-    private EnemySpawner enemySpawner;
-    private Collider collider;
     private float currentHealth;
     private float maxHealth;
 
-
+    public Rigidbody rb;
+    public Collider collider;
     public GameObject DeathEffect;
     public Animator animator;
+    public EnemySpawner enemySpawner;
+    public float waitTime = 10.0f;
+    public bool isWaiting;
+
+
 
 
 
@@ -33,7 +36,7 @@ public class m_EnemyManager : MonoBehaviour
     #endregion
 
     // Start is called before the first frame update
-   public  void Start()
+    public void Start()
     {
         player = GameObjectsManager.Instance.Player.transform;
         agent = GetComponent<NavMeshAgent>();
@@ -47,7 +50,8 @@ public class m_EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(player);
+        Vector3 enemyToPlayer = new Vector3 (player.position.x, transform.position.y, player.position.z);
+        transform.LookAt(enemyToPlayer);
         agent.SetDestination(player.position);
     }
 
@@ -66,13 +70,21 @@ public class m_EnemyManager : MonoBehaviour
     {
         //animation
         Debug.Log("When enemy died");
-        Destroy(collider);
+      //  Destroy(collider);
         if (animator != null)
+        {
             animator.SetTrigger("Death");
+
+        }
+        collider.enabled = false;
+        rb.isKinematic = false;
     }
 
     public virtual void DeactivateGameObject()
     {
+
+        collider.enabled = false;
+        rb.isKinematic = false;
 
         if (DeathEffect != null)
         {
@@ -89,8 +101,43 @@ public class m_EnemyManager : MonoBehaviour
         if (enemySpawner.MiniBosses.Count > 0)
         {
             enemySpawner.SpawnMoreEnemies();
+            collider.enabled = true;
+            rb.isKinematic = true;
         }
 
     }
+
+    public IEnumerator WaitForAttackCoroutine(Animator animator)
+    {
+        // Set the flag to indicate that we're waiting
+        isWaiting = true;
+
+        // Wait for the specified time
+        yield return new WaitForSeconds(waitTime);
+
+        // Reset the flag after waiting
+        isWaiting = false;
+
+        // Transition to the next state
+        animator.SetBool("BackToAttack", true);
+
+    }   
+    public IEnumerator WaitForBreakCoroutine(Animator animator)
+    {
+
+        // Set the flag to indicate that we're waiting
+        isWaiting = true;
+
+        // Wait for the specified time
+        yield return new WaitForSeconds(waitTime);
+
+        // Reset the flag after waiting
+        isWaiting = false;
+
+        // Transition to the next state
+        animator.SetBool("IsIdle", true);
+
+    }
+
 
 }
