@@ -313,11 +313,12 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnBossCoroutine()
     {
+        GameManager.Instance.BossEntered = true;
         yield return new WaitForSeconds(delayBeforeSpawnBoss);
 
         // Spawn the boss
         SpawnBigBoss();
-        GameManager.Instance.BossEntered = true;
+
     }
     #region //trials
     //IEnumerator AvoidEnemies()
