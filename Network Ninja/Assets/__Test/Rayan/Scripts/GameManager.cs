@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] UnityEvent OnWinGame, OnLoseGame;
 
+    [SerializeField] string MainMenu;
+
     public Difficulty Difficulty { get => difficulty; set => difficulty = value; }
     public GameState CurrentGameState 
     { 
@@ -103,10 +105,11 @@ public class GameManager : MonoBehaviour
     public void LostGame()
     {
         LosePanel.SetActive(true);
+        Invoke("LoadMainMenu", 3);
+ 
     }
-
-    public void LoadScene(string SceneName)
+    public void LoadMainMenu()
     {
-        SceneManager.LoadScene(SceneName);  
+        SceneManager.LoadScene(MainMenu);  
     }
 }
