@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource, pitchVariedsfxSource;
+    public CS_AudioLerp BossMusic;
 
     [Header("Keyboard Single Clicks Array")]
     [SerializeField] AudioClip[] clickClips;

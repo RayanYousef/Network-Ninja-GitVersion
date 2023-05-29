@@ -45,10 +45,31 @@ public class GameManager : MonoBehaviour
         } 
     }
 
+    public bool BossEntered 
+    { 
+        get => bossEntered;
+        set 
+        {
+            bossEntered = value;
+            switch(value)
+            {
+                case true:
+                    AudioManager.instance.musicSource.Stop();
+                    AudioManager.instance.BossMusic.gameObject.SetActive(true);
+                    break;
+
+                case false:
+
+                    break;
+
+            }
+        } 
+    }
+
     [Header("Game State")]
     [SerializeField] GameState currentGameState;
     [SerializeField] Difficulty difficulty;
-     public bool bossEntered;
+    [SerializeField] bool bossEntered;
 
     [Header("Panels")]
     [SerializeField] GameObject WinningPanel, LosePanel;

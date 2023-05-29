@@ -317,7 +317,7 @@ public class EnemySpawner : MonoBehaviour
 
         // Spawn the boss
         SpawnBigBoss();
-        GameManager.Instance.bossEntered = true;
+        GameManager.Instance.BossEntered = true;
     }
     #region //trials
     //IEnumerator AvoidEnemies()

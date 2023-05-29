@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CS_PlayerManager : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class CS_PlayerManager : MonoBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] PlayerInput PlayerInputs;
     [SerializeField] FixedJoystick joyStick;
+
+    [Header("Energy")]
+    [SerializeField] Slider EnergySlider;
 
     [Header("Variables")]
     [SerializeField] bool ultimateOn;
@@ -62,6 +66,7 @@ public class CS_PlayerManager : MonoBehaviour
                     anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
                     cameraManager.DisableAllCamerasExcept(cameraManager.UltimateCamera);
                     cameraManager.SlowSurroundingEnemies();
+                    AudioManager.instance.BossMusic.InCombat = value;
                     break;
 
                 case false:
@@ -70,6 +75,7 @@ public class CS_PlayerManager : MonoBehaviour
                     cameraManager.EnableAndDisableCamerasBasedOnLockState();
                     cameraManager.NormalizeSpeedOfSurroundingEnemies();
                     anim.SetBool(animController.B_Attacking, value);
+                    AudioManager.instance.BossMusic.InCombat = value;
                     break;
             }
         }
@@ -142,6 +148,8 @@ public class CS_PlayerManager : MonoBehaviour
 
         if (ultimateTimer < 0)
             UltimateOn = false;
+
+        EnergySlider.value = ultimateTimer / ultimateCoolDown;
     }
 
     public void LostGameHealthZero(float value)
