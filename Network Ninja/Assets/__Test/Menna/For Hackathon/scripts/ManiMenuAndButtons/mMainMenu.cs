@@ -12,15 +12,9 @@ public class mMainMenu : MonoBehaviour
     public GameObject optionsScreen;
     public GameObject controlScreen;
 
-    // Start is called before the first frame update
     void Start()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void startGame()

@@ -272,6 +272,7 @@ public class rArea : MonoBehaviour
     {
         if (collision.gameObject == GameObjectsManager.Instance.Player)
         {
+            playerInside = true;
             if (rAreasManager.Instance.CurrentArea == this)
             {
                 return;
