@@ -187,7 +187,8 @@ public class CS_PlayerManager : MonoBehaviour
             case CharacterState.Attacking:
                 anim.SetBool(animController.B_Attacking, true);
                 anim.applyRootMotion = true;
-                lookAtClosestTarget.RotateTowardsClosestEnemy();
+                //if(lookAtClosestTarget!=null) 
+                //lookAtClosestTarget.RotateTowardsClosestEnemy();
                 break;
 
             case CharacterState.Falling:
@@ -200,7 +201,8 @@ public class CS_PlayerManager : MonoBehaviour
             case CharacterState.Ultimate:
                 anim.SetBool(animController.B_Attacking, true);
                 anim.applyRootMotion = false;
-                lookAtClosestTarget.RotateTowardsClosestEnemy();
+                if (lookAtClosestTarget != null)
+                    lookAtClosestTarget.RotateTowardsClosestEnemy();
                 break;
 
         }
@@ -224,6 +226,8 @@ public class CS_PlayerManager : MonoBehaviour
         anim.SetBool(animController.B_Attacking, false);
         anim.SetBool(animController.B_canTransit, false);
         anim.ResetTrigger(animController.T_Ultimate);
+
+        pStatsManager.DisableAllWeapons();
         //
         rb.drag = drag;
 
