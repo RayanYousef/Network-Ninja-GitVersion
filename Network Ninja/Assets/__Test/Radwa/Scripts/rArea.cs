@@ -120,14 +120,14 @@ public class rArea : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerInside == false && password != null && !isWinningConditionMet)
+        if (playerInside == false && password != null && GameManager.Instance.CurrentGameState == GameState.InProgress)
             UpdateHealth();
     }
 
     private void UpdateHealth()
     {
         healthTimer += Time.deltaTime;
-        if (healthTimer > 3)
+        if (healthTimer > 2)
         {
             healthTimer = 0;
             health = Mathf.Clamp(health - 1, 0, maxHealth);

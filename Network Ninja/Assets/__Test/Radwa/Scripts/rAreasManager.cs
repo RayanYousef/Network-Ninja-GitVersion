@@ -104,7 +104,7 @@ public class rAreasManager : MonoBehaviour
 
         if (result.Score == 4)
             strength = PasswordStrength.Strong;
-        else if (result.Score == 3 || result.Score == 4)
+        else if (result.Score == 3)
             strength = PasswordStrength.Moderate;
         else
             strength = PasswordStrength.Weak;

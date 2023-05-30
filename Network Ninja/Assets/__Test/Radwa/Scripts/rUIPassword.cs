@@ -102,7 +102,7 @@ public class rUIPassword : MonoBehaviour
                     return;
                 }
                 resetPasswordPanel.SetActive(true);
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
                 break;
         }
     }
@@ -117,11 +117,19 @@ public class rUIPassword : MonoBehaviour
 
     public void ShowCreatePasswordPanel()
     {
+        createPasswordPanel.SetActive(true);
+
+        StartCoroutine(nameof(WaitAndShowPanel));
+
+    }
+
+    IEnumerator WaitAndShowPanel()
+    {
+        yield return new WaitForSeconds(1.5f);
         feedbackTxt.text = null;
         //playerInputs.enabled = false;
         Time.timeScale = 0f;
 
-        createPasswordPanel.SetActive(true);
         //passwordIF.Select();
     }
 
