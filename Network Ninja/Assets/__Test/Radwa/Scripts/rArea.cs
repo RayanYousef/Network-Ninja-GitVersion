@@ -193,7 +193,7 @@ public class rArea : MonoBehaviour
     }
     public void FormArmyBasedOnAreaHealth()
     {
-        if (Health <= maxHealth / 4)
+        if (Health <= maxHealth / 3)
         {
             allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
             allies1.transform.parent = alliesSpawnPos[0];
