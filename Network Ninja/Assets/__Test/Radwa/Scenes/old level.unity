@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.032506146, g: 0.030027643, b: 0.10999668, a: 1}
+  m_IndirectSpecularColor: {r: 0.06558617, g: 0.121464424, b: 0.22171026, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,7 +123,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 24acfdc1b20c6f7418f6db235ad2d454, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9b43a5dfac61ae44b877e59d1215d12d, type: 2}
 --- !u!1001 &8031009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1216,7 +1216,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &303965237
 Transform:
@@ -10965,7 +10965,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e004db79e060f43993d0bc290eff4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnWinGame:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLoseGame:
+    m_PersistentCalls:
+      m_Calls: []
+  MainMenu: 
+  currentGameState: 0
+  difficulty: 0
+  bossEntered: 0
   WinningPanel: {fileID: 901005650}
+  LosePanel: {fileID: 0}
 --- !u!23 &401330619 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -623313540440546850, guid: 355c2e1fddeb18c40b1425d28c5faec1,
@@ -11134,7 +11145,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &441714185
 Transform:
@@ -23082,6 +23093,7 @@ MonoBehaviour:
   musicSource: {fileID: 1343999274}
   sfxSource: {fileID: 108389932}
   pitchVariedsfxSource: {fileID: 1741264727}
+  BossMusic: {fileID: 0}
   clickClips:
   - {fileID: 8300000, guid: 26fce810da7ae8742b91bc46d19bf5f3, type: 3}
   - {fileID: 8300000, guid: 46ec0422db1a51148891c77665a907c0, type: 3}
@@ -23100,6 +23112,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f8e8dba0f1b1159459619003f30275c6, type: 3}
   - {fileID: 8300000, guid: 469c9f6d0bed43c44b074e6e2f30e384, type: 3}
   - {fileID: 8300000, guid: da89128fb58d89b4687fb8db5259e741, type: 3}
+  audioSourcesParent: {fileID: 0}
+  audioSources: []
 --- !u!1 &1064936631
 GameObject:
   m_ObjectHideFlags: 0
@@ -33641,7 +33655,7 @@ PrefabInstance:
     - target: {fileID: 4338722718821065500, guid: 355c2e1fddeb18c40b1425d28c5faec1,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4644766229268408915, guid: 355c2e1fddeb18c40b1425d28c5faec1,
         type: 3}
@@ -33681,7 +33695,7 @@ PrefabInstance:
     - target: {fileID: 5684594196920867746, guid: 355c2e1fddeb18c40b1425d28c5faec1,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5735134653549753750, guid: 355c2e1fddeb18c40b1425d28c5faec1,
         type: 3}
@@ -33736,7 +33750,7 @@ PrefabInstance:
     - target: {fileID: 6833289560540713312, guid: 355c2e1fddeb18c40b1425d28c5faec1,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7431424275601161146, guid: 355c2e1fddeb18c40b1425d28c5faec1,
         type: 3}
@@ -44348,7 +44362,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1410328364
 Transform:
@@ -44886,7 +44900,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1523272999
 Transform:
@@ -44969,7 +44983,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1529947161
 Transform:
@@ -50782,7 +50796,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1659005772
 Transform:
@@ -66371,7 +66385,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1913117792
 Transform:
@@ -67605,7 +67619,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passwordCanvas: {fileID: 8224981913233876863}
   listOfLevelAreas: []
-  maxSoldiersNumber: 75
   maxHealth: {r: 0, g: 1, b: 0.91119623, a: 0.98039216}
   halfHealth: {r: 0.99985135, g: 1, b: 0, a: 0.98039216}
   lowHealth: {r: 1, g: 0.2908872, b: 0, a: 0.98039216}
@@ -67669,6 +67682,7 @@ MonoBehaviour:
     type: 3}
   combatManager: {fileID: 692672857}
   boss: {fileID: 7411315700388573817, guid: 566127f06a2814c4695d322e42da3b8d, type: 3}
+  currentGate: {fileID: 0}
 --- !u!4 &392310445230200889
 Transform:
   m_ObjectHideFlags: 0
@@ -70146,28 +70160,9 @@ MonoBehaviour:
   maxHealth: 0
   password: 
   playerInside: 0
-  OnEnteringArea:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8224981913233876863}
-        m_TargetAssemblyTypeName: rUIPassword, Assembly-CSharp
-        m_MethodName: OnEnteringAreaShowPannels
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnEnteringFight:
     m_PersistentCalls:
       m_Calls: []
-  OnWinningLvl:
-    m_PersistentCalls:
-      m_Calls: []
-  areaCollider: {fileID: 0}
   alliesSpawnPos:
   - {fileID: 2266843012026952614}
   - {fileID: 2266843012315297001}
@@ -70180,7 +70175,6 @@ MonoBehaviour:
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
   sharingPasswordWarningIcon: {fileID: 0}
   healthTimer: 0
-  formationRemovingTimer: 0
 --- !u!23 &6255316749818515614
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -70347,28 +70341,9 @@ MonoBehaviour:
   maxHealth: 0
   password: 
   playerInside: 0
-  OnEnteringArea:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8224981913233876863}
-        m_TargetAssemblyTypeName: rUIPassword, Assembly-CSharp
-        m_MethodName: OnEnteringAreaShowPannels
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnEnteringFight:
     m_PersistentCalls:
       m_Calls: []
-  OnWinningLvl:
-    m_PersistentCalls:
-      m_Calls: []
-  areaCollider: {fileID: 0}
   alliesSpawnPos:
   - {fileID: 2266843012864885453}
   - {fileID: 2266843012953511991}
@@ -70381,7 +70356,6 @@ MonoBehaviour:
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
   sharingPasswordWarningIcon: {fileID: 0}
   healthTimer: 0
-  formationRemovingTimer: 0
 --- !u!33 &6255316749902934214
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -70559,28 +70533,9 @@ MonoBehaviour:
   maxHealth: 0
   password: 
   playerInside: 0
-  OnEnteringArea:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8224981913233876863}
-        m_TargetAssemblyTypeName: rUIPassword, Assembly-CSharp
-        m_MethodName: OnEnteringAreaShowPannels
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnEnteringFight:
     m_PersistentCalls:
       m_Calls: []
-  OnWinningLvl:
-    m_PersistentCalls:
-      m_Calls: []
-  areaCollider: {fileID: 0}
   alliesSpawnPos:
   - {fileID: 1650534291}
   - {fileID: 2266843012740952647}
@@ -70593,7 +70548,6 @@ MonoBehaviour:
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
   sharingPasswordWarningIcon: {fileID: 0}
   healthTimer: 0
-  formationRemovingTimer: 0
 --- !u!65 &6255316750254913930
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -70963,28 +70917,9 @@ MonoBehaviour:
   maxHealth: 0
   password: 
   playerInside: 0
-  OnEnteringArea:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8224981913233876863}
-        m_TargetAssemblyTypeName: rUIPassword, Assembly-CSharp
-        m_MethodName: OnEnteringAreaShowPannels
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnEnteringFight:
     m_PersistentCalls:
       m_Calls: []
-  OnWinningLvl:
-    m_PersistentCalls:
-      m_Calls: []
-  areaCollider: {fileID: 0}
   alliesSpawnPos:
   - {fileID: 2266843013368523151}
   - {fileID: 2266843013713509781}
@@ -70997,7 +70932,6 @@ MonoBehaviour:
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
   sharingPasswordWarningIcon: {fileID: 0}
   healthTimer: 0
-  formationRemovingTimer: 0
 --- !u!1 &6255316750787494213
 GameObject:
   m_ObjectHideFlags: 0
