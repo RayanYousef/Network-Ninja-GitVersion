@@ -71,10 +71,14 @@ public class m_EnemyManager : MonoBehaviour
 
         //  agent.SetDestination(player.position);
 
-        //if (Input.GetKeyDown(KeyCode.Y))
-        //{
-        //    StopMovementAndRotation();
-        //}
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            StopMovementAndRotation();
+        } 
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            BackMovementAndRotation();
+        }
 
     }
 
@@ -164,11 +168,13 @@ public class m_EnemyManager : MonoBehaviour
 
     public void StopMovementAndRotation()
     {
-       transform.LookAt(transform.position);
-      //  agent.speed = 0;
         agent.isStopped = true;
         LookAtPlyer = false;
-
+    }   
+    public void BackMovementAndRotation()
+    {
+        agent.isStopped = false;
+        LookAtPlyer = true;
     }
 
 
