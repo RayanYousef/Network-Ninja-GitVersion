@@ -24,7 +24,7 @@ public class CS_CameraManager : MonoBehaviour
     [SerializeField] Transform followTargetLock;
 
     [Header("Lock Function Vars")]
-    [SerializeField] List<GameObject> listOfTargets = new List<GameObject>();
+    [SerializeField] List<GameObject> listOfTargetsInRange = new List<GameObject>();
     [SerializeField] Transform lockedTarget;
     [SerializeField] int targetIndex;
     [SerializeField] float lockRotationSpeed,lockTimer;
@@ -45,7 +45,7 @@ public class CS_CameraManager : MonoBehaviour
     #region Setters and Getters
     public Vector2 DeltaValues { set => deltaValues = value; }
     public Transform LockedTarget { get => lockedTarget; }
-    public List<GameObject> ListOfTargets { get => listOfTargets; }
+    public List<GameObject> ListOfTargetsInRange { get => listOfTargetsInRange; }
     public CinemachineVirtualCamera MainVirtualCamera { get => mainVirtualCamera; }
     public CinemachineVirtualCamera LockVirtualCamera { get => lockVirtualCamera; }
     public CinemachineVirtualCamera UltimateCamera { get => ultimateCamera; }
@@ -63,14 +63,14 @@ public class CS_CameraManager : MonoBehaviour
             {
                 case true:
 
-                    if (value == true && listOfTargets.Count > 0)
+                    if (value == true && listOfTargetsInRange.Count > 0)
                         ultimateCamera.Follow = followTargetLock;
                     else
                         ultimateCamera.Follow = followTargetNormal;
                     break;
 
                 case false:
-                    EnableAndDisableCamerasBasedOnLockState();
+                    SwitchCamerasBasedOnLockState();
                         break;
 
 
@@ -106,16 +106,16 @@ public class CS_CameraManager : MonoBehaviour
 
         followTargetLock.position = followTargetNormal.position = transform.position;
         
-        if (LockedOn && listOfTargets.Count>0)
+        if (LockedOn && listOfTargetsInRange.Count>0)
         {
 
             if (lockedTarget == null)
                 SetTarget();
 
-            if(lockedTarget.gameObject.activeInHierarchy==false &&listOfTargets.Contains(lockedTarget.gameObject))
+            if(lockedTarget.gameObject.activeInHierarchy==false &&listOfTargetsInRange.Contains(lockedTarget.gameObject))
             {
-                listOfTargets.Remove(lockedTarget.gameObject);
-                if (listOfTargets.Count < 1)
+                listOfTargetsInRange.Remove(lockedTarget.gameObject);
+                if (listOfTargetsInRange.Count < 1)
                     LockedOn = false;
                 else SetTarget();
             }
@@ -131,9 +131,9 @@ public class CS_CameraManager : MonoBehaviour
         }
         else LockedOn= false;
 
-        for(int i = listOfTargets.Count-1; i>=0; i--)
+        for(int i = listOfTargetsInRange.Count-1; i>=0; i--)
         {
-            if (listOfTargets[i].activeInHierarchy==false) listOfTargets.Remove(listOfTargets[i]);
+            if (listOfTargetsInRange[i].activeInHierarchy==false) listOfTargetsInRange.Remove(listOfTargetsInRange[i]);
 
         }
 
@@ -180,7 +180,7 @@ public class CS_CameraManager : MonoBehaviour
 
     public void SlowSurroundingEnemies()
     {
-        foreach (var target in listOfTargets)
+        foreach (var target in listOfTargetsInRange)
         {
             if(target.TryGetComponent<Animator>(out Animator anim))
             {
@@ -194,7 +194,7 @@ public class CS_CameraManager : MonoBehaviour
 
     public void NormalizeSpeedOfSurroundingEnemies()
     {
-        foreach (var target in listOfTargets)
+        foreach (var target in listOfTargetsInRange)
         {
             if (target.TryGetComponent<Animator>(out Animator anim))
             {
@@ -212,11 +212,11 @@ public class CS_CameraManager : MonoBehaviour
     {
 
         // On Destroy Remove Target from the list or else a null reference will find his way to you.
-        if (listOfTargets.Count > 0 && listOfTargets[targetIndex % listOfTargets.Count] != null)
-            lockedTarget = listOfTargets[targetIndex % listOfTargets.Count].transform;
+        if (listOfTargetsInRange.Count > 0 && listOfTargetsInRange[targetIndex % listOfTargetsInRange.Count] != null)
+            lockedTarget = listOfTargetsInRange[targetIndex % listOfTargetsInRange.Count].transform;
     }
 
-    public void DisableAllCamerasExcept(CinemachineVirtualCamera ExcludedCamera)
+    public void DisableAllCamerasExceptParam(CinemachineVirtualCamera ExcludedCamera)
     {
 
         foreach(CinemachineVirtualCamera camera in virtualCameras )
@@ -226,29 +226,29 @@ public class CS_CameraManager : MonoBehaviour
         ExcludedCamera.enabled = true;
     }
 
-    public void EnableAndDisableCamerasBasedOnLockState()
+    public void SwitchCamerasBasedOnLockState()
     {
         switch (lockedOn)
         {
             case true:
 
-                if (listOfTargets.Count > 0)
+                if (listOfTargetsInRange.Count > 0)
                 {
                     cameraBrain.m_DefaultBlend.m_Time = lerpTime;
-                    DisableAllCamerasExcept(lockVirtualCamera);
+                    DisableAllCamerasExceptParam(lockVirtualCamera);
                     SetTarget();
                 }
                 else
                 {
                     lockedOn = false;
-                    DisableAllCamerasExcept(mainVirtualCamera);
+                    DisableAllCamerasExceptParam(mainVirtualCamera);
                 }
                 break;
 
 
             case false:
                 cameraBrain.m_DefaultBlend.m_Time = lerpTime;
-                DisableAllCamerasExcept(mainVirtualCamera);
+                DisableAllCamerasExceptParam(mainVirtualCamera);
                 break;
         }
     }
@@ -286,9 +286,9 @@ public class CS_CameraManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && !listOfTargets.Contains(other.gameObject))
+        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && !listOfTargetsInRange.Contains(other.gameObject))
         {
-            listOfTargets.Add(other.gameObject);
+            listOfTargetsInRange.Add(other.gameObject);
             SetTarget();
         }
 
@@ -308,10 +308,10 @@ public class CS_CameraManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && listOfTargets.Contains(other.gameObject))
+        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && listOfTargetsInRange.Contains(other.gameObject))
         {
-            listOfTargets.Remove(other.gameObject);
-            if (listOfTargets.Count < 1)
+            listOfTargetsInRange.Remove(other.gameObject);
+            if (listOfTargetsInRange.Count < 1)
                 LockedOn = false;
         }
 
