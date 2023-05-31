@@ -24,7 +24,7 @@ public class _Attack : StateMachineBehaviour
 
         RB.velocity = Vector3.zero;
         agent = animator.GetComponent<NavMeshAgent>();  
-        agent.velocity = Vector3.zero;
+        //agent.velocity = Vector3.zero;
 
         enemyManager = animator.GetComponent<m_EnemyManager>();
 

@@ -32,10 +32,12 @@ public class _Chase : StateMachineBehaviour
     {
        // Debug.Log(Time.deltaTime);
        // Debug.Log("nav mesh");
+
        agent.SetDestination(player.position);
-        Vector3 target = agent.destination;
+
+      //  Vector3 target = agent.destination;
         //  Seek(player.transform.position);
-        RB.transform.LookAt(target);
+        //RB.transform.LookAt(target);
         //agent.isStopped = true;
        // RB.transform.Translate(Vector3.forward * speed * Time.deltaTime);
 

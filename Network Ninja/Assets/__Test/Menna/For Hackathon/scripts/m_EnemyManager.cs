@@ -50,6 +50,7 @@ public class m_EnemyManager : MonoBehaviour
         currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
         maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
 
+
         //PREVENT SLIDING
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
@@ -149,6 +150,10 @@ public class m_EnemyManager : MonoBehaviour
 
     }
 
- 
+    public void StopMovementAndRotation()
+    {
+        transform.LookAt(transform.position);
+        agent.SetDestination(transform.position);
+    }
 
 }
