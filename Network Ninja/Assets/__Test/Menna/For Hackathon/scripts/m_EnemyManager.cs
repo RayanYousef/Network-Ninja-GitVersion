@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,7 @@ public class m_EnemyManager : MonoBehaviour
     private NavMeshAgent agent;
     private float currentHealth;
     private float maxHealth;
+    bool LookAtPlyer = true;
 
     public Rigidbody rb;
     public Collider collider;
@@ -49,6 +51,7 @@ public class m_EnemyManager : MonoBehaviour
         collider = GetComponent<Collider>();
         currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
         maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
+        
 
 
         //PREVENT SLIDING
@@ -60,10 +63,19 @@ public class m_EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 enemyToPlayer = new Vector3 (player.position.x, transform.position.y, player.position.z);
-        transform.LookAt(enemyToPlayer);
-      //  agent.SetDestination(player.position);
-      
+        if(LookAtPlyer)
+        {
+            Vector3 enemyToPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
+            transform.LookAt(enemyToPlayer);
+        }
+
+        //  agent.SetDestination(player.position);
+
+        //if (Input.GetKeyDown(KeyCode.Y))
+        //{
+        //    StopMovementAndRotation();
+        //}
+
     }
 
     public void showHealth()
@@ -152,8 +164,12 @@ public class m_EnemyManager : MonoBehaviour
 
     public void StopMovementAndRotation()
     {
-        transform.LookAt(transform.position);
-        agent.SetDestination(transform.position);
+       transform.LookAt(transform.position);
+      //  agent.speed = 0;
+        agent.isStopped = true;
+        LookAtPlyer = false;
+
     }
+
 
 }

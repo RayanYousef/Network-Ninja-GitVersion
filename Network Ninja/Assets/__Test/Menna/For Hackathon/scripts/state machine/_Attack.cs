@@ -38,7 +38,8 @@ public class _Attack : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        //Vector3 enemyToPlayer = new Vector3(player.position.x, animator.transform.position.y, player.position.z);
+        //animator.transform.LookAt(enemyToPlayer);
         // agent.velocity = Vector3.zero;
 
         if (Vector3.Distance(player.position, RB.transform.position) > attackRange)

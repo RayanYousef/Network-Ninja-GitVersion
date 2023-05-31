@@ -34,12 +34,13 @@ public class _Chase : StateMachineBehaviour
        // Debug.Log("nav mesh");
 
        agent.SetDestination(player.position);
-
-      //  Vector3 target = agent.destination;
+        //Vector3 enemyToPlayer = new Vector3(player.position.x, animator.transform.position.y, player.position.z);
+        //animator.transform.LookAt(enemyToPlayer);
+        //  Vector3 target = agent.destination;
         //  Seek(player.transform.position);
         //RB.transform.LookAt(target);
         //agent.isStopped = true;
-       // RB.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        // RB.transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         if (Vector3.Distance(player.position , RB.transform.position) < attackRange)
         {
