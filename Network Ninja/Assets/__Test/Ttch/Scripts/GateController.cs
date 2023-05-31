@@ -29,7 +29,7 @@ public class GateController : MonoBehaviour
     }
     private void Update()
     {
-        buttonPressed = Input.GetKey(KeyCode.E);
+        buttonPressed = Input.GetKeyDown(KeyCode.E);
         if (playerIsHere == true && buttonPressed && GameManager.Instance.BossEntered==false)
         {
             GameObjectsManager.Instance.CurrentGate.NextArea = this.nextArea;
