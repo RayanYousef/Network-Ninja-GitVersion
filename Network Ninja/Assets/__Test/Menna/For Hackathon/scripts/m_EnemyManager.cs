@@ -164,16 +164,12 @@ public class m_EnemyManager : MonoBehaviour
 
     }
 
-    public void StopMovementAndRotation()
+    public void MovementAndRotation(bool value)
     {
-        agent.isStopped = true;
-        LookAtPlyer = false;
+        agent.isStopped = !value;
+        LookAtPlyer = value;
     }   
-    public void BackMovementAndRotation()
-    {
-        agent.isStopped = false;
-        LookAtPlyer = true;
-    }
+
 
 
 }

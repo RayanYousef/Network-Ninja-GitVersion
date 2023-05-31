@@ -240,14 +240,9 @@ public class m_BossMovement : MonoBehaviour
             StartCoroutine(DoFade());
         }
     }
-    public void StopMovementAndRotation()
+    public void MovementAndRotation(bool value)
     {
-        agent.isStopped = true;
-        LookAtPlyer = false;
-    }
-    public void BackMovementAndRotation()
-    {
-        agent.isStopped = false;
-        LookAtPlyer = true;
+        agent.isStopped = !value;
+        LookAtPlyer = value;
     }
 }
