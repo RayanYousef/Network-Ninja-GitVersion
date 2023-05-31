@@ -1,79 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class rUIManager : MonoBehaviour
 {
-    [Header("Login Panel")]
-    [SerializeField] private GameObject loginPanel;
+    public static rUIManager instance;
 
-    [Header("Password Panel")]
-    [SerializeField] private GameObject passwordPanel;
-    [SerializeField] private TMP_InputField passwordIF;
-    [SerializeField] public TMP_Text debugTxt;
+    [SerializeField] private rUIPassword uiPassword;
 
-    [Header("Events")]
-    public rGameEvent OnPasswordEntered;
+    [SerializeField] private m_InGameUI inGameUI;
 
+    public static rUIManager Instance { get => instance; }
+    public rUIPassword UiPassword { get => uiPassword; set => uiPassword = value; }
+    public m_InGameUI InGameUI { get => inGameUI; set => inGameUI = value; }
 
-    [SerializeField] GameObject passwordManager;
-    rPassword Password;
-
-    string username = "Daiavoloz";
-    string birthDate = "21102000";
-
-
-    void Start()
+    private void Awake()
     {
-        Time.timeScale = 0f;
-        loginPanel.SetActive(true);
-        passwordPanel.SetActive(false);
-
-        Password = passwordManager.GetComponent<rPassword>();
-    }
-
-    public void LoginBtnClicked()
-    {
-        Time.timeScale = 1f;
-        PlayerPrefs.SetString("username", username);
-        PlayerPrefs.SetString("birthDate", birthDate);
-
-        loginPanel.SetActive(false);
-    }
-
-    public void ShowPasswordPanel()
-    {
-        Time.timeScale = 0f;
-        passwordPanel.SetActive(true);
-    }
-
-    /**
-     * TakePassword() is called when Form Army button is clicked 
-     */
-    public void TakePassword()
-    {
-        if (string.IsNullOrEmpty(passwordIF.text))
+        if (instance == null)
         {
-            return;
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        debugTxt.text = passwordIF.text;
-
-        //OnPasswordEntered.Raise(passwordIF.text);
-
-
-        if (Password != null)
+        else
         {
-            /* this should be replaced by event
-            * clicking Form Army btn will raise an event
-            * CheckStrength func. will listen to that event
-            * rPassword will listen to this event
-            * so the rPassword doesn't know anything about the UI
-            * also the UI doesn't know anything about checking the password
-            */
-            Password.CheckStrength(passwordIF.text);
+            Destroy(gameObject);
         }
-        passwordPanel.SetActive(false);
-        Time.timeScale = 1f;
     }
 }
