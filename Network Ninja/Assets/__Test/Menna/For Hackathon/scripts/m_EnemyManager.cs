@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class m_EnemyManager : MonoBehaviour
+public class m_EnemyManager : MonoBehaviour , m_interface
 {
     [SerializeField] float frictionCoefficient = 2.0f;
 
@@ -169,7 +169,4 @@ public class m_EnemyManager : MonoBehaviour
         agent.isStopped = !value;
         LookAtPlyer = value;
     }   
-
-
-
 }
