@@ -30,6 +30,7 @@ public class m_BossMovement : MonoBehaviour
     private Transform player;
     private Rigidbody rb;
     private NavMeshAgent agent;
+    bool LookAtPlyer = true;
 
     ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
 
@@ -82,10 +83,11 @@ public class m_BossMovement : MonoBehaviour
     }
     void Update()
     {
-        if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") )
+        if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && LookAtPlyer ==true)
         {
             LookAtPlayer();
         }
+
     }
 
     public void trailActivate()
@@ -238,5 +240,14 @@ public class m_BossMovement : MonoBehaviour
             StartCoroutine(DoFade());
         }
     }
-
+    public void StopMovementAndRotation()
+    {
+        agent.isStopped = true;
+        LookAtPlyer = false;
+    }
+    public void BackMovementAndRotation()
+    {
+        agent.isStopped = false;
+        LookAtPlyer = true;
+    }
 }
