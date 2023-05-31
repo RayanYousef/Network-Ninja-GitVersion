@@ -20,6 +20,8 @@ public class mMainMenu : MonoBehaviour
     public void startGame()
     {
         SceneManager.LoadScene(FirstLevel);
+        Time.timeScale = 1;
+
     }
 
     public void GoToLevel1()
