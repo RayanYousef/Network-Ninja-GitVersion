@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class m_BossIdleState : StateMachineBehaviour
 {
-    float timer;
      [SerializeField] float chaseRange;
-    Transform player;
-  
+
+     Transform player;
+     float timer;
+
+
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // player = GameObject.FindGameObjectWithTag("Player").transform;
 
         player = GameObjectsManager.Instance.Player.transform;
         timer = 0;
@@ -39,15 +40,4 @@ public class m_BossIdleState : StateMachineBehaviour
         
     }
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

@@ -15,28 +15,22 @@ public class m_BossMovement : MonoBehaviour , m_interface
 {
 
 
-    //[SerializeField] GameObject bossHP;
-
 
     public GameObject[] trails;
     public Animator dragonAnim;
 
-   // private GameObject Dragon;
     private Animator DragonAnim;
-
     private float dragonSlowSpeed = 0.3f;
     private float dragonFastSpeed = 1.5f;
     private bool finishedAttack;
     private Transform player;
     private Rigidbody rb;
     private NavMeshAgent agent;
-    bool LookAtPlyer = true;
-
-    ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
+    private bool LookAtPlyer = true;
+    private ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
 
 
     [SerializeField] UnityEvent BossDie;
-
     [SerializeField] private Image bloodSplatter;
     [SerializeField] private Color transparentColor;
     [SerializeField] private Color color;
@@ -48,30 +42,20 @@ public class m_BossMovement : MonoBehaviour , m_interface
 
     private void Awake()
     {
-       // Dragon = GameObjectsManager.Instance.Boss;
         DragonAnim = GetComponent<Animator>();
-
-        //bossHP = GameObjectsManager.Instance.BossHP;
         player = GameObjectsManager.Instance.Player.transform;
-        //dragonAnim =gameObject.GetComponent<Animator>();
-
         DragonAnim = GetComponent<Animator>();
         bloodVfx = GetComponentsInChildren<ParticleSystem>()[0];
         bloodVfx2 = GetComponentsInChildren<ParticleSystem>()[1];
         bloodVfx3 =GetComponentsInChildren<ParticleSystem>()[2];
-
         color = new Color(188f, 0f, 0f, 1f);
         transparentColor = new Color(0f, 0f, 0f, 0f);
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-
-
     }
 
     private void Start()
     {
-        //bossHP.SetActive(true);
-
         player.GetComponent<StatsManager>().onTakingDamage.AddListener(bloodPanelForPlayerDamage);
         trailDeactivate();
         // prevent sliding
@@ -118,7 +102,6 @@ public class m_BossMovement : MonoBehaviour , m_interface
     }
     private void claw_end()
     {
-        //Debug.Log("claw_end");
         trailDeactivate();
     }
     public void BasicAttackSlow()
@@ -149,17 +132,14 @@ public class m_BossMovement : MonoBehaviour , m_interface
 
     public void Claw_fin()
     {
-        //Debug.Log("claw_fin");
         finishedAttack = true;
     }
     public void Horn_fin()
     {
-        //Debug.Log("horn_fin");
         finishedAttack = true;
     }
     public void Basic_fin()
     {
-        //Debug.Log("Basic_fin");
         finishedAttack = true;
     }
 
@@ -188,7 +168,6 @@ public class m_BossMovement : MonoBehaviour , m_interface
     public bool death()
     {
         dragonAnim.speed = dragonFastSpeed;
-        //this.GetComponent<RigBuilder>().enabled = false;
         return true;
     }
     void LookAtPlayer()

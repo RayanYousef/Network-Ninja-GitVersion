@@ -5,13 +5,6 @@ using UnityEngine.AI;
 
 public class _Attack : StateMachineBehaviour
 {
-    public float attackRange;
-
-
-    Rigidbody RB;
-    private Transform player;
-    private NavMeshAgent agent;
-    m_EnemyManager enemyManager;
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

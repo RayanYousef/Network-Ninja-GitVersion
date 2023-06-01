@@ -44,9 +44,7 @@ public class m_EnemyManager : MonoBehaviour , m_interface
         collider = GetComponent<Collider>();
         currentHealth = GetComponent<StatsManager>().Stats.CurrentHealth;
         maxHealth = GetComponent<StatsManager>().Stats.MaxHealth;
-        
-
-
+       
         //PREVENT SLIDING
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
@@ -62,14 +60,6 @@ public class m_EnemyManager : MonoBehaviour , m_interface
             transform.LookAt(enemyToPlayer);
         }
 
-        //if (Input.GetKeyDown(KeyCode.Y))
-        //{
-        //    StopMovementAndRotation();
-        //} 
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    BackMovementAndRotation();
-        //}
 
     }
 
@@ -88,7 +78,6 @@ public class m_EnemyManager : MonoBehaviour , m_interface
     {
         //animation
         Debug.Log("When enemy died");
-      //  Destroy(collider);
         if (animator != null)
         {
             animator.SetTrigger("Death");
