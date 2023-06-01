@@ -40,11 +40,8 @@ public class _Chase : StateMachineBehaviour
         if (Vector3.Distance(player.position, RB.transform.position) < attackRange)
         {
             animator.SetTrigger("Attack");
-
             animator.SetBool("IsChasing", false);
-
         }
-
     }
     
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

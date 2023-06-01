@@ -2938,6 +2938,7 @@ MonoBehaviour:
   MainMenu: 
   currentGameState: 0
   difficulty: 0
+  gameLang: 0
   bossEntered: 0
   WinningPanel: {fileID: 1719222008}
   LosePanel: {fileID: 1710442869}
@@ -3366,10 +3367,9 @@ MonoBehaviour:
   maxHealth: {r: 0, g: 1, b: 0.91119623, a: 0.98039216}
   halfHealth: {r: 0.99985135, g: 1, b: 0, a: 0.98039216}
   lowHealth: {r: 1, g: 0.2908872, b: 0, a: 0.98039216}
-  enemyColor: {r: 1, g: 0, b: 0, a: 0.98039216}
   currentArea: {fileID: 0}
   strength: 0
-  currentWarnings: 
+  currentWarning: 
   currentSuggestions: 
 --- !u!4 &1971047981 stripped
 Transform:
@@ -3611,6 +3611,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fight 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6992435795791137151, guid: c615ea6f157b83d4dbba2176044f1f4b,
+        type: 3}
+      propertyPath: healthTimer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c615ea6f157b83d4dbba2176044f1f4b, type: 3}
 --- !u!4 &2166311697066186115 stripped
@@ -3643,6 +3648,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fight 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311200912521821376, guid: dc8d0c527e227e548abafaab6b37fb94,
+        type: 3}
+      propertyPath: healthTimer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8311200912521821377, guid: dc8d0c527e227e548abafaab6b37fb94,
         type: 3}
@@ -4041,6 +4051,11 @@ PrefabInstance:
       propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1591253349}
+    - target: {fileID: 2853801503078471400, guid: 6c758f6a023378a4ba9c750da83614b3,
+        type: 3}
+      propertyPath: healthTimer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3200038618184519999, guid: 6c758f6a023378a4ba9c750da83614b3,
         type: 3}
       propertyPath: m_RootOrder
@@ -4143,6 +4158,11 @@ PrefabInstance:
       propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1591253349}
+    - target: {fileID: 4246367410115590015, guid: 0209103b292ea864fb56bde7941da395,
+        type: 3}
+      propertyPath: healthTimer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7058097938274385139, guid: 0209103b292ea864fb56bde7941da395,
         type: 3}
       propertyPath: m_RootOrder
@@ -4556,6 +4576,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1028347111980897222, guid: 43184e8b793ba4140a4b6bb913eedbd5,
+        type: 3}
+      propertyPath: healthTimer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3627271780735305705, guid: 43184e8b793ba4140a4b6bb913eedbd5,
         type: 3}
       propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -4658,6 +4683,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 124958569}
     m_Modifications:
+    - target: {fileID: 1985395209220223388, guid: 8ca5339fc9f577848b9168d37d41df94,
+        type: 3}
+      propertyPath: healthTimer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1985395209220223391, guid: 8ca5339fc9f577848b9168d37d41df94,
         type: 3}
       propertyPath: m_Name
