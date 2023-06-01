@@ -5,49 +5,47 @@ using UnityEngine;
 public class Break : StateMachineBehaviour
 {
      m_EnemyManager enemyManager;
-
-    private Coroutine waitingCoroutine;
-
-
+     float timer;
+    Animator animator;
+    Coroutine coroutine;
+    Rigidbody rb;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemyManager = animator.GetComponent<m_EnemyManager>();
+        timer = 0;
+        animator = animator.GetComponent<Animator>();
+        rb = animator.GetComponent<Rigidbody>();
+        
 
-        // Start the coroutine when the state is entered
-        waitingCoroutine = animator.gameObject.GetComponent<MonoBehaviour>().StartCoroutine(enemyManager.WaitForAttackCoroutine(animator));
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //timer += Time.deltaTime;
+        //if (timer > 10)
+        //{
+        //    animator.SetBool("BackToAttack", true);
 
+        //}
     }
 
     //  OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (waitingCoroutine != null)
-        {
-            animator.gameObject.GetComponent<MonoBehaviour>().StopCoroutine(waitingCoroutine);
-            waitingCoroutine = null;
-        }
+
+        // animator.SetBool("BackToAttack", true);
+        rb.GetComponent<MonoBehaviour>().StartCoroutine(IntervalToBackToAttack());
+
     }
 
-
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+       public IEnumerator IntervalToBackToAttack()
+    {
+        yield return new WaitForSeconds(10);
+        animator.SetBool("BackToAttack", true);
+    }
 
 
 }

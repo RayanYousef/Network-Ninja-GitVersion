@@ -14,60 +14,42 @@ public class _Chase : StateMachineBehaviour
     Rigidbody RB;
     private Transform player;
     NavMeshAgent agent;
+    float timer;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         RB = animator.GetComponent<Rigidbody>();
-      //  player = GameObjectsManager.Instance.Player.transform;
         player = GameObjectsManager.Instance.Player.transform;
-
         agent = RB.GetComponent<NavMeshAgent>();
         agent.speed = speed;
-
-
+        timer = 0;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       // Debug.Log(Time.deltaTime);
-       // Debug.Log("nav mesh");
-
        agent.SetDestination(player.position);
-        //Vector3 enemyToPlayer = new Vector3(player.position.x, animator.transform.position.y, player.position.z);
-        //animator.transform.LookAt(enemyToPlayer);
-        //  Vector3 target = agent.destination;
-        //  Seek(player.transform.position);
-        //RB.transform.LookAt(target);
-        //agent.isStopped = true;
-        // RB.transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
-        if (Vector3.Distance(player.position , RB.transform.position) < attackRange)
-        {
-            Debug.Log("ATTACK");
-            // animator.SetTrigger("Attack");
-            animator.SetBool("IsAttacking", true);
-        }
 
 
         if (Vector3.Distance(player.position, RB.transform.position) > chaseRange)
         {
             Debug.Log("IDLE");
-            // animator.SetTrigger("Idle");
             animator.SetBool("IsChasing", false);
+        }
+
+        if (Vector3.Distance(player.position, RB.transform.position) < attackRange)
+        {
+            animator.SetTrigger("Attack");
+
+            animator.SetBool("IsChasing", false);
+
         }
 
     }
     
-
-    
-
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       // animator.ResetTrigger("Attack");
-      //  animator.ResetTrigger("Idle");
-
     }
 
 }

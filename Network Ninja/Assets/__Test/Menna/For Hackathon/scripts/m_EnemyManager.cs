@@ -19,14 +19,7 @@ public class m_EnemyManager : MonoBehaviour , m_interface
     public GameObject DeathEffect;
     public Animator animator;
     public EnemySpawner enemySpawner;
-    public float waitTime = 10.0f;
-    public bool isWaiting;
-
-
-
-
-
-
+    public float intervalBetweenAttacks;
 
 
 
@@ -132,41 +125,12 @@ public class m_EnemyManager : MonoBehaviour , m_interface
 
     }
 
-    public IEnumerator WaitForAttackCoroutine(Animator animator)
-    {
-        // Set the flag to indicate that we're waiting
-        isWaiting = true;
-
-        // Wait for the specified time
-        yield return new WaitForSeconds(waitTime);
-
-        // Reset the flag after waiting
-        isWaiting = false;
-
-        // Transition to the next state
-        animator.SetBool("BackToAttack", true);
-
-    }   
-    public IEnumerator WaitForBreakCoroutine(Animator animator)
-    {
-
-        // Set the flag to indicate that we're waiting
-        isWaiting = true;
-
-        // Wait for the specified time
-        yield return new WaitForSeconds(waitTime);
-
-        // Reset the flag after waiting
-        isWaiting = false;
-
-        // Transition to the next state
-        animator.SetBool("IsIdle", true);
-
-    }
-
     public void MovementAndRotation(bool value)
     {
         agent.isStopped = !value;
         LookAtPlyer = value;
-    }   
+    }
+
+
+
 }
