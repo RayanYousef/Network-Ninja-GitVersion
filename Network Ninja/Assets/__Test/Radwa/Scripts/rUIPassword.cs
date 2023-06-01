@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,14 +15,13 @@ public class rUIPassword : MonoBehaviour
     [Header("Create Password Panel")]
     [SerializeField] private GameObject createPasswordPanel;
     TMP_InputField passwordIF;
+    string passwordInput;
     Button passwordBtn;
-
 
     [Header("Check Password Panel")]
     [SerializeField] private GameObject checkPasswordPanel;
     Button[] ansBtns;
     string[] answers = new string[3];
-
 
     [Header("Menu")]
     [SerializeField] private GameObject resetPasswordPanel;
@@ -32,6 +31,51 @@ public class rUIPassword : MonoBehaviour
     [SerializeField] private GameObject feedbackPanel;
     private TMP_Text feedbackTxt;
     private Button OKBtn;
+
+    public string PasswordInput
+    {
+        get => passwordInput;
+        set
+        {
+            passwordInput = value;
+
+            passwordIF.text = Regex.Replace(passwordIF.text, @"[^a-zA-Z0-9 !@#$%^&*()_+=\[{\]};:<>|./?,-]", "");
+
+            if (createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf || resetPasswordPanel.activeSelf)
+            {
+                if (Input.anyKeyDown && passwordIF.isFocused && passwordIF.text.Length != 0)
+                {
+                    /// play clicks sounds only when inputfield is focused,
+                    AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.ClickClips);
+
+                    // play other sounds for clicking buttons and showing panels.
+                }
+            }
+
+            /// while the input field length is more than 4
+            if (passwordIF.text.Length >= 4)
+            {
+                ShortResult r = new ShortResult();
+
+                r = rPasswordChecker.CheckPasswordStrengthWithZxccvbn(passwordIF.text);
+
+                switch (r._Strength)
+                {
+                    case PasswordStrength.Weak:
+                        passwordIF.GetComponent<Image>().color = rAreasManager.Instance.LowHealth;
+                        break;
+
+                    case PasswordStrength.Moderate:
+                        passwordIF.GetComponent<Image>().color = rAreasManager.Instance.HalfHealth;
+                        break;
+
+                    case PasswordStrength.Strong:
+                        passwordIF.GetComponent<Image>().color = rAreasManager.Instance.MaxHealth;
+                        break;
+                }
+            }
+        }
+    }
 
     void Start()
     {
@@ -68,22 +112,10 @@ public class rUIPassword : MonoBehaviour
             ShowHideSideMenu();
         }
 
-        /// prevent input filed from taking arabic text
-        passwordIF.text = Regex.Replace(passwordIF.text, @"[^a-zA-Z0-9 !@#$%^&*()_+=\[{\]};:<>|./?,-]", "");
-
-        if (createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf || resetPasswordPanel.activeSelf)
-        {
-            if(Input.anyKeyDown && passwordIF.isFocused && passwordIF.text.Length != 0)
-            {
-                AudioManager.instance.PlayVariedPitcheAudio(AudioManager.instance.ClickClips);
-
-                /// play clicks sounds only when inputfield is focused,
-                /// play other sounds for clicking buttons and showing panels.
-            }
-        }
+        PasswordInput = passwordIF.text;
     }
 
-    #region Menu Panel
+    #region Reset Password Menu Panel
     void ShowHideSideMenu()
     {
         switch (resetPasswordPanel.activeSelf)
@@ -113,8 +145,8 @@ public class rUIPassword : MonoBehaviour
     }
 
     #endregion
-    #region UI Panels
 
+    #region UI Panels
     public void ShowCreatePasswordPanel()
     {
         createPasswordPanel.SetActive(true);
@@ -126,10 +158,9 @@ public class rUIPassword : MonoBehaviour
     IEnumerator WaitAndShowPanel()
     {
         yield return new WaitForSeconds(1.5f);
-        feedbackTxt.text = null;
+        ResetPasswordIF();
         //playerInputs.enabled = false;
         Time.timeScale = 0f;
-
         //passwordIF.Select();
     }
 
@@ -156,9 +187,17 @@ public class rUIPassword : MonoBehaviour
             return;
         }
 
-        if (passwordIF.text.Length <= 4)
+        if (passwordIF.text.Length < 4)
         {
-            feedbackTxt.text = "The secrect code can't be less than 5 characters.";
+            switch(GameManager.Instance.GameLang)
+            {
+                case GameLang.English:
+                    feedbackTxt.text = "The secrect code can't be less than 4 characters.";
+                    break;
+                case GameLang.Arabic:
+                    feedbackTxt.text = "الكود السري المكون من 3 أحرف ضعيف جدًا ويمكن اختراقه بسهولة.";
+                    break;
+            }
             feedbackPanel.SetActive(true);
             return;
         }
@@ -188,8 +227,14 @@ public class rUIPassword : MonoBehaviour
         ShowFeedback();
         
         Time.timeScale = 1f;
-        passwordIF.text = null;
+        ResetPasswordIF();
         //playerInputs.enabled = true;
+    }
+
+    private void ResetPasswordIF()
+    {
+        passwordIF.text = null;
+        passwordIF.GetComponent<Image>().color = Color.white;
     }
 
     private void ShowFeedback()

@@ -9,6 +9,8 @@ public enum Difficulty
     Easy, Normal, Hard
 }
 
+public enum GameLang { English, Arabic }
+
 public enum GameState
 {
     InProgress,Won,Lost
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] string MainMenu;
 
     public Difficulty Difficulty { get => difficulty; set => difficulty = value; }
+    public GameLang GameLang { get => gameLang; set => gameLang = value; }
     public GameState CurrentGameState 
     { 
         get => currentGameState; 
@@ -71,6 +74,7 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     [SerializeField] GameState currentGameState;
     [SerializeField] Difficulty difficulty;
+    [SerializeField] GameLang gameLang;
     [SerializeField] bool bossEntered;
 
     [Header("Panels")]
@@ -83,6 +87,8 @@ public class GameManager : MonoBehaviour
         StartGameManager();
         OnWinGame.AddListener(WinGame);
         OnLoseGame.AddListener(LostGame);
+
+        gameLang = GameLang.English;
     }
 
     private void StartGameManager()

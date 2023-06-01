@@ -64,7 +64,7 @@ public class CS_PlayerManager : MonoBehaviour
                 case true:
                     anim.SetBool(animController.B_Ultimate, value);
                     anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
-                    cameraManager.DisableAllCamerasExcept(cameraManager.UltimateCamera);
+                    cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
                     cameraManager.SlowSurroundingEnemies();
                     AudioManager.instance.BossMusic.InCombat = value;
                     break;
@@ -72,7 +72,7 @@ public class CS_PlayerManager : MonoBehaviour
                 case false:
                     anim.SetBool(animController.B_Ultimate, value);
                     anim.SetFloat(animController.F_animSpeed, 1f);
-                    cameraManager.EnableAndDisableCamerasBasedOnLockState();
+                    cameraManager.SwitchCamerasBasedOnLockState();
                     cameraManager.NormalizeSpeedOfSurroundingEnemies();
                     anim.SetBool(animController.B_Attacking, value);
                     AudioManager.instance.BossMusic.InCombat = value;

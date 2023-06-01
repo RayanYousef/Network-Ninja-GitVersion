@@ -129,7 +129,7 @@ public class CS_MovementController : MonoBehaviour
     private void RotateTowardsDirection(Transform TargetObject)
     {
 
-        if (playerManager.CameraManager.ListOfTargets.Count > 0)
+        if (playerManager.CameraManager.ListOfTargetsInRange.Count > 0)
         {
             Vector3 direction = TargetObject.position - transform.position;
             direction.y = 0; direction.Normalize();
