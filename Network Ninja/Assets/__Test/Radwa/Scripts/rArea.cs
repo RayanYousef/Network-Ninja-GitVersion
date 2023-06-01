@@ -39,7 +39,8 @@ public class rArea : MonoBehaviour
 
 
     [Header("Script Internal Variables")]
-    [SerializeField] float healthTimer;
+    float Timer;
+    [SerializeField] float healthTimer = 3;
 
 
     public string Password { get => password; set => password = value; }
@@ -126,10 +127,10 @@ public class rArea : MonoBehaviour
 
     private void UpdateHealth()
     {
-        healthTimer += Time.deltaTime;
-        if (healthTimer > 2)
+        Timer += Time.deltaTime;
+        if (Timer > healthTimer)
         {
-            healthTimer = 0;
+            Timer = 0;
             health = Mathf.Clamp(health - 1, 0, maxHealth);
 
             if (health > 0)
