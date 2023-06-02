@@ -10,8 +10,6 @@ using System.Text.RegularExpressions;
 
 public class rUIPassword : MonoBehaviour
 {
-    //[SerializeField] PlayerInput playerInputs;
-
     [Header("Create Password Panel")]
     [SerializeField] private GameObject createPasswordPanel;
     TMP_InputField passwordIF;
@@ -79,8 +77,6 @@ public class rUIPassword : MonoBehaviour
 
     void Start()
     {
-        //playerInputs = GameObjectsManager.Instance.Player.GetComponent<PlayerInput>();
-
         createPasswordPanel.SetActive(false);
         passwordIF = createPasswordPanel.GetComponentInChildren<TMP_InputField>();
         passwordIF.characterLimit = 18;
@@ -97,26 +93,30 @@ public class rUIPassword : MonoBehaviour
         resetPasswordPanel.SetActive(false);
         resetBtn = resetPasswordPanel.GetComponentInChildren<Button>();
         resetBtn.onClick.AddListener(ShowCreatePasswordPanel);
-        resetBtn.onClick.AddListener(ShowHideSideMenu);
+        resetBtn.onClick.AddListener(ShowHideSidePanel);
 
         feedbackPanel.SetActive(false);
         feedbackTxt = feedbackPanel.GetComponentInChildren<TMP_Text>();
         //OKBtn = feedbackPanel.GetComponentInChildren<Button>();
         //OKBtn.onClick.AddListener(OnClickOKBtn);
+
+        rUIManager.instance.InteractivePanels.Add(createPasswordPanel);
+        rUIManager.instance.InteractivePanels.Add(checkPasswordPanel);
+        rUIManager.instance.InteractivePanels.Add(resetPasswordPanel);
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.J))
         {
-            ShowHideSideMenu();
+            ShowHideSidePanel();
         }
 
         PasswordInput = passwordIF.text;
     }
 
-    #region Reset Password Menu Panel
-    void ShowHideSideMenu()
+    #region Reset Password Side Menu Panel
+    void ShowHideSidePanel()
     {
         switch (resetPasswordPanel.activeSelf)
         {
@@ -244,10 +244,10 @@ public class rUIPassword : MonoBehaviour
         }
     }
 
-    public void OnClickOKBtn()
-    {
-        feedbackPanel.SetActive(false);
-    }
+    //public void OnClickOKBtn()
+    //{
+    //    feedbackPanel.SetActive(false);
+    //}
 
     public void TakeAns(Button selectedBtn)
     {

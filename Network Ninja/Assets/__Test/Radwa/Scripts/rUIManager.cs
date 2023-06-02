@@ -13,7 +13,8 @@ public class rUIManager : MonoBehaviour
 
 
     [Header("Interactive Panels")]
-    [SerializeField] GameObject[] interactivePanels;
+    [SerializeField] List<GameObject> independantUIElements;
+    [SerializeField] List<GameObject> interactivePanels;
     [SerializeField] bool isAnyInteractivePanelEnabled;
 
 
@@ -21,7 +22,7 @@ public class rUIManager : MonoBehaviour
     public rUIPassword UiPassword { get => uiPassword; set => uiPassword = value; }
     public m_InGameUI InGameUI { get => inGameUI; set => inGameUI = value; }
 
-    public GameObject[] InteractivePanels { get => interactivePanels; set => interactivePanels = value; }
+    public List<GameObject> InteractivePanels { get => interactivePanels; set => interactivePanels = value; }
     public bool IsAnyInteractivePanelEnabled
     {
         get => isAnyInteractivePanelEnabled;
