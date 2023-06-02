@@ -30,7 +30,7 @@ public class rUIPassword : MonoBehaviour
     [Header("Message Panel")]
     [SerializeField] private GameObject feedbackPanel;
     private TMP_Text feedbackTxt;
-    private Button OKBtn;
+    //private Button OKBtn;
 
     public string PasswordInput
     {
@@ -101,8 +101,8 @@ public class rUIPassword : MonoBehaviour
 
         feedbackPanel.SetActive(false);
         feedbackTxt = feedbackPanel.GetComponentInChildren<TMP_Text>();
-        OKBtn = feedbackPanel.GetComponentInChildren<Button>();
-        OKBtn.onClick.AddListener(OnClickOKBtn);
+        //OKBtn = feedbackPanel.GetComponentInChildren<Button>();
+        //OKBtn.onClick.AddListener(OnClickOKBtn);
     }
 
     private void Update()
@@ -122,19 +122,12 @@ public class rUIPassword : MonoBehaviour
         {
             case true:
                 resetPasswordPanel.SetActive(false);
-                if (createPasswordPanel.activeSelf)
-                {
-                    return;
-                }
-                Time.timeScale = 1;
+                rUIManager.instance.IsAnyInteractivePanelEnabled = false;
                 break;
+
             case false:
-                if (createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf)
-                {
-                    return;
-                }
                 resetPasswordPanel.SetActive(true);
-                //Time.timeScale = 0;
+                rUIManager.instance.IsAnyInteractivePanelEnabled = true;
                 break;
         }
     }
@@ -150,6 +143,7 @@ public class rUIPassword : MonoBehaviour
     public void ShowCreatePasswordPanel()
     {
         createPasswordPanel.SetActive(true);
+        ResetPasswordIF();
 
         StartCoroutine(nameof(WaitAndShowPanel));
 
@@ -157,19 +151,17 @@ public class rUIPassword : MonoBehaviour
 
     IEnumerator WaitAndShowPanel()
     {
-        yield return new WaitForSeconds(1.5f);
-        ResetPasswordIF();
-        //playerInputs.enabled = false;
-        Time.timeScale = 0f;
-        //passwordIF.Select();
+        yield return new WaitForSeconds(2f);
+        rUIManager.instance.IsAnyInteractivePanelEnabled = true;
+     
+        passwordIF.Select();
     }
 
     public void ShowCheckPasswordPanel()
     {
-        //playerInputs.enabled = false;
-        Time.timeScale = 0f;
+        rUIManager.instance.IsAnyInteractivePanelEnabled = true;
         string correctAns = GameObjectsManager.Instance.CurrentGate.NextArea.Password;
-        Debug.Log($"Correct Answer is {correctAns}");
+        //Debug.Log($"Correct Answer is {correctAns}");
 
         /// generate 2 answers shuffled from the correct answer
         /// and randomly set answers to buttons
@@ -225,10 +217,9 @@ public class rUIPassword : MonoBehaviour
         createPasswordPanel.SetActive(false);
 
         ShowFeedback();
-        
-        Time.timeScale = 1f;
+
+        rUIManager.instance.IsAnyInteractivePanelEnabled = false;
         ResetPasswordIF();
-        //playerInputs.enabled = true;
     }
 
     private void ResetPasswordIF()
@@ -249,6 +240,7 @@ public class rUIPassword : MonoBehaviour
                 feedbackTxt.text += tempStr;
             }
             feedbackPanel.SetActive(true);
+            StartCoroutine(rUIManager.instance.FadePanel(feedbackPanel.GetComponent<CanvasGroup>(), 7));
         }
     }
 
@@ -261,20 +253,18 @@ public class rUIPassword : MonoBehaviour
     {
         if (selectedBtn.GetComponent<rAnswerButton>().IsCorrect)
         {
-            Debug.Log("Correct Password");
+            //Debug.Log("Correct Password");
 
-            //rAreasManager.Instance.NextArea.ShowAlliesBasedOnAreaHealth();
             GameObjectsManager.Instance.CurrentGate.NextArea.ShowAlliesBasedOnAreaHealth();
             GameObjectsManager.Instance.CurrentGate.PathController.PlayerEnteredPath(GameObjectsManager.Instance.CurrentGate.State);
         }
         else
         {
-            Debug.Log("Wrong Password");
+            //Debug.Log("Wrong Password");
         }
 
         checkPasswordPanel.SetActive(false);
-        Time.timeScale = 1f;
-        //playerInputs.enabled = true;
+        rUIManager.instance.IsAnyInteractivePanelEnabled = false;
     }
     #endregion
 
