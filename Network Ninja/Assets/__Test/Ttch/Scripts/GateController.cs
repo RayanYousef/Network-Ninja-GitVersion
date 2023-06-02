@@ -55,7 +55,8 @@ public class GateController : MonoBehaviour
 
             playerIsHere = true;
             GameObjectsManager.Instance.CurrentGate = this;
-            rUIManager.instance.InGameUI.prompt.enabled = true;
+            //rUIManager.instance.InGameUI.prompt.enabled = true;
+            rUIManager.instance.InGameUI.prompt.gameObject.SetActive(true);
         }
     }
 
@@ -64,8 +65,8 @@ public class GateController : MonoBehaviour
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
             playerIsHere = false;
-            rUIManager.instance.InGameUI.prompt.enabled = false;
-
+            //rUIManager.instance.InGameUI.prompt.enabled = false;
+            rUIManager.instance.InGameUI.prompt.gameObject.SetActive(false);
         }
     }
 }

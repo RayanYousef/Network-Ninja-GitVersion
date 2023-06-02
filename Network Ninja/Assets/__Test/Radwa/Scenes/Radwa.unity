@@ -257,8 +257,8 @@ Transform:
   m_Children:
   - {fileID: 1706623866}
   - {fileID: 1923162536}
-  - {fileID: 1591253348}
   - {fileID: 1653053040}
+  - {fileID: 1591253348}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -869,9 +869,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPassword: {fileID: 1591253349}
   inGameUI: {fileID: 1653053041}
-  independantUIElements: []
   interactivePanels: []
-  isAnyInteractivePanelEnabled: 0
+  isAnyInteractivePanelActive: 0
+  independantUIElements: []
 --- !u!1001 &666997108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3048,7 +3048,7 @@ PrefabInstance:
     - target: {fileID: 1286040514807054544, guid: fbf85c7217c6bdd4397805b86aa764af,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1286040514807054544, guid: fbf85c7217c6bdd4397805b86aa764af,
         type: 3}
@@ -3339,7 +3339,7 @@ PrefabInstance:
     - target: {fileID: 5704936237776952181, guid: dc78c54bef9633942990407f410a33a8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5704936237776952181, guid: dc78c54bef9633942990407f410a33a8,
         type: 3}
@@ -3932,12 +3932,12 @@ PrefabInstance:
     - target: {fileID: 5325971816260002519, guid: c615ea6f157b83d4dbba2176044f1f4b,
         type: 3}
       propertyPath: armySize
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5325971816260002519, guid: c615ea6f157b83d4dbba2176044f1f4b,
         type: 3}
       propertyPath: miniBossSize
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5325971816260002519, guid: c615ea6f157b83d4dbba2176044f1f4b,
         type: 3}
@@ -4055,12 +4055,12 @@ PrefabInstance:
     - target: {fileID: 8733211091486610627, guid: dc8d0c527e227e548abafaab6b37fb94,
         type: 3}
       propertyPath: armySize
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8733211091486610627, guid: dc8d0c527e227e548abafaab6b37fb94,
         type: 3}
       propertyPath: miniBossSize
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8733211091486610627, guid: dc8d0c527e227e548abafaab6b37fb94,
         type: 3}
@@ -4402,12 +4402,12 @@ PrefabInstance:
     - target: {fileID: 1897905310730138996, guid: 6c758f6a023378a4ba9c750da83614b3,
         type: 3}
       propertyPath: armySize
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1897905310730138996, guid: 6c758f6a023378a4ba9c750da83614b3,
         type: 3}
       propertyPath: miniBossSize
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1897905310730138996, guid: 6c758f6a023378a4ba9c750da83614b3,
         type: 3}
@@ -4519,12 +4519,12 @@ PrefabInstance:
     - target: {fileID: 166105607979952159, guid: 0209103b292ea864fb56bde7941da395,
         type: 3}
       propertyPath: armySize
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 166105607979952159, guid: 0209103b292ea864fb56bde7941da395,
         type: 3}
       propertyPath: miniBossSize
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 166105607979952159, guid: 0209103b292ea864fb56bde7941da395,
         type: 3}
@@ -4972,12 +4972,12 @@ PrefabInstance:
     - target: {fileID: 3627271780735305705, guid: 43184e8b793ba4140a4b6bb913eedbd5,
         type: 3}
       propertyPath: armySize
-      value: 15
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3627271780735305705, guid: 43184e8b793ba4140a4b6bb913eedbd5,
         type: 3}
       propertyPath: miniBossSize
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3627271780735305705, guid: 43184e8b793ba4140a4b6bb913eedbd5,
         type: 3}
@@ -5094,7 +5094,12 @@ PrefabInstance:
     - target: {fileID: 3090932717764345148, guid: 8ca5339fc9f577848b9168d37d41df94,
         type: 3}
       propertyPath: armySize
-      value: 15
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090932717764345148, guid: 8ca5339fc9f577848b9168d37d41df94,
+        type: 3}
+      propertyPath: miniBossSize
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3090932717764345148, guid: 8ca5339fc9f577848b9168d37d41df94,
         type: 3}
