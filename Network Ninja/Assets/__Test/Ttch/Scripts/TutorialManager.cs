@@ -64,7 +64,7 @@ public class TutorialManager : MonoBehaviour
             case 2:
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    LAttackCount++;
+                    IncrementLAttack();
                     if (LAttackCount == 10)
                     {
                         popUpIndex++;
@@ -76,7 +76,7 @@ public class TutorialManager : MonoBehaviour
             case 3:
                 if (Input.GetKeyDown(KeyCode.Mouse1))
                 {
-                    RAttackCount++;
+                    IncrementRAttack();
                     if (RAttackCount == 5)
                     {
                         popUpIndex++;
@@ -133,5 +133,14 @@ public class TutorialManager : MonoBehaviour
                 break;
 
         }
+    }
+
+    public void IncrementLAttack()
+    {
+        LAttackCount++;
+    }
+    public void IncrementRAttack()
+    {
+        RAttackCount++;
     }
 }
