@@ -16,9 +16,6 @@ public class rUIManager : MonoBehaviour
     [SerializeField] GameObject[] interactivePanels;
     [SerializeField] bool isAnyInteractivePanelEnabled;
 
-    [Header("Fade effect")]
-    [SerializeField] private Color transparentColor;
-    [SerializeField] private Color color;
 
     public static rUIManager Instance { get => instance; }
     public rUIPassword UiPassword { get => uiPassword; set => uiPassword = value; }
@@ -65,12 +62,6 @@ public class rUIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        color = new Color(0f, 0f, 0f, 1f);
-        transparentColor = new Color(0f, 0f, 0f, 0f);
     }
 
     public IEnumerator FadePanel(CanvasGroup panelToFade, float time)
