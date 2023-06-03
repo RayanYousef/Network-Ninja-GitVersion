@@ -29,7 +29,8 @@ public class StatsManager : MonoBehaviour
 
     [Header("Difficulty")]
     [SerializeField] public Difficulty difficulty = Difficulty.Normal;
-    public float difficultyMultiplier;
+    public float maxHealthDifficultyMultiplier, defenseDifficultyMultiplier,atkDifficultyMultiplier,
+        atkSpeedDifficultyMultiplier,moveSpeedDifficultyMultiplier,cdrDifficultyMultiplier;
 
     #region Setter and Getters
     public StatsStruct Stats { get => myStats; }
@@ -96,16 +97,38 @@ public class StatsManager : MonoBehaviour
         switch(difficulty)
         {
             case Difficulty.Easy:
-                difficultyMultiplier = 0.5f;
+                maxHealthDifficultyMultiplier = 0.5f;
+                defenseDifficultyMultiplier = 0.5f;
+                atkDifficultyMultiplier = 0.5f;
+                atkSpeedDifficultyMultiplier = 0.5f;
+                moveSpeedDifficultyMultiplier = 0.5f;
+                cdrDifficultyMultiplier = 0.5f;
                 break;
+
             case Difficulty.Normal:
-                difficultyMultiplier = 1f;
+                maxHealthDifficultyMultiplier = 1f;
+                defenseDifficultyMultiplier = 1f;
+                atkDifficultyMultiplier = 1f;
+                atkSpeedDifficultyMultiplier = 1f;
+                moveSpeedDifficultyMultiplier = 1f;
+                cdrDifficultyMultiplier = 1f;
+                
                 break;
             case Difficulty.Hard:
-                difficultyMultiplier = 2f;
+                maxHealthDifficultyMultiplier = 2f;
+                defenseDifficultyMultiplier = 2f;
+                atkDifficultyMultiplier = 2f;
+                atkSpeedDifficultyMultiplier = 2f;
+                moveSpeedDifficultyMultiplier = 2f;
+                cdrDifficultyMultiplier = 2f;
                 break;
             default:
-                difficultyMultiplier = 1f;
+                maxHealthDifficultyMultiplier = 1f;
+                defenseDifficultyMultiplier = 1f;
+                atkDifficultyMultiplier = 1f;
+                atkSpeedDifficultyMultiplier = 1f;
+                moveSpeedDifficultyMultiplier = 1f;
+                cdrDifficultyMultiplier = 1f;
                 break;         
         }
     }
@@ -114,11 +137,11 @@ public class StatsManager : MonoBehaviour
         if (this.Team == CharacterTeam.Enemy)
         {
 
-            myStats.MaxHealth = myStats.MaxHealth * difficultyMultiplier;
-            myStats.DefaultDefense = myStats.DefaultDefense * difficultyMultiplier;
-            myStats.DefaultAtk = myStats.DefaultAtk * difficultyMultiplier;
-            myStats.DefaultMoveSpeed = myStats.DefaultMoveSpeed * difficultyMultiplier;
-            myStats.DefaultCooldownReduction = myStats.DefaultCooldownReduction * difficultyMultiplier;
+            myStats.MaxHealth = myStats.MaxHealth * maxHealthDifficultyMultiplier;
+            myStats.DefaultDefense = myStats.DefaultDefense * defenseDifficultyMultiplier;
+            myStats.DefaultAtk = myStats.DefaultAtk * atkDifficultyMultiplier;
+            myStats.DefaultMoveSpeed = myStats.DefaultMoveSpeed * moveSpeedDifficultyMultiplier;
+            myStats.DefaultCooldownReduction = myStats.DefaultCooldownReduction * cdrDifficultyMultiplier;
 
         }
     }
