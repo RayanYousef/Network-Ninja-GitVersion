@@ -46,6 +46,8 @@ public class StatsManager : MonoBehaviour
         myStats.AtkSpeed = myStats.DefaultAtkSpeed;
         myStats.MoveSpeed = myStats.DefaultMoveSpeed;
         myStats.CooldownReduction = myStats.DefaultCooldownReduction;
+        myStats.Energy = myStats.DefaultEnergy;
+
 
         if (HealthBar != null)
         {
@@ -257,8 +259,28 @@ public class StatsManager : MonoBehaviour
     }
     #endregion
 
+    #region EnergyFunctions
+    public void BuffEnergy(float changeValue = 1.3f)
+    {
+        myStats.Energy += changeValue;
+    }
+    public void DebuffEnergy(float changeValue = 1.2f)
+    {
+        myStats.Energy -= changeValue;
+    }
+    public void ResetEnergy()
+    {
+        myStats.Energy = myStats.DefaultEnergy;
+    }
+    public float GetEnergy()
+    {
+        return myStats.Energy;
+    }
+
+    #endregion
+
     #region DefenseFunctions
-    
+
     public void BuffDefense(float changeValue = 10)
     {
         myStats.Defense += changeValue;

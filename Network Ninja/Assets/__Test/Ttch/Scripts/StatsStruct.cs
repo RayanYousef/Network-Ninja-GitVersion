@@ -8,6 +8,8 @@ using UnityEngine.Events;
 public struct StatsStruct
 {
     [SerializeField] public UnityEvent<float> OnHealthUpdated;
+    [SerializeField] public UnityEvent<float> OnEnergyUpdated;
+
 
     [SerializeField]
     private float maxHealth, currentHealth;
@@ -23,6 +25,8 @@ public struct StatsStruct
     private float defaultCooldownReduction, cooldownReduction;
     [SerializeField]
     private float defaultLuck, luck;
+    [SerializeField]
+    private float defaultEnergy, energy;
 
 
     #region Setters and Getters
@@ -49,6 +53,16 @@ public struct StatsStruct
     public float CooldownReduction { get => cooldownReduction; set => cooldownReduction = value; }
     public float DefaultLuck { get => defaultLuck; set => defaultLuck = value; }
     public float Luck { get => luck; set => luck = value; }
+    public float DefaultEnergy { get => defaultEnergy; set => defaultEnergy = value; }
+    public float Energy 
+    { 
+        get => energy; 
+        set
+        { 
+            energy = Mathf.Clamp(value, 0, DefaultEnergy);
+            OnEnergyUpdated?.Invoke(energy);
+        }
+    }
 
     #endregion
 }
