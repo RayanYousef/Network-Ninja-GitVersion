@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class m_InGameUI : MonoBehaviour
 {
     [Header("Winning Panel")]
-    [SerializeField] GameObject winningPanel;
     [SerializeField] GameObject menuPanel;
 
     [Header("Options")]
@@ -20,21 +19,14 @@ public class m_InGameUI : MonoBehaviour
     public TextMeshProUGUI prompt;
 
 
-    #region Winning Panel
-    public void WinningUI()
-    {
-        rAreasManager.Instance.CurrentArea.MeshColourChanger.ChangeToColour(rAreasManager.Instance.MaxHealth);
-        winningPanel.SetActive(true);
-        //Time.timeScale = 0;
-    }
-    #endregion
-
     private void Start()
     {
-        if(winningPanel != null)
-        winningPanel.SetActive(false);
+
         if(menuPanel!= null)
-        menuPanel.SetActive(false);
+            menuPanel.SetActive(false);
+        rUIManager.instance.InteractivePanels.Add(menuPanel);
+
+        rUIManager.instance.IndependantUIElements.Add(prompt.gameObject);
 
 
     //    #region Volume Slider
@@ -85,11 +77,13 @@ public class m_InGameUI : MonoBehaviour
         {
             case true:
                 menuPanel.SetActive(false);
-                Time.timeScale = 1;
+                //rUIManager.Instance.IsAnyInteractivePanelEnabled = false;
                 break;
+
             case false:
                 menuPanel.SetActive(true);
-                Time.timeScale = 0;
+                //rUIManager.Instance.IsAnyInteractivePanelEnabled = true;
+                //rUIManager.Instance.HideAllIndependantUIElementsExceptLast(menuPanel);
                 break;
         }
     }

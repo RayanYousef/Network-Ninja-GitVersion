@@ -18,6 +18,8 @@ public class m_BossMovement : MonoBehaviour , m_interface
 
     public GameObject[] trails;
     public Animator dragonAnim;
+    public float IntervalBetweenBossAttacks = 10;
+
 
     private Animator DragonAnim;
     private float dragonSlowSpeed = 0.3f;

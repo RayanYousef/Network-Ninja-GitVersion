@@ -40,7 +40,6 @@ public class _Idle : StateMachineBehaviour
 
         if(Vector3.Distance(player.position , RB.transform.position) < AttackRange)
         {
-
             if (timer > enemyManager.intervalBetweenAttacks)
             {
                 animator.SetTrigger("Attack");

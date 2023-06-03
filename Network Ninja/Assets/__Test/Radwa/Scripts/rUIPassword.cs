@@ -10,8 +10,6 @@ using System.Text.RegularExpressions;
 
 public class rUIPassword : MonoBehaviour
 {
-    //[SerializeField] PlayerInput playerInputs;
-
     [Header("Create Password Panel")]
     [SerializeField] private GameObject createPasswordPanel;
     TMP_InputField passwordIF;
@@ -79,8 +77,6 @@ public class rUIPassword : MonoBehaviour
 
     void Start()
     {
-        //playerInputs = GameObjectsManager.Instance.Player.GetComponent<PlayerInput>();
-
         createPasswordPanel.SetActive(false);
         passwordIF = createPasswordPanel.GetComponentInChildren<TMP_InputField>();
         passwordIF.characterLimit = 18;
@@ -96,28 +92,39 @@ public class rUIPassword : MonoBehaviour
 
         resetPasswordPanel.SetActive(false);
         resetBtn = resetPasswordPanel.GetComponentInChildren<Button>();
+        resetBtn.onClick.AddListener(ShowHideSidePanel);
         resetBtn.onClick.AddListener(ShowCreatePasswordPanel);
-        resetBtn.onClick.AddListener(ShowHideSideMenu);
 
         feedbackPanel.SetActive(false);
         feedbackTxt = feedbackPanel.GetComponentInChildren<TMP_Text>();
         //OKBtn = feedbackPanel.GetComponentInChildren<Button>();
         //OKBtn.onClick.AddListener(OnClickOKBtn);
+
+        rUIManager.instance.InteractivePanels.Add(createPasswordPanel);
+        rUIManager.instance.InteractivePanels.Add(checkPasswordPanel);
+        rUIManager.instance.InteractivePanels.Add(resetPasswordPanel);
+
+        rUIManager.instance.IndependantUIElements.Add(createPasswordPanel);
+        rUIManager.instance.IndependantUIElements.Add(checkPasswordPanel);
+        rUIManager.instance.IndependantUIElements.Add(resetPasswordPanel);
+        rUIManager.instance.IndependantUIElements.Add(feedbackPanel);
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.J))
         {
-            ShowHideSideMenu();
+            ShowHideSidePanel();
         }
 
         PasswordInput = passwordIF.text;
     }
 
-    #region Reset Password Menu Panel
-    void ShowHideSideMenu()
+    #region Reset Password Side Menu Panel
+    void ShowHideSidePanel()
     {
+        if (createPasswordPanel.activeSelf || checkPasswordPanel.activeSelf)
+            return;
         switch (resetPasswordPanel.activeSelf)
         {
             case true:
@@ -127,6 +134,7 @@ public class rUIPassword : MonoBehaviour
 
             case false:
                 resetPasswordPanel.SetActive(true);
+                rUIManager.instance.HideAllIndependantUIElementsExceptLast(resetPasswordPanel) ;
                 rUIManager.instance.IsAnyInteractivePanelEnabled = true;
                 break;
         }
@@ -144,22 +152,21 @@ public class rUIPassword : MonoBehaviour
     {
         createPasswordPanel.SetActive(true);
         ResetPasswordIF();
-
+        rUIManager.Instance.HideAllIndependantUIElementsExceptLast(createPasswordPanel);
         StartCoroutine(nameof(WaitAndShowPanel));
-
     }
 
     IEnumerator WaitAndShowPanel()
     {
         yield return new WaitForSeconds(2f);
-        rUIManager.instance.IsAnyInteractivePanelEnabled = true;
+        rUIManager.Instance.IsAnyInteractivePanelEnabled = true;
      
         passwordIF.Select();
     }
 
     public void ShowCheckPasswordPanel()
     {
-        rUIManager.instance.IsAnyInteractivePanelEnabled = true;
+
         string correctAns = GameObjectsManager.Instance.CurrentGate.NextArea.Password;
         //Debug.Log($"Correct Answer is {correctAns}");
 
@@ -168,6 +175,8 @@ public class rUIPassword : MonoBehaviour
         SetAnswersToButtons(correctAns);
 
         checkPasswordPanel.SetActive(true);
+        rUIManager.Instance.HideAllIndependantUIElementsExceptLast(checkPasswordPanel);
+        rUIManager.instance.IsAnyInteractivePanelEnabled = true;
     }
     #endregion
 
@@ -239,15 +248,18 @@ public class rUIPassword : MonoBehaviour
             {
                 feedbackTxt.text += tempStr;
             }
+
             feedbackPanel.SetActive(true);
+            rUIManager.Instance.HideAllIndependantUIElementsExceptLast(feedbackPanel);
+
             StartCoroutine(rUIManager.instance.FadePanel(feedbackPanel.GetComponent<CanvasGroup>(), 7));
         }
     }
 
-    public void OnClickOKBtn()
-    {
-        feedbackPanel.SetActive(false);
-    }
+    //public void OnClickOKBtn()
+    //{
+    //    feedbackPanel.SetActive(false);
+    //}
 
     public void TakeAns(Button selectedBtn)
     {

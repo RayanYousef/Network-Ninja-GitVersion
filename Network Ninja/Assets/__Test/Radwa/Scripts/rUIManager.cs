@@ -12,23 +12,25 @@ public class rUIManager : MonoBehaviour
     [SerializeField] private m_InGameUI inGameUI;
 
 
-    [Header("Interactive Panels")]
-    [SerializeField] GameObject[] interactivePanels;
-    [SerializeField] bool isAnyInteractivePanelEnabled;
+    [Header("Panels Lists")]
+    [SerializeField] List<GameObject> interactivePanels;
+    [SerializeField] bool isAnyInteractivePanelActive;
+
+    [SerializeField] List<GameObject> independantUIElements;
 
 
     public static rUIManager Instance { get => instance; }
     public rUIPassword UiPassword { get => uiPassword; set => uiPassword = value; }
     public m_InGameUI InGameUI { get => inGameUI; set => inGameUI = value; }
 
-    public GameObject[] InteractivePanels { get => interactivePanels; set => interactivePanels = value; }
+    public List<GameObject> InteractivePanels { get => interactivePanels; set => interactivePanels = value; }
     public bool IsAnyInteractivePanelEnabled
     {
-        get => isAnyInteractivePanelEnabled;
+        get => isAnyInteractivePanelActive;
         set
         {
-            isAnyInteractivePanelEnabled = value;
-            switch(isAnyInteractivePanelEnabled)
+            isAnyInteractivePanelActive = value;
+            switch(isAnyInteractivePanelActive)
             {
                 case true:
                     if (Time.timeScale != 0)
@@ -50,6 +52,8 @@ public class rUIManager : MonoBehaviour
             }
         }
     }
+
+    public List<GameObject> IndependantUIElements { get => independantUIElements; set => independantUIElements = value; }
 
     private void Awake()
     {
@@ -77,4 +81,14 @@ public class rUIManager : MonoBehaviour
         }
     }
 
+    public void HideAllIndependantUIElementsExceptLast(GameObject lastElementToAppear)
+    {
+        foreach(GameObject e in independantUIElements)
+        {
+            if (e == lastElementToAppear)
+                continue;
+
+            e.SetActive(false);
+        }
+    }
 }

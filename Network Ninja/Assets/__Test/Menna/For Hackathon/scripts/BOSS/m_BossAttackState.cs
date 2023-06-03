@@ -19,12 +19,12 @@ public class m_BossAttackState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        float distance = Vector3.Distance(player.position, animator.transform.position);
+        //float distance = Vector3.Distance(player.position, animator.transform.position);
 
-        if (distance > AttackRange)
-        {
-            animator.SetBool("isAttacking", false);
-        }
+        //if (distance > AttackRange)
+        //{
+        //    animator.SetBool("isAttacking", false);
+        //}
     }
 
     public int ChooseDragonAttack()

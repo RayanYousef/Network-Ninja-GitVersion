@@ -29,15 +29,16 @@ override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo
 
 
         float distance = Vector3.Distance(player.position, animator.transform.position);
-        if (distance > ChaseRange)
+        Debug.Log("distance betweeen boss and player is " +  distance);
+        if (distance > ChaseRange || distance <= AttackRange)
         {
             animator.SetBool("isChasing", false);
         }
-        if (distance < AttackRange)
-        {
-            //Debug.Log(distance);
-            animator.SetBool("isAttacking", true);
-        }
+        //if (distance <= AttackRange)
+        //{
+        //    animator.SetTrigger("Attack");
+        //    animator.SetBool("IsChasing", false);
+        //}
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -11,6 +11,8 @@ public class m_BossPatrolState : StateMachineBehaviour
     Transform Boss;
     bool isChasing = false;
     NavMeshAgent agent;
+    m_BossMovement bossMovement;
+
 
     public float chaseRange;
     public float spawnRadius = 20f;
@@ -20,6 +22,9 @@ public class m_BossPatrolState : StateMachineBehaviour
     List<Vector3>waypoints= new List<Vector3>();
 
 
+    [SerializeField] float AttackRange;
+
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -27,6 +32,7 @@ public class m_BossPatrolState : StateMachineBehaviour
 
         player = GameObjectsManager.Instance.Player.transform;
         Boss = GameObjectsManager.Instance.Boss.transform;
+        bossMovement = animator.GetComponent<m_BossMovement>();
 
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = 1.5f;
@@ -45,21 +51,30 @@ public class m_BossPatrolState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(agent.remainingDistance<= agent.stoppingDistance)
+        float distance = Vector3.Distance(player.position, animator.transform.position);
+
+        if (agent.remainingDistance<= agent.stoppingDistance)
         {
             agent.SetDestination(waypoints[Random.Range(0, waypoints.Count)]);
         }
 
         timer += Time.deltaTime;
-        if (timer > 3)
+        if (distance > chaseRange)
         {
-            animator.SetBool("isPatrolling", false);
+            if (timer > 3)
+            {
+                animator.SetBool("isPatrolling", false);
+            }
         }
-        float distance = Vector3.Distance(player.position, animator.transform.position);
-        if (distance <= chaseRange)
+
+        if (distance <= chaseRange && distance > AttackRange)
         {
             animator.SetBool("isChasing", true);
             isChasing= true;
+        }
+        if (distance <= AttackRange)
+        {
+            animator.SetBool("isPatrolling", false);
         }
     }
     public bool TheDragonIsChasing()
