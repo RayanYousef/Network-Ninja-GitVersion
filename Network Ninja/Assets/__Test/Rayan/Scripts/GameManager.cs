@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case GameState.Won:
+                    rAreasManager.Instance.CurrentArea.MeshColourChanger.ChangeToColour(rAreasManager.Instance.MaxHealth);
                     OnWinGame?.Invoke();
                     break;
             }

@@ -121,7 +121,7 @@ public class rArea : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerInside == false && password != null && GameManager.Instance.CurrentGameState == GameState.InProgress)
+        if (playerInside == false && password != null && !GameManager.Instance.BossEntered)
             UpdateHealth();
     }
 
