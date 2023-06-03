@@ -5,9 +5,11 @@ using UnityEngine;
 public class m_BossIdleState : StateMachineBehaviour
 {
      [SerializeField] float chaseRange;
+     [SerializeField] float AttackRange;
 
      Transform player;
      float timer;
+    m_BossMovement bossMovement;
 
 
 
@@ -17,20 +19,35 @@ public class m_BossIdleState : StateMachineBehaviour
 
         player = GameObjectsManager.Instance.Player.transform;
         timer = 0;
+        bossMovement = animator.GetComponent<m_BossMovement>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer += Time.deltaTime;
-        if (timer > 3)
-        {
-            animator.SetBool("isPatrolling", true);
-        }
         float distance = Vector3.Distance(player.position, animator.transform.position);
-        if (distance <= chaseRange)
+        if(distance > chaseRange)
+        {
+            if (timer > 3)
+            {
+                animator.SetBool("isPatrolling", true);
+            }
+        }
+
+
+        if (distance <= chaseRange && distance > AttackRange)
         {
             animator.SetBool("isChasing", true);
+        }
+
+        if (distance <= AttackRange)
+        {
+            if (timer > bossMovement.IntervalBetweenBossAttacks)
+            {
+                animator.SetTrigger("Attack");
+                timer = 0;
+            }
         }
     }
 
