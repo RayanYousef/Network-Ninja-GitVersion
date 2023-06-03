@@ -11,6 +11,7 @@ public class rUIManager : MonoBehaviour
 
     [SerializeField] private m_InGameUI inGameUI;
 
+    [SerializeField] Image bg;
 
     [Header("Panels Lists")]
     [SerializeField] List<GameObject> interactivePanels;
@@ -35,6 +36,7 @@ public class rUIManager : MonoBehaviour
                 case true:
                     if (Time.timeScale != 0)
                     {
+                        bg.gameObject.SetActive(true);
                         GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().ControllerState(false);
                         Cursor.lockState = CursorLockMode.Confined;
                         Time.timeScale = 0;
@@ -44,6 +46,7 @@ public class rUIManager : MonoBehaviour
                 case false:
                     if(Time.timeScale != 1)
                     {
+                        bg.gameObject.SetActive(false);
                         GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().ControllerState(true);
                         Cursor.lockState = CursorLockMode.Locked;
                         Time.timeScale = 1;

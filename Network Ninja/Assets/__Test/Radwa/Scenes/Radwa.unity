@@ -259,6 +259,7 @@ Transform:
   - {fileID: 1923162536}
   - {fileID: 1653053040}
   - {fileID: 1591253348}
+  - {fileID: 861398548}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -869,6 +870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPassword: {fileID: 1591253349}
   inGameUI: {fileID: 1653053041}
+  bg: {fileID: 1162554574}
   interactivePanels: []
   isAnyInteractivePanelActive: 0
   independantUIElements: []
@@ -1811,6 +1813,106 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 813959164}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &861398547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 861398548}
+  - component: {fileID: 861398551}
+  - component: {fileID: 861398550}
+  - component: {fileID: 861398549}
+  m_Layer: 0
+  m_Name: CardCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &861398548
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861398547}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 114602977}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &861398549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861398547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &861398550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861398547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &861398551
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861398547}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &867394414
 GameObject:
   m_ObjectHideFlags: 0
@@ -2297,6 +2399,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 187632531}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1162554574 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 804501399547785894, guid: fbf85c7217c6bdd4397805b86aa764af,
+    type: 3}
+  m_PrefabInstance: {fileID: 1591253347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1204519334 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1140815381521603851, guid: 9ae6884bd0e3de34d9fb80a53ad4bce9,
@@ -3580,6 +3694,7 @@ MonoBehaviour:
   maxHealth: {r: 0, g: 1, b: 0.91119623, a: 0.98039216}
   halfHealth: {r: 0.99985135, g: 1, b: 0, a: 0.98039216}
   lowHealth: {r: 1, g: 0.2908872, b: 0, a: 0.98039216}
+  darkColor: {r: 0.06968674, g: 0.11916321, b: 0.509434, a: 0.98039216}
   currentArea: {fileID: 0}
   strength: 0
   currentWarning: 
@@ -3936,8 +4051,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5325971816260002519, guid: c615ea6f157b83d4dbba2176044f1f4b,
         type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 5655842852061179386, guid: 9ef7756fba014674c9e6e65b9a0c339c,
+        type: 3}
+    - target: {fileID: 5325971816260002519, guid: c615ea6f157b83d4dbba2176044f1f4b,
+        type: 3}
       propertyPath: miniBossSize
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5325971816260002519, guid: c615ea6f157b83d4dbba2176044f1f4b,
         type: 3}
@@ -3948,6 +4069,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fight 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6992435795791137151, guid: c615ea6f157b83d4dbba2176044f1f4b,
+        type: 3}
+      propertyPath: areaType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6992435795791137151, guid: c615ea6f157b83d4dbba2176044f1f4b,
         type: 3}
@@ -4059,8 +4185,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8733211091486610627, guid: dc8d0c527e227e548abafaab6b37fb94,
         type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 5655842852061179386, guid: 9ef7756fba014674c9e6e65b9a0c339c,
+        type: 3}
+    - target: {fileID: 8733211091486610627, guid: dc8d0c527e227e548abafaab6b37fb94,
+        type: 3}
       propertyPath: miniBossSize
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8733211091486610627, guid: dc8d0c527e227e548abafaab6b37fb94,
         type: 3}
@@ -4406,14 +4538,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1897905310730138996, guid: 6c758f6a023378a4ba9c750da83614b3,
         type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 5655842852061179386, guid: 9ef7756fba014674c9e6e65b9a0c339c,
+        type: 3}
+    - target: {fileID: 1897905310730138996, guid: 6c758f6a023378a4ba9c750da83614b3,
+        type: 3}
       propertyPath: miniBossSize
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1897905310730138996, guid: 6c758f6a023378a4ba9c750da83614b3,
         type: 3}
       propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1591253349}
+    - target: {fileID: 2853801503078471400, guid: 6c758f6a023378a4ba9c750da83614b3,
+        type: 3}
+      propertyPath: areaType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2853801503078471400, guid: 6c758f6a023378a4ba9c750da83614b3,
         type: 3}
       propertyPath: healthTimer
@@ -4523,8 +4666,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 166105607979952159, guid: 0209103b292ea864fb56bde7941da395,
         type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 5655842852061179386, guid: 9ef7756fba014674c9e6e65b9a0c339c,
+        type: 3}
+    - target: {fileID: 166105607979952159, guid: 0209103b292ea864fb56bde7941da395,
+        type: 3}
       propertyPath: miniBossSize
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 166105607979952159, guid: 0209103b292ea864fb56bde7941da395,
         type: 3}
@@ -4976,8 +5125,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3627271780735305705, guid: 43184e8b793ba4140a4b6bb913eedbd5,
         type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 5655842852061179386, guid: 9ef7756fba014674c9e6e65b9a0c339c,
+        type: 3}
+    - target: {fileID: 3627271780735305705, guid: 43184e8b793ba4140a4b6bb913eedbd5,
+        type: 3}
       propertyPath: miniBossSize
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3627271780735305705, guid: 43184e8b793ba4140a4b6bb913eedbd5,
         type: 3}
@@ -5098,8 +5253,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3090932717764345148, guid: 8ca5339fc9f577848b9168d37d41df94,
         type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 5655842852061179386, guid: 9ef7756fba014674c9e6e65b9a0c339c,
+        type: 3}
+    - target: {fileID: 3090932717764345148, guid: 8ca5339fc9f577848b9168d37d41df94,
+        type: 3}
       propertyPath: miniBossSize
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3090932717764345148, guid: 8ca5339fc9f577848b9168d37d41df94,
         type: 3}
