@@ -155,13 +155,13 @@ public class rUIPassword : MonoBehaviour
         rUIManager.Instance.HideAllIndependantUIElementsExceptLast(createPasswordPanel);
         rAreasManager.Instance.CurrentArea.IsFlashing = true;
         rAreasManager.Instance.CurrentArea.StartCoroutine(nameof(rAreasManager.Instance.CurrentArea.StartFlashing));
+        rUIManager.Instance.IsAnyInteractivePanelEnabled = true;
         StartCoroutine(nameof(WaitAndShowPanel));
     }
 
     IEnumerator WaitAndShowPanel()
     {
         yield return new WaitForSeconds(2f);
-        rUIManager.Instance.IsAnyInteractivePanelEnabled = true;
      
         passwordIF.Select();
     }
