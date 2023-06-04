@@ -19,6 +19,7 @@ public class rAreasManager : MonoBehaviour
     [SerializeField] rArea[] listOfLevelAreas;
     int maxSoldiersNumber = 75;
     [SerializeField] Color maxHealth, halfHealth, lowHealth;
+    [SerializeField] Color darkColor;
     [SerializeField] rArea currentArea;
 
     [Header("Password Result Details")]
@@ -41,6 +42,8 @@ public class rAreasManager : MonoBehaviour
     public Color MaxHealth { get => maxHealth; }
     public Color HalfHealth { get => halfHealth; }
     public Color LowHealth { get => lowHealth; }
+    public Color DarkColor { get => darkColor; set => darkColor = value; }
+
     public rArea CurrentArea { get { return currentArea; } set => currentArea = value; }
     
     public string Warnings { get => currentWarning; set => currentWarning = value; }

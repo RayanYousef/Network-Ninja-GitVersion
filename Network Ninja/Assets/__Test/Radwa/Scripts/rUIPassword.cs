@@ -153,6 +153,8 @@ public class rUIPassword : MonoBehaviour
         createPasswordPanel.SetActive(true);
         ResetPasswordIF();
         rUIManager.Instance.HideAllIndependantUIElementsExceptLast(createPasswordPanel);
+        rAreasManager.Instance.CurrentArea.IsFlashing = true;
+        rAreasManager.Instance.CurrentArea.StartCoroutine(nameof(rAreasManager.Instance.CurrentArea.StartFlashing));
         StartCoroutine(nameof(WaitAndShowPanel));
     }
 
@@ -217,6 +219,7 @@ public class rUIPassword : MonoBehaviour
         rAreasManager.Instance.CurrentArea.AreaType = AreaType.Base;
         rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
 
+        rAreasManager.Instance.CurrentArea.IsFlashing = false;
 
         rAreasManager.Instance.SetAreaHealthBasedOnPassword();
         rAreasManager.Instance.CurrentArea.FormArmyBasedOnAreaHealth();

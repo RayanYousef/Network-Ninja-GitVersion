@@ -36,6 +36,7 @@ public class rArea : MonoBehaviour
     [Header("MiniMap Components")]
     [SerializeField] CS_ChangeObjectsColour meshColourChanger;
     [SerializeField] SpriteRenderer sharingPasswordWarningIcon;
+    [SerializeField] bool isFlashing;
 
 
     [Header("Script Internal Variables")]
@@ -55,6 +56,7 @@ public class rArea : MonoBehaviour
     }
     public AreaType AreaType { get => areaType; set => areaType = value; }
     public CS_ChangeObjectsColour MeshColourChanger { get => meshColourChanger; }
+    public bool IsFlashing { get => isFlashing; set => isFlashing = value; }
     public SpriteRenderer SharingPasswordWarningIcon { get => sharingPasswordWarningIcon; }
     public bool PlayerInside {
         get => playerInside;
@@ -80,6 +82,7 @@ public class rArea : MonoBehaviour
         }
     }
 
+
     private void Awake()
     {
         if (areaCamera != null) { }
@@ -99,6 +102,7 @@ public class rArea : MonoBehaviour
         meshColourChanger.MaxHealth = rAreasManager.Instance.MaxHealth;
         meshColourChanger.HalfHealth = rAreasManager.Instance.HalfHealth;
         meshColourChanger.LowHealth = rAreasManager.Instance.LowHealth;
+
 
         Renderer[] Renderers = new Renderer[1];
         Renderers[0] = GetComponentsInChildren<Renderer>()[1];
@@ -121,7 +125,7 @@ public class rArea : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerInside == false && password != null && GameManager.Instance.CurrentGameState == GameState.InProgress)
+        if (playerInside == false && password != null && !GameManager.Instance.BossEntered)
             UpdateHealth();
     }
 
@@ -146,6 +150,23 @@ public class rArea : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator StartFlashing()
+    {
+        while(IsFlashing)
+        {
+            Debug.Log("flashing");
+            meshColourChanger.ChangeToColour(rAreasManager.Instance.DarkColor);
+            yield return new WaitForSecondsRealtime(0.5f);
+            if (!IsFlashing)
+                yield break;
+            meshColourChanger.ChangeToColour(Color.white);
+            yield return new WaitForSecondsRealtime(0.5f);
+            if (!IsFlashing)
+                yield break;
+        }
+    }
+
 
     public void LostArea()
     {
