@@ -74,6 +74,10 @@ public class m_BossPatrolState : StateMachineBehaviour
         }
         if (distance <= AttackRange)
         {
+            if(bossMovement.LookAtPlyer == true)
+            {
+                bossMovement.LookAtPlayer();
+            }
             animator.SetBool("isPatrolling", false);
         }
     }

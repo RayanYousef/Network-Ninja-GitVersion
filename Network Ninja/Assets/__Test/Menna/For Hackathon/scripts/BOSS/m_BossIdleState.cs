@@ -18,8 +18,9 @@ public class m_BossIdleState : StateMachineBehaviour
     {
 
         player = GameObjectsManager.Instance.Player.transform;
-        timer = 0;
         bossMovement = animator.GetComponent<m_BossMovement>();
+        timer =0;
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -43,9 +44,14 @@ public class m_BossIdleState : StateMachineBehaviour
 
         if (distance <= AttackRange)
         {
+            if (bossMovement.LookAtPlyer == true)
+            {
+                bossMovement.LookAtPlayer();
+            }
             if (timer > bossMovement.IntervalBetweenBossAttacks)
             {
-                animator.SetTrigger("Attack");
+                //  animator.SetTrigger("Attack");
+                animator.SetBool("isAttacking", true);
                 timer = 0;
             }
         }
