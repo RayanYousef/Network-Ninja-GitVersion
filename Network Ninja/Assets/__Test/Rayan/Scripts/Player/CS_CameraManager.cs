@@ -28,7 +28,7 @@ public class CS_CameraManager : MonoBehaviour
     [SerializeField] Transform lockedTarget;
     [SerializeField] int targetIndex;
     [SerializeField] float lockRotationSpeed,lockTimer;
-    [SerializeField] bool lockedOn,ultimateLockOn;
+    [SerializeField] bool lockedOn;
 
     [Header("Camera Behavior Vars")]
     [SerializeField] float lerpTime;
@@ -178,82 +178,7 @@ public class CS_CameraManager : MonoBehaviour
             RotateObjectQuaternionClamping(deltaValues, followTargetNormal);
     }
 
-    public void SlowSurroundingEnemies()
-    {
-        foreach (var target in listOfTargetsInRange)
-        {
-            if(target.TryGetComponent<Animator>(out Animator anim))
-            {
-                anim.speed = slowAnimationRate;
-                anim.GetComponent<NavMeshAgent>().isStopped = true;
-
-            }
-
-        }
-    }
-
-    public void NormalizeSpeedOfSurroundingEnemies()
-    {
-        foreach (var target in listOfTargetsInRange)
-        {
-            if (target.TryGetComponent<Animator>(out Animator anim))
-            {
-                anim.speed = 1;
-                anim.GetComponent<NavMeshAgent>().isStopped = false;
-
-            }
-
-        }
-    }
-
-    #region Functions
-
-    private void SetTarget()
-    {
-
-        // On Destroy Remove Target from the list or else a null reference will find his way to you.
-        if (listOfTargetsInRange.Count > 0 && listOfTargetsInRange[targetIndex % listOfTargetsInRange.Count] != null)
-            lockedTarget = listOfTargetsInRange[targetIndex % listOfTargetsInRange.Count].transform;
-    }
-
-    public void DisableAllCamerasExceptParam(CinemachineVirtualCamera ExcludedCamera)
-    {
-
-        foreach(CinemachineVirtualCamera camera in virtualCameras )
-        {
-            camera.enabled=false;
-        }
-        ExcludedCamera.enabled = true;
-    }
-
-    public void SwitchCamerasBasedOnLockState()
-    {
-        switch (lockedOn)
-        {
-            case true:
-
-                if (listOfTargetsInRange.Count > 0)
-                {
-                    cameraBrain.m_DefaultBlend.m_Time = lerpTime;
-                    DisableAllCamerasExceptParam(lockVirtualCamera);
-                    SetTarget();
-                }
-                else
-                {
-                    lockedOn = false;
-                    DisableAllCamerasExceptParam(mainVirtualCamera);
-                }
-                break;
-
-
-            case false:
-                cameraBrain.m_DefaultBlend.m_Time = lerpTime;
-                DisableAllCamerasExceptParam(mainVirtualCamera);
-                break;
-        }
-    }
-    #endregion
-
+ 
     #region Main Rotation Function
 
     public void RotateObjectQuaternionClamping(Vector2 mouseDelta, Transform transform)
@@ -282,26 +207,67 @@ public class CS_CameraManager : MonoBehaviour
 
     #endregion
 
+    #region Other Functions
+
+    private void SetTarget()
+    {
+
+        // On Destroy Remove Target from the list or else a null reference will find his way to you.
+        if (listOfTargetsInRange.Count > 0 && listOfTargetsInRange[targetIndex % listOfTargetsInRange.Count] != null)
+            lockedTarget = listOfTargetsInRange[targetIndex % listOfTargetsInRange.Count].transform;
+    }
+
+    public void DisableAllCamerasExceptParam(CinemachineVirtualCamera ExcludedCamera)
+    {
+
+        foreach (CinemachineVirtualCamera camera in virtualCameras)
+        {
+            camera.enabled = false;
+        }
+        ExcludedCamera.enabled = true;
+    }
+
+    public void SwitchCamerasBasedOnLockState()
+    {
+        switch (lockedOn)
+        {
+            case true:
+
+                if (listOfTargetsInRange.Count > 0)
+                {
+                    cameraBrain.m_DefaultBlend.m_Time = lerpTime;
+                    DisableAllCamerasExceptParam(lockVirtualCamera);
+                    SetTarget();
+                }
+                else
+                {
+                    lockedOn = false;
+                    if (mainVirtualCamera.enabled == false)
+                        DisableAllCamerasExceptParam(mainVirtualCamera);
+                }
+                break;
+
+
+            case false:
+                cameraBrain.m_DefaultBlend.m_Time = lerpTime;
+                if(mainVirtualCamera.enabled==false)
+                DisableAllCamerasExceptParam(mainVirtualCamera);
+                break;
+        }
+    }
+    #endregion
+
     #region TriggerEnter/Exit
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && !listOfTargetsInRange.Contains(other.gameObject))
         {
-            listOfTargetsInRange.Add(other.gameObject);
-            SetTarget();
-        }
-
-        if (other.gameObject.TryGetComponent<Animator>(out Animator anim)
-            &&
-            other.gameObject.TryGetComponent<StatsManager>(out StatsManager stats))
-        {
-            if (PlayerManager.UltimateOn)
+            if (enemy.Team == CharacterTeam.Enemy && enemy.Targetable)
             {
-                anim.speed = slowAnimationRate;
-                anim.GetComponent<NavMeshAgent>().isStopped = true;
+                listOfTargetsInRange.Add(other.gameObject);
+                SetTarget();
             }
-
         }
 
     }
@@ -314,15 +280,6 @@ public class CS_CameraManager : MonoBehaviour
             if (listOfTargetsInRange.Count < 1)
                 LockedOn = false;
         }
-
-        if (other.gameObject.TryGetComponent<Animator>(out Animator anim) &&
-            other.gameObject.TryGetComponent<StatsManager>(out StatsManager stats))
-        {
-            anim.speed = 1;
-            anim.GetComponent<NavMeshAgent>().isStopped = false;
-
-        }
-
     }
 
     #endregion

@@ -58,7 +58,7 @@ public class m_BossMovement : MonoBehaviour , m_interface
 
     private void Start()
     {
-        player.GetComponent<StatsManager>().onTakingDamage.AddListener(bloodPanelForPlayerDamage);
+        player.GetComponent<StatsManager>().OnTakingDamage.AddListener(bloodPanelForPlayerDamage);
         trailDeactivate();
         // prevent sliding
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;

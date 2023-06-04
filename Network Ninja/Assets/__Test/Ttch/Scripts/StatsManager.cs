@@ -11,21 +11,32 @@ public enum CharacterTeam
     None,Player, Enemy
 }
 
-
 public class StatsManager : MonoBehaviour
 {
-    [Header("Parent Of This Object")]
+    [Header("Top Most Parent Of This Object")]
     [SerializeField] GameObject parent;
 
+    [Header("Components")]
     [SerializeField] List<Collider> hitObjects = new List<Collider>();
+    [SerializeField] CS_DamageObject[] damageObjects;
 
+    [Header ("UI Elements")]
+    [SerializeField] Slider HealthBar;
+
+    [Header ("Events")]
+    public UnityEvent OnTakingDamage;
+    public UnityEvent OnApplyingDamage;
+
+    [Header("Stats")]
     [SerializeField] StatsStruct myStats = new StatsStruct();
 
-    [SerializeField] public CharacterTeam Team= CharacterTeam.None;
+    [Header("GameObject Team")]
+    [SerializeField] CharacterTeam team = CharacterTeam.None;
 
-    [SerializeField] CS_DamageObject[] damageObjects;
-    [SerializeField] Slider HealthBar;
-    public UnityEvent onTakingDamage;
+    [Header("Can Be Targeted By Player Camera")]
+    [SerializeField] bool targetable;
+
+
 
     [Header("Difficulty")]
     [SerializeField] public Difficulty difficulty = Difficulty.Normal;
@@ -33,9 +44,11 @@ public class StatsManager : MonoBehaviour
         atkSpeedDifficultyMultiplier,moveSpeedDifficultyMultiplier,cdrDifficultyMultiplier;
 
     #region Setter and Getters
-    public StatsStruct Stats { get => myStats; }
+    public StatsStruct Stats { get => myStats;}
     public List<Collider> HitObjects { get => hitObjects; set => hitObjects = value; }
     public CS_DamageObject[] DamageObjects { get => damageObjects;}
+    public CharacterTeam Team { get => team; set => team = value; }
+    public bool Targetable { get => targetable;}
     #endregion
 
     private void OnDisable()
@@ -189,23 +202,38 @@ public class StatsManager : MonoBehaviour
 
     #endregion
 
-    #region HealthFunctions
+    #region Health and Energy Functions
     public void Heal(float value = 20)
     {
         myStats.CurrentHealth += value;
         HealthBar.value = myStats.CurrentHealth;
     }
-    public void ApplyDamage(StatsManager AttackerStats)
+
+    public void IncreaseHealth(float amount)
+    {
+        myStats.CurrentHealth += amount;
+    }
+
+    public void IncreaseEnergy(float amount)
+    {
+        myStats.Energy += amount;
+    }
+
+    public void TakeDamage(StatsManager AttackerStats)
     {
         float dmg = AttackerStats.CalculateAttackStrength() - this.GetDefense();
         myStats.CurrentHealth -= dmg;
         if(HealthBar!=null) 
         HealthBar.value = myStats.CurrentHealth;
         Debug.Log(myStats.CurrentHealth);
-        onTakingDamage?.Invoke();
+        OnTakingDamage?.Invoke();
 
     }
 
+    public void ApplyDamage()
+    {
+        OnApplyingDamage?.Invoke(); 
+    }
 
     #endregion
 

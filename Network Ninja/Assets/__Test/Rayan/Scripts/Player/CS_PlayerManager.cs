@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class CS_PlayerManager : MonoBehaviour
 {
 
-        
+
     [Header("Components")]
     public GameObject PlayerTopMostParent;
     public CS_HitEffect[] HitEffects;
@@ -29,16 +29,14 @@ public class CS_PlayerManager : MonoBehaviour
     [Header("Energy")]
     [SerializeField] Slider EnergySlider;
 
-    [Header("Variables")]
-    [SerializeField] bool ultimateOn;
-    [SerializeField] float drag;
-    [SerializeField] float clicksIntervalTime;
-
     [Header("Ultimate")]
-    [SerializeField] float ultimateCoolDown;
-    [SerializeField] float ultimateAttackSpeed;
+    [SerializeField] bool ultimateOn;
+    [SerializeField] float energyRecoveryOnHit, energyRecoveryOnKill, ultimateCoolDown, ultimateAttackSpeed;
     float ultimateTimer;
 
+    [Header("Other Variables")]
+    [SerializeField] float drag;
+    [SerializeField] float clicksIntervalTime;
 
     [Header("Script Variables")]
     [SerializeField] CharacterState currentState;
@@ -51,8 +49,8 @@ public class CS_PlayerManager : MonoBehaviour
     public CS_AnimatorController AnimController { get => animController; }
     public CS_CameraManager CameraManager { get => cameraManager; }
     public Rigidbody Rb { get => rb; }
-    public StatsManager PStatsManager { get => pStatsManager;}
-    public bool UltimateOn 
+    public StatsManager PStatsManager { get => pStatsManager; set => pStatsManager = value; }
+    public bool UltimateOn
     {
         get => ultimateOn;
         set
@@ -65,7 +63,8 @@ public class CS_PlayerManager : MonoBehaviour
                     anim.SetBool(animController.B_Ultimate, value);
                     anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
                     cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
-                    cameraManager.SlowSurroundingEnemies();
+                    // Call Menna Script to Enable Slow Motion
+                    //cameraManager.SlowSurroundingEnemies();
                     AudioManager.instance.BossMusic.InCombat = value;
                     break;
 
@@ -73,7 +72,7 @@ public class CS_PlayerManager : MonoBehaviour
                     anim.SetBool(animController.B_Ultimate, value);
                     anim.SetFloat(animController.F_animSpeed, 1f);
                     cameraManager.SwitchCamerasBasedOnLockState();
-                    cameraManager.NormalizeSpeedOfSurroundingEnemies();
+                    //cameraManager.NormalizeSpeedOfSurroundingEnemies();
                     anim.SetBool(animController.B_Attacking, value);
                     AudioManager.instance.BossMusic.InCombat = value;
                     break;
@@ -83,11 +82,16 @@ public class CS_PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        if (GameObjectsManager.Instance != null)
+        {
+            GameObjectsManager.Instance.Player = this.gameObject;
+        }
+
         // Top Most parent of Player
         if (PlayerTopMostParent == null)
             PlayerTopMostParent = gameObject;
         // Stats Manager
-        if(pStatsManager==null) pStatsManager = GetComponentInChildren<StatsManager>();
+        if (pStatsManager == null) pStatsManager = GetComponentInChildren<StatsManager>();
 
         anim = PlayerTopMostParent.GetComponentInChildren<Animator>();
         moveController = PlayerTopMostParent.GetComponentInChildren<CS_MovementController>();
@@ -95,8 +99,8 @@ public class CS_PlayerManager : MonoBehaviour
         lookAtClosestTarget = PlayerTopMostParent.GetComponentInChildren<CS_LookAtClosestTarget>();
 
         // Camera Manager
-        if(cameraManager== null)    
-        cameraManager = PlayerTopMostParent.GetComponentInChildren<CS_CameraManager>();
+        if (cameraManager == null)
+            cameraManager = PlayerTopMostParent.GetComponentInChildren<CS_CameraManager>();
         cameraManager.PlayerManager = this;
 
         rb = PlayerTopMostParent.GetComponentInChildren<Rigidbody>();
@@ -113,7 +117,6 @@ public class CS_PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         pStatsManager.Stats.OnHealthUpdated.AddListener(LostGameHealthZero);
 
     }
@@ -133,25 +136,24 @@ public class CS_PlayerManager : MonoBehaviour
             SendInputDirection(joyStick.Direction);
 
 
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-            Cursor.lockState = CursorLockMode.None;
-        if (Input.GetKeyUp(KeyCode.LeftAlt))
-            Cursor.lockState = CursorLockMode.Locked;
+        //if (Input.GetKeyDown(KeyCode.LeftAlt))
+        //    Cursor.lockState = CursorLockMode.None;
+        //if (Input.GetKeyUp(KeyCode.LeftAlt))
+        //    Cursor.lockState = CursorLockMode.Locked;
 
     }
     private void FixedUpdate()
     {
         if (ultimateTimer < ultimateCoolDown && ultimateOn == false)
             ultimateTimer += Time.deltaTime;
-        else if (ultimateOn== true)
-            ultimateTimer -= Time.deltaTime*2;
+        else if (ultimateOn == true)
+            ultimateTimer -= Time.deltaTime * 2;
 
         if (ultimateTimer < 0)
             UltimateOn = false;
-
+        if(EnergySlider!= null)
         EnergySlider.value = ultimateTimer / ultimateCoolDown;
     }
-
     public void LostGameHealthZero(float value)
     {
         if (value <= 0)
@@ -244,7 +246,7 @@ public class CS_PlayerManager : MonoBehaviour
                 if (yLength > GetComponent<CapsuleCollider>().height / 2 - 0.01f)
                 {
                     Debug.Log("happened");
-                  //  rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+                    //  rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                 }
             }
         }
@@ -308,7 +310,7 @@ public class CS_PlayerManager : MonoBehaviour
 
     public void ActivateUltimate(bool value)
     {
-        if (ultimateTimer > ultimateCoolDown && value == true && ultimateOn==false)
+        if (ultimateTimer > ultimateCoolDown && value == true && ultimateOn == false)
             UltimateOn = true;
     }
 
@@ -357,6 +359,27 @@ public class CS_PlayerManager : MonoBehaviour
     #endregion
 
     #region Public Functions
+
+    public void RecoverEnergy(Collider other)
+    {
+        other.TryGetComponent<StatsManager>(out StatsManager otherStatsManager);
+
+        if (otherStatsManager != null)
+        {
+            switch (otherStatsManager.Stats.CurrentHealth)
+            {
+                case 0:
+                    otherStatsManager.IncreaseEnergy(energyRecoveryOnKill);
+                    break;
+
+                default:
+                    otherStatsManager.IncreaseEnergy(energyRecoveryOnHit);
+                    break;
+
+            }
+        }
+
+    }
 
     public void ControllerState(bool value)
     {
