@@ -1545,6 +1545,7 @@ MonoBehaviour:
   musicSource: {fileID: 1043334831}
   sfxSource: {fileID: 2067005496}
   pitchVariedsfxSource: {fileID: 2029628240}
+  BossMusic: {fileID: 0}
   clickClips:
   - {fileID: 8300000, guid: 26fce810da7ae8742b91bc46d19bf5f3, type: 3}
   - {fileID: 8300000, guid: 46ec0422db1a51148891c77665a907c0, type: 3}
@@ -3395,8 +3396,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 1347369491}
   hitObjects: []
+  damageObjects: []
+  HealthBar: {fileID: 0}
+  OnTakingDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnApplyingDamage:
+    m_PersistentCalls:
+      m_Calls: []
   myStats:
     OnHealthUpdated:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnergyUpdated:
       m_PersistentCalls:
         m_Calls: []
     maxHealth: 5000
@@ -3413,14 +3425,17 @@ MonoBehaviour:
     cooldownReduction: 0
     defaultLuck: 0
     luck: 0
-  Team: 2
-  damageObjects: []
-  HealthBar: {fileID: 0}
-  onTakingDamage:
-    m_PersistentCalls:
-      m_Calls: []
+    defaultEnergy: 0
+    energy: 0
+  team: 2
+  targetable: 1
   difficulty: 1
-  difficultyMultiplier: 1
+  maxHealthDifficultyMultiplier: 0
+  defenseDifficultyMultiplier: 0
+  atkDifficultyMultiplier: 0
+  atkSpeedDifficultyMultiplier: 0
+  moveSpeedDifficultyMultiplier: 0
+  cdrDifficultyMultiplier: 0
 --- !u!65 &1347369493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3708,8 +3723,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 1457744000}
   hitObjects: []
+  damageObjects: []
+  HealthBar: {fileID: 0}
+  OnTakingDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnApplyingDamage:
+    m_PersistentCalls:
+      m_Calls: []
   myStats:
     OnHealthUpdated:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnergyUpdated:
       m_PersistentCalls:
         m_Calls: []
     maxHealth: 5000
@@ -3726,14 +3752,17 @@ MonoBehaviour:
     cooldownReduction: 0
     defaultLuck: 0
     luck: 0
-  Team: 2
-  damageObjects: []
-  HealthBar: {fileID: 0}
-  onTakingDamage:
-    m_PersistentCalls:
-      m_Calls: []
+    defaultEnergy: 0
+    energy: 0
+  team: 2
+  targetable: 1
   difficulty: 1
-  difficultyMultiplier: 1
+  maxHealthDifficultyMultiplier: 0
+  defenseDifficultyMultiplier: 0
+  atkDifficultyMultiplier: 0
+  atkSpeedDifficultyMultiplier: 0
+  moveSpeedDifficultyMultiplier: 0
+  cdrDifficultyMultiplier: 0
 --- !u!1 &1477548807
 GameObject:
   m_ObjectHideFlags: 0
@@ -4734,7 +4763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abbc0bd09437ca94eb4c6659be465517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxSource: {fileID: 0}
   musicSource: {fileID: 1700754601}
   mixer: {fileID: 24100000, guid: a6521e8fdb35099408caee77ac6462ad, type: 2}
   lerping: 0
@@ -4972,8 +5000,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 1972988284}
   hitObjects: []
+  damageObjects: []
+  HealthBar: {fileID: 0}
+  OnTakingDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnApplyingDamage:
+    m_PersistentCalls:
+      m_Calls: []
   myStats:
     OnHealthUpdated:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnergyUpdated:
       m_PersistentCalls:
         m_Calls: []
     maxHealth: 5000
@@ -4990,14 +5029,17 @@ MonoBehaviour:
     cooldownReduction: 0
     defaultLuck: 0
     luck: 0
-  Team: 2
-  damageObjects: []
-  HealthBar: {fileID: 0}
-  onTakingDamage:
-    m_PersistentCalls:
-      m_Calls: []
+    defaultEnergy: 0
+    energy: 0
+  team: 2
+  targetable: 1
   difficulty: 1
-  difficultyMultiplier: 1
+  maxHealthDifficultyMultiplier: 0
+  defenseDifficultyMultiplier: 0
+  atkDifficultyMultiplier: 0
+  atkSpeedDifficultyMultiplier: 0
+  moveSpeedDifficultyMultiplier: 0
+  cdrDifficultyMultiplier: 0
 --- !u!65 &1972988286
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5574,6 +5616,21 @@ PrefabInstance:
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5029212637853818777, guid: d1343ce0abc5ad3488c18860a399b97b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029212639057935446, guid: d1343ce0abc5ad3488c18860a399b97b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029212639057935446, guid: d1343ce0abc5ad3488c18860a399b97b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5029212639057935446, guid: d1343ce0abc5ad3488c18860a399b97b,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0

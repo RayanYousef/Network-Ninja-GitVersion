@@ -48,15 +48,18 @@ public class CS_LookAtClosestTarget : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && !listOfTargets.Contains(other.transform))
+        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) 
+            && !listOfTargets.Contains(other.transform)
+            && enemy.Targetable==true)
             listOfTargets.Add(other.transform);
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && listOfTargets.Contains(other.transform))
-            listOfTargets.Remove(other.transform);
+        if (other.TryGetComponent<StatsManager>(out StatsManager enemy)
+            && !listOfTargets.Contains(other.transform)
+            && enemy.Targetable == true) listOfTargets.Remove(other.transform);
 
     }
 }

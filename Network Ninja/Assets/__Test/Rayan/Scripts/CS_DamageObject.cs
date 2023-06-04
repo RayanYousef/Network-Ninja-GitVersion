@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -18,31 +19,47 @@ public class CS_DamageObject : MonoBehaviour
     [SerializeField, Range(-3, 3)] float pitch = 1;
     [SerializeField, Range(0, 1)] float volume = 1;
 
+    [Header("Events")]
+    [SerializeField] Action<Collider> OnHittingEnemy;
+
     [Header("Variables")]
     [SerializeField] float skillMultiplier = 1;
     [SerializeField] string weaponName;
 
     public StatsManager MyStatsManager
     {
-        get => myStatsManager; set
+        get => myStatsManager;
+        set
         {
             if (myStatsManager == null) myStatsManager = value;
-            playerManager = myStatsManager.GetComponent<CS_PlayerManager>();
+
+            myStatsManager.TryGetComponent<CS_PlayerManager>(out playerManager);
         }
     }
 
     public string WeaponName { get => weaponName; }
     private void Start()
     {
-
+        if(playerManager!= null)
+        {
+            OnHittingEnemy += OnHitStopObject;
+            OnHittingEnemy += ApplyForceToHitObject;
+            OnHittingEnemy += EnableHitParticles;
+            OnHittingEnemy += playerManager.RecoverEnergy;
+        }
     }
 
     #region Logic
+
+    #region On Enable Functions
     private void OnEnable()
     {
         if (myStatsManager != null)
             myStatsManager.HitObjects.Clear();
-
+        ApplySFX();
+    }
+    private void ApplySFX()
+    {
         if (SFXClip != null && AudioManager.instance != null)
             foreach (var audioSource in AudioManager.instance.audioSources)
             {
@@ -56,8 +73,9 @@ public class CS_DamageObject : MonoBehaviour
                 }
 
             }
-
     }
+
+    #endregion
 
     public void OnTriggerEnter(Collider other)
     {
@@ -69,32 +87,50 @@ public class CS_DamageObject : MonoBehaviour
             {
                 if (otherStatsManager.Team != myStatsManager.Team)
                 {
-                    //Apply Hitstop
-                    if (otherStatsManager.TryGetComponent<HitStopHandler>(out HitStopHandler handler))
-                        handler.GetComponent<HitStopHandler>().AnimationStop(0.5f, 0f);
+                    // Apply Damage to enemy.
+                    otherStatsManager.TakeDamage(myStatsManager);
 
-                    otherStatsManager.ApplyDamage(myStatsManager);
-                    if (other != myStatsManager.gameObject)
-                        if (other.TryGetComponent<Rigidbody>(out Rigidbody rb))
-                            other.GetComponent<Rigidbody>().velocity = myStatsManager.GetComponent<Rigidbody>().velocity * 2;
-
-
-                    if (playerManager != null)
-                        foreach (var particle in playerManager.HitEffects)
-                        {
-                            if (particle.gameObject.activeInHierarchy == false)
-                            {
-                                particle.transform.position = other.bounds.center;
-                                particle.gameObject.SetActive(true);
-                                return;
-                            }
-
-                        }
+                    OnHittingEnemy?.Invoke(other);
                 }
             }
 
         }
 
     }
+
+    #region On Hit Functions
+    private void OnHitStopObject(Collider other)
+    {
+        if (other.TryGetComponent(out StatsManager otherStatsManager))
+            if (otherStatsManager.TryGetComponent<HitStopHandler>(out HitStopHandler handler))
+                handler.GetComponent<HitStopHandler>().AnimationStop(0.5f, 0f);
+
+    }
+    private void ApplyForceToHitObject(Collider other)
+    {
+        // Apply Force to enemies on hit.
+        if (other != myStatsManager.gameObject)
+            if (other.TryGetComponent<Rigidbody>(out Rigidbody rb))
+                other.GetComponent<Rigidbody>().velocity = myStatsManager.GetComponent<Rigidbody>().velocity * 2;
+
+    }
+    private void EnableHitParticles(Collider other)
+    {
+        // Apply Particle effect when hitting enemy
+        if (playerManager != null)
+            foreach (var particle in playerManager.HitEffects)
+            {
+                if (particle.gameObject.activeInHierarchy == false)
+                {
+                    particle.transform.position = other.bounds.center;
+                    particle.gameObject.SetActive(true);
+                    return;
+                }
+
+            }
+    }
+    #endregion
+
+
     #endregion
 }
