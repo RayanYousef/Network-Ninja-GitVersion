@@ -19,6 +19,10 @@ public class m_BossMovement : MonoBehaviour , m_interface
     public GameObject[] trails;
     public Animator dragonAnim;
     public float IntervalBetweenBossAttacks = 10;
+    public float AttackDuration;
+    public bool LookAtPlyer = true;
+
+
 
 
     private Animator DragonAnim;
@@ -28,7 +32,6 @@ public class m_BossMovement : MonoBehaviour , m_interface
     private Transform player;
     private Rigidbody rb;
     private NavMeshAgent agent;
-    private bool LookAtPlyer = true;
     private ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
 
 
@@ -69,7 +72,7 @@ public class m_BossMovement : MonoBehaviour , m_interface
     }
     void Update()
     {
-        if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && LookAtPlyer ==true)
+        if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("AttackState") && LookAtPlyer == true)
         {
             LookAtPlayer();
         }
@@ -172,7 +175,7 @@ public class m_BossMovement : MonoBehaviour , m_interface
         dragonAnim.speed = dragonFastSpeed;
         return true;
     }
-    void LookAtPlayer()
+    public void LookAtPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));

@@ -6,6 +6,9 @@ using UnityEngine.AI;
 public class m_BossAttackState : StateMachineBehaviour
 {
     [SerializeField] int AttackRange;
+    m_BossMovement bossMovement;
+    float timer;
+
 
     Transform player;
     private float[] attackOptions = new float[] { 0f, 0.5f, 1f };
@@ -14,17 +17,30 @@ public class m_BossAttackState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObjectsManager.Instance.Player.transform;
+        bossMovement = animator.GetComponent<m_BossMovement>();
+        timer = 0;
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //float distance = Vector3.Distance(player.position, animator.transform.position);
+        float distance = Vector3.Distance(player.position, animator.transform.position);
+        timer += Time.deltaTime;
+        if(distance < AttackRange)
+        {
+            if (timer > bossMovement.AttackDuration)
+            {
+                animator.SetBool("isAttacking", false);
+                timer = 0;
+            }
+        }
+        else
+        {
+            animator.SetBool("isAttacking", false);
+        }
 
-        //if (distance > AttackRange)
-        //{
-        //    animator.SetBool("isAttacking", false);
-        //}
+
     }
 
     public int ChooseDragonAttack()

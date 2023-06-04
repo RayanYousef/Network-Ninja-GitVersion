@@ -34,7 +34,6 @@ public class _Idle : StateMachineBehaviour
 
         if (Vector3.Distance(player.position, RB.transform.position) < chaseRange  && Vector3.Distance(player.position, RB.transform.position) > AttackRange)
         {
-            Debug.Log("CHASE");
             animator.SetBool("IsChasing", true);
         }
 
