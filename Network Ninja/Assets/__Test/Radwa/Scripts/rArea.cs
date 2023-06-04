@@ -55,9 +55,10 @@ public class rArea : MonoBehaviour
         }
     }
     public AreaType AreaType { get => areaType; set => areaType = value; }
+    public EnemySpawner EnemySpawner { get => enemySpawner; set => enemySpawner = value; }
     public CS_ChangeObjectsColour MeshColourChanger { get => meshColourChanger; }
-    public bool IsFlashing { get => isFlashing; set => isFlashing = value; }
     public SpriteRenderer SharingPasswordWarningIcon { get => sharingPasswordWarningIcon; }
+    public bool IsFlashing { get => isFlashing; set => isFlashing = value; }
     public bool PlayerInside {
         get => playerInside;
         set

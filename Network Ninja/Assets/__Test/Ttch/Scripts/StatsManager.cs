@@ -109,6 +109,8 @@ public class StatsManager : MonoBehaviour
         {
             damageObject.MyStatsManager = this;
             damageObject.gameObject.SetActive(false);
+            if(team == CharacterTeam.Player)
+                damageObject.gameObject.layer = 9;
         }
     }
 

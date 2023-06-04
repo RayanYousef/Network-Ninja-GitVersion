@@ -71,13 +71,26 @@ public class rUIManager : MonoBehaviour
         }
     }
 
-    public IEnumerator FadePanel(CanvasGroup panelToFade, float time)
+    public IEnumerator FadeOutPanel(CanvasGroup panelToFade, float time)
     {
         float elapsedTime = 0f;
 
         while (elapsedTime < time)
         {
             panelToFade.alpha = Mathf.Lerp(1, 0, (elapsedTime / time));
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+    }
+    
+    public IEnumerator FadeInPanel(CanvasGroup panelToFade, float time)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < time)
+        {
+            panelToFade.alpha = Mathf.Lerp(0, 1, (elapsedTime / time));
             elapsedTime += Time.deltaTime;
 
             yield return null;
