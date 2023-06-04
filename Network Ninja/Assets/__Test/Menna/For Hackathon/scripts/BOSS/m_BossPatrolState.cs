@@ -11,7 +11,7 @@ public class m_BossPatrolState : StateMachineBehaviour
     Transform Boss;
     bool isChasing = false;
     NavMeshAgent agent;
-    m_BossMovement bossMovement;
+    m_BossManager bossMovement;
 
 
     public float chaseRange;
@@ -32,7 +32,7 @@ public class m_BossPatrolState : StateMachineBehaviour
 
         player = GameObjectsManager.Instance.Player.transform;
         Boss = GameObjectsManager.Instance.Boss.transform;
-        bossMovement = animator.GetComponent<m_BossMovement>();
+        bossMovement = animator.GetComponent<m_BossManager>();
 
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = 1.5f;

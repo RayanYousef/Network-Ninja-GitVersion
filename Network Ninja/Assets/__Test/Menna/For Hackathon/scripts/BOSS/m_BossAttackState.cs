@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class m_BossAttackState : StateMachineBehaviour
 {
     [SerializeField] int AttackRange;
-    m_BossMovement bossMovement;
+    m_BossManager bossMovement;
     float timer;
 
 
@@ -17,7 +17,7 @@ public class m_BossAttackState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObjectsManager.Instance.Player.transform;
-        bossMovement = animator.GetComponent<m_BossMovement>();
+        bossMovement = animator.GetComponent<m_BossManager>();
         timer = 0;
 
     }

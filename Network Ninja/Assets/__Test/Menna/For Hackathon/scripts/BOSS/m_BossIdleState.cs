@@ -9,7 +9,7 @@ public class m_BossIdleState : StateMachineBehaviour
 
      Transform player;
      float timer;
-    m_BossMovement bossMovement;
+    m_BossManager bossMovement;
 
 
 
@@ -18,7 +18,7 @@ public class m_BossIdleState : StateMachineBehaviour
     {
 
         player = GameObjectsManager.Instance.Player.transform;
-        bossMovement = animator.GetComponent<m_BossMovement>();
+        bossMovement = animator.GetComponent<m_BossManager>();
         timer =0;
 
     }

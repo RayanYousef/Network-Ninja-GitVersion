@@ -11,7 +11,7 @@ using UnityEngine.AI;
 
 
 
-public class m_BossMovement : MonoBehaviour , m_interface
+public class m_BossManager : MonoBehaviour , m_interface
 {
 
 
