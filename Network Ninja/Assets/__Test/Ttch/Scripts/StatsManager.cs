@@ -22,6 +22,8 @@ public class StatsManager : MonoBehaviour
 
     [Header ("UI Elements")]
     [SerializeField] Slider HealthBar;
+    [SerializeField] Slider EnergyBar;
+
 
     [Header ("Events")]
     public UnityEvent OnTakingDamage;
@@ -66,6 +68,12 @@ public class StatsManager : MonoBehaviour
         {
             HealthBar.maxValue = myStats.MaxHealth;
             HealthBar.value = myStats.CurrentHealth;
+        }
+
+        if (EnergyBar != null)
+        {
+            EnergyBar.maxValue = myStats.DefaultEnergy;
+            EnergyBar.value = myStats.Energy;
         }
 
     }
@@ -208,17 +216,6 @@ public class StatsManager : MonoBehaviour
         myStats.CurrentHealth += value;
         HealthBar.value = myStats.CurrentHealth;
     }
-
-    public void IncreaseHealth(float amount)
-    {
-        myStats.CurrentHealth += amount;
-    }
-
-    public void IncreaseEnergy(float amount)
-    {
-        myStats.Energy += amount;
-    }
-
     public void TakeDamage(StatsManager AttackerStats)
     {
         float dmg = AttackerStats.CalculateAttackStrength() - this.GetDefense();
@@ -291,14 +288,18 @@ public class StatsManager : MonoBehaviour
     public void BuffEnergy(float changeValue = 1.3f)
     {
         myStats.Energy += changeValue;
+        EnergyBar.value = myStats.Energy;
+
     }
     public void DebuffEnergy(float changeValue = 1.2f)
     {
         myStats.Energy -= changeValue;
+        EnergyBar.value = myStats.Energy;
     }
     public void ResetEnergy()
     {
         myStats.Energy = myStats.DefaultEnergy;
+        EnergyBar.value = myStats.Energy;
     }
     public float GetEnergy()
     {
