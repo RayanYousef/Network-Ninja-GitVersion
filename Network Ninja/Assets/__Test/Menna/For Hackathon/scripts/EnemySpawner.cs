@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Big Boss")]
     public GameObject BigBossPrefab;
+    public GameObject cardPrefab;
   
     [Header("Enemies")]
     public GameObject enemyPrefab;
@@ -151,6 +152,12 @@ public class EnemySpawner : MonoBehaviour
         GameObject BigBoss = Instantiate(BigBossPrefab, this.transform.position, Quaternion.identity);
         BigBoss.transform.parent = this.transform;
 
+    }
+    
+    public void SpawnCard()
+    {
+        GameObject BigBoss = Instantiate(cardPrefab, this.transform.position, Quaternion.identity);
+        //BigBoss.transform.parent = this.transform;
     }
 
 
@@ -300,7 +307,7 @@ public class EnemySpawner : MonoBehaviour
                 /// spawn big boss
                 /// in case of emergency... invoke winning event here
                 //OnBigBossKilled?.Invoke();
-                StartCoroutine(SpawnBossCoroutine());
+                StartCoroutine(SpawnCardCoroutine());
                 // GameManager.Instance.EndStage(true);
             }
             else
@@ -311,13 +318,21 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnBossCoroutine()
+    public IEnumerator SpawnBossCoroutine()
+    {
+        yield return new WaitForSeconds(delayBeforeSpawnBoss / 2);
+
+        // Spawn the boss
+        SpawnBigBoss();
+    }
+    
+    IEnumerator SpawnCardCoroutine()
     {
         GameManager.Instance.BossEntered = true;
         yield return new WaitForSeconds(delayBeforeSpawnBoss);
 
-        // Spawn the boss
-        SpawnBigBoss();
+        // Spawn the card
+        SpawnCard();
 
     }
     #region //trials

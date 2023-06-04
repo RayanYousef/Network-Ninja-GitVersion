@@ -368,13 +368,13 @@ public class CS_PlayerManager : MonoBehaviour
         {
             switch (otherStatsManager.Stats.CurrentHealth)
             {
-                case 0:
-                    otherStatsManager.IncreaseEnergy(energyRecoveryOnKill);
-                    break;
+                //case 0:
+                //    otherStatsManager.IncreaseEnergy(energyRecoveryOnKill);
+                //    break;
 
-                default:
-                    otherStatsManager.IncreaseEnergy(energyRecoveryOnHit);
-                    break;
+                //default:
+                //    otherStatsManager.IncreaseEnergy(energyRecoveryOnHit);
+                //    break;
 
             }
         }

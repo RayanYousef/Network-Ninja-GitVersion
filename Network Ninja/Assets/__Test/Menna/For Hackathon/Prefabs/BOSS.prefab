@@ -91780,6 +91780,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 7411315700388573817}
   hitObjects: []
+  damageObjects: []
+  HealthBar: {fileID: 1087477201389731707}
+  OnTakingDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnApplyingDamage:
+    m_PersistentCalls:
+      m_Calls: []
   myStats:
     OnHealthUpdated:
       m_PersistentCalls:
@@ -91815,24 +91823,8 @@ MonoBehaviour:
     luck: 1
     defaultEnergy: 0
     energy: 0
-  Team: 2
-  damageObjects: []
-  HealthBar: {fileID: 1087477201389731707}
-  onTakingDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7645741682736140076}
-        m_TargetAssemblyTypeName: m_BossMovement, Assembly-CSharp
-        m_MethodName: bleed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  team: 2
+  targetable: 0
   difficulty: 1
   maxHealthDifficultyMultiplier: 0
   defenseDifficultyMultiplier: 0

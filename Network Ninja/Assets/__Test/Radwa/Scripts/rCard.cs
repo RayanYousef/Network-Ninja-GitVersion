@@ -72,8 +72,8 @@ public class rCard : MonoBehaviour
         // spawn big boss
         rAreasManager.Instance.CurrentArea.EnemySpawner.StartCoroutine(nameof(rAreasManager.Instance.CurrentArea.EnemySpawner.SpawnBossCoroutine));
         
-        // hide card
-        gameObject.SetActive(false);
+        // hide card parent
+        gameObject.transform.parent.gameObject.SetActive(false);
     }
 
     private void ShowCursorAndStopInputs(bool value)

@@ -955,6 +955,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 5305931202414142652}
   hitObjects: []
+  damageObjects: []
+  HealthBar: {fileID: 5905984096174248380}
+  OnTakingDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnApplyingDamage:
+    m_PersistentCalls:
+      m_Calls: []
   myStats:
     OnHealthUpdated:
       m_PersistentCalls:
@@ -983,6 +991,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    OnEnergyUpdated:
+      m_PersistentCalls:
+        m_Calls: []
     maxHealth: 400
     currentHealth: 400
     defaultDefense: 0
@@ -997,14 +1008,17 @@ MonoBehaviour:
     cooldownReduction: 1
     defaultLuck: 1
     luck: 1
-  Team: 2
-  damageObjects: []
-  HealthBar: {fileID: 5905984096174248380}
-  onTakingDamage:
-    m_PersistentCalls:
-      m_Calls: []
+    defaultEnergy: 0
+    energy: 0
+  team: 2
+  targetable: 0
   difficulty: 1
-  difficultyMultiplier: 0
+  maxHealthDifficultyMultiplier: 0
+  defenseDifficultyMultiplier: 0
+  atkDifficultyMultiplier: 0
+  atkSpeedDifficultyMultiplier: 0
+  moveSpeedDifficultyMultiplier: 0
+  cdrDifficultyMultiplier: 0
 --- !u!114 &8593837235445398087
 MonoBehaviour:
   m_ObjectHideFlags: 0
