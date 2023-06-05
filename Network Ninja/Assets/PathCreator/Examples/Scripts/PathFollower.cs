@@ -6,10 +6,23 @@ namespace PathCreation.Examples
     // Depending on the end of path instruction, will either loop, reverse, or stop at the end of the path.
     public class PathFollower : MonoBehaviour
     {
-        public PathCreator pathCreator;
+        private PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
         float distanceTravelled;
+
+        public PathCreator PathCreator
+        {
+            get => pathCreator;
+            set
+            {
+                pathCreator = value;
+                if(pathCreator != null)
+                {
+                    transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                }
+            }
+        }
 
         void Start() {
             if (pathCreator != null)
@@ -23,11 +36,20 @@ namespace PathCreation.Examples
         {
             if (pathCreator != null)
             {
-                distanceTravelled += speed * Time.deltaTime;
-                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                
+                    distanceTravelled += speed * Time.deltaTime;
+                    transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+                
             }
         }
+
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    if(other.GetComponentInParent<PathCreator>() != null)
+        //    {
+        //        pathCreator = other.GetComponentInParent<PathCreator>();
+        //    }
+        //}
 
         // If the path changes during the game, update the distance travelled so that the follower's position on the new path
         // is as close as possible to its position on the old path
