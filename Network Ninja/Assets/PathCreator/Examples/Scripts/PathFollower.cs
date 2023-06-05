@@ -43,13 +43,14 @@ namespace PathCreation.Examples
             }
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if(other.GetComponentInParent<PathCreator>() != null)
-            {
-                pathCreator = other.GetComponentInParent<PathCreator>();
-            }
-        }
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    if(other.GetComponentInParent<PathCreator>() != null)
+        //    {
+        //        pathCreator = other.GetComponentInParent<PathCreator>();
+        //    }
+        //}
+
         // If the path changes during the game, update the distance travelled so that the follower's position on the new path
         // is as close as possible to its position on the old path
         void OnPathChanged() {
