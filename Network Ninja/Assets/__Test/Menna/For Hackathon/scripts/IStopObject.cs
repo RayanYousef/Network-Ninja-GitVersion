@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface m_interface 
+public interface IStopObject 
 {
-    void MovementAndRotation(bool value);
+    void ObjectMovementEnabled(bool value);
 
 }
