@@ -5,7 +5,7 @@ using TMPro;
 
 public class PathController : MonoBehaviour
 {
-    private GameObject player;
+    [SerializeField] GameObject player;
     public Transform startPoint;
     public Transform endPoint;
 
@@ -22,19 +22,40 @@ public class PathController : MonoBehaviour
 
 
     public bool reversePath = false;
-    private bool playerIsOnPath = false;
+    [SerializeField] private bool playerIsOnPath = false;
 
-    private int currentWayPointIndex = 0;
+    public int currentWayPointIndex = 0;
 
     public float distance;
     public float speed = 50f;
 
+    public bool PlayerIsOnPath { get => playerIsOnPath;
+        set
+        {
+            playerIsOnPath = value;
+            switch (value)
+            {
+                case true:
+                    player.GetComponent<CS_PlayerManager>().ControllerState(false);
+                   // player.GetComponent<CS_PlayerManager>().ColliderState(false);
 
+                    break;
+                case false:
+                    player.GetComponent<CS_PlayerManager>().ControllerState(true);
+                   // player.GetComponent<CS_PlayerManager>().ColliderState(true);
+
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
     private void Start()
     {
         player = GameObjectsManager.Instance.Player;
         brain = GameObjectsManager.Instance.CameraBrain;
     }
+
 
     void FixedUpdate()
     {
@@ -72,7 +93,7 @@ public class PathController : MonoBehaviour
             {
                 currentWayPointIndex += reversePath ? -1 : 1;
             }
-            else playerIsOnPath = false;
+            else PlayerIsOnPath = false;
             foreach (CinemachineVirtualCamera cam in WaypointCameras)
             {
                 brain.m_DefaultBlend.m_Time = defaultblendtime;
@@ -80,7 +101,8 @@ public class PathController : MonoBehaviour
             }
 
         }
-
+        if (PlayerIsOnPath == true && (currentWayPointIndex == -1 || currentWayPointIndex == wayPoints.Count))
+            PlayerIsOnPath = false;
         if(currentWayPointIndex<0)
         return wayPoints[0].position;
         else if(currentWayPointIndex > wayPoints.Count - 1) return wayPoints[wayPoints.Count - 1].position;
@@ -107,7 +129,7 @@ public class PathController : MonoBehaviour
                 default:
                     break;
             }
-            playerIsOnPath = true;
+            PlayerIsOnPath = true;
             currentWayPointIndex = reversePath ? wayPoints.Count - 1 : 0;
         
     }
