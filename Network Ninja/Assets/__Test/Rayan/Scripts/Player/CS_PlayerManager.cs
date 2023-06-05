@@ -142,6 +142,7 @@ public class CS_PlayerManager : MonoBehaviour
         //    Cursor.lockState = CursorLockMode.Locked;
 
     }
+
     private void FixedUpdate()
     {
         if (ultimateTimer < ultimateCoolDown && ultimateOn == false)
@@ -156,7 +157,7 @@ public class CS_PlayerManager : MonoBehaviour
     }
     public void LostGameHealthZero(float value)
     {
-        if (value <= 0)
+        if (value <= 0 && GameManager.Instance.CurrentGameState == GameState.InProgress)
             GameManager.Instance.CurrentGameState = GameState.Lost;
     }
 
@@ -389,6 +390,11 @@ public class CS_PlayerManager : MonoBehaviour
     {
         this.enabled = value;
         GetComponent<Collider>().enabled = value;
+    }
+
+    public void GravityState(bool value)
+    {
+        MoveController.Gravity= value;
     }
 
     #endregion
