@@ -287,11 +287,16 @@ public class StatsManager : MonoBehaviour
     #endregion
 
     #region EnergyFunctions
-    public void AddtoEnergy(float changeValue = 20f)
+    public void AddtoEnergy(float changeValue = 1.3f)
     {
         myStats.Energy += changeValue;
         EnergyBar.value = myStats.Energy;
 
+    }
+    public void DebuffEnergy(float changeValue = 1.2f)
+    {
+        myStats.Energy -= changeValue;
+        EnergyBar.value = myStats.Energy;
     }
     public void ResetEnergy()
     {
