@@ -23,6 +23,7 @@ public class CS_MovementController : MonoBehaviour
     [Header("Gravity Variables")]
     [SerializeField] float gravityAccumiliationForce;
     [SerializeField] float maxGravity,minGravity;
+    [SerializeField] bool gravity;
 
     [Header("Character Movement and Rotation Speed")]
     [SerializeField] float movementSpeed;
@@ -38,6 +39,7 @@ public class CS_MovementController : MonoBehaviour
     public float DashDuration { get => dashDuration; }
     public float AppliedGravityForce { get => appliedGravityForce; set => appliedGravityForce = value; }
     public CS_PlayerManager PlayerManager { get => playerManager; set => playerManager = value; }
+    public bool Gravity { get => gravity; set => gravity = value; }
 
     private void Awake()
     {
@@ -103,9 +105,12 @@ public class CS_MovementController : MonoBehaviour
 
     public void FallingUpdate()
     {
-        appliedGravityForce *=gravityAccumiliationForce;
-        appliedGravityForce = Mathf.Clamp(appliedGravityForce,minGravity,maxGravity);
-        rb.AddForce(-transform.up * appliedGravityForce * Time.deltaTime, ForceMode.Impulse);
+        if (Gravity)
+        {
+            appliedGravityForce *= gravityAccumiliationForce;
+            appliedGravityForce = Mathf.Clamp(appliedGravityForce, minGravity, maxGravity);
+            rb.AddForce(-transform.up * appliedGravityForce * Time.deltaTime, ForceMode.Impulse);
+        }
     }
 
     #region Movement and Rotation
