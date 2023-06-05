@@ -24,7 +24,7 @@ public class BreakableObject : MonoBehaviour
                         break;
 
                     case StatToChange.Energy:
-                        dmgObject.MyStatsManager.BuffEnergy();
+                        dmgObject.MyStatsManager.SetEnergy();
                         break;
 
                     case StatToChange.MovementSpeed:
