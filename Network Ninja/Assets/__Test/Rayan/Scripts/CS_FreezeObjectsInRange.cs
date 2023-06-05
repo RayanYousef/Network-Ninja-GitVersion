@@ -8,13 +8,12 @@ public class CS_FreezeObjectsInRange : MonoBehaviour
     [SerializeField] List<Transform> objectsInRange;
 
 
-    public void ObjectsStopped(bool value)
+    public void ObjectsMovementEnabled(bool value)
     {
         foreach(var enemy in objectsInRange)
         {
-            enemy.TryGetComponent<m_interface>(out m_interface enemySlowInterface);
-            enemySlowInterface.MovementAndRotation(!value);
-
+            enemy.TryGetComponent<IStopObject>(out IStopObject enemySlowInterface);
+            enemySlowInterface.ObjectMovementEnabled(value);
         }
 
     }
@@ -23,24 +22,24 @@ public class CS_FreezeObjectsInRange : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.TryGetComponent<m_interface>(out m_interface slowInterface)
+        if (other.TryGetComponent<IStopObject>(out IStopObject slowInterface)
             && !objectsInRange.Contains(other.transform))
         {
             objectsInRange.Add(other.transform);
 
             if (_playerManager.UltimateOn)
-                slowInterface.MovementAndRotation(false);
+                slowInterface.ObjectMovementEnabled(false);
         }
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<m_interface>(out m_interface slowInterface)
+        if (other.TryGetComponent<IStopObject>(out IStopObject slowInterface)
             && !objectsInRange.Contains(other.transform))
         {
             objectsInRange.Remove(other.transform);
-            slowInterface.MovementAndRotation(true);
+            slowInterface.ObjectMovementEnabled(true);
 
 
         }

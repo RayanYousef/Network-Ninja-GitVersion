@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class m_EnemyManager : MonoBehaviour , m_interface
+public class m_EnemyManager : MonoBehaviour , IStopObject
 {
     [SerializeField] float frictionCoefficient = 2.0f;
 
@@ -114,7 +114,7 @@ public class m_EnemyManager : MonoBehaviour , m_interface
 
     }
 
-    public void MovementAndRotation(bool value)
+    public void ObjectMovementEnabled(bool value)
     {
         agent.isStopped = !value;
         LookAtPlyer = value;

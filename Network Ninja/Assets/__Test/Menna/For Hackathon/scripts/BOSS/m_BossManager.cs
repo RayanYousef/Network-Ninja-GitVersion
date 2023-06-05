@@ -11,7 +11,7 @@ using UnityEngine.AI;
 
 
 
-public class m_BossManager : MonoBehaviour , m_interface
+public class m_BossManager : MonoBehaviour , IStopObject
 {
 
 
@@ -224,7 +224,7 @@ public class m_BossManager : MonoBehaviour , m_interface
             StartCoroutine(DoFade());
         }
     }
-    public void MovementAndRotation(bool value)
+    public void ObjectMovementEnabled(bool value)
     {
         agent.isStopped = !value;
         LookAtPlyer = value;
