@@ -21,6 +21,7 @@ public class CS_PlayerManager : MonoBehaviour
     [SerializeField] CS_AnimatorController animController;
     [SerializeField] CS_LookAtClosestTarget lookAtClosestTarget;
     [SerializeField] CS_CameraManager cameraManager;
+    [SerializeField] CS_FreezeObjectsInRange _freezeObjectsInRange;
     [SerializeField] StatsManager pStatsManager;
     [SerializeField] Rigidbody rb;
     [SerializeField] PlayerInput PlayerInputs;
@@ -28,6 +29,7 @@ public class CS_PlayerManager : MonoBehaviour
 
     [Header("Ultimate")]
     [SerializeField] bool ultimateOn;
+    [SerializeField] float ultimateAttenuationRate;
     [SerializeField] float energyRecoveryOnHit, energyRecoveryOnKill, ultimateCoolDown, ultimateAttackSpeed;
 
     [Header("Other Variables")]
@@ -59,8 +61,8 @@ public class CS_PlayerManager : MonoBehaviour
                     anim.SetBool(animController.B_Ultimate, value);
                     anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
                     cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
-                    // Call Menna Script to Enable Slow Motion
-                    //cameraManager.SlowSurroundingEnemies();
+                    if(_freezeObjectsInRange!=null)
+                    _freezeObjectsInRange.ObjectsStopped(true);
                     if (AudioManager.instance.BossMusic != null)
                         AudioManager.instance.BossMusic.InCombat = value;
                     break;
@@ -69,8 +71,8 @@ public class CS_PlayerManager : MonoBehaviour
                     anim.SetBool(animController.B_Ultimate, value);
                     anim.SetFloat(animController.F_animSpeed, 0.9f);
                     cameraManager.SwitchCamerasBasedOnLockState();
-                    //cameraManager.NormalizeSpeedOfSurroundingEnemies();
-                    anim.SetBool(animController.B_Attacking, value);
+                    if (_freezeObjectsInRange != null)
+                        _freezeObjectsInRange.ObjectsStopped(false);
                     if (AudioManager.instance.BossMusic != null)
                         AudioManager.instance.BossMusic.InCombat = value;
                     break;
@@ -96,6 +98,7 @@ public class CS_PlayerManager : MonoBehaviour
         moveController = PlayerTopMostParent.GetComponentInChildren<CS_MovementController>();
         animController = PlayerTopMostParent.GetComponentInChildren<CS_AnimatorController>();
         lookAtClosestTarget = PlayerTopMostParent.GetComponentInChildren<CS_LookAtClosestTarget>();
+        _freezeObjectsInRange = PlayerTopMostParent.GetComponentInChildren<CS_FreezeObjectsInRange>();
 
         // Camera Manager
         if (cameraManager == null)
@@ -109,7 +112,6 @@ public class CS_PlayerManager : MonoBehaviour
         // Get Player Inputs
         PlayerInputs = GetComponent<PlayerInput>();
 
-
         HitEffects = PlayerTopMostParent.GetComponentsInChildren<CS_HitEffect>();
 
 
@@ -117,6 +119,9 @@ public class CS_PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        if (GameObjectsManager.Instance!=null)
+            GameObjectsManager.Instance.Player = gameObject;
+
         pStatsManager.Stats.OnHealthUpdated.AddListener(LostGameHealthZero);
         pStatsManager.Stats.OnEnergyUpdated.AddListener(DisableUltimate);
     }
@@ -146,7 +151,7 @@ public class CS_PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
         if (ultimateOn == true)
-            pStatsManager.AddtoEnergy(-Time.deltaTime * 2);
+            pStatsManager.AddtoEnergy(-Time.deltaTime * ultimateAttenuationRate);
 
     }
 
@@ -364,16 +369,16 @@ public class CS_PlayerManager : MonoBehaviour
     {
         other.TryGetComponent<StatsManager>(out StatsManager otherStatsManager);
 
-        if (otherStatsManager != null)
+        if (otherStatsManager != null && ultimateOn==false)
         {
             switch (otherStatsManager.Stats.CurrentHealth)
             {
                 case 0:
-                    otherStatsManager.AddtoEnergy(energyRecoveryOnKill);
+                    pStatsManager.AddtoEnergy(energyRecoveryOnKill);
                     break;
 
                 default:
-                    otherStatsManager.AddtoEnergy(energyRecoveryOnHit);
+                    pStatsManager.AddtoEnergy(energyRecoveryOnHit);
                     break;
 
             }
