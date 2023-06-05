@@ -26,9 +26,6 @@ public class CS_PlayerManager : MonoBehaviour
     [SerializeField] PlayerInput PlayerInputs;
     [SerializeField] FixedJoystick joyStick;
 
-    [Header("Energy")]
-    [SerializeField] Slider EnergySlider;
-
     [Header("Ultimate")]
     [SerializeField] bool ultimateOn;
     [SerializeField] float energyRecoveryOnHit, energyRecoveryOnKill, ultimateCoolDown, ultimateAttackSpeed;
@@ -93,6 +90,7 @@ public class CS_PlayerManager : MonoBehaviour
         // Stats Manager
         if (pStatsManager == null) pStatsManager = GetComponentInChildren<StatsManager>();
 
+        // Get components
         anim = PlayerTopMostParent.GetComponentInChildren<Animator>();
         moveController = PlayerTopMostParent.GetComponentInChildren<CS_MovementController>();
         animController = PlayerTopMostParent.GetComponentInChildren<CS_AnimatorController>();
@@ -103,10 +101,11 @@ public class CS_PlayerManager : MonoBehaviour
             cameraManager = PlayerTopMostParent.GetComponentInChildren<CS_CameraManager>();
         cameraManager.PlayerManager = this;
 
+        // Get Rigidbody
         rb = PlayerTopMostParent.GetComponentInChildren<Rigidbody>();
         moveController.PlayerManager = this;
         animController.PlayerManager = this;
-
+        // Get Player Inputs
         PlayerInputs = GetComponent<PlayerInput>();
 
 
@@ -118,7 +117,7 @@ public class CS_PlayerManager : MonoBehaviour
     private void Start()
     {
         pStatsManager.Stats.OnHealthUpdated.AddListener(LostGameHealthZero);
-
+        pStatsManager.Stats.OnEnergyUpdated.AddListener(DisableUltimate);
     }
 
     private void Update()
@@ -145,21 +144,12 @@ public class CS_PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (ultimateTimer < ultimateCoolDown && ultimateOn == false)
-            ultimateTimer += Time.deltaTime;
-        else if (ultimateOn == true)
+        if (ultimateOn == true)
             ultimateTimer -= Time.deltaTime * 2;
 
-        if (ultimateTimer < 0)
-            UltimateOn = false;
-        if(EnergySlider!= null)
-        EnergySlider.value = ultimateTimer / ultimateCoolDown;
     }
-    public void LostGameHealthZero(float value)
-    {
-        if (value <= 0 && GameManager.Instance.CurrentGameState == GameState.InProgress)
-            GameManager.Instance.CurrentGameState = GameState.Lost;
-    }
+
+ 
 
     #region Animator States
     public void OnStateEnter(CharacterState enteredState)
@@ -361,6 +351,11 @@ public class CS_PlayerManager : MonoBehaviour
 
     #region Public Functions
 
+    public void LostGameHealthZero(float value)
+    {
+        if (value <= 0 && GameManager.Instance.CurrentGameState == GameState.InProgress)
+            GameManager.Instance.CurrentGameState = GameState.Lost;
+    }
     public void RecoverEnergy(Collider other)
     {
         other.TryGetComponent<StatsManager>(out StatsManager otherStatsManager);
@@ -369,17 +364,23 @@ public class CS_PlayerManager : MonoBehaviour
         {
             switch (otherStatsManager.Stats.CurrentHealth)
             {
-                //case 0:
-                //    otherStatsManager.IncreaseEnergy(energyRecoveryOnKill);
-                //    break;
+                case 0:
+                    otherStatsManager.BuffEnergy(energyRecoveryOnKill);
+                    break;
 
-                //default:
-                //    otherStatsManager.IncreaseEnergy(energyRecoveryOnHit);
-                //    break;
+                default:
+                    otherStatsManager.BuffEnergy(energyRecoveryOnHit);
+                    break;
 
             }
         }
 
+    }
+
+    public void DisableUltimate(float energyValue)
+    {
+        if (energyValue == 0)
+            UltimateOn = false;
     }
 
     public void ControllerState(bool value)
