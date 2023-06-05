@@ -92,11 +92,18 @@ public class StatsManager : MonoBehaviour
         myStats.AtkSpeed = myStats.DefaultAtkSpeed;
         myStats.MoveSpeed = myStats.DefaultMoveSpeed;
         myStats.CooldownReduction = myStats.DefaultCooldownReduction;
+        myStats.Energy = myStats.DefaultEnergy;
 
         if (HealthBar != null)
         {
             HealthBar.maxValue = myStats.MaxHealth;
             HealthBar.value = myStats.CurrentHealth;
+        }
+
+        if (EnergyBar != null)
+        {
+            EnergyBar.maxValue = myStats.DefaultEnergy;
+            EnergyBar.value = myStats.Energy;
         }
 
         // Set Parent to this if parent field was null
@@ -291,7 +298,7 @@ public class StatsManager : MonoBehaviour
     {
         myStats.Energy += changeValue;
         if(EnergyBar!=null)
-        EnergyBar.value = myStats.Energy;
+            EnergyBar.value = myStats.Energy;
 
     }
     public void DebuffEnergy(float changeValue = 1.2f)
