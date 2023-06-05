@@ -54626,9 +54626,9 @@ MonoBehaviour:
     cooldownReduction: 1
     defaultLuck: 1
     luck: 1
-    defaultEnergy: 0
+    defaultEnergy: 100
     energy: 0
-  team: 0
+  team: 1
   targetable: 0
   difficulty: 1
   maxHealthDifficultyMultiplier: 0
@@ -54822,15 +54822,17 @@ MonoBehaviour:
   animController: {fileID: 0}
   lookAtClosestTarget: {fileID: 0}
   cameraManager: {fileID: 0}
+  _freezeObjectsInRange: {fileID: 0}
   pStatsManager: {fileID: 0}
   rb: {fileID: 0}
   PlayerInputs: {fileID: 0}
   joyStick: {fileID: 0}
   ultimateOn: 0
-  energyRecoveryOnHit: 5
-  energyRecoveryOnKill: 10
+  ultimateAttenuationRate: 3
+  energyRecoveryOnHit: 1
+  energyRecoveryOnKill: 2
   ultimateCoolDown: 30
-  ultimateAttackSpeed: 1.3
+  ultimateAttackSpeed: 1.1
   drag: 10
   clicksIntervalTime: 0.2
   currentState: 0
