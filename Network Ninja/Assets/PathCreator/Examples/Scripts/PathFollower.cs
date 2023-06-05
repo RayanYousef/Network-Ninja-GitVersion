@@ -34,13 +34,13 @@ namespace PathCreation.Examples
 
         void Update()
         {
-            if (pathCreator != null)
-            {
-                
-                    distanceTravelled += speed * Time.deltaTime;
-                    transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-                
-            }
+            //if (Input.GetKeyDown(KeyCode.E))
+            //{
+                if (pathCreator != null)
+                {
+                    MovePlayerOnPath();
+                }
+            //}
         }
 
         //private void OnTriggerEnter(Collider other)
@@ -51,6 +51,22 @@ namespace PathCreation.Examples
         //    }
         //}
 
+        public void GetCurrentPath(PathCreator currentPath)
+        {
+            pathCreator = currentPath;
+        }
+
+        public void EmptyPath()
+        {
+            pathCreator = null;
+        }
+        private void MovePlayerOnPath()
+        {
+
+                distanceTravelled += speed * Time.deltaTime;
+                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+
+        }
         // If the path changes during the game, update the distance travelled so that the follower's position on the new path
         // is as close as possible to its position on the old path
         void OnPathChanged() {
