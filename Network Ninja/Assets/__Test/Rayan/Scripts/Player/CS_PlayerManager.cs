@@ -365,11 +365,11 @@ public class CS_PlayerManager : MonoBehaviour
             switch (otherStatsManager.Stats.CurrentHealth)
             {
                 case 0:
-                    otherStatsManager.BuffEnergy(energyRecoveryOnKill);
+                    otherStatsManager.AddtoEnergy(energyRecoveryOnKill);
                     break;
 
                 default:
-                    otherStatsManager.BuffEnergy(energyRecoveryOnHit);
+                    otherStatsManager.AddtoEnergy(energyRecoveryOnHit);
                     break;
 
             }
