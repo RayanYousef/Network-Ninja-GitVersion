@@ -16,7 +16,7 @@ public class PathController : MonoBehaviour
     private CinemachineBrain brain;
 
     //List of cameras that change the view based on waypoint
-    public List<CinemachineVirtualCamera> WaypointCameras = new List<CinemachineVirtualCamera>();
+    //public List<CinemachineVirtualCamera> WaypointCameras = new List<CinemachineVirtualCamera>();
 
     public float blendtime = 0.5f;
 
@@ -36,13 +36,15 @@ public class PathController : MonoBehaviour
             switch (value)
             {
                 case true:
-                    player.GetComponent<CS_PlayerManager>().ControllerState(false);
-                   // player.GetComponent<CS_PlayerManager>().ColliderState(false);
+                    //player.GetComponent<CS_PlayerManager>().ControllerState(false);
+                    // player.GetComponent<CS_PlayerManager>().ColliderState(false);
+                    player.GetComponent<CS_PlayerManager>().GravityState(false);
 
                     break;
                 case false:
-                    player.GetComponent<CS_PlayerManager>().ControllerState(true);
-                   // player.GetComponent<CS_PlayerManager>().ColliderState(true);
+                    //player.GetComponent<CS_PlayerManager>().ControllerState(true);
+                    // player.GetComponent<CS_PlayerManager>().ColliderState(true);
+                    player.GetComponent<CS_PlayerManager>().GravityState(true);
 
                     break;
                 default:
@@ -81,12 +83,16 @@ public class PathController : MonoBehaviour
     {
         Transform currentWayPoint = wayPoints[currentWayPointIndex];
         distance = Vector3.Distance(player.transform.position, currentWayPoint.position);
-        CinemachineVirtualCamera currentCamera = WaypointCameras[currentWayPointIndex];
+        //if (WaypointCameras != null)
+        //{
+        //    CinemachineVirtualCamera currentCamera = WaypointCameras[currentWayPointIndex];
 
-        //Enable camera and remove blend time or instantaneous change
-        currentCamera.enabled = true;
-        brain.m_DefaultBlend.m_Time = blendtime;
 
+        //    //Enable camera and remove blend time or instantaneous change
+        //    currentCamera.enabled = true;
+        //
+        //brain.m_DefaultBlend.m_Time = blendtime;
+            //}
         if (Vector3.Distance(player.transform.position, currentWayPoint.position) < 2)
         {
             if (currentWayPointIndex >= 0 && currentWayPointIndex <= wayPoints.Count-1)
@@ -94,11 +100,11 @@ public class PathController : MonoBehaviour
                 currentWayPointIndex += reversePath ? -1 : 1;
             }
             else PlayerIsOnPath = false;
-            foreach (CinemachineVirtualCamera cam in WaypointCameras)
-            {
-                brain.m_DefaultBlend.m_Time = defaultblendtime;
-                cam.enabled = false;
-            }
+            //foreach (CinemachineVirtualCamera cam in WaypointCameras)
+            //{
+            //    brain.m_DefaultBlend.m_Time = defaultblendtime;
+            //    cam.enabled = false;
+            //}
 
         }
         if (PlayerIsOnPath == true && (currentWayPointIndex == -1 || currentWayPointIndex == wayPoints.Count))
