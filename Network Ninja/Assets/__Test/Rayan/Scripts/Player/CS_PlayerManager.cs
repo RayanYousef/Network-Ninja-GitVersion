@@ -301,8 +301,11 @@ public class CS_PlayerManager : MonoBehaviour
 
     public void ActivateUltimate(bool value)
     {
-        if (ultimateTimer > ultimateCoolDown && value == true && ultimateOn == false)
+        
+        if (value == true && ultimateOn == false && pStatsManager.Stats.Energy>0)
             UltimateOn = true;
+        else if(value == true && ultimateOn) 
+            UltimateOn = false;
     }
 
     #endregion

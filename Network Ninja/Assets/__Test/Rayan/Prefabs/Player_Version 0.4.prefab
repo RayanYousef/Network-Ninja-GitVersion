@@ -52120,7 +52120,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5029212637853818776}
-  m_LocalRotation: {x: 0.000000006501346, y: 0.00000010402154, z: -6.7628e-16, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.4, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -52463,9 +52463,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5029212638114798010}
-  m_LocalRotation: {x: 0.0000000070479005, y: 0.00000011276641, z: -7.947664e-16,
-    w: 1}
-  m_LocalPosition: {x: 0.8499985, y: 1.3600001, z: -1.2799997}
+  m_LocalRotation: {x: -0.000000002289009, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.85000014, y: 1.36, z: -1.2800001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -53787,7 +53786,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5029212639057935445}
-  m_LocalRotation: {x: 0.000000006501346, y: 0.00000010402154, z: -6.7628e-16, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.4, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -54597,8 +54596,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 5029212637801860295}
   hitObjects: []
+  damageObjects: []
+  HealthBar: {fileID: 0}
+  EnergyBar: {fileID: 0}
+  OnTakingDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnApplyingDamage:
+    m_PersistentCalls:
+      m_Calls: []
   myStats:
     OnHealthUpdated:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnergyUpdated:
       m_PersistentCalls:
         m_Calls: []
     maxHealth: 12000
@@ -54615,14 +54626,17 @@ MonoBehaviour:
     cooldownReduction: 1
     defaultLuck: 1
     luck: 1
-  Team: 1
-  damageObjects: []
-  HealthBar: {fileID: 0}
-  onTakingDamage:
-    m_PersistentCalls:
-      m_Calls: []
+    defaultEnergy: 0
+    energy: 0
+  team: 0
+  targetable: 0
   difficulty: 1
-  difficultyMultiplier: 1
+  maxHealthDifficultyMultiplier: 0
+  defenseDifficultyMultiplier: 0
+  atkDifficultyMultiplier: 0
+  atkSpeedDifficultyMultiplier: 0
+  moveSpeedDifficultyMultiplier: 0
+  cdrDifficultyMultiplier: 0
 --- !u!114 &5029212639455066790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54780,6 +54794,7 @@ MonoBehaviour:
   gravityAccumiliationForce: 1.3
   maxGravity: 170
   minGravity: 1
+  gravity: 0
   movementSpeed: 100
   rotationSpeed: 600
   inputDirection: {x: 0, y: 0, z: 0}
@@ -54812,10 +54827,12 @@ MonoBehaviour:
   PlayerInputs: {fileID: 0}
   joyStick: {fileID: 0}
   ultimateOn: 0
-  drag: 10
-  clicksIntervalTime: 0.2
+  energyRecoveryOnHit: 5
+  energyRecoveryOnKill: 10
   ultimateCoolDown: 30
   ultimateAttackSpeed: 1.3
+  drag: 10
+  clicksIntervalTime: 0.2
   currentState: 0
 --- !u!1 &5029212639488851226
 GameObject:
@@ -54870,13 +54887,12 @@ MonoBehaviour:
   ultimateCamera: {fileID: 5029212638114798016}
   followTargetNormal: {fileID: 5029212637794321468}
   followTargetLock: {fileID: 5029212637761668778}
-  listOfTargets: []
+  listOfTargetsInRange: []
   lockedTarget: {fileID: 0}
   targetIndex: 0
   lockRotationSpeed: 250
   lockTimer: 0
   lockedOn: 0
-  ultimateLockOn: 0
   lerpTime: 0.3
   rotationSpeed: 10
   slowAnimationRate: 0
@@ -55241,8 +55257,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5029212639697173372}
-  m_LocalRotation: {x: 0.000000025563068, y: 0.00000011005665, z: 0.1650476, w: 0.9862856}
-  m_LocalPosition: {x: 0.8499985, y: 1.3600001, z: -1.2799997}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.4, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55274,7 +55290,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 100
-  field of view: 90
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
