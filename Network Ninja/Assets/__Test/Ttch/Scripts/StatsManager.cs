@@ -290,13 +290,15 @@ public class StatsManager : MonoBehaviour
     public void AddtoEnergy(float changeValue = 1.3f)
     {
         myStats.Energy += changeValue;
+        if(EnergyBar!=null)
         EnergyBar.value = myStats.Energy;
 
     }
     public void DebuffEnergy(float changeValue = 1.2f)
     {
         myStats.Energy -= changeValue;
-        EnergyBar.value = myStats.Energy;
+        if (EnergyBar != null)
+            EnergyBar.value = myStats.Energy;
     }
     public void ResetEnergy()
     {

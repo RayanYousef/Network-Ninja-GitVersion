@@ -29,7 +29,6 @@ public class CS_PlayerManager : MonoBehaviour
     [Header("Ultimate")]
     [SerializeField] bool ultimateOn;
     [SerializeField] float energyRecoveryOnHit, energyRecoveryOnKill, ultimateCoolDown, ultimateAttackSpeed;
-    float ultimateTimer;
 
     [Header("Other Variables")]
     [SerializeField] float drag;
@@ -54,7 +53,7 @@ public class CS_PlayerManager : MonoBehaviour
         {
             ultimateOn = value;
 
-            switch (value)
+                switch (value)
             {
                 case true:
                     anim.SetBool(animController.B_Ultimate, value);
@@ -62,16 +61,18 @@ public class CS_PlayerManager : MonoBehaviour
                     cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
                     // Call Menna Script to Enable Slow Motion
                     //cameraManager.SlowSurroundingEnemies();
-                    AudioManager.instance.BossMusic.InCombat = value;
+                    if (AudioManager.instance.BossMusic != null)
+                        AudioManager.instance.BossMusic.InCombat = value;
                     break;
 
                 case false:
                     anim.SetBool(animController.B_Ultimate, value);
-                    anim.SetFloat(animController.F_animSpeed, 1f);
+                    anim.SetFloat(animController.F_animSpeed, 0.9f);
                     cameraManager.SwitchCamerasBasedOnLockState();
                     //cameraManager.NormalizeSpeedOfSurroundingEnemies();
                     anim.SetBool(animController.B_Attacking, value);
-                    AudioManager.instance.BossMusic.InCombat = value;
+                    if (AudioManager.instance.BossMusic != null)
+                        AudioManager.instance.BossMusic.InCombat = value;
                     break;
             }
         }
@@ -145,7 +146,7 @@ public class CS_PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
         if (ultimateOn == true)
-            ultimateTimer -= Time.deltaTime * 2;
+            pStatsManager.AddtoEnergy(-Time.deltaTime * 2);
 
     }
 
