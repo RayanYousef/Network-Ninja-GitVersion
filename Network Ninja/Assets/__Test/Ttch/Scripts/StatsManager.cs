@@ -287,7 +287,7 @@ public class StatsManager : MonoBehaviour
     #endregion
 
     #region EnergyFunctions
-    public void BuffEnergy(float changeValue = 1.3f)
+    public void AddtoEnergy(float changeValue = 1.3f)
     {
         myStats.Energy += changeValue;
         EnergyBar.value = myStats.Energy;
