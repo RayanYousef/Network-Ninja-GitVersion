@@ -11,7 +11,8 @@ using UnityEngine.UI;
 
 public class CS_PlayerManager : MonoBehaviour
 {
-
+    [Header("Events")]
+    public UnityEvent FirstButtonClicked,SecondButtonClicked;
 
     [Header("Components")]
     public GameObject PlayerTopMostParent;

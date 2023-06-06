@@ -4,12 +4,17 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public enum CharacterState { Idling, Running, Attacking, Jumping, Dashing,Falling, Hit, Dying, Ultimate };
+public enum ButtonClicked
+{
+    None, First, Second
+}
 
 public class CS_StatesHandler : StateMachineBehaviour
 {
 
 
     [SerializeField]CharacterState thisState;
+    [SerializeField]ButtonClicked _buttonClicked;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,6 +22,16 @@ public class CS_StatesHandler : StateMachineBehaviour
         if (playerManager != null)
         {
             playerManager.OnStateEnter(thisState);
+        }
+
+        if (_buttonClicked == ButtonClicked.First)
+        {
+            playerManager.FirstButtonClicked?.Invoke();
+        }
+        else if (_buttonClicked!= ButtonClicked.Second) 
+        {
+            playerManager.SecondButtonClicked?.Invoke();
+
         }
     }
 
