@@ -12,8 +12,14 @@ public class CS_FreezeObjectsInRange : MonoBehaviour
     {
         foreach(var enemy in objectsInRange)
         {
-            enemy.TryGetComponent<IStopObject>(out IStopObject enemySlowInterface);
-            enemySlowInterface.ObjectMovementEnabled(value);
+            if(enemy.TryGetComponent<IStopObject>(out IStopObject enemySlowInterface))
+            {
+                enemySlowInterface.ObjectMovementEnabled(value);
+
+            }
+            if (enemy.TryGetComponent<Animator>(out Animator animator))
+                animator.speed = 0.15f;
+            
         }
 
     }

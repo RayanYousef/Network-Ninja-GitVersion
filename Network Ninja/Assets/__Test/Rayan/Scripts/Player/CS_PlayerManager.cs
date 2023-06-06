@@ -58,23 +58,11 @@ public class CS_PlayerManager : MonoBehaviour
                 switch (value)
             {
                 case true:
-                    anim.SetBool(animController.B_Ultimate, value);
-                    anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
-                    cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
-                    if(_freezeObjectsInRange!=null)
-                    _freezeObjectsInRange.ObjectsMovementEnabled(false);
-                    if (AudioManager.instance.BossMusic != null)
-                        AudioManager.instance.BossMusic.InCombat = value;
+                    UltimateEnabled(value);
                     break;
 
                 case false:
-                    anim.SetBool(animController.B_Ultimate, value);
-                    anim.SetFloat(animController.F_animSpeed, 0.9f);
-                    cameraManager.SwitchCamerasBasedOnLockState();
-                    if (_freezeObjectsInRange != null)
-                        _freezeObjectsInRange.ObjectsMovementEnabled(true);
-                    if (AudioManager.instance.BossMusic != null)
-                        AudioManager.instance.BossMusic.InCombat = value;
+                    UltimateDisabled(value);
                     break;
             }
         }
@@ -408,4 +396,25 @@ public class CS_PlayerManager : MonoBehaviour
     }
 
     #endregion
+
+    private void UltimateEnabled(bool value)
+    {
+        anim.SetBool(animController.B_Ultimate, value);
+        anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
+        cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
+        if (_freezeObjectsInRange != null)
+            _freezeObjectsInRange.ObjectsMovementEnabled(false);
+        if (AudioManager.instance.BossMusic != null)
+            AudioManager.instance.BossMusic.InCombat = value;
+    }
+    private void UltimateDisabled(bool value)
+    {
+        anim.SetBool(animController.B_Ultimate, value);
+        anim.SetFloat(animController.F_animSpeed, 0.9f);
+        cameraManager.SwitchCamerasBasedOnLockState();
+        if (_freezeObjectsInRange != null)
+            _freezeObjectsInRange.ObjectsMovementEnabled(true);
+        if (AudioManager.instance.BossMusic != null)
+            AudioManager.instance.BossMusic.InCombat = value;
+    }
 }
