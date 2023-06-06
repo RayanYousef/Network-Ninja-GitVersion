@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using System.Linq;
 using Cinemachine;
 
-public enum AreaType { Base, Fight };
+public enum AreaType { Base, Fight, Main };
 
 public class rArea : MonoBehaviour
 {
@@ -308,7 +308,7 @@ public class rArea : MonoBehaviour
                 /// raise event to spawn enemies
                 OnEnteringFight?.Invoke();
             }
-            else
+            else if (areaType == AreaType.Base)
             {
                 playerInside = true;
                 rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
@@ -325,6 +325,15 @@ public class rArea : MonoBehaviour
                     rUIManager.instance.UiPassword.ShowCreatePasswordPanel();
                     //OnEnteringArea?.Invoke();
                 }
+            }
+            else
+            {
+                // defualt area has max health
+                this.Health = maxHealth;
+                FormArmyBasedOnAreaHealth();
+
+                // show intro panel
+                rUIManager.instance.UiPassword.ShowIntroPanel();
             }
         }
     }
