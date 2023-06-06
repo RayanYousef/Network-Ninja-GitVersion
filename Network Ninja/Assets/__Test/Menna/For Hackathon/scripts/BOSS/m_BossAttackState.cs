@@ -27,7 +27,7 @@ public class m_BossAttackState : StateMachineBehaviour
     {
         float distance = Vector3.Distance(player.position, animator.transform.position);
         timer += Time.deltaTime;
-        if(distance < AttackRange)
+        if (distance < AttackRange)
         {
             if (timer > bossMovement.AttackDuration)
             {
@@ -39,8 +39,6 @@ public class m_BossAttackState : StateMachineBehaviour
         {
             animator.SetBool("isAttacking", false);
         }
-
-
     }
 
     public int ChooseDragonAttack()

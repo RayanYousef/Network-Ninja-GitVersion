@@ -28,14 +28,14 @@ public class m_BossIdleState : StateMachineBehaviour
     {
         timer += Time.deltaTime;
         float distance = Vector3.Distance(player.position, animator.transform.position);
-        if(distance > chaseRange)
-        {
-            if (timer > 3)
-            {
-                animator.SetBool("isPatrolling", true);
-            }
-        }
 
+        //if(distance > chaseRange)
+        //{
+        //    if (timer > 3)
+        //    {
+        //        animator.SetBool("isPatrolling", true);
+        //    }
+        //}
 
         if (distance <= chaseRange && distance > AttackRange)
         {
@@ -44,13 +44,14 @@ public class m_BossIdleState : StateMachineBehaviour
 
         if (distance <= AttackRange)
         {
-            if (bossMovement.LookAtPlyer == true)
-            {
-                bossMovement.LookAtPlayer();
-            }
+            //if (bossMovement.LookAtPlyer == true)
+            //{
+            //    bossMovement.LookAtPlayer();
+            //}
+
             if (timer > bossMovement.IntervalBetweenBossAttacks)
             {
-                //  animator.SetTrigger("Attack");
+                 // animator.SetTrigger("Attack");
                 animator.SetBool("isAttacking", true);
                 timer = 0;
             }

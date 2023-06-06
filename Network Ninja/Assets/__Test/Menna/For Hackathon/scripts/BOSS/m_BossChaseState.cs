@@ -15,7 +15,7 @@ override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo
     {
         player = GameObjectsManager.Instance.Player.transform;
         agent = animator.GetComponent<NavMeshAgent>();
-        agent.speed = 12f;
+        agent.speed = 8.0f;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -24,12 +24,17 @@ override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo
         agent.SetDestination(player.position);
         float distance = Vector3.Distance(player.position, animator.transform.position);
 
-        Debug.Log("distance betweeen boss and player is " +  distance);
+       // Debug.Log("distance betweeen boss and player is " +  distance);
         if (distance > ChaseRange || distance <= AttackRange)
         {
             animator.SetBool("isChasing", false);
-        }
+        }    
 
+        //if (distance <= AttackRange)
+        //{
+        //    animator.SetTrigger("Attack");
+        //    animator.SetBool("IsChasing", false);
+        //}
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

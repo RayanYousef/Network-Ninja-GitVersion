@@ -45,9 +45,6 @@ public class _Idle : StateMachineBehaviour
                 timer = 0;
             }
         }
-
-
-
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

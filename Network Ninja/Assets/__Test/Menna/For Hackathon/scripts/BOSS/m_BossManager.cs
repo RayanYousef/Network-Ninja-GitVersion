@@ -8,8 +8,8 @@ using static UnityEngine.ParticleSystem;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.AI;
-
-
+using Unity.Mathematics;
+using Unity.IO.LowLevel.Unsafe;
 
 public class m_BossManager : MonoBehaviour , IStopObject
 {
@@ -72,11 +72,15 @@ public class m_BossManager : MonoBehaviour , IStopObject
     }
     void Update()
     {
-        if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("AttackState") && LookAtPlyer == true)
+        //if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("IdleState")  && LookAtPlyer == true)
+        //{
+        //    LookAtPlayer();
+        //}
+        if (LookAtPlyer)
         {
-            LookAtPlayer();
+            Vector3 enemyToPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
+            transform.LookAt(enemyToPlayer);
         }
-
     }
 
     public void trailActivate()
@@ -160,8 +164,9 @@ public class m_BossManager : MonoBehaviour , IStopObject
             Die();
 
         }
+       
     }
-
+    
     public void Die()
     {
         DragonAnim.SetBool("dead", true);
