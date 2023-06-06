@@ -1027,6 +1027,12 @@ MonoBehaviour:
   interactivePanels: []
   isAnyInteractivePanelActive: 0
   independantUIElements: []
+  characterFace: {fileID: 6528535987920792768}
+  facialExpFadeDuration: 0.2
+  idle: {fileID: 21300000, guid: d7351727a9bb2e3499d30c920fa15fcc, type: 3}
+  angry: {fileID: 21300000, guid: c10e83971b0414b44a084066f52a04db, type: 3}
+  serious: {fileID: 21300000, guid: 2ae3b719c0f10874fa8037ce1f1f735b, type: 3}
+  afraid: {fileID: 21300000, guid: a1a173bf5106ccf4780557a2a18f1245, type: 3}
 --- !u!1001 &666997108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3127,26 +3133,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 114602977}
     m_Modifications:
-    - target: {fileID: 804501399547785894, guid: fbf85c7217c6bdd4397805b86aa764af,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 804501399547785894, guid: fbf85c7217c6bdd4397805b86aa764af,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.18039216
-      objectReference: {fileID: 0}
-    - target: {fileID: 804501399547785894, guid: fbf85c7217c6bdd4397805b86aa764af,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.14509805
-      objectReference: {fileID: 0}
-    - target: {fileID: 804501399547785894, guid: fbf85c7217c6bdd4397805b86aa764af,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.11372549
-      objectReference: {fileID: 0}
     - target: {fileID: 1286040514807054544, guid: fbf85c7217c6bdd4397805b86aa764af,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3438,16 +3424,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 114602977}
     m_Modifications:
-    - target: {fileID: 5704936237650655523, guid: dc78c54bef9633942990407f410a33a8,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5704936237650655523, guid: dc78c54bef9633942990407f410a33a8,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5704936237776952181, guid: dc78c54bef9633942990407f410a33a8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3557,21 +3533,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InGameUICanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5704936237888781666, guid: dc78c54bef9633942990407f410a33a8,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5704936237888781666, guid: dc78c54bef9633942990407f410a33a8,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5704936237888781666, guid: dc78c54bef9633942990407f410a33a8,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc78c54bef9633942990407f410a33a8, type: 3}
@@ -4960,6 +4921,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5708445c4ea80f46825a2884bfd70d9, type: 3}
+--- !u!114 &6528535987920792768 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6232389155362681740, guid: a5708445c4ea80f46825a2884bfd70d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6528535987920792767}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6973594677501759663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5257,7 +5230,7 @@ PrefabInstance:
     - target: {fileID: 1985395209220223388, guid: 8ca5339fc9f577848b9168d37d41df94,
         type: 3}
       propertyPath: areaType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1985395209220223388, guid: 8ca5339fc9f577848b9168d37d41df94,
         type: 3}

@@ -30,6 +30,12 @@ public class rUIPassword : MonoBehaviour
     private TMP_Text feedbackTxt;
     //private Button OKBtn;
 
+    [Header("Intro Panel")]
+    [SerializeField] GameObject introPanel;
+    [SerializeField] TMP_Text introTxt;
+    [SerializeField] Button nextBtn;
+    bool isFirstClk = true;
+
     public string PasswordInput
     {
         get => passwordInput;
@@ -100,6 +106,10 @@ public class rUIPassword : MonoBehaviour
         //OKBtn = feedbackPanel.GetComponentInChildren<Button>();
         //OKBtn.onClick.AddListener(OnClickOKBtn);
 
+        nextBtn = introPanel.GetComponentInChildren<Button>();
+        nextBtn.onClick.AddListener(OnClkNext);
+        introPanel.SetActive(false);
+
         rUIManager.instance.InteractivePanels.Add(createPasswordPanel);
         rUIManager.instance.InteractivePanels.Add(checkPasswordPanel);
         rUIManager.instance.InteractivePanels.Add(resetPasswordPanel);
@@ -156,10 +166,10 @@ public class rUIPassword : MonoBehaviour
         rAreasManager.Instance.CurrentArea.IsFlashing = true;
         rAreasManager.Instance.CurrentArea.StartCoroutine(nameof(rAreasManager.Instance.CurrentArea.StartFlashing));
         rUIManager.Instance.IsAnyInteractivePanelEnabled = true;
-        StartCoroutine(nameof(WaitAndShowPanel));
+        StartCoroutine(nameof(WaitAndFocusOnInputField));
     }
 
-    IEnumerator WaitAndShowPanel()
+    IEnumerator WaitAndFocusOnInputField()
     {
         yield return new WaitForSeconds(2f);
      
@@ -179,6 +189,22 @@ public class rUIPassword : MonoBehaviour
         checkPasswordPanel.SetActive(true);
         rUIManager.Instance.HideAllIndependantUIElementsExceptLast(checkPasswordPanel);
         rUIManager.instance.IsAnyInteractivePanelEnabled = true;
+    }
+
+    public void ShowIntroPanel()
+    {
+        introPanel.SetActive(true);
+        rUIManager.instance.IsAnyInteractivePanelEnabled = true;
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(introPanel.GetComponent<CanvasGroup>(), 1));
+        rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Serious);
+    }
+    
+    public void HideIntroPanel()
+    {
+        introPanel.SetActive(true);
+        rUIManager.instance.IsAnyInteractivePanelEnabled = false;
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(introPanel.GetComponent<CanvasGroup>(), 1));
+        rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle);
     }
     #endregion
 
@@ -263,6 +289,22 @@ public class rUIPassword : MonoBehaviour
     //{
     //    feedbackPanel.SetActive(false);
     //}
+
+    private void OnClkNext()
+    {
+        if(isFirstClk)
+        {
+        introTxt.text = "....but don't worry, your main base is still safe with a strong army. " +
+            "You're lucky to have their support! Stay strong and defend what's yours!";
+
+        rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle);
+            isFirstClk = false;
+        }
+        else
+        {
+            HideIntroPanel();
+        }
+    }
 
     public void TakeAns(Button selectedBtn)
     {
