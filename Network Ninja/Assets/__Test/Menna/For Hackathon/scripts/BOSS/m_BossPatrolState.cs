@@ -7,18 +7,22 @@ using UnityEngine.AI;
 public class m_BossPatrolState : StateMachineBehaviour
 {
     float timer;
-    float chaseRange = 15;
     Transform player;
     Transform Boss;
     bool isChasing = false;
     NavMeshAgent agent;
+    m_BossMovement bossMovement;
 
 
+    public float chaseRange;
     public float spawnRadius = 20f;
     public float minDistanceFromObject = 15f;
     public float maxDistanceFromObject = 25f;
 
     List<Vector3>waypoints= new List<Vector3>();
+
+
+    [SerializeField] float AttackRange;
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -28,6 +32,7 @@ public class m_BossPatrolState : StateMachineBehaviour
 
         player = GameObjectsManager.Instance.Player.transform;
         Boss = GameObjectsManager.Instance.Boss.transform;
+        bossMovement = animator.GetComponent<m_BossMovement>();
 
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = 1.5f;
@@ -36,7 +41,7 @@ public class m_BossPatrolState : StateMachineBehaviour
        // GameObject go= GameObject.FindGameObjectWithTag("waypoints");
         for(int i =0; i<3; i++)
         {
-            Vector3 randomPosition = Boss.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+            Vector3 randomPosition = player.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
             waypoints.Add(randomPosition);
         }
 
@@ -46,21 +51,34 @@ public class m_BossPatrolState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(agent.remainingDistance<= agent.stoppingDistance)
+        float distance = Vector3.Distance(player.position, animator.transform.position);
+
+        if (agent.remainingDistance<= agent.stoppingDistance)
         {
             agent.SetDestination(waypoints[Random.Range(0, waypoints.Count)]);
         }
 
         timer += Time.deltaTime;
-        if (timer > 3)
+        if (distance > chaseRange)
         {
-            animator.SetBool("isPatrolling", false);
+            if (timer > 3)
+            {
+                animator.SetBool("isPatrolling", false);
+            }
         }
-        float distance = Vector3.Distance(player.position, animator.transform.position);
-        if (distance <= chaseRange)
+
+        if (distance <= chaseRange && distance > AttackRange)
         {
             animator.SetBool("isChasing", true);
             isChasing= true;
+        }
+        if (distance <= AttackRange)
+        {
+            if(bossMovement.LookAtPlyer == true)
+            {
+                bossMovement.LookAtPlayer();
+            }
+            animator.SetBool("isPatrolling", false);
         }
     }
     public bool TheDragonIsChasing()

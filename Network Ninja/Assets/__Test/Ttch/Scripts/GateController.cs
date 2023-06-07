@@ -29,8 +29,8 @@ public class GateController : MonoBehaviour
     }
     private void Update()
     {
-        buttonPressed = Input.GetKey(KeyCode.E);
-        if (playerIsHere == true && buttonPressed)
+        buttonPressed = Input.GetKeyDown(KeyCode.E);
+        if (playerIsHere == true && buttonPressed && GameManager.Instance.BossEntered==false && !rUIManager.Instance.IsAnyInteractivePanelEnabled)
         {
             GameObjectsManager.Instance.CurrentGate.NextArea = this.nextArea;
 
@@ -55,7 +55,8 @@ public class GateController : MonoBehaviour
 
             playerIsHere = true;
             GameObjectsManager.Instance.CurrentGate = this;
-            rUIManager.instance.InGameUI.prompt.enabled = true;
+            //rUIManager.instance.InGameUI.prompt.enabled = true;
+            rUIManager.instance.InGameUI.prompt.gameObject.SetActive(true);
         }
     }
 
@@ -64,8 +65,8 @@ public class GateController : MonoBehaviour
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
             playerIsHere = false;
-            rUIManager.instance.InGameUI.prompt.enabled = false;
-
+            //rUIManager.instance.InGameUI.prompt.enabled = false;
+            rUIManager.instance.InGameUI.prompt.gameObject.SetActive(false);
         }
     }
 }

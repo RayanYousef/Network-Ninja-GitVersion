@@ -36,10 +36,12 @@ public class rArea : MonoBehaviour
     [Header("MiniMap Components")]
     [SerializeField] CS_ChangeObjectsColour meshColourChanger;
     [SerializeField] SpriteRenderer sharingPasswordWarningIcon;
+    [SerializeField] bool isFlashing;
 
 
     [Header("Script Internal Variables")]
-    [SerializeField] float healthTimer;
+    float Timer;
+    [SerializeField] float healthTimer = 3;
 
 
     public string Password { get => password; set => password = value; }
@@ -53,8 +55,10 @@ public class rArea : MonoBehaviour
         }
     }
     public AreaType AreaType { get => areaType; set => areaType = value; }
+    public EnemySpawner EnemySpawner { get => enemySpawner; set => enemySpawner = value; }
     public CS_ChangeObjectsColour MeshColourChanger { get => meshColourChanger; }
     public SpriteRenderer SharingPasswordWarningIcon { get => sharingPasswordWarningIcon; }
+    public bool IsFlashing { get => isFlashing; set => isFlashing = value; }
     public bool PlayerInside {
         get => playerInside;
         set
@@ -79,6 +83,7 @@ public class rArea : MonoBehaviour
         }
     }
 
+
     private void Awake()
     {
         if (areaCamera != null) { }
@@ -98,6 +103,7 @@ public class rArea : MonoBehaviour
         meshColourChanger.MaxHealth = rAreasManager.Instance.MaxHealth;
         meshColourChanger.HalfHealth = rAreasManager.Instance.HalfHealth;
         meshColourChanger.LowHealth = rAreasManager.Instance.LowHealth;
+
 
         Renderer[] Renderers = new Renderer[1];
         Renderers[0] = GetComponentsInChildren<Renderer>()[1];
@@ -120,16 +126,16 @@ public class rArea : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerInside == false && password != null && !isWinningConditionMet)
+        if (playerInside == false && password != null && !GameManager.Instance.BossEntered)
             UpdateHealth();
     }
 
     private void UpdateHealth()
     {
-        healthTimer += Time.deltaTime;
-        if (healthTimer > 3)
+        Timer += Time.deltaTime;
+        if (Timer > healthTimer)
         {
-            healthTimer = 0;
+            Timer = 0;
             health = Mathf.Clamp(health - 1, 0, maxHealth);
 
             if (health > 0)
@@ -145,6 +151,23 @@ public class rArea : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator StartFlashing()
+    {
+        while(IsFlashing)
+        {
+            Debug.Log("flashing");
+            meshColourChanger.ChangeToColour(rAreasManager.Instance.DarkColor);
+            yield return new WaitForSecondsRealtime(0.5f);
+            if (!IsFlashing)
+                yield break;
+            meshColourChanger.ChangeToColour(Color.white);
+            yield return new WaitForSecondsRealtime(0.5f);
+            if (!IsFlashing)
+                yield break;
+        }
+    }
+
 
     public void LostArea()
     {
@@ -193,7 +216,7 @@ public class rArea : MonoBehaviour
     }
     public void FormArmyBasedOnAreaHealth()
     {
-        if (Health <= maxHealth / 4)
+        if (Health <= maxHealth / 3)
         {
             allies1 = Instantiate(alliesSpawnerPrefab, alliesSpawnPos[0].position, Quaternion.identity);
             allies1.transform.parent = alliesSpawnPos[0];
@@ -242,7 +265,7 @@ public class rArea : MonoBehaviour
     #region Cinemachine Cut Scene
     IEnumerator WaitAndSwitchCameraBack()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(4.5f);
         areaCamera.enabled = false;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
     }
@@ -272,6 +295,12 @@ public class rArea : MonoBehaviour
     {
         if (collision.gameObject == GameObjectsManager.Instance.Player)
         {
+            playerInside = true;
+            if (rAreasManager.Instance.CurrentArea == this)
+            {
+                return;
+            }
+
             if (areaType == AreaType.Fight)
             {
                 rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
@@ -284,10 +313,10 @@ public class rArea : MonoBehaviour
                 playerInside = true;
                 rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
 
-                if (rAreasManager.Instance.CurrentArea == this)
-                {
-                    return;
-                }
+                //if (rAreasManager.Instance.CurrentArea == this)
+                //{
+                //    return;
+                //}
                 rAreasManager.Instance.CurrentArea = this;
 
                 /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to

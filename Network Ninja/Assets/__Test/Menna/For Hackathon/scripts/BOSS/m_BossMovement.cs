@@ -7,82 +7,86 @@ using static Unity.VisualScripting.Member;
 using static UnityEngine.ParticleSystem;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 
-public class m_BossMovement : MonoBehaviour
+
+public class m_BossMovement : MonoBehaviour , m_interface
 {
 
-
-    //[SerializeField] GameObject bossHP;
 
 
     public GameObject[] trails;
     public Animator dragonAnim;
+    public float IntervalBetweenBossAttacks = 10;
+    public float AttackDuration;
+    public bool LookAtPlyer = true;
 
-   // private GameObject Dragon;
+
+
+
     private Animator DragonAnim;
-
     private float dragonSlowSpeed = 0.3f;
     private float dragonFastSpeed = 1.5f;
     private bool finishedAttack;
     private Transform player;
-
-    ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
+    private Rigidbody rb;
+    private NavMeshAgent agent;
+    private ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
 
 
     [SerializeField] UnityEvent BossDie;
-
     [SerializeField] private Image bloodSplatter;
     [SerializeField] private Color transparentColor;
     [SerializeField] private Color color;
+    [SerializeField] float frictionCoefficient = 2.0f;
+
 
 
 
 
     private void Awake()
     {
-       // Dragon = GameObjectsManager.Instance.Boss;
         DragonAnim = GetComponent<Animator>();
-
-        //bossHP = GameObjectsManager.Instance.BossHP;
         player = GameObjectsManager.Instance.Player.transform;
-        //dragonAnim =gameObject.GetComponent<Animator>();
-
         DragonAnim = GetComponent<Animator>();
         bloodVfx = GetComponentsInChildren<ParticleSystem>()[0];
         bloodVfx2 = GetComponentsInChildren<ParticleSystem>()[1];
         bloodVfx3 =GetComponentsInChildren<ParticleSystem>()[2];
-
         color = new Color(188f, 0f, 0f, 1f);
         transparentColor = new Color(0f, 0f, 0f, 0f);
-
+        rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
     {
-        //bossHP.SetActive(true);
-
-        player.GetComponent<StatsManager>().onTakingDamage.AddListener(bloodPanelForPlayerDamage);
+        player.GetComponent<StatsManager>().OnTakingDamage.AddListener(bloodPanelForPlayerDamage);
         trailDeactivate();
+        // prevent sliding
+        Vector3 frictionForce = -rb.velocity * frictionCoefficient;
+        rb.AddForce(frictionForce, ForceMode.Acceleration);
+
 
 
     }
     void Update()
     {
-        if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") )
+        if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("AttackState") && LookAtPlyer == true)
         {
             LookAtPlayer();
         }
+
     }
 
-    void trailActivate()
+    public void trailActivate()
     {
         foreach (GameObject trail in trails)
         {
             trail.SetActive(true);
         }
     }
-    void trailDeactivate()
+    public void trailDeactivate()
     {
         foreach (GameObject trail in trails)
         {
@@ -103,7 +107,6 @@ public class m_BossMovement : MonoBehaviour
     }
     private void claw_end()
     {
-        //Debug.Log("claw_end");
         trailDeactivate();
     }
     public void BasicAttackSlow()
@@ -134,17 +137,14 @@ public class m_BossMovement : MonoBehaviour
 
     public void Claw_fin()
     {
-        //Debug.Log("claw_fin");
         finishedAttack = true;
     }
     public void Horn_fin()
     {
-        //Debug.Log("horn_fin");
         finishedAttack = true;
     }
     public void Basic_fin()
     {
-        //Debug.Log("Basic_fin");
         finishedAttack = true;
     }
 
@@ -167,16 +167,15 @@ public class m_BossMovement : MonoBehaviour
         DragonAnim.SetBool("dead", true);
         DragonAnim.SetBool("isAttacking", false);
         DragonAnim.SetBool("isChasing", false);
-        GameManager.Instance.EndStage(true);
+        GameManager.Instance.CurrentGameState = GameState.Won;
         BossDie?.Invoke();
     }
     public bool death()
     {
         dragonAnim.speed = dragonFastSpeed;
-        //this.GetComponent<RigBuilder>().enabled = false;
         return true;
     }
-    void LookAtPlayer()
+    public void LookAtPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
@@ -223,7 +222,11 @@ public class m_BossMovement : MonoBehaviour
         if(gameObject)
         {
             StartCoroutine(DoFade());
-
         }
+    }
+    public void MovementAndRotation(bool value)
+    {
+        agent.isStopped = !value;
+        LookAtPlyer = value;
     }
 }

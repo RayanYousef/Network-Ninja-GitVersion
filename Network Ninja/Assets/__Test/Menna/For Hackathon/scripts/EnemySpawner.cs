@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Big Boss")]
     public GameObject BigBossPrefab;
+    public GameObject cardPrefab;
   
     [Header("Enemies")]
     public GameObject enemyPrefab;
@@ -22,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
     public float minDistanceFromObject = 5f;
     public float maxDistanceFromObject = 10f;
     public int miniBossSize = 4;
+    public float delayBeforeSpawnBoss = 3f; // Delay in seconds before spawning the boss
 
 
 
@@ -44,7 +46,8 @@ public class EnemySpawner : MonoBehaviour
         MiniBosses = new List<GameObject>();
         player = GameObjectsManager.Instance.Player.transform;
 
-        
+        OnAllMiniBossesKilled.AddListener(rUIManager.instance.UiPassword.ShowCreatePasswordPanel);
+
         //obj pooling
         enemyPool = new List<GameObject>();
 
@@ -150,6 +153,12 @@ public class EnemySpawner : MonoBehaviour
         BigBoss.transform.parent = this.transform;
 
     }
+    
+    public void SpawnCard()
+    {
+        GameObject BigBoss = Instantiate(cardPrefab, this.transform.position, Quaternion.identity);
+        //BigBoss.transform.parent = this.transform;
+    }
 
 
     #region
@@ -168,11 +177,9 @@ public class EnemySpawner : MonoBehaviour
                 //enemy.transform.parent = this.transform;
                 enemy.SetActive(true);
                 enemies.Add(enemy);
-              //  enemies.Add(enemy);
             }
 
-            //numAlive++;
-            //numSpawned++;
+
         }
     }
 
@@ -249,8 +256,8 @@ public class EnemySpawner : MonoBehaviour
                 enemy.transform.position = randomPosition;
                 enemy.transform.parent = this.transform;
                 enemy.SetActive(true);
-                enemy.AddComponent<CapsuleCollider>();
-                enemies.Add(enemy);
+            // enemy.AddComponent<CapsuleCollider>();
+            enemies.Add(enemy);
            
             }
 
@@ -263,7 +270,8 @@ public class EnemySpawner : MonoBehaviour
         {
             if(MiniBoss != null)
             {
-                Destroy(MiniBoss);
+                //Destroy(MiniBoss);
+                MiniBoss.gameObject.SetActive(false);
 
             }
         }
@@ -299,8 +307,8 @@ public class EnemySpawner : MonoBehaviour
                 /// spawn big boss
                 /// in case of emergency... invoke winning event here
                 //OnBigBossKilled?.Invoke();
-                SpawnBigBoss();
-               // GameManager.Instance.EndStage(true);
+                StartCoroutine(SpawnCardCoroutine());
+                // GameManager.Instance.EndStage(true);
             }
             else
             {
@@ -308,6 +316,26 @@ public class EnemySpawner : MonoBehaviour
                 OnAllMiniBossesKilled?.Invoke();
             }  
         }
+    }
+
+    public IEnumerator SpawnBossCoroutine()
+    {
+        //GameManager.Instance.BossEntered = true;
+        yield return new WaitForSeconds(delayBeforeSpawnBoss);
+
+        // Spawn the boss
+        SpawnBigBoss();
+    }
+    
+    IEnumerator SpawnCardCoroutine()
+    {
+        GameManager.Instance.BossEntered = true;
+        yield return new WaitForSeconds(delayBeforeSpawnBoss);
+
+        // Spawn the boss
+        //SpawnBigBoss();
+        SpawnCard();
+
     }
     #region //trials
     //IEnumerator AvoidEnemies()

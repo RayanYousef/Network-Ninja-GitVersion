@@ -10,33 +10,45 @@ public enum CharacterTeam
 {
     None,Player, Enemy
 }
-public enum Difficulty
-{
-    Easy, Normal, Hard
-}
+
 public class StatsManager : MonoBehaviour
 {
-    [Header("Parent Of This Object")]
+    [Header("Top Most Parent Of This Object")]
     [SerializeField] GameObject parent;
 
+    [Header("Components")]
     [SerializeField] List<Collider> hitObjects = new List<Collider>();
+    [SerializeField] CS_DamageObject[] damageObjects;
 
+    [Header ("UI Elements")]
+    [SerializeField] Slider HealthBar;
+
+    [Header ("Events")]
+    public UnityEvent OnTakingDamage;
+    public UnityEvent OnApplyingDamage;
+
+    [Header("Stats")]
     [SerializeField] StatsStruct myStats = new StatsStruct();
 
-    [SerializeField] public CharacterTeam Team= CharacterTeam.None;
+    [Header("GameObject Team")]
+    [SerializeField] CharacterTeam team = CharacterTeam.None;
 
-    [SerializeField] CS_DamageObject[] damageObjects;
-    [SerializeField] Slider HealthBar;
-    public UnityEvent onTakingDamage;
+    [Header("Can Be Targeted By Player Camera")]
+    [SerializeField] bool targetable;
+
+
 
     [Header("Difficulty")]
     [SerializeField] public Difficulty difficulty = Difficulty.Normal;
-    public float difficultyMultiplier;
+    public float maxHealthDifficultyMultiplier, defenseDifficultyMultiplier,atkDifficultyMultiplier,
+        atkSpeedDifficultyMultiplier,moveSpeedDifficultyMultiplier,cdrDifficultyMultiplier;
 
     #region Setter and Getters
-    public StatsStruct Stats { get => myStats; }
+    public StatsStruct Stats { get => myStats;}
     public List<Collider> HitObjects { get => hitObjects; set => hitObjects = value; }
     public CS_DamageObject[] DamageObjects { get => damageObjects;}
+    public CharacterTeam Team { get => team; set => team = value; }
+    public bool Targetable { get => targetable;}
     #endregion
 
     private void OnDisable()
@@ -47,6 +59,8 @@ public class StatsManager : MonoBehaviour
         myStats.AtkSpeed = myStats.DefaultAtkSpeed;
         myStats.MoveSpeed = myStats.DefaultMoveSpeed;
         myStats.CooldownReduction = myStats.DefaultCooldownReduction;
+        myStats.Energy = myStats.DefaultEnergy;
+
 
         if (HealthBar != null)
         {
@@ -98,16 +112,38 @@ public class StatsManager : MonoBehaviour
         switch(difficulty)
         {
             case Difficulty.Easy:
-                difficultyMultiplier = 0.5f;
+                maxHealthDifficultyMultiplier = 0.5f;
+                defenseDifficultyMultiplier = 0.5f;
+                atkDifficultyMultiplier = 0.5f;
+                atkSpeedDifficultyMultiplier = 0.5f;
+                moveSpeedDifficultyMultiplier = 0.5f;
+                cdrDifficultyMultiplier = 0.5f;
                 break;
+
             case Difficulty.Normal:
-                difficultyMultiplier = 1f;
+                maxHealthDifficultyMultiplier = 1f;
+                defenseDifficultyMultiplier = 1f;
+                atkDifficultyMultiplier = 1f;
+                atkSpeedDifficultyMultiplier = 1f;
+                moveSpeedDifficultyMultiplier = 1f;
+                cdrDifficultyMultiplier = 1f;
+                
                 break;
             case Difficulty.Hard:
-                difficultyMultiplier = 2f;
+                maxHealthDifficultyMultiplier = 2f;
+                defenseDifficultyMultiplier = 2f;
+                atkDifficultyMultiplier = 2f;
+                atkSpeedDifficultyMultiplier = 2f;
+                moveSpeedDifficultyMultiplier = 2f;
+                cdrDifficultyMultiplier = 2f;
                 break;
             default:
-                difficultyMultiplier = 1f;
+                maxHealthDifficultyMultiplier = 1f;
+                defenseDifficultyMultiplier = 1f;
+                atkDifficultyMultiplier = 1f;
+                atkSpeedDifficultyMultiplier = 1f;
+                moveSpeedDifficultyMultiplier = 1f;
+                cdrDifficultyMultiplier = 1f;
                 break;         
         }
     }
@@ -116,11 +152,11 @@ public class StatsManager : MonoBehaviour
         if (this.Team == CharacterTeam.Enemy)
         {
 
-            myStats.MaxHealth = myStats.MaxHealth * difficultyMultiplier;
-            myStats.DefaultDefense = myStats.DefaultDefense * difficultyMultiplier;
-            myStats.DefaultAtk = myStats.DefaultAtk * difficultyMultiplier;
-            myStats.DefaultMoveSpeed = myStats.DefaultMoveSpeed * difficultyMultiplier;
-            myStats.DefaultCooldownReduction = myStats.DefaultCooldownReduction * difficultyMultiplier;
+            myStats.MaxHealth = myStats.MaxHealth * maxHealthDifficultyMultiplier;
+            myStats.DefaultDefense = myStats.DefaultDefense * defenseDifficultyMultiplier;
+            myStats.DefaultAtk = myStats.DefaultAtk * atkDifficultyMultiplier;
+            myStats.DefaultMoveSpeed = myStats.DefaultMoveSpeed * moveSpeedDifficultyMultiplier;
+            myStats.DefaultCooldownReduction = myStats.DefaultCooldownReduction * cdrDifficultyMultiplier;
 
         }
     }
@@ -128,6 +164,7 @@ public class StatsManager : MonoBehaviour
 
 
     #endregion
+            
     #region Enable/Disable Damage Collider Based on Animation Event
     public void EnableAllWeapons()
     {
@@ -165,23 +202,38 @@ public class StatsManager : MonoBehaviour
 
     #endregion
 
-    #region HealthFunctions
+    #region Health and Energy Functions
     public void Heal(float value = 20)
     {
         myStats.CurrentHealth += value;
         HealthBar.value = myStats.CurrentHealth;
     }
-    public void ApplyDamage(StatsManager AttackerStats)
+
+    public void IncreaseHealth(float amount)
+    {
+        myStats.CurrentHealth += amount;
+    }
+
+    public void IncreaseEnergy(float amount)
+    {
+        myStats.Energy += amount;
+    }
+
+    public void TakeDamage(StatsManager AttackerStats)
     {
         float dmg = AttackerStats.CalculateAttackStrength() - this.GetDefense();
         myStats.CurrentHealth -= dmg;
         if(HealthBar!=null) 
         HealthBar.value = myStats.CurrentHealth;
         Debug.Log(myStats.CurrentHealth);
-        onTakingDamage?.Invoke();
+        OnTakingDamage?.Invoke();
 
     }
 
+    public void ApplyDamage()
+    {
+        OnApplyingDamage?.Invoke(); 
+    }
 
     #endregion
 
@@ -235,8 +287,28 @@ public class StatsManager : MonoBehaviour
     }
     #endregion
 
+    #region EnergyFunctions
+    public void BuffEnergy(float changeValue = 1.3f)
+    {
+        myStats.Energy += changeValue;
+    }
+    public void DebuffEnergy(float changeValue = 1.2f)
+    {
+        myStats.Energy -= changeValue;
+    }
+    public void ResetEnergy()
+    {
+        myStats.Energy = myStats.DefaultEnergy;
+    }
+    public float GetEnergy()
+    {
+        return myStats.Energy;
+    }
+
+    #endregion
+
     #region DefenseFunctions
-    
+
     public void BuffDefense(float changeValue = 10)
     {
         myStats.Defense += changeValue;

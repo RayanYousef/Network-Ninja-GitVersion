@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
 public class CS_CameraManager : MonoBehaviour
 {
+    [Header("Player Manager")]
+    public CS_PlayerManager PlayerManager;
+
     [Header("Cinemachine")]
     [SerializeField] CinemachineBrain cameraBrain;
-    [SerializeField] CinemachineVirtualCamera mainVirtualCamera;
-    [SerializeField] CinemachineVirtualCamera lockVirtualCamera;
-    [SerializeField] float lerpTime;
+    [SerializeField] List<CinemachineVirtualCamera> virtualCameras = new List<CinemachineVirtualCamera>();
+    [SerializeField] CinemachineVirtualCamera mainVirtualCamera, lockVirtualCamera, ultimateCamera;
 
 
     [Header("Targets To Follow")]
@@ -21,14 +24,15 @@ public class CS_CameraManager : MonoBehaviour
     [SerializeField] Transform followTargetLock;
 
     [Header("Lock Function Vars")]
-    [SerializeField] List<GameObject> listOfTargets = new List<GameObject>();
+    [SerializeField] List<GameObject> listOfTargetsInRange = new List<GameObject>();
     [SerializeField] Transform lockedTarget;
     [SerializeField] int targetIndex;
     [SerializeField] float lockRotationSpeed,lockTimer;
     [SerializeField] bool lockedOn;
 
     [Header("Camera Behavior Vars")]
-    [SerializeField] float rotationSpeed;
+    [SerializeField] float lerpTime;
+    [SerializeField] float rotationSpeed, slowAnimationRate;
     [SerializeField] float /*targetRotationSmoothTime,*/ minAngle, maxAngle;
 
 
@@ -38,8 +42,14 @@ public class CS_CameraManager : MonoBehaviour
     [SerializeField] Quaternion QuaternionRotation;
     [SerializeField] float yaw, pitch;
 
-    public Vector2 DeltaValues
-    { set => deltaValues = value; }
+    #region Setters and Getters
+    public Vector2 DeltaValues { set => deltaValues = value; }
+    public Transform LockedTarget { get => lockedTarget; }
+    public List<GameObject> ListOfTargetsInRange { get => listOfTargetsInRange; }
+    public CinemachineVirtualCamera MainVirtualCamera { get => mainVirtualCamera; }
+    public CinemachineVirtualCamera LockVirtualCamera { get => lockVirtualCamera; }
+    public CinemachineVirtualCamera UltimateCamera { get => ultimateCamera; }
+
     public bool LockedOn
     {
         get => lockedOn;
@@ -48,37 +58,42 @@ public class CS_CameraManager : MonoBehaviour
         {
             lockedOn = value;
             lockTimer = 0;
-            switch (lockedOn)
+
+            switch (PlayerManager.UltimateOn) 
             {
                 case true:
-                    if (listOfTargets.Count > 0)
-                    {
-                        cameraBrain.m_DefaultBlend.m_Time = lerpTime;
-                        lockVirtualCamera.enabled = true;
-                        mainVirtualCamera.enabled = false;
-                        SetTarget();
-                            
-                    }
+
+                    if (value == true && listOfTargetsInRange.Count > 0)
+                        ultimateCamera.Follow = followTargetLock;
                     else
-                    {
-                        lockedOn = false;
-                        mainVirtualCamera.enabled = true;
-                        lockVirtualCamera.enabled = false;
-                    }
+                        ultimateCamera.Follow = followTargetNormal;
                     break;
 
                 case false:
-                    cameraBrain.m_DefaultBlend.m_Time = lerpTime;
-                    mainVirtualCamera.enabled = true;
-                    lockVirtualCamera.enabled = false;
-                    break;
+                    SwitchCamerasBasedOnLockState();
+                        break;
+
+
             }
+
         }
     }
 
-    private void Update()
+
+    #endregion
+
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.T)) { LockedOn = !LockedOn; }
+        foreach(CinemachineVirtualCamera camera in PlayerManager.PlayerTopMostParent.GetComponentsInChildren<CinemachineVirtualCamera>())
+            virtualCameras.Add(camera);
+    }
+
+    private void Update()   
+    {
+        if (Input.GetKeyDown(KeyCode.T)) 
+        {
+            LockedOn = !LockedOn; 
+        }
         if (Input.GetKeyDown(KeyCode.Tab)) 
         {
             targetIndex++;
@@ -91,15 +106,20 @@ public class CS_CameraManager : MonoBehaviour
 
         followTargetLock.position = followTargetNormal.position = transform.position;
         
-        if (LockedOn && listOfTargets.Count>0)
+        if (LockedOn && listOfTargetsInRange.Count>0)
         {
-            if(lockedTarget.gameObject.activeInHierarchy==false &&listOfTargets.Contains(lockedTarget.gameObject))
+
+            if (lockedTarget == null)
+                SetTarget();
+
+            if(lockedTarget.gameObject.activeInHierarchy==false &&listOfTargetsInRange.Contains(lockedTarget.gameObject))
             {
-                listOfTargets.Remove(lockedTarget.gameObject);
-                LockedOn= false;
+                listOfTargetsInRange.Remove(lockedTarget.gameObject);
+                if (listOfTargetsInRange.Count < 1)
+                    LockedOn = false;
+                else SetTarget();
             }
 
-            //followTargetLock.LookAt(lockTarget);
             followTargetLock.rotation= Quaternion.RotateTowards( 
                 followTargetLock.rotation,
                 Quaternion.LookRotation(lockedTarget.position - followTargetLock.position),
@@ -111,9 +131,9 @@ public class CS_CameraManager : MonoBehaviour
         }
         else LockedOn= false;
 
-        for(int i = listOfTargets.Count-1; i>=0; i--)
+        for(int i = listOfTargetsInRange.Count-1; i>=0; i--)
         {
-            if (listOfTargets[i].activeInHierarchy==false) listOfTargets.Remove(listOfTargets[i]);
+            if (listOfTargetsInRange[i].activeInHierarchy==false) listOfTargetsInRange.Remove(listOfTargetsInRange[i]);
 
         }
 
@@ -152,23 +172,13 @@ public class CS_CameraManager : MonoBehaviour
         #endregion
 
     }
-
     private void LateUpdate()
     {
         if (lockedOn) return;
             RotateObjectQuaternionClamping(deltaValues, followTargetNormal);
     }
 
-
-    private void SetTarget()
-    {
-
-        // On Destroy Remove Target from the list or else a null reference will find his way to you.
-        if (listOfTargets.Count > 0 && listOfTargets[targetIndex % listOfTargets.Count] != null)
-            lockedTarget = listOfTargets[targetIndex % listOfTargets.Count].transform;
-    }
-
-
+ 
     #region Main Rotation Function
 
     public void RotateObjectQuaternionClamping(Vector2 mouseDelta, Transform transform)
@@ -197,29 +207,83 @@ public class CS_CameraManager : MonoBehaviour
 
     #endregion
 
+    #region Other Functions
+
+    private void SetTarget()
+    {
+
+        // On Destroy Remove Target from the list or else a null reference will find his way to you.
+        if (listOfTargetsInRange.Count > 0 && listOfTargetsInRange[targetIndex % listOfTargetsInRange.Count] != null)
+            lockedTarget = listOfTargetsInRange[targetIndex % listOfTargetsInRange.Count].transform;
+    }
+
+    public void DisableAllCamerasExceptParam(CinemachineVirtualCamera ExcludedCamera)
+    {
+
+        foreach (CinemachineVirtualCamera camera in virtualCameras)
+        {
+            camera.enabled = false;
+        }
+        ExcludedCamera.enabled = true;
+    }
+
+    public void SwitchCamerasBasedOnLockState()
+    {
+        switch (lockedOn)
+        {
+            case true:
+
+                if (listOfTargetsInRange.Count > 0)
+                {
+                    cameraBrain.m_DefaultBlend.m_Time = lerpTime;
+                    DisableAllCamerasExceptParam(lockVirtualCamera);
+                    SetTarget();
+                }
+                else
+                {
+                    lockedOn = false;
+                    if (mainVirtualCamera.enabled == false)
+                        DisableAllCamerasExceptParam(mainVirtualCamera);
+                }
+                break;
+
+
+            case false:
+                cameraBrain.m_DefaultBlend.m_Time = lerpTime;
+                if(mainVirtualCamera.enabled==false)
+                DisableAllCamerasExceptParam(mainVirtualCamera);
+                break;
+        }
+    }
+    #endregion
+
     #region TriggerEnter/Exit
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && !listOfTargets.Contains(other.gameObject))
-            listOfTargets.Add(other.gameObject);
+        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && !listOfTargetsInRange.Contains(other.gameObject))
+        {
+            if (enemy.Team == CharacterTeam.Enemy && enemy.Targetable)
+            {
+                listOfTargetsInRange.Add(other.gameObject);
+                SetTarget();
+            }
+        }
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && listOfTargets.Contains(other.gameObject))
+        if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && listOfTargetsInRange.Contains(other.gameObject))
         {
-            listOfTargets.Remove(other.gameObject);
-            if (listOfTargets.Count < 1)
+            listOfTargetsInRange.Remove(other.gameObject);
+            if (listOfTargetsInRange.Count < 1)
                 LockedOn = false;
         }
-
     }
 
     #endregion
-
-
+        
     //#region Old Rotation Functions
     //public void RotateAround(Vector2 mouseDelta)
     //{

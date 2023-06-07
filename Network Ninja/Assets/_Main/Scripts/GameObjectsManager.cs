@@ -31,7 +31,7 @@ public class GameObjectsManager : MonoBehaviour
     public static GameObjectsManager Instance { get => instance; }
 
 
-    public GameObject Player { get => player; }
+    public GameObject Player { get => player; set => player = value; }
     public GameObject Boss { get => boss; }
     public CinemachineVirtualCamera PlayerCamera { get => playerCamera; set => playerCamera = value; }
     public FormationAgent AllyPrefab { get => allyPrefab; }

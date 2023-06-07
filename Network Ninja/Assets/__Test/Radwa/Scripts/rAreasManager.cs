@@ -6,48 +6,48 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using System.Text.RegularExpressions;
-using Zxcvbn;
 
 
 //public enum Soldiers { Melee, Ranged, MeleeRanged, MeleeRangedTank };
-public enum PasswordStrength { Weak, Moderate, Strong };
 
 public class rAreasManager : MonoBehaviour
 {
     private static rAreasManager instance;
     [SerializeField] rUIPassword passwordCanvas;
 
-    [Header("Password Manager Components")]
+    [Header("Area Manager Components")]
     [SerializeField] rArea[] listOfLevelAreas;
     int maxSoldiersNumber = 75;
-    [SerializeField] Color maxHealth, halfHealth, lowHealth, enemyColor;
-
+    [SerializeField] Color maxHealth, halfHealth, lowHealth;
+    [SerializeField] Color darkColor;
     [SerializeField] rArea currentArea;
-   // [SerializeField] rArea nextArea;
-    [SerializeField] PasswordStrength strength;
-    [SerializeField] Result result;
 
     [Header("Password Result Details")]
-    [SerializeField] string currentWarnings = null;
+    ShortResult shortResult;
+    [SerializeField] PasswordStrength strength;
+    [SerializeField] string currentWarning = null;
     [SerializeField] string currentSuggestions = null;
 
+    /*
     [Header("Password Lists")]
     private string[] playerPersonalData;
+    */
 
-    //
+    
     public static rAreasManager Instance { get => instance; }
-    public rArea CurrentArea { get { return currentArea; } set => currentArea = value; }
-   // public rArea NextArea { get => nextArea; set => nextArea = value; }
-
+    public rUIPassword PasswordCanvas { get => passwordCanvas; set => passwordCanvas = value; }
+    
+    public rArea[] ListOfLevelAreas { get => listOfLevelAreas; set => listOfLevelAreas = value; }
     public int MaxSoldiersNumber { get => maxSoldiersNumber; }
     public Color MaxHealth { get => maxHealth; }
     public Color HalfHealth { get => halfHealth; }
     public Color LowHealth { get => lowHealth; }
-    public Color EnemyColor { get => enemyColor;}
-    public rUIPassword PasswordCanvas { get => passwordCanvas; set => passwordCanvas = value; }
-    public string Warnings { get => currentWarnings; set => currentWarnings = value; }
+    public Color DarkColor { get => darkColor; set => darkColor = value; }
+
+    public rArea CurrentArea { get { return currentArea; } set => currentArea = value; }
+    
+    public string Warnings { get => currentWarning; set => currentWarning = value; }
     public string Suggestions { get => currentSuggestions; set => currentSuggestions = value; }
-    public rArea[] ListOfLevelAreas { get => listOfLevelAreas; set => listOfLevelAreas = value; }
 
     private void Awake()
     {
@@ -99,29 +99,15 @@ public class rAreasManager : MonoBehaviour
     {
         /// load user personal data to check the password against them
         // loadUserPrivateData();
-        
-        result = Core.EvaluatePassword(currentArea.Password);
 
-        if (result.Score == 4)
-            strength = PasswordStrength.Strong;
-        else if (result.Score == 3 || result.Score == 4)
-            strength = PasswordStrength.Moderate;
-        else
-            strength = PasswordStrength.Weak;
+        shortResult = rPasswordChecker.CheckPasswordStrengthWithZxccvbn(currentArea.Password);
 
-        currentWarnings = null;
-        currentWarnings = result.Feedback.Warning;
-
-        currentSuggestions = null;
-
-        int cnt = result.Feedback.Suggestions.Count;
-        if (cnt > 0)
-        {
-            int i = UnityEngine.Random.Range(0, cnt);
-            currentSuggestions = result.Feedback.Suggestions[i];
-        }
+        strength = shortResult._Strength;
+        currentWarning = shortResult._Currentwarning;
+        currentSuggestions = shortResult._CurrentSuggestions;
     }
 
+    /*
     void loadUserPrivateData()
     {
         playerPersonalData = new string[2];
@@ -132,7 +118,7 @@ public class rAreasManager : MonoBehaviour
         playerPersonalData[0] = PlayerPrefs.GetString("username").ToLower();
         playerPersonalData[1] = PlayerPrefs.GetString("birthDate").ToLower();
     }
-
+    */
 
     public void SetAreaHealthBasedOnPassword()
     {

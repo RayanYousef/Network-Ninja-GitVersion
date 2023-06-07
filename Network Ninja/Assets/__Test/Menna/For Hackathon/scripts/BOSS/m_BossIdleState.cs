@@ -4,32 +4,56 @@ using UnityEngine;
 
 public class m_BossIdleState : StateMachineBehaviour
 {
-    float timer;
-    float chaseRange = 15;
-    Transform player;
-    
+     [SerializeField] float chaseRange;
+     [SerializeField] float AttackRange;
+
+     Transform player;
+     float timer;
+    m_BossMovement bossMovement;
+
+
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // player = GameObject.FindGameObjectWithTag("Player").transform;
 
         player = GameObjectsManager.Instance.Player.transform;
-        timer = 0;
+        bossMovement = animator.GetComponent<m_BossMovement>();
+        timer =0;
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer += Time.deltaTime;
-        if (timer > 3)
-        {
-            animator.SetBool("isPatrolling", true);
-        }
         float distance = Vector3.Distance(player.position, animator.transform.position);
-        if (distance <= chaseRange)
+        if(distance > chaseRange)
+        {
+            if (timer > 3)
+            {
+                animator.SetBool("isPatrolling", true);
+            }
+        }
+
+
+        if (distance <= chaseRange && distance > AttackRange)
         {
             animator.SetBool("isChasing", true);
+        }
+
+        if (distance <= AttackRange)
+        {
+            if (bossMovement.LookAtPlyer == true)
+            {
+                bossMovement.LookAtPlayer();
+            }
+            if (timer > bossMovement.IntervalBetweenBossAttacks)
+            {
+                //  animator.SetTrigger("Attack");
+                animator.SetBool("isAttacking", true);
+                timer = 0;
+            }
         }
     }
 
@@ -39,15 +63,4 @@ public class m_BossIdleState : StateMachineBehaviour
         
     }
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

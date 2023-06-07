@@ -10,21 +10,18 @@ public class mMainMenu : MonoBehaviour
     public string Level2;
     public string Level3;
     public GameObject optionsScreen;
+    public GameObject controlScreen;
 
-    // Start is called before the first frame update
     void Start()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void startGame()
     {
         SceneManager.LoadScene(FirstLevel);
+        Time.timeScale = 1;
+
     }
 
     public void GoToLevel1()
@@ -64,6 +61,16 @@ public class mMainMenu : MonoBehaviour
     {
 
         optionsScreen.SetActive(false);
+    }
+    public void openControls()
+    {
+        controlScreen.SetActive(true);
+    }
+
+    public void closeControls()
+    {
+
+        controlScreen.SetActive(false);
     }
 
     public void QuitGame()

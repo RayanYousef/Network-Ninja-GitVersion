@@ -5,7 +5,10 @@ using UnityEngine.AI;
 
 public class m_BossAttackState : StateMachineBehaviour
 {
-    [SerializeField] int AttackRange =3;
+    [SerializeField] int AttackRange;
+    m_BossMovement bossMovement;
+    float timer;
+
 
     Transform player;
     private float[] attackOptions = new float[] { 0f, 0.5f, 1f };
@@ -13,9 +16,9 @@ public class m_BossAttackState : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // player = GameObject.FindGameObjectWithTag("Player").transform;
-
         player = GameObjectsManager.Instance.Player.transform;
+        bossMovement = animator.GetComponent<m_BossMovement>();
+        timer = 0;
 
     }
 
@@ -23,11 +26,21 @@ public class m_BossAttackState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         float distance = Vector3.Distance(player.position, animator.transform.position);
-
-        if (distance > AttackRange)
+        timer += Time.deltaTime;
+        if(distance < AttackRange)
+        {
+            if (timer > bossMovement.AttackDuration)
+            {
+                animator.SetBool("isAttacking", false);
+                timer = 0;
+            }
+        }
+        else
         {
             animator.SetBool("isAttacking", false);
         }
+
+
     }
 
     public int ChooseDragonAttack()
@@ -40,6 +53,6 @@ public class m_BossAttackState : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         
-       // animator.SetFloat("attacks", attackOptions[ChooseDragonAttack()]);
+        animator.SetFloat("attacks", attackOptions[ChooseDragonAttack()]);
     }
 }

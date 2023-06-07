@@ -1,28 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CS_PlayerManager : MonoBehaviour
 {
 
 
     [Header("Components")]
-    [SerializeField] GameObject playerTopMostParent;
+    public GameObject PlayerTopMostParent;
+    public CS_HitEffect[] HitEffects;
     [SerializeField] Animator anim;
     [SerializeField] CS_MovementController moveController;
     [SerializeField] CS_AnimatorController animController;
     [SerializeField] CS_LookAtClosestTarget lookAtClosestTarget;
-    [SerializeField] CS_CameraManager camTarget;
+    [SerializeField] CS_CameraManager cameraManager;
     [SerializeField] StatsManager pStatsManager;
     [SerializeField] Rigidbody rb;
     [SerializeField] PlayerInput PlayerInputs;
     [SerializeField] FixedJoystick joyStick;
 
-    [Header("Variables")]
+    [Header("Energy")]
+    [SerializeField] Slider EnergySlider;
+
+    [Header("Ultimate")]
+    [SerializeField] bool ultimateOn;
+    [SerializeField] float energyRecoveryOnHit, energyRecoveryOnKill, ultimateCoolDown, ultimateAttackSpeed;
+    float ultimateTimer;
+
+    [Header("Other Variables")]
     [SerializeField] float drag;
     [SerializeField] float clicksIntervalTime;
 
@@ -31,40 +43,81 @@ public class CS_PlayerManager : MonoBehaviour
     float clicksIntervalTimer;
     bool AndroidBuild = false;
 
-    public CharacterState AnimatorCurrentState { get => currentState; }
+    public CharacterState CurrentState { get => currentState; }
     public Animator Anim { get => anim; }
     public CS_MovementController MoveController { get => moveController; }
     public CS_AnimatorController AnimController { get => animController; }
-    public CS_CameraManager CamTarget { get => camTarget; }
+    public CS_CameraManager CameraManager { get => cameraManager; }
     public Rigidbody Rb { get => rb; }
-    public StatsManager PStatsManager { get => pStatsManager;}
+    public StatsManager PStatsManager { get => pStatsManager; set => pStatsManager = value; }
+    public bool UltimateOn
+    {
+        get => ultimateOn;
+        set
+        {
+            ultimateOn = value;
+
+            switch (value)
+            {
+                case true:
+                    anim.SetBool(animController.B_Ultimate, value);
+                    anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
+                    cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
+                    // Call Menna Script to Enable Slow Motion
+                    //cameraManager.SlowSurroundingEnemies();
+                    AudioManager.instance.BossMusic.InCombat = value;
+                    break;
+
+                case false:
+                    anim.SetBool(animController.B_Ultimate, value);
+                    anim.SetFloat(animController.F_animSpeed, 1f);
+                    cameraManager.SwitchCamerasBasedOnLockState();
+                    //cameraManager.NormalizeSpeedOfSurroundingEnemies();
+                    anim.SetBool(animController.B_Attacking, value);
+                    AudioManager.instance.BossMusic.InCombat = value;
+                    break;
+            }
+        }
+    }
 
     private void Awake()
     {
-        if (playerTopMostParent == null)
-            playerTopMostParent = gameObject;
-        if(pStatsManager==null) pStatsManager = GetComponentInChildren<StatsManager>();
+        if (GameObjectsManager.Instance != null)
+        {
+            GameObjectsManager.Instance.Player = this.gameObject;
+        }
 
-        anim = playerTopMostParent.GetComponentInChildren<Animator>();
-        moveController = playerTopMostParent.GetComponentInChildren<CS_MovementController>();
-        animController = playerTopMostParent.GetComponentInChildren<CS_AnimatorController>();
-        lookAtClosestTarget = playerTopMostParent.GetComponentInChildren<CS_LookAtClosestTarget>();
+        // Top Most parent of Player
+        if (PlayerTopMostParent == null)
+            PlayerTopMostParent = gameObject;
+        // Stats Manager
+        if (pStatsManager == null) pStatsManager = GetComponentInChildren<StatsManager>();
 
-        if(camTarget== null)    
-        camTarget = playerTopMostParent.GetComponentInChildren<CS_CameraManager>();
+        anim = PlayerTopMostParent.GetComponentInChildren<Animator>();
+        moveController = PlayerTopMostParent.GetComponentInChildren<CS_MovementController>();
+        animController = PlayerTopMostParent.GetComponentInChildren<CS_AnimatorController>();
+        lookAtClosestTarget = PlayerTopMostParent.GetComponentInChildren<CS_LookAtClosestTarget>();
 
-        rb = playerTopMostParent.GetComponentInChildren<Rigidbody>();
+        // Camera Manager
+        if (cameraManager == null)
+            cameraManager = PlayerTopMostParent.GetComponentInChildren<CS_CameraManager>();
+        cameraManager.PlayerManager = this;
+
+        rb = PlayerTopMostParent.GetComponentInChildren<Rigidbody>();
         moveController.PlayerManager = this;
         animController.PlayerManager = this;
 
         PlayerInputs = GetComponent<PlayerInput>();
 
 
+        HitEffects = PlayerTopMostParent.GetComponentsInChildren<CS_HitEffect>();
+
+
     }
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        pStatsManager.Stats.OnHealthUpdated.AddListener(LostGameHealthZero);
 
     }
 
@@ -83,12 +136,122 @@ public class CS_PlayerManager : MonoBehaviour
             SendInputDirection(joyStick.Direction);
 
 
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-            Cursor.lockState = CursorLockMode.None;
-        if (Input.GetKeyUp(KeyCode.LeftAlt))
-            Cursor.lockState = CursorLockMode.Locked;
+        //if (Input.GetKeyDown(KeyCode.LeftAlt))
+        //    Cursor.lockState = CursorLockMode.None;
+        //if (Input.GetKeyUp(KeyCode.LeftAlt))
+        //    Cursor.lockState = CursorLockMode.Locked;
 
     }
+    private void FixedUpdate()
+    {
+        if (ultimateTimer < ultimateCoolDown && ultimateOn == false)
+            ultimateTimer += Time.deltaTime;
+        else if (ultimateOn == true)
+            ultimateTimer -= Time.deltaTime * 2;
+
+        if (ultimateTimer < 0)
+            UltimateOn = false;
+        if(EnergySlider!= null)
+        EnergySlider.value = ultimateTimer / ultimateCoolDown;
+    }
+    public void LostGameHealthZero(float value)
+    {
+        if (value <= 0)
+            GameManager.Instance.CurrentGameState = GameState.Lost;
+    }
+
+    #region Animator States
+    public void OnStateEnter(CharacterState enteredState)
+    {
+        currentState = enteredState;
+
+        if (enteredState != CharacterState.Attacking)
+            animController.ResetCombo();
+
+        ResetParameters();
+
+        switch (enteredState)
+        {
+            case CharacterState.Running:
+                break;
+
+            case CharacterState.Jumping:
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
+                moveController.Jump();
+                anim.SetBool(animController.B_Jumping, true);
+                break;
+
+            case CharacterState.Dashing:
+                anim.SetBool(animController.B_Dashing, true);
+                moveController.Dash();
+                break;
+
+            case CharacterState.Attacking:
+                anim.SetBool(animController.B_Attacking, true);
+                anim.applyRootMotion = true;
+                //if (lookAtClosestTarget != null)
+                //    lookAtClosestTarget.RotateTowardsClosestEnemy();
+                break;
+
+            case CharacterState.Falling:
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
+                break;
+
+            case CharacterState.Idling:
+                break;
+
+            case CharacterState.Ultimate:
+                anim.SetBool(animController.B_Attacking, true);
+                anim.applyRootMotion = false;
+                if (lookAtClosestTarget != null)
+                    lookAtClosestTarget.RotateTowardsClosestEnemy();
+                break;
+
+        }
+    }
+
+    public void OnStateExit(CharacterState exitedState)
+    {
+        //Debug.Log("Exited State:" + exitedState);
+
+        //switch (exitedState)
+        //{
+
+        //}
+    }
+    public void ResetParameters()
+    {
+        anim.applyRootMotion = false;
+
+        anim.SetBool(animController.B_Dashing, false);
+        anim.SetBool(animController.B_Jumping, false);
+        anim.SetBool(animController.B_Attacking, false);
+        anim.SetBool(animController.B_canTransit, false);
+        anim.ResetTrigger(animController.T_Ultimate);
+
+        pStatsManager.DisableAllWeapons();
+        //
+        rb.drag = drag;
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 6)
+        {
+            var contactPoints = collision.contacts;
+            foreach (var contact in contactPoints)
+            {
+                var yLength = GetComponent<CapsuleCollider>().bounds.center.y - contact.point.y;
+                if (yLength > GetComponent<CapsuleCollider>().height / 2 - 0.01f)
+                {
+                    Debug.Log("happened");
+                    //  rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+                }
+            }
+        }
+    }
+    #endregion
 
     #region Main Input Functions
     public void SendInputDirection(Vector2 value)
@@ -104,7 +267,7 @@ public class CS_PlayerManager : MonoBehaviour
         //if(Mouse.current.leftButton.isPressed) 
 
         //camTarget.DeltaValues = Mouse.current.rightButton.isPressed || AndroidBuild ? value : Vector2.zero;
-        camTarget.DeltaValues = value;
+        cameraManager.DeltaValues = value;
     }
 
     public void SendJumpInputState(bool value)
@@ -141,89 +304,16 @@ public class CS_PlayerManager : MonoBehaviour
             Debug.Log("Attack Clicked");
             clicksIntervalTimer = 0;
             anim.SetInteger(animController.I_Combo_2, anim.GetInteger(animController.I_Combo_2) + 1);
-        }
-    }
-    #endregion
-
-    #region Animator States
-    public void OnStateEnter(CharacterState enteredState)
-    {
-        currentState = enteredState;
-        if (enteredState != CharacterState.Attacking)
-            animController.ResetCombo();
-
-        ResetParameters();
-
-        switch (enteredState)
-        {
-            case CharacterState.Running:
-                break;
-
-            case CharacterState.Jumping:
-                rb.constraints = RigidbodyConstraints.FreezeRotation;
-                moveController.Jump();
-                anim.SetBool(animController.B_Jumping, true);
-                break;
-
-            case CharacterState.Dashing:
-                anim.SetBool(animController.B_Dashing, true);
-                moveController.Dash();
-                break;
-
-            case CharacterState.Attacking:
-                anim.SetBool(animController.B_Attacking, true);
-                anim.applyRootMotion = true;
-                lookAtClosestTarget.RotateTowardsClosestEnemy();
-                break;
-
-            case CharacterState.Falling:
-                rb.constraints = RigidbodyConstraints.FreezeRotation;
-                break;
-
-            case CharacterState.Idling:
-                break;
-
+            if (ultimateOn) anim.SetTrigger(animController.T_Ultimate);
         }
     }
 
-    public void OnStateExit(CharacterState exitedState)
+    public void ActivateUltimate(bool value)
     {
-        //Debug.Log("Exited State:" + exitedState);
-
-        //switch (exitedState)
-        //{
-
-        //}
-    }
-    public void ResetParameters()
-    {
-        anim.applyRootMotion = false;
-
-        anim.SetBool(animController.B_Dashing, false);
-        anim.SetBool(animController.B_Jumping, false);
-        anim.SetBool(animController.B_Attacking, false);
-        anim.SetBool(animController.B_canTransit, false);
-        //
-        rb.drag = drag;
-
+        if (ultimateTimer > ultimateCoolDown && value == true && ultimateOn == false)
+            UltimateOn = true;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == 6)
-        {
-            var contactPoints = collision.contacts;
-            foreach (var contact in contactPoints)
-            {
-                var yLength = GetComponent<CapsuleCollider>().bounds.center.y - contact.point.y;
-                if (yLength > GetComponent<CapsuleCollider>().height / 2 - 0.01f)
-                {
-                    Debug.Log("happened");
-                  //  rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
-                }
-            }
-        }
-    }
     #endregion
 
     #region Messages from Player Inputs
@@ -262,9 +352,34 @@ public class CS_PlayerManager : MonoBehaviour
         //Debug.Log("SendDashInputState:" + value.isPressed);
     }
 
+    public void OnUltimate(InputValue value)
+    {
+        ActivateUltimate(value.isPressed);
+    }
     #endregion
 
     #region Public Functions
+
+    public void RecoverEnergy(Collider other)
+    {
+        other.TryGetComponent<StatsManager>(out StatsManager otherStatsManager);
+
+        if (otherStatsManager != null)
+        {
+            switch (otherStatsManager.Stats.CurrentHealth)
+            {
+                case 0:
+                    otherStatsManager.IncreaseEnergy(energyRecoveryOnKill);
+                    break;
+
+                default:
+                    otherStatsManager.IncreaseEnergy(energyRecoveryOnHit);
+                    break;
+
+            }
+        }
+
+    }
 
     public void ControllerState(bool value)
     {
