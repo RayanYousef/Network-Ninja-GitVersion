@@ -86,7 +86,27 @@ public class CS_CameraManager : MonoBehaviour
         }
     }
 
-    public CameraMode CameraMode { get => _cameraMode; set => _cameraMode = value; }
+    public CameraMode CameraMode { get => _cameraMode;
+        set
+        {
+            _cameraMode = value;
+            switch (value)
+            {
+                case CameraMode.Close:
+                    mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 3;
+                    mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 0.2f;
+                    break;
+                case CameraMode.Mid:
+                    mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 4;
+                    mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 0.8f;
+                    break;
+                case CameraMode.Far:
+                    mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 6;
+                    mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 1.5f;
+                    break;
+            }
+        }
+    }
 
 
     #endregion
@@ -291,25 +311,18 @@ public class CS_CameraManager : MonoBehaviour
     // 0.8 4
     // 0.2 3 
 
-    public void SetCameraDistance()
+    public void SetCameraToFar()
     {
-        switch (_cameraMode)
-        {
-            case CameraMode.Close:
-                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 3;
-                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 0.2f;
-                break;
-            case CameraMode.Mid:
-                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 4;
-                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 0.8f;
-                break;
-            case CameraMode.Far:
-                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 6;
-                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 1.5f;
-                break;
-        }
+        CameraMode= CameraMode.Far;
+    }
+    public void SetCameraToMid()
+    {
+        CameraMode = CameraMode.Mid;
+    }
 
-        followTargetNormal.rotation = PlayerManager.transform.rotation;
+    public void SetCameraToClose()
+    {
+        CameraMode = CameraMode.Close;
     }
     #endregion
 
