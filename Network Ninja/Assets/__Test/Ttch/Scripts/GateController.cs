@@ -34,16 +34,14 @@ public class GateController : MonoBehaviour
         {
             GameObjectsManager.Instance.CurrentGate.NextArea = this.nextArea;
 
-            if (nextArea.AreaType == AreaType.Fight)
+            if (nextArea.AreaType == AreaType.Base)
             {
-                rAreasManager.Instance.CurrentArea.PlayerInside = false;
-                pathController.PlayerEnteredPath(state);
+                rUIManager.instance.UiPassword.ShowCheckPasswordPanel();
             }
             else
             {
-                rUIManager.instance.UiPassword.ShowCheckPasswordPanel();
-                /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
-                //GameObjectsManager.Instance.CurrentGate.NextArea.OnEnteringArea?.Invoke();
+                rAreasManager.Instance.CurrentArea.PlayerInside = false;
+                pathController.PlayerEnteredPath(state);
             }
         }
 

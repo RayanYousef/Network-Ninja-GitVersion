@@ -20,7 +20,7 @@ public class rArea : MonoBehaviour
     [SerializeField] string password;
 
     [SerializeField] bool playerInside = false;
-
+    bool isFirst = true;
 
     [Header("Events")]
     [SerializeField] public UnityEvent OnEnteringFight;
@@ -331,14 +331,15 @@ public class rArea : MonoBehaviour
                     //OnEnteringArea?.Invoke();
                 }
             }
-            else
+            else if (isFirst)
             {
                 // defualt area has max health
                 this.Health = maxHealth;
                 FormArmyBasedOnAreaHealth();
-                areaType = AreaType.Base;
+                //areaType = AreaType.Base;
                 // show intro panel
                 rUIManager.instance.UiPassword.ShowIntroPanel();
+                isFirst = false;
             }
         }
     }
