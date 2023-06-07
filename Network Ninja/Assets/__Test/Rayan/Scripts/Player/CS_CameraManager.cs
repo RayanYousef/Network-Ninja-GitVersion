@@ -23,6 +23,7 @@ public class CS_CameraManager : MonoBehaviour
     [SerializeField] List<CinemachineVirtualCamera> virtualCameras = new List<CinemachineVirtualCamera>();
     [SerializeField] CinemachineVirtualCamera mainVirtualCamera, lockVirtualCamera, ultimateCamera;
     [SerializeField] CinemachineImpulseSource _impulseSource;
+    [SerializeField] CameraMode _cameraMode;
 
 
     [Header("Targets To Follow")]
@@ -84,6 +85,8 @@ public class CS_CameraManager : MonoBehaviour
 
         }
     }
+
+    public CameraMode CameraMode { get => _cameraMode; set => _cameraMode = value; }
 
 
     #endregion
@@ -288,9 +291,9 @@ public class CS_CameraManager : MonoBehaviour
     // 0.8 4
     // 0.2 3 
 
-    public void SetCameraDistance(CameraMode mode)
+    public void SetCameraDistance()
     {
-        switch (mode)
+        switch (_cameraMode)
         {
             case CameraMode.Close:
                 mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 3;
