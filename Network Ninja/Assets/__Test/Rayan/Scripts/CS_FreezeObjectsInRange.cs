@@ -18,7 +18,7 @@ public class CS_FreezeObjectsInRange : MonoBehaviour
 
             }
             if (enemy.TryGetComponent<Animator>(out Animator animator))
-                animator.speed = 0.15f;
+                animator.speed = 0.1f;
             
         }
 

@@ -17,6 +17,7 @@ public class CS_CameraManager : MonoBehaviour
     [SerializeField] CinemachineBrain cameraBrain;
     [SerializeField] List<CinemachineVirtualCamera> virtualCameras = new List<CinemachineVirtualCamera>();
     [SerializeField] CinemachineVirtualCamera mainVirtualCamera, lockVirtualCamera, ultimateCamera;
+    [SerializeField] CinemachineImpulseSource _impulseSource;
 
 
     [Header("Targets To Follow")]
@@ -31,9 +32,9 @@ public class CS_CameraManager : MonoBehaviour
     [SerializeField] bool lockedOn;
 
     [Header("Camera Behavior Vars")]
-    [SerializeField] float lerpTime;
-    [SerializeField] float rotationSpeed, slowAnimationRate;
-    [SerializeField] float /*targetRotationSmoothTime,*/ minAngle, maxAngle;
+    [SerializeField] float cinemachineLerpTime;
+    [SerializeField, Range(0,300)] float rotationSpeed;
+    [SerializeField] float minAngle, maxAngle;
 
 
     [Header("Necessary For The Script")]
@@ -82,6 +83,10 @@ public class CS_CameraManager : MonoBehaviour
 
     #endregion
 
+    private void Awake()
+    {
+        _impulseSource= GetComponentInChildren<CinemachineImpulseSource>();
+    }
     private void Start()
     {
         foreach(CinemachineVirtualCamera camera in PlayerManager.PlayerTopMostParent.GetComponentsInChildren<CinemachineVirtualCamera>())
@@ -184,8 +189,11 @@ public class CS_CameraManager : MonoBehaviour
     public void RotateObjectQuaternionClamping(Vector2 mouseDelta, Transform transform)
     {
 
-        float mouseX = mouseDelta.x * rotationSpeed * Time.deltaTime;
-        float mouseY = mouseDelta.y * rotationSpeed * Time.deltaTime;
+        //float mouseX = mouseDelta.x * rotationSpeed * Time.deltaTime;
+        //float mouseY = mouseDelta.y * rotationSpeed * Time.deltaTime;
+
+        float mouseX = mouseDelta.x;
+        float mouseY = mouseDelta.y;
 
         float pitch = -mouseY;
         float yaw = mouseX;
@@ -202,7 +210,8 @@ public class CS_CameraManager : MonoBehaviour
                 break;
         }
 
-        transform.rotation = Quaternion.Euler(new Vector3(pitch, rotation.eulerAngles.y,0));
+        //transform.rotation = Quaternion.Euler(new Vector3(pitch, rotation.eulerAngles.y,0));
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(pitch, rotation.eulerAngles.y, 0)), Time.deltaTime * rotationSpeed);
     }
 
     #endregion
@@ -235,7 +244,7 @@ public class CS_CameraManager : MonoBehaviour
 
                 if (listOfTargetsInRange.Count > 0)
                 {
-                    cameraBrain.m_DefaultBlend.m_Time = lerpTime;
+                    cameraBrain.m_DefaultBlend.m_Time = cinemachineLerpTime;
                     DisableAllCamerasExceptParam(lockVirtualCamera);
                     SetTarget();
                 }
@@ -249,11 +258,26 @@ public class CS_CameraManager : MonoBehaviour
 
 
             case false:
-                cameraBrain.m_DefaultBlend.m_Time = lerpTime;
+                cameraBrain.m_DefaultBlend.m_Time = cinemachineLerpTime;
                 if(mainVirtualCamera.enabled==false)
                 DisableAllCamerasExceptParam(mainVirtualCamera);
                 break;
         }
+    }
+
+    public void ApplyShakeOnTakingDamage()
+    {
+        _impulseSource.GenerateImpulseWithVelocity(new Vector3(0,-1,0));
+    }
+
+    public void ApplyShakeOnDealingDamage()
+    {
+        _impulseSource.GenerateImpulseWithVelocity(new Vector3(0, 0.2f, 0));
+    }
+
+    public void SetDistanceOfCamera(float value)
+    {
+        mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = value;
     }
     #endregion
 

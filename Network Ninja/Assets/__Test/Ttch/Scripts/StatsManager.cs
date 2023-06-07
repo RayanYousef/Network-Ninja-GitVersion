@@ -31,6 +31,7 @@ public class StatsManager : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] StatsStruct myStats = new StatsStruct();
+    [SerializeField] bool damagable;
 
     [Header("GameObject Team")]
     [SerializeField] CharacterTeam team = CharacterTeam.None;
@@ -51,6 +52,7 @@ public class StatsManager : MonoBehaviour
     public CS_DamageObject[] DamageObjects { get => damageObjects;}
     public CharacterTeam Team { get => team; set => team = value; }
     public bool Targetable { get => targetable;}
+    public bool Damagable { get => damagable; set => damagable = value; }
     #endregion
 
     private void OnDisable()
@@ -227,16 +229,19 @@ public class StatsManager : MonoBehaviour
     }
     public void TakeDamage(StatsManager AttackerStats)
     {
-        float dmg = AttackerStats.CalculateAttackStrength() - this.GetDefense();
-        myStats.CurrentHealth -= dmg;
-        if(HealthBar!=null) 
-        HealthBar.value = myStats.CurrentHealth;
-        Debug.Log(myStats.CurrentHealth);
-        OnTakingDamage?.Invoke();
+        if (damagable)
+        {
+            float dmg = AttackerStats.CalculateAttackStrength() - this.GetDefense();
+            myStats.CurrentHealth -= dmg;
+            if (HealthBar != null)
+                HealthBar.value = myStats.CurrentHealth;
+            Debug.Log(myStats.CurrentHealth);
+            OnTakingDamage?.Invoke();
+        }
 
     }
 
-    public void ApplyDamage()
+    public void ApplyDamage(Collider damagedObject)
     {
         OnApplyingDamage?.Invoke(); 
     }

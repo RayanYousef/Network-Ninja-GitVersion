@@ -170074,7 +170074,6 @@ GameObject:
   - component: {fileID: 4922773841797100573}
   - component: {fileID: 4922773841797100642}
   - component: {fileID: 4922773841797100643}
-  - component: {fileID: 4922773841797100640}
   - component: {fileID: 4922773841797100641}
   m_Layer: 0
   m_Name: Ultimate Virtual Camera
@@ -170090,7 +170089,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922773841797100647}
-  m_LocalRotation: {x: 6.6141936e-10, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.000000002289009, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.85000014, y: 1.36, z: -1.2800001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -170185,23 +170184,6 @@ MonoBehaviour:
   IgnoreTag: 
   AimDistance: 200
   AimTargetReticle: {fileID: 0}
---- !u!114 &4922773841797100640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922773841797100647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FocusTracksTarget: 0
-  m_FocusTracking: 0
-  m_FocusTarget: {fileID: 0}
-  m_FocusOffset: 0
-  m_Profile: {fileID: 11400000, guid: 7c04c6e74d4361e4e8c1fd321b43dff7, type: 2}
 --- !u!114 &4922773841797100641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170417,8 +170399,8 @@ GameObject:
   - component: {fileID: 4922773842041303623}
   - component: {fileID: 4922773842041303617}
   - component: {fileID: 4922773842041303622}
-  - component: {fileID: 4922773842041303616}
   - component: {fileID: 4922773842041303619}
+  - component: {fileID: 1337591376}
   m_Layer: 0
   m_Name: Main Virtual Camera
   m_TagString: Untagged
@@ -170433,8 +170415,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922773842041303621}
-  m_LocalRotation: {x: 0.000000006501346, y: 0.00000010402154, z: -6.7628e-16, w: 1}
-  m_LocalPosition: {x: 0, y: 2.4, z: -4}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.6, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170465,7 +170447,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
-    NearClipPlane: 0.01
+    NearClipPlane: 0.001
     FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
@@ -170528,23 +170510,6 @@ MonoBehaviour:
   IgnoreTag: 
   AimDistance: 200
   AimTargetReticle: {fileID: 0}
---- !u!114 &4922773842041303616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922773842041303621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FocusTracksTarget: 0
-  m_FocusTracking: 0
-  m_FocusTarget: {fileID: 0}
-  m_FocusOffset: 0
-  m_Profile: {fileID: 11400000, guid: 7c04c6e74d4361e4e8c1fd321b43dff7, type: 2}
 --- !u!114 &4922773842041303619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170562,6 +170527,29 @@ MonoBehaviour:
   m_FocusTarget: {fileID: 0}
   m_FocusOffset: 0
   m_Profile: {fileID: 11400000, guid: 8367181cee78b9a4e920730ba38646e9, type: 2}
+--- !u!114 &1337591376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922773842041303621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_AmplitudeGain: 10
+    m_FrequencyGain: 0.5
+    m_Duration: 0.5
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &4922773842086144435
 GameObject:
   m_ObjectHideFlags: 0
@@ -170715,6 +170703,7 @@ GameObject:
   - component: {fileID: 4922773842341368157}
   - component: {fileID: 4922773842341369506}
   - component: {fileID: 4922773842341369507}
+  - component: {fileID: 1775837541}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: Untagged
@@ -170729,8 +170718,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922773842341369505}
-  m_LocalRotation: {x: 0.000000006501346, y: 0.00000010402154, z: -6.7628e-16, w: 1}
-  m_LocalPosition: {x: 0, y: 2.4, z: -4}
+  m_LocalRotation: {x: -0.0000000022576168, y: 3.7779543e-10, z: 0.1650476, w: 0.9862856}
+  m_LocalPosition: {x: 0.85000014, y: 1.36, z: -1.2800001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -170762,7 +170751,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 100
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -170841,7 +170830,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 0.3
+    m_Time: 0
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -170855,6 +170844,59 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1775837541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922773842341369505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1 &4922773842411934872
 GameObject:
   m_ObjectHideFlags: 0
@@ -171179,6 +171221,7 @@ GameObject:
   - component: {fileID: 4922773842570072262}
   - component: {fileID: 4922773842570072257}
   - component: {fileID: 4922773842570072256}
+  - component: {fileID: 1661674303}
   m_Layer: 8
   m_Name: Camera Manager
   m_TagString: Untagged
@@ -171219,6 +171262,7 @@ MonoBehaviour:
   mainVirtualCamera: {fileID: 4922773842041303623}
   lockVirtualCamera: {fileID: 4922773843001053572}
   ultimateCamera: {fileID: 4922773841797100573}
+  _impulseSource: {fileID: 1661674303}
   followTargetNormal: {fileID: 4922773842117044705}
   followTargetLock: {fileID: 4922773842149698423}
   listOfTargetsInRange: []
@@ -171227,9 +171271,8 @@ MonoBehaviour:
   lockRotationSpeed: 250
   lockTimer: 0
   lockedOn: 0
-  lerpTime: 0.3
-  rotationSpeed: 10
-  slowAnimationRate: 0
+  cinemachineLerpTime: 0
+  rotationSpeed: 150
   minAngle: -30
   maxAngle: 60
   currentRotation: {x: 0, y: 0, z: 0}
@@ -171251,6 +171294,59 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 30
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1661674303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922773842570072263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &4922773842600253305
 GameObject:
   m_ObjectHideFlags: 0
@@ -171348,10 +171444,34 @@ MonoBehaviour:
   EnergyBar: {fileID: 0}
   OnTakingDamage:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4922773842570072257}
+        m_TargetAssemblyTypeName: CS_CameraManager, Assembly-CSharp
+        m_MethodName: ApplyShakeOnTakingDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnApplyingDamage:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4922773842570072257}
+        m_TargetAssemblyTypeName: CS_CameraManager, Assembly-CSharp
+        m_MethodName: ApplyShakeOnDealingDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   myStats:
     OnHealthUpdated:
       m_PersistentCalls:
@@ -171375,6 +171495,7 @@ MonoBehaviour:
     luck: 1
     defaultEnergy: 100
     energy: 100
+  damagable: 0
   team: 1
   targetable: 0
   difficulty: 1
@@ -171562,6 +171683,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd60e984a0c4ba4ab4eb92808b1e6ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FirstButtonClicked:
+    m_PersistentCalls:
+      m_Calls: []
+  SecondButtonClicked:
+    m_PersistentCalls:
+      m_Calls: []
   PlayerTopMostParent: {fileID: 4922773842089189658}
   HitEffects: []
   anim: {fileID: 0}
@@ -172104,7 +172231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 1, y: 1, z: 1}
-  ShoulderOffset: {x: 0, y: 0.8, z: 0}
+  ShoulderOffset: {x: 0, y: 1, z: 0}
   VerticalArmLength: 0
   CameraSide: 1
   CameraDistance: 4
@@ -172185,8 +172312,8 @@ GameObject:
   - component: {fileID: 4922773843001053572}
   - component: {fileID: 4922773843001053573}
   - component: {fileID: 4922773843001053578}
-  - component: {fileID: 4922773843001053574}
   - component: {fileID: 4922773843001053575}
+  - component: {fileID: 855593877}
   m_Layer: 0
   m_Name: Lock Virtual Camera
   m_TagString: Untagged
@@ -172233,7 +172360,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
-    NearClipPlane: 0.01
+    NearClipPlane: 0.001
     FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
@@ -172296,23 +172423,6 @@ MonoBehaviour:
   IgnoreTag: 
   AimDistance: 200
   AimTargetReticle: {fileID: 0}
---- !u!114 &4922773843001053574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922773843001053576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FocusTracksTarget: 0
-  m_FocusTracking: 0
-  m_FocusTarget: {fileID: 0}
-  m_FocusOffset: 0
-  m_Profile: {fileID: 11400000, guid: 7c04c6e74d4361e4e8c1fd321b43dff7, type: 2}
 --- !u!114 &4922773843001053575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172330,6 +172440,29 @@ MonoBehaviour:
   m_FocusTarget: {fileID: 0}
   m_FocusOffset: 0
   m_Profile: {fileID: 11400000, guid: 8367181cee78b9a4e920730ba38646e9, type: 2}
+--- !u!114 &855593877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922773843001053576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_AmplitudeGain: 10
+    m_FrequencyGain: 0.5
+    m_Duration: 0.5
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &4922773843024640613
 GameObject:
   m_ObjectHideFlags: 0
@@ -172727,7 +172860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.5, y: 0.5, z: 0.5}
-  ShoulderOffset: {x: 0, y: 0.8, z: 0}
+  ShoulderOffset: {x: 0, y: 1, z: 0}
   VerticalArmLength: 0
   CameraSide: 1
   CameraDistance: 4

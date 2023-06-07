@@ -46,6 +46,8 @@ public class CS_DamageObject : MonoBehaviour
             OnHittingEnemy += ApplyForceToHitObject;
             OnHittingEnemy += EnableHitParticles;
             OnHittingEnemy += playerManager.RecoverEnergy;
+            OnHittingEnemy += myStatsManager.ApplyDamage;
+
         }
     }
 
