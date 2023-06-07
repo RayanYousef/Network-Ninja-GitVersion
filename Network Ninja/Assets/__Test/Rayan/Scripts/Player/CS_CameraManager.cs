@@ -8,8 +8,13 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
+public enum CameraMode
+{
+    Close,Mid,Far
+}
 public class CS_CameraManager : MonoBehaviour
 {
+   
     [Header("Player Manager")]
     public CS_PlayerManager PlayerManager;
 
@@ -274,14 +279,34 @@ public class CS_CameraManager : MonoBehaviour
     {
         _impulseSource.GenerateImpulseWithVelocity(new Vector3(0, 0.2f, 0));
     }
-
-    public void SetDistanceOfCamera(float value)
-    {
-        mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = value;
-    }
     public void RotationSpeed( float value)
     {
         rotationSpeed = value * 300;
+    }
+
+    // 1.5 6 
+    // 0.8 4
+    // 0.2 3 
+
+    public void SetCameraDistance(CameraMode mode)
+    {
+        switch (mode)
+        {
+            case CameraMode.Close:
+                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 3;
+                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 0.2f;
+                break;
+            case CameraMode.Mid:
+                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 4;
+                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 0.8f;
+                break;
+            case CameraMode.Far:
+                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 6;
+                mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 1.5f;
+                break;
+        }
+
+        followTargetNormal.rotation = PlayerManager.transform.rotation;
     }
     #endregion
 

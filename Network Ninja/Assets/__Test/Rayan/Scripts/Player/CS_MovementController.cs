@@ -89,17 +89,29 @@ public class CS_MovementController : MonoBehaviour
 
     private void LateUpdate()
     {
-        switch (playerManager.CurrentState == CharacterState.Ultimate && playerManager.CameraManager.LockedOn)
+        //switch (playerManager.CurrentState == CharacterState.Ultimate && playerManager.CameraManager.LockedOn)
+        //{
+        //    case true:
+        //        RotateTowardsDirection(playerManager.CameraManager.LockedTarget);
+
+        //        break;
+
+        //    case false:
+        //        if(playerManager.CurrentState != CharacterState.Ultimate)
+        //        RotateTowardsDirection();
+        //        break;
+        //}
+
+        switch (playerManager.CurrentState == CharacterState.Attacking && playerManager.CameraManager.LockedOn) 
         {
             case true:
                 RotateTowardsDirection(playerManager.CameraManager.LockedTarget);
-
                 break;
-
-            case false:
-                if(playerManager.CurrentState != CharacterState.Ultimate)
+            case false: 
                 RotateTowardsDirection();
                 break;
+
+        
         }
     }
 
