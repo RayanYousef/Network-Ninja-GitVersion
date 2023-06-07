@@ -241,10 +241,14 @@ public class rArea : MonoBehaviour
             FormStrongArmy();
         }
 
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
-        areaCamera.enabled = true;
-        if(switchCamBack)
-            StartCoroutine(WaitAndSwitchCameraBack());
+        if (GameObjectsManager.Instance.CameraBrain != null)
+        {
+            GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+
+            areaCamera.enabled = true;
+            if (switchCamBack)
+                StartCoroutine(WaitAndSwitchCameraBack());
+        }
     } 
 
     private void FormStrongArmy()

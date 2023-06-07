@@ -62,26 +62,22 @@ public class TutorialManager : MonoBehaviour
                 break;
             //Left Click Attack Tutorial
             case 2:
-                if (Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    IncrementLAttack();
-                    if (LAttackCount == 10)
+                
+                    if (LAttackCount == 8)
                     {
                         popUpIndex++;
                     }
-                }
+                
                 break;
 
             //Right Click Attack Tutorial
             case 3:
-                if (Input.GetKeyDown(KeyCode.Mouse1))
-                {
-                    IncrementRAttack();
-                    if (RAttackCount == 5)
+                
+                    if (RAttackCount == 3)
                     {
                         popUpIndex++;
                     }
-                }
+                
                 break;
 
             //Securing Rooms Tutorial
