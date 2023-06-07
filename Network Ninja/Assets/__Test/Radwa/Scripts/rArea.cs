@@ -339,7 +339,7 @@ public class rArea : MonoBehaviour
                 //areaType = AreaType.Base;
                 // show intro panel
                 rUIManager.instance.UiPassword.ShowIntroPanel();
-                isFirst = false;
+                isFirst = false
             }
         }
     }
