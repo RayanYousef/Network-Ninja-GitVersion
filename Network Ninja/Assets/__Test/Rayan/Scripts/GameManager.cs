@@ -60,8 +60,11 @@ public class GameManager : MonoBehaviour
             switch(value)
             {
                 case true:
-                    AudioManager.instance.musicSource.Stop();
-                    AudioManager.instance.BossMusic.gameObject.SetActive(true);
+                    if (AudioManager.instance != null && AudioManager.instance.musicSource != null && AudioManager.instance.BossMusic != null)
+                    {
+                        AudioManager.instance.musicSource.Stop();
+                        AudioManager.instance.BossMusic.gameObject.SetActive(true);
+                    }
                     break;
 
                 case false:

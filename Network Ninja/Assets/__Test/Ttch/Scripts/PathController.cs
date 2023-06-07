@@ -11,14 +11,14 @@ public class PathController : MonoBehaviour
 
     public List<Transform> wayPoints = new List<Transform>();
 
-    public float defaultblendtime = 2;
+   // public float defaultblendtime = 2;
 
-    private CinemachineBrain brain;
+    //private CinemachineBrain brain;
 
     //List of cameras that change the view based on waypoint
     //public List<CinemachineVirtualCamera> WaypointCameras = new List<CinemachineVirtualCamera>();
 
-    public float blendtime = 0.5f;
+    //public float blendtime = 0.5f;
 
 
     public bool reversePath = false;
@@ -55,7 +55,7 @@ public class PathController : MonoBehaviour
     private void Start()
     {
         player = GameObjectsManager.Instance.Player;
-        brain = GameObjectsManager.Instance.CameraBrain;
+        //brain = GameObjectsManager.Instance.CameraBrain;
     }
 
 
@@ -64,7 +64,7 @@ public class PathController : MonoBehaviour
 
         if (playerIsOnPath&& currentWayPointIndex >= 0 && currentWayPointIndex <= wayPoints.Count - 1)
         {
-            brain.m_DefaultBlend.m_Time = blendtime;
+           ///brain.m_DefaultBlend.m_Time = blendtime;
             MoveObjectTowards(player, ChooseDestination());
         }
     }
