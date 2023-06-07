@@ -28,7 +28,7 @@ public class CS_StatesHandler : StateMachineBehaviour
         {
             playerManager.FirstButtonClicked?.Invoke();
         }
-        else if (_buttonClicked!= ButtonClicked.Second) 
+        else if (_buttonClicked == ButtonClicked.Second) 
         {
             playerManager.SecondButtonClicked?.Invoke();
 
