@@ -305,10 +305,11 @@ public class rArea : MonoBehaviour
                 return;
             }
 
+            rAreasManager.Instance.CurrentArea = this;
+            
             if (areaType == AreaType.Fight)
             {
                 rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
-                rAreasManager.Instance.CurrentArea = this;
                 /// raise event to spawn enemies
                 OnEnteringFight?.Invoke();
             }
@@ -321,7 +322,7 @@ public class rArea : MonoBehaviour
                 //{
                 //    return;
                 //}
-                rAreasManager.Instance.CurrentArea = this;
+                //rAreasManager.Instance.CurrentArea = this;
 
                 /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
                 if (password == null)
@@ -335,7 +336,7 @@ public class rArea : MonoBehaviour
                 // defualt area has max health
                 this.Health = maxHealth;
                 FormArmyBasedOnAreaHealth();
-
+                areaType = AreaType.Base;
                 // show intro panel
                 rUIManager.instance.UiPassword.ShowIntroPanel();
             }
