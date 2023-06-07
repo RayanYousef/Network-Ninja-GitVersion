@@ -279,6 +279,10 @@ public class CS_CameraManager : MonoBehaviour
     {
         mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = value;
     }
+    public void RotationSpeed( float value)
+    {
+        rotationSpeed = value * 300;
+    }
     #endregion
 
     #region TriggerEnter/Exit
