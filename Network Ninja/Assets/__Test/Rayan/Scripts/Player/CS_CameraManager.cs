@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public enum CameraMode
 {
@@ -302,9 +303,9 @@ public class CS_CameraManager : MonoBehaviour
     {
         _impulseSource.GenerateImpulseWithVelocity(new Vector3(0, 0.2f, 0));
     }
-    public void RotationSpeed( float value)
+    public void RotationSpeed(Slider mouseSlider)
     {
-        rotationSpeed = value * 300;
+        rotationSpeed = mouseSlider.value * 300;
     }
 
     // 1.5 6 
