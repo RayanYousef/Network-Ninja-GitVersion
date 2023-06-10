@@ -36,6 +36,7 @@ public class rUIPassword : MonoBehaviour
     [SerializeField] Button nextBtn;
     bool isFirstClk = true;
 
+    public GameObject CheckPasswordPanel { get => checkPasswordPanel; set => checkPasswordPanel = value; }
     public string PasswordInput
     {
         get => passwordInput;
@@ -109,15 +110,16 @@ public class rUIPassword : MonoBehaviour
         nextBtn = introPanel.GetComponentInChildren<Button>();
         nextBtn.onClick.AddListener(OnClkNext);
         introPanel.SetActive(false);
+        rUIManager.Instance.InteractivePanels.Add(introPanel);
 
-        rUIManager.instance.InteractivePanels.Add(createPasswordPanel);
-        rUIManager.instance.InteractivePanels.Add(checkPasswordPanel);
-        rUIManager.instance.InteractivePanels.Add(resetPasswordPanel);
+        rUIManager.Instance.InteractivePanels.Add(createPasswordPanel);
+        rUIManager.Instance.InteractivePanels.Add(checkPasswordPanel);
+        rUIManager.Instance.InteractivePanels.Add(resetPasswordPanel);
 
-        rUIManager.instance.IndependantUIElements.Add(createPasswordPanel);
-        rUIManager.instance.IndependantUIElements.Add(checkPasswordPanel);
-        rUIManager.instance.IndependantUIElements.Add(resetPasswordPanel);
-        rUIManager.instance.IndependantUIElements.Add(feedbackPanel);
+        rUIManager.Instance.IndependantUIElements.Add(createPasswordPanel);
+        rUIManager.Instance.IndependantUIElements.Add(checkPasswordPanel);
+        rUIManager.Instance.IndependantUIElements.Add(resetPasswordPanel);
+        rUIManager.Instance.IndependantUIElements.Add(feedbackPanel);
     }
 
     private void Update()
@@ -139,13 +141,13 @@ public class rUIPassword : MonoBehaviour
         {
             case true:
                 resetPasswordPanel.SetActive(false);
-                rUIManager.instance.IsAnyInteractivePanelEnabled = false;
+                rUIManager.Instance.SetInteractivePanelState = false;
                 break;
 
             case false:
                 resetPasswordPanel.SetActive(true);
-                rUIManager.instance.HideAllIndependantUIElementsExceptLast(resetPasswordPanel) ;
-                rUIManager.instance.IsAnyInteractivePanelEnabled = true;
+                rUIManager.Instance.HideAllIndependantUIElementsExceptLast(resetPasswordPanel) ;
+                rUIManager.Instance.SetInteractivePanelState = true;
                 break;
         }
     }
@@ -161,11 +163,12 @@ public class rUIPassword : MonoBehaviour
     public void ShowCreatePasswordPanel()
     {
         createPasswordPanel.SetActive(true);
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(createPasswordPanel.GetComponent<CanvasGroup>(), 3));
+
         ResetPasswordIF();
         rUIManager.Instance.HideAllIndependantUIElementsExceptLast(createPasswordPanel);
         rAreasManager.Instance.CurrentArea.IsFlashing = true;
         rAreasManager.Instance.CurrentArea.StartCoroutine(nameof(rAreasManager.Instance.CurrentArea.StartFlashing));
-        rUIManager.Instance.IsAnyInteractivePanelEnabled = true;
         StartCoroutine(nameof(WaitAndFocusOnInputField));
     }
 
@@ -188,23 +191,15 @@ public class rUIPassword : MonoBehaviour
 
         checkPasswordPanel.SetActive(true);
         rUIManager.Instance.HideAllIndependantUIElementsExceptLast(checkPasswordPanel);
-        rUIManager.instance.IsAnyInteractivePanelEnabled = true;
+        rUIManager.Instance.SetInteractivePanelState = true;
     }
 
     public void ShowIntroPanel()
     {
         introPanel.SetActive(true);
-        rUIManager.instance.IsAnyInteractivePanelEnabled = true;
+        rUIManager.Instance.SetInteractivePanelState = true;
         rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(introPanel.GetComponent<CanvasGroup>(), 1));
         rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Serious);
-    }
-    
-    public void HideIntroPanel()
-    {
-        introPanel.SetActive(true);
-        rUIManager.instance.IsAnyInteractivePanelEnabled = false;
-        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(introPanel.GetComponent<CanvasGroup>(), 1));
-        rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle);
     }
     #endregion
 
@@ -256,7 +251,7 @@ public class rUIPassword : MonoBehaviour
 
         ShowFeedback();
 
-        rUIManager.instance.IsAnyInteractivePanelEnabled = false;
+        rUIManager.Instance.SetInteractivePanelState = false;
         ResetPasswordIF();
     }
 
@@ -281,7 +276,7 @@ public class rUIPassword : MonoBehaviour
             feedbackPanel.SetActive(true);
             rUIManager.Instance.HideAllIndependantUIElementsExceptLast(feedbackPanel);
 
-            StartCoroutine(rUIManager.instance.FadeOutPanel(feedbackPanel.GetComponent<CanvasGroup>(), 7));
+            StartCoroutine(rUIManager.Instance.FadeOutPanel(feedbackPanel.GetComponent<CanvasGroup>(), 7));
         }
     }
 
@@ -294,15 +289,15 @@ public class rUIPassword : MonoBehaviour
     {
         if(isFirstClk)
         {
-        introTxt.text = "....but don't worry, your main base is still safe with a strong army. " +
-            "You're lucky to have their support! Stay strong and defend what's yours!";
-
-        rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle);
             isFirstClk = false;
+            rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle);
+            introTxt.text = "....but don't worry, your main base is still safe with a strong army. " +
+                "You're lucky to have their support! Stay strong and defend what's yours!";
+
         }
         else
         {
-            HideIntroPanel();
+            rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(introPanel.GetComponent<CanvasGroup>(), 1));
         }
     }
 
@@ -321,7 +316,7 @@ public class rUIPassword : MonoBehaviour
         }
 
         checkPasswordPanel.SetActive(false);
-        rUIManager.instance.IsAnyInteractivePanelEnabled = false;
+        rUIManager.Instance.SetInteractivePanelState = false;
     }
     #endregion
 

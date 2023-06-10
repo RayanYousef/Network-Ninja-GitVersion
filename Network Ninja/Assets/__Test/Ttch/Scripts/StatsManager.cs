@@ -31,13 +31,16 @@ public class StatsManager : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] StatsStruct myStats = new StatsStruct();
-    [SerializeField] bool damagable;
+
 
     [Header("GameObject Team")]
     [SerializeField] CharacterTeam team = CharacterTeam.None;
 
     [Header("Can Be Targeted By Player Camera")]
     [SerializeField] bool targetable;
+
+    [Header("Can Take Damage When Attack")]
+    [SerializeField] bool damagable = true;
 
 
 

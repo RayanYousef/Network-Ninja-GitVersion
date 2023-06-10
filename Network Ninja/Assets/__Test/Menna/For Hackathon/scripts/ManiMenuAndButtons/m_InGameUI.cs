@@ -11,49 +11,78 @@ public class m_InGameUI : MonoBehaviour
     [Header("Winning Panel")]
     [SerializeField] GameObject menuPanel;
 
-    [Header("Options")]
-    [SerializeField] Slider volumeSlider;
+    [Header("Main Menu")]
     public string MainMenu;
 
     [Header("Transition")]
     public TextMeshProUGUI prompt;
 
+    [Header("Options Panel")]
+    [SerializeField] GameObject optionsPanel;
+    [SerializeField] Button optionsBtn;
+
+    [SerializeField] Slider volumeSlider;
+    [SerializeField] Slider mouseSensitivitySlider;
+
+    [SerializeField] Button camFarBtn;
+    [SerializeField] Button camMidBtn;
+    [SerializeField] Button camNearBtn;
+    [SerializeField] Button closeBtn;
+
+    public GameObject MenuPanel { get => menuPanel; set => menuPanel = value; }
 
     private void Start()
     {
-
         if(menuPanel!= null)
             menuPanel.SetActive(false);
-        rUIManager.instance.InteractivePanels.Add(menuPanel);
+        rUIManager.Instance.InteractivePanels.Add(menuPanel);
+        rUIManager.Instance.InteractivePanels.Add(optionsPanel);
 
-        rUIManager.instance.IndependantUIElements.Add(prompt.gameObject);
+        rUIManager.Instance.IndependantUIElements.Add(prompt.gameObject);
 
+        optionsBtn.onClick.AddListener(OnClkOptions);
 
-    //    #region Volume Slider
-    //    volumeSlider.value = 1;
+        //mouseSensitivitySlider.onValueChanged.AddListener(delegate { (); });
 
-    //    if (!PlayerPrefs.HasKey("musicVolume"))
-    //    {
-    //        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-    //        Load();
-    //    }
-    //    else
-    //    {
-    //        Load();
-    //    } 
-    //    #endregion
+        //camFarBtn.onClick.AddListener(GameObjectsManager.Instance.Player.GetComponent<CS_CameraManager>().SetCameraToFar);
+        //camMidBtn.onClick.AddListener(GameObjectsManager.Instance.Player.GetComponent<CS_CameraManager>().SetCameraToMid);
+        //camNearBtn.onClick.AddListener(GameObjectsManager.Instance.Player.GetComponent<CS_CameraManager>().SetCameraToClose);
+
+        closeBtn.onClick.AddListener(OnCloseClicked);
+       
+        //    #region Volume Slider
+        //    volumeSlider.value = 1;
+
+        //    if (!PlayerPrefs.HasKey("musicVolume"))
+        //    {
+        //        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
+        //        Load();
+        //    }
+        //    else
+        //    {
+        //        Load();
+        //    } 
+        //    #endregion
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ShowHideMenu();
+            if(optionsPanel.activeSelf)
+            {
+                optionsPanel.SetActive(false);
+                rUIManager.Instance.SetInteractivePanelState = false;
+            }
+            else
+            {
+                ShowHideSideMenu();
+            }
         }
     }
 
-        #region Volume
-        public void changeVolume()
+    #region Volume
+    public void changeVolume()
     {
         AudioListener.volume = volumeSlider.value;
     }
@@ -71,19 +100,18 @@ public class m_InGameUI : MonoBehaviour
     }
     #endregion
 
-    void ShowHideMenu()
+    void ShowHideSideMenu()
     {
         switch (menuPanel.activeSelf)
         {
             case true:
                 menuPanel.SetActive(false);
-                //rUIManager.Instance.IsAnyInteractivePanelEnabled = false;
+                rUIManager.Instance.SetInteractivePanelState = false;
                 break;
 
             case false:
                 menuPanel.SetActive(true);
-                //rUIManager.Instance.IsAnyInteractivePanelEnabled = true;
-                //rUIManager.Instance.HideAllIndependantUIElementsExceptLast(menuPanel);
+                rUIManager.Instance.SetInteractivePanelState = true;
                 break;
         }
     }
@@ -104,7 +132,18 @@ public class m_InGameUI : MonoBehaviour
     public void unPause()
     {
         Time.timeScale = 1;
-    } 
+    }
     #endregion
 
+    private void OnClkOptions()
+    {
+        optionsPanel.SetActive(true);
+        rUIManager.Instance.SetInteractivePanelState = true;
+    }
+
+    public void OnCloseClicked()
+    {
+        optionsPanel.SetActive(false);
+        rUIManager.Instance.SetInteractivePanelState = false;
+    }
 }
