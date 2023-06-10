@@ -30,6 +30,13 @@ public class GateController : MonoBehaviour
     private void Update()
     {
         buttonPressed = Input.GetKeyDown(KeyCode.E);
+        if (playerIsHere == true && buttonPressed && rUIManager.Instance.UiPassword.CheckPasswordPanel.activeSelf)
+        {
+            rUIManager.Instance.UiPassword.CheckPasswordPanel.SetActive(false);
+            rUIManager.instance.IsAnyInteractivePanelEnabled = false;
+            return;
+        }
+
         if (playerIsHere == true && buttonPressed && GameManager.Instance.BossEntered==false && !rUIManager.Instance.IsAnyInteractivePanelEnabled)
         {
             GameObjectsManager.Instance.CurrentGate.NextArea = this.nextArea;

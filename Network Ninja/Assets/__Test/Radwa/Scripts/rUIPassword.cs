@@ -36,6 +36,7 @@ public class rUIPassword : MonoBehaviour
     [SerializeField] Button nextBtn;
     bool isFirstClk = true;
 
+    public GameObject CheckPasswordPanel { get => checkPasswordPanel; set => checkPasswordPanel = value; }
     public string PasswordInput
     {
         get => passwordInput;
