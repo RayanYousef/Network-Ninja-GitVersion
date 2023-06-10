@@ -245,9 +245,9 @@ public class rArea : MonoBehaviour
         {
             GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
 
-            areaCamera.enabled = true;
-            if (switchCamBack)
-                StartCoroutine(WaitAndSwitchCameraBack());
+            //areaCamera.enabled = true;
+            //if (switchCamBack)
+            //    StartCoroutine(WaitAndSwitchCameraBack());
         }
     } 
 
