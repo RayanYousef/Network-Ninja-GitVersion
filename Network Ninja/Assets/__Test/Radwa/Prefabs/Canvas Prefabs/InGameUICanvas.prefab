@@ -1158,7 +1158,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5704936237776952176}
-        m_TargetAssemblyTypeName: m_InGameMenuUI, Assembly-CSharp
+        m_TargetAssemblyTypeName: m_InGameUI, Assembly-CSharp
         m_MethodName: changeVolume
         m_Mode: 1
         m_Arguments:
@@ -1830,7 +1830,7 @@ GameObject:
   - component: {fileID: 6303819532643723181}
   - component: {fileID: 1780806065358232024}
   m_Layer: 5
-  m_Name: CancelBtn
+  m_Name: CloseBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1938,19 +1938,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6050837005865426408}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5704936237776952176}
-        m_TargetAssemblyTypeName: m_InGameUI, Assembly-CSharp
-        m_MethodName: OnCancelClicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!223 &6303819532643723181
 Canvas:
   m_ObjectHideFlags: 0
@@ -2478,9 +2466,11 @@ MonoBehaviour:
   optionsPanel: {fileID: 378671275078971477}
   optionsBtn: {fileID: 3395520936627952556}
   volumeSlider: {fileID: 729106923375084512}
+  mouseSensitivitySlider: {fileID: 451947431264943728}
   camFarBtn: {fileID: 7275127936826908504}
   camMidBtn: {fileID: 7214337301264968063}
   camNearBtn: {fileID: 4316496831908207586}
+  closeBtn: {fileID: 3710155451224432455}
 --- !u!1 &5704936237824124671
 GameObject:
   m_ObjectHideFlags: 0

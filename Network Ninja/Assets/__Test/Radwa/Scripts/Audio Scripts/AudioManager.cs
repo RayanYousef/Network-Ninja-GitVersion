@@ -20,6 +20,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] GameObject audioSourcesParent;
     public List<AudioSource> audioSources= new List<AudioSource>();
 
+    public static AudioManager Instance { get => instance; }
+
     public AudioClip[] ClickClips { get => clickClips; set => clickClips = value; }
     public AudioClip[] Footsteps { get => footsteps; set => footsteps = value; }
 

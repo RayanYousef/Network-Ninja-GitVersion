@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
         MiniBosses = new List<GameObject>();
         player = GameObjectsManager.Instance.Player.transform;
 
-        OnAllMiniBossesKilled.AddListener(rUIManager.instance.UiPassword.ShowCreatePasswordPanel);
+        OnAllMiniBossesKilled.AddListener(rUIManager.Instance.UiPassword.ShowCreatePasswordPanel);
 
         //obj pooling
         enemyPool = new List<GameObject>();

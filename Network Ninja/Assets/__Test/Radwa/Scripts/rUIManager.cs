@@ -11,11 +11,9 @@ public class rUIManager : MonoBehaviour
 
     [SerializeField] private m_InGameUI inGameUI;
 
-    [SerializeField] Image bg;
-
     [Header("Panels Lists")]
     [SerializeField] List<GameObject> interactivePanels;
-    [SerializeField] bool isAnyInteractivePanelActive;
+    [SerializeField] bool setInteractivePanelState;
 
     [SerializeField] List<GameObject> independantUIElements;
 
@@ -37,34 +35,27 @@ public class rUIManager : MonoBehaviour
     public m_InGameUI InGameUI { get => inGameUI; set => inGameUI = value; }
 
     public List<GameObject> InteractivePanels { get => interactivePanels; set => interactivePanels = value; }
-    public bool IsAnyInteractivePanelEnabled
+    public bool SetInteractivePanelState
     {
-        get => isAnyInteractivePanelActive;
+        get => setInteractivePanelState;
         set
         {
-            isAnyInteractivePanelActive = value;
-            switch(isAnyInteractivePanelActive)
+            setInteractivePanelState = value;
+
+            foreach(GameObject p in interactivePanels)
             {
-                case true:
-                    if (Time.timeScale != 0)
-                    {
-                        bg.gameObject.SetActive(true);
-                        GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().ControllerState(false);
-                        Cursor.lockState = CursorLockMode.Confined;
-                        Time.timeScale = 0;
-                        return;
-                    }
-                    break;
-                case false:
-                    if(Time.timeScale != 1)
-                    {
-                        bg.gameObject.SetActive(false);
-                        GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().ControllerState(true);
-                        Cursor.lockState = CursorLockMode.Locked;
-                        Time.timeScale = 1;
-                    }
-                    break;
+                if(p.activeSelf)
+                {
+                    GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().ControllerState(false);
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Time.timeScale = 0;
+                    return;
+                }
             }
+
+            GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().ControllerState(true);
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1;
         }
     }
 
@@ -102,6 +93,7 @@ public class rUIManager : MonoBehaviour
         }
 
         panelToFade.gameObject.SetActive(false);
+        SetInteractivePanelState = false;
     }
 
     public IEnumerator FadeInPanel(CanvasGroup panelToFade, float time)
@@ -115,36 +107,11 @@ public class rUIManager : MonoBehaviour
 
             yield return null;
         }
+        SetInteractivePanelState = true;
     } 
     #endregion
 
     #region Fade Out/In Sprite
-    //public IEnumerator FadeOutImg(Image imgToFade, float time)
-    //{
-    //    float elapsedTime = 0f;
-
-    //    while (elapsedTime < time)
-    //    {
-    //        imgToFade.color = Color.Lerp(nonTransparentColor, transparentColor, time);
-    //        elapsedTime += Time.deltaTime;
-
-    //        yield return null;
-    //    }
-    //}
-
-    //public IEnumerator FadeInImg(Image imgToFade, float time)
-    //{
-    //    float elapsedTime = 0f;
-
-    //    while (elapsedTime < time)
-    //    {
-    //        imgToFade.color = Color.Lerp(transparentColor, nonTransparentColor, time);
-    //        elapsedTime += Time.deltaTime;
-
-    //        yield return null;
-    //    }
-    //}
-
     public IEnumerator FadeOutInImg(Sprite anotherExp, float time)
     {
         if (anotherExp == null)
@@ -177,6 +144,4 @@ public class rUIManager : MonoBehaviour
             e.SetActive(false);
         }
     }
-
-    
 }

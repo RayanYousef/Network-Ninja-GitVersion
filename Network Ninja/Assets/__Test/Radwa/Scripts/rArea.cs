@@ -327,7 +327,7 @@ public class rArea : MonoBehaviour
                 /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
                 if (password == null)
                 {
-                    rUIManager.instance.UiPassword.ShowCreatePasswordPanel();
+                    rUIManager.Instance.UiPassword.ShowCreatePasswordPanel();
                     //OnEnteringArea?.Invoke();
                 }
             }
@@ -338,7 +338,7 @@ public class rArea : MonoBehaviour
                 FormArmyBasedOnAreaHealth();
                 //areaType = AreaType.Base;
                 // show intro panel
-                rUIManager.instance.UiPassword.ShowIntroPanel();
+                rUIManager.Instance.UiPassword.ShowIntroPanel();
                 isFirst = false;
             }
         }
