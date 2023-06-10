@@ -30,29 +30,32 @@ public class GateController : MonoBehaviour
     private void Update()
     {
         buttonPressed = Input.GetKeyDown(KeyCode.E);
-        if (playerIsHere == true && buttonPressed && rUIManager.Instance.UiPassword.CheckPasswordPanel.activeSelf)
-        {
-            rUIManager.Instance.UiPassword.CheckPasswordPanel.SetActive(false);
-            rUIManager.instance.IsAnyInteractivePanelEnabled = false;
-            return;
-        }
-
-        if (playerIsHere == true && buttonPressed && GameManager.Instance.BossEntered==false && !rUIManager.Instance.IsAnyInteractivePanelEnabled)
-        {
-            GameObjectsManager.Instance.CurrentGate.NextArea = this.nextArea;
-
-            if (nextArea.AreaType == AreaType.Base)
+        if (playerIsHere == true && buttonPressed)
+        { 
+            if(rUIManager.Instance.UiPassword.CheckPasswordPanel.activeSelf)
             {
-                rUIManager.instance.UiPassword.ShowCheckPasswordPanel();
+                rUIManager.Instance.UiPassword.CheckPasswordPanel.SetActive(false);
+                rUIManager.Instance.SetInteractivePanelState = false;
+                return;
             }
-            else
+
+            if (GameManager.Instance.BossEntered == false && !rUIManager.Instance.SetInteractivePanelState)
             {
-                rAreasManager.Instance.CurrentArea.PlayerInside = false;
-                pathController.PlayerEnteredPath(state);
+                GameObjectsManager.Instance.CurrentGate.NextArea = this.nextArea;
+
+                if (nextArea.AreaType == AreaType.Base)
+                {
+                    rUIManager.Instance.UiPassword.ShowCheckPasswordPanel();
+                }
+                else
+                {
+                    rAreasManager.Instance.CurrentArea.PlayerInside = false;
+                    pathController.PlayerEnteredPath(state);
+                }
             }
         }
-
     }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == GameObjectsManager.Instance.Player)
@@ -61,7 +64,7 @@ public class GateController : MonoBehaviour
             playerIsHere = true;
             GameObjectsManager.Instance.CurrentGate = this;
             //rUIManager.instance.InGameUI.prompt.enabled = true;
-            rUIManager.instance.InGameUI.prompt.gameObject.SetActive(true);
+            rUIManager.Instance.InGameUI.prompt.gameObject.SetActive(true);
         }
     }
 
@@ -71,7 +74,7 @@ public class GateController : MonoBehaviour
         {
             playerIsHere = false;
             //rUIManager.instance.InGameUI.prompt.enabled = false;
-            rUIManager.instance.InGameUI.prompt.gameObject.SetActive(false);
+            rUIManager.Instance.InGameUI.prompt.gameObject.SetActive(false);
         }
     }
 }
