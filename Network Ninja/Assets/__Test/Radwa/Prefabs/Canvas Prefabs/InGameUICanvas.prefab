@@ -679,20 +679,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: playSFX
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: ButtonClick
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5704936237776952176}
-        m_TargetAssemblyTypeName: m_InGameMenuUI, Assembly-CSharp
-        m_MethodName: BackToMainMenu
+        m_TargetAssemblyTypeName: CS_CameraManager, Assembly-CSharp
+        m_MethodName: SetCameraToFar
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1642,20 +1630,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: playSFX
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: ButtonClick
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5704936237776952176}
-        m_TargetAssemblyTypeName: m_InGameMenuUI, Assembly-CSharp
-        m_MethodName: BackToMainMenu
+        m_TargetAssemblyTypeName: CS_CameraManager, Assembly-CSharp
+        m_MethodName: SetCameraToMid
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2497,11 +2473,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuPanel: {fileID: 1130557109456391922}
-  optionsBtn: {fileID: 0}
   MainMenu: Main_Menu0.2
   prompt: {fileID: 6852296895620235999}
-  optionsPanel: {fileID: 0}
-  volumeSlider: {fileID: 0}
+  optionsPanel: {fileID: 378671275078971477}
+  optionsBtn: {fileID: 3395520936627952556}
+  volumeSlider: {fileID: 729106923375084512}
+  camFarBtn: {fileID: 7275127936826908504}
+  camMidBtn: {fileID: 7214337301264968063}
+  camNearBtn: {fileID: 4316496831908207586}
 --- !u!1 &5704936237824124671
 GameObject:
   m_ObjectHideFlags: 0
@@ -3206,19 +3185,7 @@ MonoBehaviour:
   m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!223 &7336889425817025868
 Canvas:
   m_ObjectHideFlags: 0
@@ -4019,20 +3986,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: playSFX
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: ButtonClick
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5704936237776952176}
-        m_TargetAssemblyTypeName: m_InGameMenuUI, Assembly-CSharp
-        m_MethodName: BackToMainMenu
+        m_TargetAssemblyTypeName: CS_CameraManager, Assembly-CSharp
+        m_MethodName: SetCameraToClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
