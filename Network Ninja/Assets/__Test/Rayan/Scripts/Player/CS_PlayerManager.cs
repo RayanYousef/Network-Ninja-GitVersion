@@ -36,6 +36,10 @@ public class CS_PlayerManager : MonoBehaviour
     [Header("Other Variables")]
     [SerializeField] float drag;
     [SerializeField] float clicksIntervalTime;
+    [Header("Take Damage Variables")]
+    // Controlls the damage taken so it wont happen a lot, but rather every interval
+    [SerializeField] float intervalsBetweenDamage=0.5f;
+    [SerializeField] float damageTimer;
 
     [Header("Script Variables")]
     [SerializeField] CharacterState currentState;
@@ -113,6 +117,7 @@ public class CS_PlayerManager : MonoBehaviour
 
         pStatsManager.Stats.OnHealthUpdated.AddListener(LostGameHealthZero);
         pStatsManager.Stats.OnEnergyUpdated.AddListener(DisableUltimate);
+        pStatsManager.OnTakingDamage.AddListener(ResetDamageTimerAndCanNotTakeDamage);
     }
 
     private void Update()
@@ -141,6 +146,8 @@ public class CS_PlayerManager : MonoBehaviour
     {
         if (ultimateOn == true)
             pStatsManager.AddtoEnergy(-Time.deltaTime * ultimateAttenuationRate);
+
+        DamageIntervalFunction();
 
     }
 
@@ -374,13 +381,11 @@ public class CS_PlayerManager : MonoBehaviour
         }
 
     }
-
     public void DisableUltimate(float energyValue)
     {
         if (energyValue == 0)
             UltimateOn = false;
     }
-
     public void ControllerState(bool value)
     {
         PlayerInputs.enabled = value;
@@ -390,14 +395,20 @@ public class CS_PlayerManager : MonoBehaviour
         this.enabled = value;
         GetComponent<Collider>().enabled = value;
     }
-
     public void GravityState(bool value)
     {
         MoveController.Gravity= value;
     }
 
+    public void ResetDamageTimerAndCanNotTakeDamage()
+    {
+        damageTimer= 0;
+        pStatsManager.Damagable = false;
+
+    }
     #endregion
 
+    #region Private Functions
     private void UltimateEnabled(bool value)
     {
         anim.SetBool(animController.B_Ultimate, value);
@@ -417,5 +428,13 @@ public class CS_PlayerManager : MonoBehaviour
             _freezeObjectsInRange.ObjectsMovementEnabled(true);
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
+    } 
+
+    private void DamageIntervalFunction()
+    {
+        if (intervalsBetweenDamage > damageTimer)
+            damageTimer += Time.deltaTime;
+        else PStatsManager.Damagable = true;
     }
+    #endregion
 }
