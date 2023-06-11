@@ -159,9 +159,6 @@ public class CS_PlayerManager : MonoBehaviour
     {
         currentState = enteredState;
 
-        if (enteredState != CharacterState.Attacking)
-            animController.ResetCombo();
-
         ResetParameters();
 
         switch (enteredState)
@@ -215,13 +212,19 @@ public class CS_PlayerManager : MonoBehaviour
     }
     public void ResetParameters()
     {
+
+        if (CurrentState != CharacterState.Attacking)
+            animController.ResetCombo();
+
         anim.applyRootMotion = false;
 
         anim.SetBool(animController.B_Dashing, false);
         anim.SetBool(animController.B_Jumping, false);
         anim.SetBool(animController.B_Attacking, false);
         anim.SetBool(animController.B_canTransit, false);
+
         anim.ResetTrigger(animController.T_Ultimate);
+        anim.ResetTrigger(animController.T_Dash);
 
         pStatsManager.DisableAllWeapons();
         //

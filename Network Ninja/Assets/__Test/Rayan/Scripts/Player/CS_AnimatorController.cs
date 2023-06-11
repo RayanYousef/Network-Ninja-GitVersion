@@ -52,7 +52,7 @@ public class CS_AnimatorController : MonoBehaviour
     #region public function
     public void PlayTakeDamageAnim()
     {
-        if (PlayerManager.Anim.GetBool(B_TakingDamage) == false)
+        if (PlayerManager.Anim.GetBool(B_TakingDamage) == false && playerManager.CurrentState!=CharacterState.Attacking)
         {
             PlayerManager.Anim.SetBool(B_TakingDamage, true);
             PlayerManager.Anim.Play("Take Damage");
