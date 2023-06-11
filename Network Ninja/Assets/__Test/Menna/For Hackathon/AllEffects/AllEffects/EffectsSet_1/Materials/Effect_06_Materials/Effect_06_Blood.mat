@@ -7,13 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Effect_06_Line
+  m_Name: Effect_06_Blood
   m_Shader: {fileID: 4800000, guid: 1d58a8e283100ea4f8435e923e54553e, type: 3}
   m_ValidKeywords:
-  - IS_LINEPASS
-  - IS_NORMAL_ANIMATE
   - IS_NORMAL_DISTORTION
   - IS_SOFT_PARTICLES
+  - IS_TEXTURE_BLEND
   m_InvalidKeywords:
   - IS_UNITY_PARTICLE_INSTANCING_ENABLED
   - _ALPHAPREMULTIPLY_ON
@@ -51,12 +50,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LinePassTex:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 1dd87d263698bdd489172bf9aa265da1, type: 3}
-        m_Scale: {x: 2, y: 2}
+        m_Texture: {fileID: 2800000, guid: 3eed06b33b3f2a14e8740685c6ce348b, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskDistortion:
         m_Texture: {fileID: 0}
@@ -80,7 +79,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
         m_Texture: {fileID: 2800000, guid: 9a9498ac1b0e2484dbe7cdeee7973e50, type: 3}
-        m_Scale: {x: 5, y: 5}
+        m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -92,7 +91,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - IS_USE_TEXANIMATION: 0
     - _BlendDst: 10
     - _BlendOp: 0
     - _BlendSrc: 5
@@ -100,7 +98,7 @@ Material:
     - _CameraFadingEnabled: 0
     - _CameraFarFadeDistance: 2
     - _CameraNearFadeDistance: 1
-    - _ColorFactor: 3
+    - _ColorFactor: 2
     - _ColorMode: 0
     - _Cull: 2
     - _Culling: 0
@@ -123,7 +121,7 @@ Material:
     - _IsRotateAngle: 0
     - _Lighting: 0
     - _LightingEnabled: 0
-    - _LinePass: 1
+    - _LinePass: 0
     - _MaskAnimatedSpeed: 1
     - _MaskCutOut: 1
     - _MaskFade: 0
@@ -134,10 +132,10 @@ Material:
     - _Mode: 3
     - _NoiseNormalFactor: 1
     - _NoiseScale: 1
-    - _NormalAnimate: 1
+    - _NormalAnimate: 0
     - _NormalAnimateSpeed: 2
     - _NormalDistortion: 1
-    - _NormalDistortionFactor: 2
+    - _NormalDistortionFactor: 0.05
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ParticleInstancing: 1
@@ -161,9 +159,9 @@ Material:
     - _TexcoordMoveUsingCustom: 0
     - _TextureAnimate: 0
     - _TextureAnimateAdvanced: 0
-    - _TextureAnimateSpeed: 2
-    - _TextureAnimateStyle: 2
-    - _TextureBlend: 0
+    - _TextureAnimateSpeed: 1
+    - _TextureAnimateStyle: 1
+    - _TextureBlend: 1
     - _TextureNoise: 0
     - _UVSec: 0
     - _UseTexAnimation: 0
@@ -181,6 +179,6 @@ Material:
     - _NoiseValue: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _TintColor: {r: 1.0135119, g: 0.91287947, b: 1.3729132, a: 1}
+    - _TintColor: {r: 0.036027018, g: 0.15044707, b: 0.8679245, a: 1}
     - _TintColor2: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

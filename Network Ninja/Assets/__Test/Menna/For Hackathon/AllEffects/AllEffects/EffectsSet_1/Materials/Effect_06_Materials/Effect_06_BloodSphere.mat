@@ -7,17 +7,22 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Effect_06_Decal
-  m_Shader: {fileID: 4800000, guid: 416d9dd6e46c1c5408e8ed3f0d48c1bc, type: 3}
+  m_Name: Effect_06_BloodSphere
+  m_Shader: {fileID: 4800000, guid: 1d58a8e283100ea4f8435e923e54553e, type: 3}
   m_ValidKeywords:
   - IS_MASK_FADE
   - IS_NORMAL_ANIMATE
   - IS_NORMAL_DISTORTION
-  - IS_TEXTURE_ANIMATE
-  m_InvalidKeywords:
   - IS_SOFT_PARTICLES
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  - IS_TEXCOORD_MOVE
+  - IS_TEXTURE_ANIMATE
+  - IS_USE_TEXANIMATION
+  - IS_VERTEXANIMATION
+  m_InvalidKeywords:
+  - IS_UNITY_PARTICLE_INSTANCING_ENABLED
+  - _ALPHAPREMULTIPLY_ON
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -55,14 +60,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 3cb02bf457cde1b48af42b67ee413532, type: 3}
-        m_Scale: {x: 2, y: 2}
+        m_Scale: {x: 5, y: 5}
         m_Offset: {x: 0, y: 0}
     - _MaskDistortion:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b1df31c32ef1d4f428c40f70fa84a503, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
-        m_Texture: {fileID: 2800000, guid: dc7881f67d109c24a8eac099529a2945, type: 3}
+        m_Texture: {fileID: 2800000, guid: a56198dae5bb8384d818c961477337e6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -74,7 +79,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 708d24fa8e8cc804aba4ce74d4e6a1b1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
@@ -91,66 +96,95 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlendDst: 10
+    - IS_USE_TEXANIMATION: 0
+    - _BlendDst: 1
+    - _BlendOp: 0
     - _BlendSrc: 5
     - _BumpScale: 1
-    - _ColorFactor: 2
+    - _CameraFadingEnabled: 0
+    - _CameraFarFadeDistance: 2
+    - _CameraNearFadeDistance: 1
+    - _ColorFactor: 7.5
+    - _ColorMode: 0
+    - _Cull: 2
     - _Culling: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DistortionBlend: 0.5
+    - _DistortionEnabled: 0
+    - _DistortionStrength: 1
+    - _DistortionStrengthScaled: 0
+    - _DstBlend: 10
+    - _EmissionEnabled: 0
+    - _FlipbookMode: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Impact: 0
+    - _ImpactFactor: 1
     - _ImpactSize: 0.5
     - _InvFade: 1
+    - _IsRotateAngle: 0
     - _Lighting: 0
+    - _LightingEnabled: 0
     - _LinePass: 0
     - _MaskAnimatedSpeed: 1
     - _MaskCutOut: 1
     - _MaskFade: 1
-    - _MaskOffsetFactor: 1
+    - _MaskOffsetFactor: 5
+    - _MaxIndex: 2
     - _Metallic: 0
     - _MixedMove: 0
-    - _Mode: 0
+    - _Mode: 3
     - _NoiseNormalFactor: 1
-    - _NoiseScale: 1
+    - _NoiseScale: 0.0175
     - _NormalAnimate: 1
-    - _NormalAnimateSpeed: 0.1
+    - _NormalAnimateSpeed: 1
     - _NormalDistortion: 1
-    - _NormalDistortionFactor: 5
+    - _NormalDistortionFactor: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ParticleInstancing: 0
+    - _ParticleInstancing: 1
     - _RimLight: 0
-    - _RimScale: 1
+    - _RimScale: 2
     - _RimStrength: 1
+    - _RotateAngle: 0
     - _SecondColor: 0
     - _SmoothnessTextureChannel: 0
     - _SoftParticle: 1
+    - _SoftParticlesEnabled: 0
+    - _SoftParticlesFarFadeDistance: 1
+    - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TexLength: 1
     - _TexPath: 1
-    - _TexPosMove: 0
-    - _TexcoordMove: 0
-    - _TexcoordMoveStrength: 0
+    - _TexPosMove: 0.39
+    - _TexcoordMove: 1
+    - _TexcoordMoveStrength: 25
+    - _TexcoordMoveUsingCustom: 0
     - _TextureAnimate: 1
-    - _TextureAnimateSpeed: 0.1
-    - _TextureAnimateStyle: 1
+    - _TextureAnimateAdvanced: 0
+    - _TextureAnimateSpeed: 2
+    - _TextureAnimateStyle: 2
     - _TextureBlend: 0
     - _TextureNoise: 0
     - _UVSec: 0
-    - _VertexAnimation: 0
+    - _UseTexAnimation: 1
+    - _VertexAnimation: 1
     - _ZTest1: 5
+    - _ZTest2: 2
     - _ZWrite: 0
-    - _xTexcoordMove: 0
-    - _yTexcoordMove: 0
+    - _xTexcoordMove: 0.5
+    - _yTexcoordMove: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
+    - _Color: {r: 3.9999995, g: 3.9999995, b: 3.9999995, a: 1}
+    - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _NoiseValue: {r: 1, g: 1, b: 1, a: 0}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TintColor: {r: 2.8403008, g: 0.19093266, b: 5.2097325, a: 1}
-    - _TintColor2: {r: 1, g: 1, b: 1, a: 1}
+    - _NoiseValue: {r: 0.1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.021787085, g: 0.78375804, b: 0.9622642, a: 1}
+    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
+    - _TintColor: {r: 0.0627451, g: 0.1254902, b: 1.0039216, a: 0.99607843}
+    - _TintColor2: {r: 0.0627451, g: 0.0627451, b: 0.627451, a: 1}
   m_BuildTextureStacks: []

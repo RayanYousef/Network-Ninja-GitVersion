@@ -334,7 +334,7 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(delayBeforeSpawnBoss / 2);
         spawnBossIntroEffect();
-        yield return new WaitForSeconds(delayBeforeSpawnBoss);
+        yield return new WaitForSeconds(3.5f);
         // Spawn the boss
         SpawnBigBoss();
     }
