@@ -118,6 +118,7 @@ public class CS_PlayerManager : MonoBehaviour
         pStatsManager.Stats.OnHealthUpdated.AddListener(LostGameHealthZero);
         pStatsManager.Stats.OnEnergyUpdated.AddListener(DisableUltimate);
         pStatsManager.OnTakingDamage.AddListener(ResetDamageTimerAndCanNotTakeDamage);
+        pStatsManager.OnTakingDamage.AddListener(AnimController.PlayTakeDamageAnim);
     }
 
     private void Update()
