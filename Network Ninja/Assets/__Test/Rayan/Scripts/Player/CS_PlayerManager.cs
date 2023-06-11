@@ -416,7 +416,7 @@ public class CS_PlayerManager : MonoBehaviour
         anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
         cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
         if (_freezeObjectsInRange != null)
-            _freezeObjectsInRange.ObjectsMovementEnabled(false);
+            _freezeObjectsInRange.ObjectsMovementEnabled(false,0.05f);
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
     }
@@ -426,7 +426,7 @@ public class CS_PlayerManager : MonoBehaviour
         anim.SetFloat(animController.F_animSpeed, 0.9f);
         cameraManager.SwitchCamerasBasedOnLockState();
         if (_freezeObjectsInRange != null)
-            _freezeObjectsInRange.ObjectsMovementEnabled(true);
+            _freezeObjectsInRange.ObjectsMovementEnabled(true,1);
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
     } 
