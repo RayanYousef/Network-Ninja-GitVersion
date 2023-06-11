@@ -175,7 +175,6 @@ public class CS_PlayerManager : MonoBehaviour
             case CharacterState.Dashing:
                 anim.SetBool(animController.B_Dashing, true);
                 moveController.Dash();
-                PStatsManager.Damagable = false;
                 break;
 
             case CharacterState.Attacking:
@@ -206,12 +205,10 @@ public class CS_PlayerManager : MonoBehaviour
     {
         //Debug.Log("Exited State:" + exitedState);
 
-        switch (exitedState)
-        {
-            case CharacterState.Dashing:
-                PStatsManager.Damagable = true;
-                break;
-        }
+        //switch (exitedState)
+        //{
+
+        //}
     }
     public void ResetParameters()
     {
@@ -426,7 +423,7 @@ public class CS_PlayerManager : MonoBehaviour
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
     }
-    private void UltimateDisabled(bool value)
+    public void UltimateDisabled(bool value)
     {
         anim.SetBool(animController.B_Ultimate, value);
         anim.SetFloat(animController.F_animSpeed, 0.9f);
@@ -441,7 +438,7 @@ public class CS_PlayerManager : MonoBehaviour
     {
         if (intervalsBetweenDamage > damageTimer)
             damageTimer += Time.deltaTime;
-        else if(currentState != CharacterState.Dashing) PStatsManager.Damagable = true;
+        else PStatsManager.Damagable = true;
     }
     #endregion
 }
