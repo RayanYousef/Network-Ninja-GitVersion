@@ -15,7 +15,6 @@ public class CS_MovementController : MonoBehaviour
     [Header("Dash Variables")]
     [SerializeField] float dashDuration;
     [SerializeField] float defaultDashForce, dashAttenuationRate;
-    //[SerializeField] float dashTimer, dashEnergy;
 
     [Header("Jump Variables")]
     [SerializeField] float jumpDuration;
@@ -80,6 +79,7 @@ public class CS_MovementController : MonoBehaviour
             case CharacterState.Falling:
                 MoveTowardsDirection(movementSpeed);
                 break;
+
         }
 
         if (PlayerManager.enabled && playerManager.AnimController.Grounded == false && playerManager.CurrentState!= CharacterState.Dashing)
