@@ -116,6 +116,11 @@ public class rArea : MonoBehaviour
         {
             meshColourChanger.ChangeToColour(Color.red);
         }
+        else if (areaType == AreaType.Main)
+        {
+            meshColourChanger.ChangeToColour(rAreasManager.Instance.MaxHealth);
+            health = maxHealth;
+        }
 
         maxHealth = rAreasManager.Instance.MaxSoldiersNumber;
 
@@ -126,6 +131,7 @@ public class rArea : MonoBehaviour
     {
         //if (playerInside == false && password != null && !GameManager.Instance.BossEntered)
         //    UpdateHealth();
+
         if (!playerInside && areaType != AreaType.Fight && !GameManager.Instance.BossEntered)
             UpdateHealth();
     }
@@ -136,12 +142,12 @@ public class rArea : MonoBehaviour
         if (Timer > healthTimer)
         {
             Timer = 0;
-            health = Mathf.Clamp(health - 1, 0, maxHealth);
+            Health = Mathf.Clamp(health - 1, 0, maxHealth);
 
             if (health > 0)
                 meshColourChanger.LerpBetweenObjectColours(health / maxHealth);
-            else
-                meshColourChanger.ChangeToColour(Color.red);
+            //else
+                //meshColourChanger.ChangeToColour(Color.red);
 
 
             if (health == 0 && password != null)

@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Big Boss")]
     public GameObject BigBossPrefab;
     public GameObject cardPrefab;
+    public GameObject IntroEffectPrefab;
   
     [Header("Enemies")]
     public GameObject enemyPrefab;
@@ -152,6 +153,12 @@ public class EnemySpawner : MonoBehaviour
         GameObject BigBoss = Instantiate(BigBossPrefab, this.transform.position, Quaternion.identity);
         BigBoss.transform.parent = this.transform;
 
+    }
+
+    public void spawnBossIntroEffect()
+    {
+        GameObject introEffect = Instantiate(IntroEffectPrefab , this.transform.position, Quaternion.identity);
+        introEffect.transform.parent = this.transform;
     }
     
     public void SpawnCard()
@@ -318,10 +325,16 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public IEnumerator spawnIntroEffect()
+    {
+        yield return new WaitForSeconds(5);
+
+    }
     public IEnumerator SpawnBossCoroutine()
     {
         yield return new WaitForSeconds(delayBeforeSpawnBoss / 2);
-
+        spawnBossIntroEffect();
+        yield return new WaitForSeconds(3.5f);
         // Spawn the boss
         SpawnBigBoss();
     }
