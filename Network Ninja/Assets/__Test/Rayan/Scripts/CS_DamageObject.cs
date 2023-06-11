@@ -136,11 +136,6 @@ public class CS_DamageObject : MonoBehaviour
 
             }
     }
-
-    private void ApplyShakeEffect()
-    {
-
-    }
     #endregion
 
 

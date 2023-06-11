@@ -296,7 +296,7 @@ public class CS_CameraManager : MonoBehaviour
 
     public void ApplyShakeOnTakingDamage()
     {
-        _impulseSource.GenerateImpulseWithVelocity(new Vector3(0,-0.6f,0));
+        _impulseSource.GenerateImpulseWithVelocity(new Vector3(0,-0.4f,0));
     }
 
     public void ApplyShakeOnDealingDamage()
