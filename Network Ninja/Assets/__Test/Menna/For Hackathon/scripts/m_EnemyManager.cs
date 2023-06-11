@@ -49,6 +49,15 @@ public class m_EnemyManager : MonoBehaviour , IStopObject
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
 
+        //StartCoroutine("WaitAndDie");
+    }
+
+    IEnumerator WaitAndDie()
+    {
+        int r = Random.Range(2, 6);
+        yield return new WaitForSeconds(r);
+
+        Die();
     }
 
     // Update is called once per frame
