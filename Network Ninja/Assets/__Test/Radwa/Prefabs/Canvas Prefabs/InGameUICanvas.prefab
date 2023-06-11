@@ -814,6 +814,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8268715383740819552}
   - component: {fileID: 7151497276678046029}
+  - component: {fileID: 1429052321}
   m_Layer: 5
   m_Name: MenuPanel
   m_TagString: Untagged
@@ -852,6 +853,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1130557109456391922}
   m_CullTransparentMesh: 1
+--- !u!225 &1429052321
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130557109456391922}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1403894931333473702
 GameObject:
   m_ObjectHideFlags: 0
@@ -3172,10 +3185,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 0.65
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CS_CameraManager, Assembly-CSharp
+        m_MethodName: RotationSpeed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 451947431264943728}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!223 &7336889425817025868
 Canvas:
   m_ObjectHideFlags: 0
