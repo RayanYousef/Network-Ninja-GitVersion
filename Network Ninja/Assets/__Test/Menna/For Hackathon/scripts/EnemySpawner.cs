@@ -48,6 +48,8 @@ public class EnemySpawner : MonoBehaviour
         player = GameObjectsManager.Instance.Player.transform;
 
         OnAllMiniBossesKilled.AddListener(rUIManager.Instance.UiPassword.ShowCreatePasswordPanel);
+        OnAllMiniBossesKilled.AddListener(delegate { GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().UltimateDisabled(false); });
+        OnAllMiniBossesKilled.AddListener(delegate { rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle); });
 
         //obj pooling
         enemyPool = new List<GameObject>();
@@ -73,6 +75,7 @@ public class EnemySpawner : MonoBehaviour
         //}
 
     }
+
 
     #region  enemies before obj pooling
     //public void SpawnEnemies()

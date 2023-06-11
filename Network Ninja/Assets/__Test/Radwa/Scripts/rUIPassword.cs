@@ -162,7 +162,6 @@ public class rUIPassword : MonoBehaviour
     #region UI Panels
     public void ShowCreatePasswordPanel()
     {
-        createPasswordPanel.SetActive(true);
         rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(createPasswordPanel.GetComponent<CanvasGroup>(), 3));
 
         ResetPasswordIF();
@@ -247,7 +246,9 @@ public class rUIPassword : MonoBehaviour
         rAreasManager.Instance.AreasWithSamePasswordAsCurrent();
 
 
-        createPasswordPanel.SetActive(false);
+        //createPasswordPanel.SetActive(false);
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(createPasswordPanel.GetComponent<CanvasGroup>(), 0.2f));
+
 
         ShowFeedback();
 
