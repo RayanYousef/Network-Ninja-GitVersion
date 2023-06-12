@@ -141,9 +141,30 @@ public class EnemySpawner : MonoBehaviour
     #endregion
 
     // spawn MiniBosses
+    #region old mini bosses
+    //public void SpawnMiniBosses()
+    //{
+    //    for (int i = 0; i < miniBossSize; i++)
+    //    {
+    //        Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
+    //        GameObject MiniBoss = Instantiate(MiniBossPrefab, randomPosition, Quaternion.identity);
+    //        MiniBoss.transform.parent = this.transform;
+    //        MiniBoss.GetComponent<m_MiniBoss>().OnMiniBossKilled += HandleMiniBossKilled;
+    //        MiniBosses.Add(MiniBoss);
+    //        //Debug.Log("mini boss spawned");
+    //    }
+    //}
+    #endregion
     public void SpawnMiniBosses()
     {
-        for (int i = 0; i < miniBossSize; i++)
+        foreach (GameObject mb in MiniBosses)
+        {
+            mb.SetActive(true);
+        }
+
+        int cnt = MiniBosses.Count;
+
+        for (int i = 0; i < miniBossSize - cnt; i++)
         {
             Vector3 randomPosition = objectToSpawnAround.position + new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius)).normalized * Random.Range(minDistanceFromObject, maxDistanceFromObject);
             GameObject MiniBoss = Instantiate(MiniBossPrefab, randomPosition, Quaternion.identity);
@@ -153,7 +174,6 @@ public class EnemySpawner : MonoBehaviour
             //Debug.Log("mini boss spawned");
         }
     }
-
     public void SpawnBigBoss()
     {
         GameObject BigBoss = Instantiate(BigBossPrefab, this.transform.position, Quaternion.identity);
