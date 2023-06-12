@@ -14,6 +14,12 @@
       "url": "https://json.schemastore.org/base-04.json"
     },
     {
+      "name": "1Password SSH Agent Config",
+      "description": "Configuration file for the 1Password SSH agent.",
+      "fileMatch": ["**/1password/ssh/agent.toml"],
+      "url": "https://developer.1password.com/schema/ssh-agent-config.json"
+    },
+    {
       "name": "Application Accelerator",
       "description": "Application Accelerator for VMware Tanzu",
       "fileMatch": ["accelerator.yaml"],
@@ -39,6 +45,24 @@
       "description": "AdonisJS configuration file",
       "fileMatch": [".adonisrc.json"],
       "url": "https://raw.githubusercontent.com/adonisjs/application/master/adonisrc.schema.json"
+    },
+    {
+      "name": "aerleon.yml",
+      "description": "Aerleon configuration file",
+      "fileMatch": ["aerleon.yml"],
+      "url": "https://raw.githubusercontent.com/aerleon/aerleon/main/schemas/aerleon-config.schema.json"
+    },
+    {
+      "name": "Aerleon Network & Service Definitions",
+      "description": "Aerleon network & service definition file",
+      "fileMatch": ["**/def/**/*.yaml"],
+      "url": "https://raw.githubusercontent.com/aerleon/aerleon/main/schemas/aerleon-definitions.schema.json"
+    },
+    {
+      "name": "Aerleon Policy",
+      "description": "Aerleon policy file",
+      "fileMatch": ["**/policies/**/*.yaml"],
+      "url": "https://raw.githubusercontent.com/aerleon/aerleon/main/schemas/aerleon-policies.schema.json"
     },
     {
       "name": ".agripparc.json",
@@ -2730,6 +2754,12 @@
       "description": "Packer template JSON configuration",
       "fileMatch": ["packer.json"],
       "url": "https://json.schemastore.org/packer.json"
+    },
+    {
+      "name": "Paper paper-plugin.yml",
+      "description": "JSON Schema for Paper Plugins YAML",
+      "fileMatch": ["paper-plugin.yml"],
+      "url": "https://json.schemastore.org/paper-plugin.json"
     },
     {
       "name": "pgap_yaml_input_reader",

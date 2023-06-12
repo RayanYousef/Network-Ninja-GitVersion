@@ -72,7 +72,7 @@ public class m_InGameUI : MonoBehaviour
             if(optionsPanel.activeSelf)
             {
                 optionsPanel.SetActive(false);
-                rUIManager.Instance.SetInteractivePanelState = false;
+                rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(optionsPanel.GetComponent<CanvasGroup>(), 0.2f));
             }
             else
             {
@@ -105,13 +105,11 @@ public class m_InGameUI : MonoBehaviour
         switch (menuPanel.activeSelf)
         {
             case true:
-                menuPanel.SetActive(false);
-                rUIManager.Instance.SetInteractivePanelState = false;
+                rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(menuPanel.GetComponent<CanvasGroup>(), 0.2f));
                 break;
 
             case false:
-                menuPanel.SetActive(true);
-                rUIManager.Instance.SetInteractivePanelState = true;
+                rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(menuPanel.GetComponent<CanvasGroup>(), 0.2f));
                 break;
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum CharacterState { Idling, Running, Attacking, Jumping, Dashing,Falling, Hit, Dying, Ultimate };
+public enum CharacterState { Idling, Running, Attacking, Jumping, Dashing,Falling, Hit, Dying, Ultimate, TakingDamage };
 public enum ButtonClicked
 {
     None, First, Second

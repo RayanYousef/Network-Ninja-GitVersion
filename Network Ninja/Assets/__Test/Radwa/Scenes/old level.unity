@@ -123,7 +123,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 9b43a5dfac61ae44b877e59d1215d12d, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1001 &8031009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10974,6 +10974,7 @@ MonoBehaviour:
   MainMenu: 
   currentGameState: 0
   difficulty: 0
+  gameLang: 0
   bossEntered: 0
   WinningPanel: {fileID: 901005650}
   LosePanel: {fileID: 0}
@@ -38987,6 +38988,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPassword: {fileID: 0}
   inGameUI: {fileID: 0}
+  interactivePanels: []
+  setInteractivePanelState: 0
+  independantUIElements: []
+  characterFace: {fileID: 0}
+  facialExpFadeDuration: 1
+  idle: {fileID: 0}
+  angry: {fileID: 0}
+  serious: {fileID: 0}
+  afraid: {fileID: 0}
 --- !u!1001 &1256904813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45493,11 +45503,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dabb45f8a602247a7c0b3a591714d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winningPanel: {fileID: 901005650}
   menuPanel: {fileID: 2094178102}
-  volumeSlider: {fileID: 1490244770}
   MainMenu: mainMenu
   prompt: {fileID: 0}
+  optionsPanel: {fileID: 0}
+  optionsBtn: {fileID: 0}
+  volumeSlider: {fileID: 1490244770}
+  mouseSensitivitySlider: {fileID: 0}
+  camFarBtn: {fileID: 0}
+  camMidBtn: {fileID: 0}
+  camNearBtn: {fileID: 0}
+  closeBtn: {fileID: 0}
 --- !u!1 &1582215836
 GameObject:
   m_ObjectHideFlags: 0
@@ -67622,10 +67638,10 @@ MonoBehaviour:
   maxHealth: {r: 0, g: 1, b: 0.91119623, a: 0.98039216}
   halfHealth: {r: 0.99985135, g: 1, b: 0, a: 0.98039216}
   lowHealth: {r: 1, g: 0.2908872, b: 0, a: 0.98039216}
-  enemyColor: {r: 1, g: 0, b: 0, a: 0.98039216}
+  darkColor: {r: 0, g: 0, b: 0, a: 0}
   currentArea: {fileID: 0}
   strength: 0
-  currentWarnings: 
+  currentWarning: 
   currentSuggestions: 
 --- !u!4 &392310444755736394
 Transform:
@@ -70174,6 +70190,7 @@ MonoBehaviour:
     HalfHealth: {r: 0, g: 0, b: 0, a: 0}
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
   sharingPasswordWarningIcon: {fileID: 0}
+  isFlashing: 0
   healthTimer: 0
 --- !u!23 &6255316749818515614
 MeshRenderer:
@@ -70355,6 +70372,7 @@ MonoBehaviour:
     HalfHealth: {r: 0, g: 0, b: 0, a: 0}
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
   sharingPasswordWarningIcon: {fileID: 0}
+  isFlashing: 0
   healthTimer: 0
 --- !u!33 &6255316749902934214
 MeshFilter:
@@ -70547,6 +70565,7 @@ MonoBehaviour:
     HalfHealth: {r: 0, g: 0, b: 0, a: 0}
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
   sharingPasswordWarningIcon: {fileID: 0}
+  isFlashing: 0
   healthTimer: 0
 --- !u!65 &6255316750254913930
 BoxCollider:
@@ -70931,6 +70950,7 @@ MonoBehaviour:
     HalfHealth: {r: 0, g: 0, b: 0, a: 0}
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
   sharingPasswordWarningIcon: {fileID: 0}
+  isFlashing: 0
   healthTimer: 0
 --- !u!1 &6255316750787494213
 GameObject:

@@ -296,11 +296,12 @@ public class CS_CameraManager : MonoBehaviour
 
     public void ApplyShakeOnTakingDamage()
     {
-        _impulseSource.GenerateImpulseWithVelocity(new Vector3(0,-1,0));
+        _impulseSource.GenerateImpulseWithVelocity(new Vector3(0,-0.4f,0));
     }
 
     public void ApplyShakeOnDealingDamage()
     {
+        if(PlayerManager.PStatsManager.HitObjects.Count==1)
         _impulseSource.GenerateImpulseWithVelocity(new Vector3(0, 0.2f, 0));
     }
     public void RotationSpeed(Slider mouseSlider)

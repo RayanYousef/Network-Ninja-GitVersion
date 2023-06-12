@@ -16,7 +16,6 @@ public class rArea : MonoBehaviour
     [Header("Area Info")]
     [SerializeField] AreaType areaType;
     [SerializeField] float health, maxHealth;
-    bool isWinningConditionMet = false;
     [SerializeField] string password;
 
     [SerializeField] bool playerInside = false;
@@ -71,7 +70,6 @@ public class rArea : MonoBehaviour
                     enemySpawner.AddEnemiesInPool();
                     enemySpawner.DisableMiniBosses();
                 }
-
                 else
                 {
                     for (int i = 0; i < alliesList.Count; i++)
@@ -118,6 +116,11 @@ public class rArea : MonoBehaviour
         {
             meshColourChanger.ChangeToColour(Color.red);
         }
+        else if (areaType == AreaType.Main)
+        {
+            meshColourChanger.ChangeToColour(rAreasManager.Instance.MaxHealth);
+            health = maxHealth;
+        }
 
         maxHealth = rAreasManager.Instance.MaxSoldiersNumber;
 
@@ -126,7 +129,10 @@ public class rArea : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerInside == false && password != null && !GameManager.Instance.BossEntered)
+        //if (playerInside == false && password != null && !GameManager.Instance.BossEntered)
+        //    UpdateHealth();
+
+        if (!playerInside && (password != null || areaType == AreaType.Main) && !GameManager.Instance.BossEntered)
             UpdateHealth();
     }
 
@@ -136,12 +142,12 @@ public class rArea : MonoBehaviour
         if (Timer > healthTimer)
         {
             Timer = 0;
-            health = Mathf.Clamp(health - 1, 0, maxHealth);
+            Health = Mathf.Clamp(health - 1, 0, maxHealth);
 
             if (health > 0)
                 meshColourChanger.LerpBetweenObjectColours(health / maxHealth);
-            else
-                meshColourChanger.ChangeToColour(Color.red);
+            //else
+                //meshColourChanger.ChangeToColour(Color.red);
 
 
             if (health == 0 && password != null)
@@ -181,9 +187,6 @@ public class rArea : MonoBehaviour
 
     public void Winning()
     {
-        // stop update health
-        isWinningConditionMet = true;
-
         // current area minimap ..> max health color
         meshColourChanger.ChangeToColour(rAreasManager.Instance.MaxHealth);
         health = rAreasManager.Instance.MaxSoldiersNumber;
@@ -191,7 +194,7 @@ public class rArea : MonoBehaviour
         // Allies Formation
         FormStrongArmy();
 
-        areaCamera.enabled = true;
+        //areaCamera.enabled = true;
         //StartCoroutine(WinningCutScene());
     }
 
@@ -241,14 +244,7 @@ public class rArea : MonoBehaviour
             FormStrongArmy();
         }
 
-        if (GameObjectsManager.Instance.CameraBrain != null)
-        {
-            GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
-
-            //areaCamera.enabled = true;
-            //if (switchCamBack)
-            //    StartCoroutine(WaitAndSwitchCameraBack());
-        }
+        enableCinemachine();
     } 
 
     private void FormStrongArmy()
@@ -267,6 +263,18 @@ public class rArea : MonoBehaviour
     #endregion
 
     #region Cinemachine Cut Scene
+
+    void enableCinemachine()
+    {
+        if (GameObjectsManager.Instance.CameraBrain != null)
+        {
+            GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+
+            //areaCamera.enabled = true;
+            //if (switchCamBack)
+            //    StartCoroutine(WaitAndSwitchCameraBack());
+        }
+    }
     IEnumerator WaitAndSwitchCameraBack()
     {
         yield return new WaitForSeconds(4.5f);
@@ -304,42 +312,40 @@ public class rArea : MonoBehaviour
             {
                 return;
             }
-
             rAreasManager.Instance.CurrentArea = this;
             
             if (areaType == AreaType.Fight)
             {
                 rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
+                rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Serious);
                 /// raise event to spawn enemies
                 OnEnteringFight?.Invoke();
+                return;
             }
-            else if (areaType == AreaType.Base)
+
+            rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle);
+            if (areaType == AreaType.Base)
             {
                 playerInside = true;
                 rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(true);
 
-                //if (rAreasManager.Instance.CurrentArea == this)
-                //{
-                //    return;
-                //}
-                //rAreasManager.Instance.CurrentArea = this;
-
-                /// On Entering Area call, invoke OnEnteringArea that UIPassword listens to
                 if (password == null)
                 {
                     rUIManager.Instance.UiPassword.ShowCreatePasswordPanel();
-                    //OnEnteringArea?.Invoke();
                 }
             }
             else if (isFirst)
             {
                 // defualt area has max health
                 this.Health = maxHealth;
-                FormArmyBasedOnAreaHealth();
-                //areaType = AreaType.Base;
+                FormStrongArmy();
                 // show intro panel
                 rUIManager.Instance.UiPassword.ShowIntroPanel();
                 isFirst = false;
+            }
+            else /*AreaType == AreaType.Main && !isFirst*/
+            {
+                ShowAlliesBasedOnAreaHealth();
             }
         }
     }
