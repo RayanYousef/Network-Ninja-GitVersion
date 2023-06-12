@@ -43,7 +43,6 @@ public class StatsManager : MonoBehaviour
     [SerializeField] bool damagable = true;
 
 
-
     [Header("Difficulty")]
     [SerializeField] public Difficulty difficulty = Difficulty.Normal;
     public float maxHealthDifficultyMultiplier, defenseDifficultyMultiplier,atkDifficultyMultiplier,

@@ -36,6 +36,10 @@ public class CS_PlayerManager : MonoBehaviour
     [Header("Other Variables")]
     [SerializeField] float drag;
     [SerializeField] float clicksIntervalTime;
+    [Header("Take Damage Variables")]
+    // Controlls the damage taken so it wont happen a lot, but rather every interval
+    [SerializeField] float intervalsBetweenDamage=0.5f;
+    [SerializeField] float damageTimer;
 
     [Header("Script Variables")]
     [SerializeField] CharacterState currentState;
@@ -113,6 +117,8 @@ public class CS_PlayerManager : MonoBehaviour
 
         pStatsManager.Stats.OnHealthUpdated.AddListener(LostGameHealthZero);
         pStatsManager.Stats.OnEnergyUpdated.AddListener(DisableUltimate);
+        pStatsManager.OnTakingDamage.AddListener(ResetDamageTimerAndCanNotTakeDamage);
+        pStatsManager.OnTakingDamage.AddListener(AnimController.PlayTakeDamageAnim);
     }
 
     private void Update()
@@ -142,6 +148,8 @@ public class CS_PlayerManager : MonoBehaviour
         if (ultimateOn == true)
             pStatsManager.AddtoEnergy(-Time.deltaTime * ultimateAttenuationRate);
 
+        DamageIntervalFunction();
+
     }
 
  
@@ -150,9 +158,6 @@ public class CS_PlayerManager : MonoBehaviour
     public void OnStateEnter(CharacterState enteredState)
     {
         currentState = enteredState;
-
-        if (enteredState != CharacterState.Attacking)
-            animController.ResetCombo();
 
         ResetParameters();
 
@@ -207,13 +212,19 @@ public class CS_PlayerManager : MonoBehaviour
     }
     public void ResetParameters()
     {
+
+        if (CurrentState != CharacterState.Attacking)
+            animController.ResetCombo();
+
         anim.applyRootMotion = false;
 
         anim.SetBool(animController.B_Dashing, false);
         anim.SetBool(animController.B_Jumping, false);
         anim.SetBool(animController.B_Attacking, false);
         anim.SetBool(animController.B_canTransit, false);
+
         anim.ResetTrigger(animController.T_Ultimate);
+        anim.ResetTrigger(animController.T_Dash);
 
         pStatsManager.DisableAllWeapons();
         //
@@ -374,13 +385,11 @@ public class CS_PlayerManager : MonoBehaviour
         }
 
     }
-
     public void DisableUltimate(float energyValue)
     {
         if (energyValue == 0)
             UltimateOn = false;
     }
-
     public void ControllerState(bool value)
     {
         PlayerInputs.enabled = value;
@@ -390,32 +399,46 @@ public class CS_PlayerManager : MonoBehaviour
         this.enabled = value;
         GetComponent<Collider>().enabled = value;
     }
-
     public void GravityState(bool value)
     {
         MoveController.Gravity= value;
     }
 
+    public void ResetDamageTimerAndCanNotTakeDamage()
+    {
+        damageTimer= 0;
+        pStatsManager.Damagable = false;
+
+    }
     #endregion
 
+    #region Private Functions
     private void UltimateEnabled(bool value)
     {
         anim.SetBool(animController.B_Ultimate, value);
         anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
         cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
         if (_freezeObjectsInRange != null)
-            _freezeObjectsInRange.ObjectsMovementEnabled(false);
+            _freezeObjectsInRange.ObjectsMovementEnabled(false,0.05f);
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
     }
-    private void UltimateDisabled(bool value)
+    public void UltimateDisabled(bool value)
     {
         anim.SetBool(animController.B_Ultimate, value);
         anim.SetFloat(animController.F_animSpeed, 0.9f);
         cameraManager.SwitchCamerasBasedOnLockState();
         if (_freezeObjectsInRange != null)
-            _freezeObjectsInRange.ObjectsMovementEnabled(true);
+            _freezeObjectsInRange.ObjectsMovementEnabled(true,1);
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
+    } 
+
+    private void DamageIntervalFunction()
+    {
+        if (intervalsBetweenDamage > damageTimer)
+            damageTimer += Time.deltaTime;
+        else PStatsManager.Damagable = true;
     }
+    #endregion
 }

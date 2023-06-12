@@ -60,6 +60,11 @@ public class CS_DamageObject : MonoBehaviour
             myStatsManager.HitObjects.Clear();
         ApplySFX();
     }
+    private void OnDisable()
+    {
+        if (myStatsManager != null)
+            myStatsManager.HitObjects.Clear();
+    }
     private void ApplySFX()
     {
         if (SFXClip != null && AudioManager.instance != null)
@@ -130,11 +135,6 @@ public class CS_DamageObject : MonoBehaviour
                 }
 
             }
-    }
-
-    private void ApplyShakeEffect()
-    {
-
     }
     #endregion
 

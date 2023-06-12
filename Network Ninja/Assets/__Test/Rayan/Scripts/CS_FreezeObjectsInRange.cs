@@ -8,7 +8,7 @@ public class CS_FreezeObjectsInRange : MonoBehaviour
     [SerializeField] List<Transform> objectsInRange;
 
 
-    public void ObjectsMovementEnabled(bool value)
+    public void ObjectsMovementEnabled(bool value, float animationSpeed)
     {
         foreach(var enemy in objectsInRange)
         {
@@ -18,8 +18,7 @@ public class CS_FreezeObjectsInRange : MonoBehaviour
 
             }
             if (enemy.TryGetComponent<Animator>(out Animator animator))
-                animator.speed = 0.1f;
-            
+                animator.speed = animationSpeed;            
         }
 
     }
@@ -46,6 +45,7 @@ public class CS_FreezeObjectsInRange : MonoBehaviour
         {
             objectsInRange.Remove(other.transform);
             slowInterface.ObjectMovementEnabled(true);
+
 
 
         }

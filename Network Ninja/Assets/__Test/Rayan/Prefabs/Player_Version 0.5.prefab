@@ -170089,8 +170089,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922773841797100647}
-  m_LocalRotation: {x: -0.000000002289009, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.85000014, y: 1.36, z: -1.2800001}
+  m_LocalRotation: {x: 0.000000016058612, y: 0.0000001284689, z: -2.0630322e-15, w: 1}
+  m_LocalPosition: {x: 0.8499985, y: 1.3600001, z: -1.2800007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170415,8 +170415,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922773842041303621}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.6, z: -4}
+  m_LocalRotation: {x: 0.000000022675161, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.7999997, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170718,8 +170718,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922773842341369505}
-  m_LocalRotation: {x: -0.0000000022576168, y: 3.7779543e-10, z: 0.1650476, w: 0.9862856}
-  m_LocalPosition: {x: 0.85000014, y: 1.36, z: -1.2800001}
+  m_LocalRotation: {x: 0.000000022675161, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.7999997, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -170751,7 +170751,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 100
-  field of view: 90
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -171263,6 +171263,7 @@ MonoBehaviour:
   lockVirtualCamera: {fileID: 4922773843001053572}
   ultimateCamera: {fileID: 4922773841797100573}
   _impulseSource: {fileID: 1661674303}
+  _cameraMode: 0
   followTargetNormal: {fileID: 4922773842117044705}
   followTargetLock: {fileID: 4922773842149698423}
   listOfTargetsInRange: []
@@ -171416,6 +171417,7 @@ MonoBehaviour:
   f_Direction: Direction
   f_MotionTime: MotionTime
   f_animSpeed: AnimationSpeed
+  b_TakingDamage: Taking Damage
   b_Grounded: Grounded
   b_Attacking: Attacking
   b_Ultimate: UltimateOn
@@ -171495,9 +171497,9 @@ MonoBehaviour:
     luck: 1
     defaultEnergy: 100
     energy: 100
-  damagable: 0
   team: 1
   targetable: 0
+  damagable: 1
   difficulty: 1
   maxHealthDifficultyMultiplier: 0
   defenseDifficultyMultiplier: 0
@@ -171709,6 +171711,8 @@ MonoBehaviour:
   ultimateAttackSpeed: 1.1
   drag: 10
   clicksIntervalTime: 0.2
+  intervalsBetweenDamage: 0.5
+  damageTimer: 0
   currentState: 0
 --- !u!1 &4922773842606892486
 GameObject:
@@ -172328,8 +172332,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922773843001053576}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.4, z: -4}
+  m_LocalRotation: {x: 0.000000016674738, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.8970494, z: -0.053794384}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -172860,10 +172864,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.5, y: 0.5, z: 0.5}
-  ShoulderOffset: {x: 0, y: 1, z: 0}
+  ShoulderOffset: {x: 0, y: 0.2, z: 0}
   VerticalArmLength: 0
   CameraSide: 1
-  CameraDistance: 4
+  CameraDistance: 3
   CameraCollisionFilter:
     serializedVersion: 2
     m_Bits: 64

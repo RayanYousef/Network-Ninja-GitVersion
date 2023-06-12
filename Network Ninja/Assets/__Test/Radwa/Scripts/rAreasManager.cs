@@ -158,11 +158,11 @@ public class rAreasManager : MonoBehaviour
     {
         foreach (rArea area in listOfLevelAreas)
         {
-            if (area == rAreasManager.Instance.CurrentArea)
+            if (area == CurrentArea)
             {
                 continue;
             }
-            if (area.AreaType != AreaType.Base)
+            if (area.AreaType != AreaType.Base && area.AreaType != AreaType.Main)
             {
                 return false;
             }

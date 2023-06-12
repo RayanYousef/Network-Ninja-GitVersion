@@ -15,7 +15,7 @@ public class rTakeEnter : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            myBtn.onClick.Invoke();
+            myBtn.onClick?.Invoke();
         }
     }
 }

@@ -22,10 +22,11 @@ public class rCard : MonoBehaviour
     {
         cardPanel1.alpha = 0;
         cardPanel2.alpha = 0;
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 1.0f;
         anim.SetBool("startRotation", true);
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
         cardCam.enabled = true;
-
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+        
         skipBtn.onClick.AddListener(OnClkSkip);
 
         if(GameManager.Instance.GameLang == GameLang.English)
@@ -41,7 +42,7 @@ public class rCard : MonoBehaviour
 
     public void CardAppeared()
     {
-        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(cardPanel1, timeToFadeIn));
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(cardPanel1, timeToFadeIn, false));
     }
 
     public void CardPlaced()
@@ -61,6 +62,7 @@ public class rCard : MonoBehaviour
     {
         // disable card cam
         cardCam.enabled = false;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
 
         // disable cursor, player inputs
         ShowCursorAndStopInputs(false);

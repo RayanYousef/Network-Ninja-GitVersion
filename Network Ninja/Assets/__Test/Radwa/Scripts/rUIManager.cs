@@ -48,7 +48,6 @@ public class rUIManager : MonoBehaviour
                 {
                     GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().ControllerState(false);
                     Cursor.lockState = CursorLockMode.Confined;
-                    Time.timeScale = 0;
                     return;
                 }
             }
@@ -93,22 +92,28 @@ public class rUIManager : MonoBehaviour
         }
 
         panelToFade.gameObject.SetActive(false);
+
         SetInteractivePanelState = false;
     }
 
-    public IEnumerator FadeInPanel(CanvasGroup panelToFade, float time)
+    public IEnumerator FadeInPanel(CanvasGroup panelToFade, float time, bool stopTimeScale = true)
     {
+        panelToFade.gameObject.SetActive(true);
+
+        SetInteractivePanelState = true;
+
         float elapsedTime = 0f;
 
-        while (elapsedTime < time)
+        while (elapsedTime < time + 0.1)
         {
             panelToFade.alpha = Mathf.Lerp(0, 1, (elapsedTime / time));
             elapsedTime += Time.unscaledDeltaTime;
 
             yield return null;
         }
-        SetInteractivePanelState = true;
-    } 
+        if(stopTimeScale)
+            Time.timeScale = 0;
+    }
     #endregion
 
     #region Fade Out/In Sprite
