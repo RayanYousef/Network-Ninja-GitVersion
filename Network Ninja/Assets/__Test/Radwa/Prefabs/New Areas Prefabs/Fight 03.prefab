@@ -327,7 +327,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2969290368901449881}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7240306803225901418
 GameObject:
@@ -353,7 +353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7240306803225901418}
   m_LocalRotation: {x: -0, y: 0.9692236, z: 0, w: 0.24618232}
-  m_LocalPosition: {x: -5.29, y: -0.15997314, z: -13.38}
+  m_LocalPosition: {x: -0.54248786, y: -0.15997314, z: -4.216721}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -544,7 +544,7 @@ GameObject:
   - component: {fileID: 7240306803935518353}
   - component: {fileID: 7240306803935518358}
   - component: {fileID: 7240306803935518359}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Area UI Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,9 +649,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7240306803935518353}
+  - {fileID: 7240306802780975691}
   - {fileID: 6932156391207564991}
   - {fileID: 3950291739965598806}
-  - {fileID: 7240306802780975691}
   - {fileID: 7240306803701181822}
   - {fileID: 7240306803225901717}
   - {fileID: 7240306803302879092}
@@ -5054,7 +5054,7 @@ PrefabInstance:
     - target: {fileID: 308860715549818941, guid: be6ef8f20571ebc4990c4c6d19887f34,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 308860715549818941, guid: be6ef8f20571ebc4990c4c6d19887f34,
         type: 3}
@@ -5115,6 +5115,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: passwordSharedUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 308860715549818942, guid: be6ef8f20571ebc4990c4c6d19887f34,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 308860715549818942, guid: be6ef8f20571ebc4990c4c6d19887f34,
         type: 3}
@@ -5834,7 +5839,7 @@ PrefabInstance:
     - target: {fileID: 5956289530070099838, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099838, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
@@ -5894,7 +5899,7 @@ PrefabInstance:
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: armySize
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}

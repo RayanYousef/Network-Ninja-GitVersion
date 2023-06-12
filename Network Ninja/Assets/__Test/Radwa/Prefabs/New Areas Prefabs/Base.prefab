@@ -320,7 +320,7 @@ MonoBehaviour:
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
   sharingPasswordWarningIcon: {fileID: 0}
   isFlashing: 0
-  healthTimer: 3
+  healthTimer: 0
 --- !u!1 &2075303866547685170
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,7 +2213,7 @@ GameObject:
   - component: {fileID: 8858637547849580632}
   - component: {fileID: 8858637547849580631}
   - component: {fileID: 8858637547849580630}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Area UI Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3055,6 +3055,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: passwordSharedUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 308860715549818942, guid: be6ef8f20571ebc4990c4c6d19887f34,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 308860715549818942, guid: be6ef8f20571ebc4990c4c6d19887f34,
         type: 3}
@@ -4680,11 +4685,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
-        type: 3}
-      propertyPath: armySize
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
