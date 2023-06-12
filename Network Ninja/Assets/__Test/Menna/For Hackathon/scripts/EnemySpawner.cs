@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class EnemySpawner : MonoBehaviour
     public GameObject BigBossPrefab;
     public GameObject cardPrefab;
     public GameObject IntroEffectPrefab;
-  
+    public PlayableDirector playableDirector;
+
+
     [Header("Enemies")]
     public GameObject enemyPrefab;
     public GameObject MiniBossPrefab;
@@ -242,17 +245,15 @@ public class EnemySpawner : MonoBehaviour
 
     public void AddEnemiesInPool()
     {
-        enemies.Clear();
-        foreach(GameObject enemy in enemies)
-        { 
+        foreach (GameObject enemy in enemies)
+        {
             if (enemy != null)
             {
-                enemies.Remove(enemy);
                 enemyPool.Add(enemy);
                 enemy.SetActive(false);
             }
-
         }
+        enemies.Clear();
     }
     public void SpawnMoreEnemies()
     {
@@ -328,11 +329,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public IEnumerator spawnIntroEffect()
-    {
-        yield return new WaitForSeconds(5);
-
-    }
     public IEnumerator SpawnBossCoroutine()
     {
         yield return new WaitForSeconds(delayBeforeSpawnBoss / 2);
@@ -340,8 +336,15 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
         // Spawn the boss
         SpawnBigBoss();
+       // playableDirector.Play();
+       // BigBossPrefab.GetComponent<Animator>().enabled = false;
+       // yield return new WaitForSeconds(5);
+       // BigBossPrefab.GetComponent<Animator>().enabled = true;
+
+
+
     }
-    
+
     IEnumerator SpawnCardCoroutine()
     {
         GameManager.Instance.BossEntered = true;
