@@ -96,7 +96,7 @@ public class rUIManager : MonoBehaviour
         SetInteractivePanelState = false;
     }
 
-    public IEnumerator FadeInPanel(CanvasGroup panelToFade, float time)
+    public IEnumerator FadeInPanel(CanvasGroup panelToFade, float time, bool stopTimeScale = true)
     {
         panelToFade.gameObject.SetActive(true);
 
@@ -111,7 +111,8 @@ public class rUIManager : MonoBehaviour
 
             yield return null;
         }
-        Time.timeScale = 0;
+        if(stopTimeScale)
+            Time.timeScale = 0;
     }
     #endregion
 

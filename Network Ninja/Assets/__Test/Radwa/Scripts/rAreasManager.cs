@@ -162,7 +162,7 @@ public class rAreasManager : MonoBehaviour
             {
                 continue;
             }
-            if (area.AreaType != AreaType.Base || area.AreaType != AreaType.Main)
+            if (area.AreaType != AreaType.Base && area.AreaType != AreaType.Main)
             {
                 return false;
             }
