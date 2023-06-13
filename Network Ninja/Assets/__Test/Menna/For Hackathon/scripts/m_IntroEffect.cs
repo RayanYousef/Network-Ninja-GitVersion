@@ -17,6 +17,6 @@ public class m_IntroEffect : MonoBehaviour
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
         yield return new WaitForSeconds(5);
         effectCam.enabled = false;
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 3.0f;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
     }
 }

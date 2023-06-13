@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class m_BossIdleState : StateMachineBehaviour
 {
+
      [SerializeField] float chaseRange;
      [SerializeField] float AttackRange;
 
      Transform player;
      float timer;
-     float timer2;
-    m_BossManager bossMovement;
+     m_BossManager bossMovement;
 
 
 
@@ -21,7 +21,7 @@ public class m_BossIdleState : StateMachineBehaviour
         player = GameObjectsManager.Instance.Player.transform;
         bossMovement = animator.GetComponent<m_BossManager>();
         timer =0;
-        timer2 =0;
+        //startStats = false;
 
 
     }
@@ -30,7 +30,6 @@ public class m_BossIdleState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer += Time.deltaTime;
-        timer2 += Time.deltaTime;
         float distance = Vector3.Distance(player.position, animator.transform.position);
 
         //if(distance > chaseRange)
@@ -41,7 +40,7 @@ public class m_BossIdleState : StateMachineBehaviour
         //    }
         //}
 
-        if(timer2> 16)
+        if (bossMovement.startBossState)
         {
             if (distance <= chaseRange && distance > AttackRange)
             {
@@ -62,6 +61,7 @@ public class m_BossIdleState : StateMachineBehaviour
                     timer = 0;
                 }
             }
+
         }
        
     }

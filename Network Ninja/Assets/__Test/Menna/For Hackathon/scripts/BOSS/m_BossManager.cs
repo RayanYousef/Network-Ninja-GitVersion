@@ -12,6 +12,7 @@ using Unity.Mathematics;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine.Playables;
 using Unity.VisualScripting;
+using UnityEditor.Animations;
 
 public class m_BossManager : MonoBehaviour , IStopObject
 {
@@ -19,9 +20,10 @@ public class m_BossManager : MonoBehaviour , IStopObject
 
     public GameObject[] trails;
     public Animator dragonAnim;
-    public float IntervalBetweenBossAttacks = 10;
+    public float IntervalBetweenBossAttacks = 1;
     public float AttackDuration;
     public bool LookAtPlyer = true;
+    public bool startBossState = false;
     public PlayableDirector playableDirector;
     public CinemachineVirtualCamera BossCam1;
     public CinemachineVirtualCamera BossCam2;
@@ -46,6 +48,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
     [SerializeField] private Color color;
     [SerializeField] float frictionCoefficient = 2.0f;
     [SerializeField] GameObject HP;
+
 
     private void Awake()
     {
@@ -239,19 +242,17 @@ public class m_BossManager : MonoBehaviour , IStopObject
 
     private IEnumerator intervalBetCams()
     {
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
         yield return new WaitForSeconds(5);
         BossCam1.enabled = false;
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
         yield return new WaitForSeconds(5);
         BossCam2.enabled = false;
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
         yield return new WaitForSeconds(5);
         BossCam3.enabled = false;
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
-
-
-
-
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
+        yield return new WaitForSeconds(1);
+        startBossState = true;
     }
 }
