@@ -9,10 +9,10 @@ public class m_IntroEffect : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(intervalBetCams());
+        StartCoroutine(WaitForEffect());
     }
 
-    private IEnumerator intervalBetCams()
+    private IEnumerator WaitForEffect()
     {
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
         yield return new WaitForSeconds(5);

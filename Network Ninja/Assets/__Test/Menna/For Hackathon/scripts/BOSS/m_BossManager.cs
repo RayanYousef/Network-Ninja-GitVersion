@@ -45,6 +45,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
     [SerializeField] private Color transparentColor;
     [SerializeField] private Color color;
     [SerializeField] float frictionCoefficient = 2.0f;
+    [SerializeField] GameObject HP;
 
     private void Awake()
     {
@@ -174,6 +175,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         DragonAnim.SetBool("isChasing", false);
         GameManager.Instance.CurrentGameState = GameState.Won;
         BossDie?.Invoke();
+        HP.SetActive(false);
     }
     public bool death()
     {
