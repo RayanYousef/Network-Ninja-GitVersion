@@ -8,7 +8,8 @@ public class CS_MiniMap : MonoBehaviour
 {
     // World player is used to get the position of the player in the world
     [Header("Player Position & Rotation In the World")]
-    [SerializeField] Transform playerTransform, playerCamera;
+    [SerializeField] Transform playerTransform;
+    [SerializeField] Transform playerCamera;
     [SerializeField] RectTransform playerIconInMiniMap;
 
     // Mini map guide is used to get the size of the mini map in the world in order to

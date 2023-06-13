@@ -40,6 +40,7 @@ public class CS_MovementController : MonoBehaviour
     public float AppliedGravityForce { get => appliedGravityForce; set => appliedGravityForce = value; }
     public CS_PlayerManager PlayerManager { get => playerManager; set => playerManager = value; }
     public bool Gravity { get => gravity; set => gravity = value; }
+    public float MovementSpeed { get => movementSpeed;}
 
     private void Awake()
     {
@@ -64,7 +65,6 @@ public class CS_MovementController : MonoBehaviour
                 MoveTowardsDirection(movementSpeed);
                 break;
             case CharacterState.Attacking:
-                MoveTowardsDirection(movementSpeed/8);
                 break;
 
             case CharacterState.Dashing:
@@ -85,36 +85,20 @@ public class CS_MovementController : MonoBehaviour
         if (PlayerManager.enabled && playerManager.AnimController.Grounded == false && playerManager.CurrentState!= CharacterState.Dashing)
             FallingUpdate();
 
-    }
 
-    private void LateUpdate()
-    {
-        //switch (playerManager.CurrentState == CharacterState.Ultimate && playerManager.CameraManager.LockedOn)
-        //{
-        //    case true:
-        //        RotateTowardsDirection(playerManager.CameraManager.LockedTarget);
-
-        //        break;
-
-        //    case false:
-        //        if(playerManager.CurrentState != CharacterState.Ultimate)
-        //        RotateTowardsDirection();
-        //        break;
-        //}
-
-        switch (playerManager.CurrentState == CharacterState.Attacking && playerManager.CameraManager.LockedOn) 
+        switch (playerManager.CameraManager.LockedOn)
         {
             case true:
                 RotateTowardsDirection(playerManager.CameraManager.LockedTarget);
                 break;
-            case false: 
+            case false:
+                if(playerManager.CurrentState!= CharacterState.Attacking)
                 RotateTowardsDirection();
                 break;
 
-        
         }
-    }
 
+    }
     public void FallingUpdate()
     {
         if (Gravity)
@@ -126,14 +110,14 @@ public class CS_MovementController : MonoBehaviour
     }
 
     #region Movement and Rotation
-    void MoveTowardsDirection( float speed)
+    public void MoveTowardsDirection( float speed)
     {
         Vector3 newDirection = playerCam.transform.TransformDirection(inputDirection);
         newDirection.y = 0; newDirection.Normalize();
         rb.AddForce(newDirection * speed * Time.deltaTime, ForceMode.VelocityChange);
     }
 
-    private void RotateTowardsDirection()
+    public void RotateTowardsDirection()
     {
 
         Vector3 newDirection = playerCam.transform.TransformDirection(inputDirection);
@@ -141,6 +125,16 @@ public class CS_MovementController : MonoBehaviour
         if (newDirection != Vector3.zero)
             transform.rotation = Quaternion.RotateTowards(transform.rotation,
                 Quaternion.LookRotation(newDirection), Time.deltaTime * rotationSpeed);
+    }
+
+    public void RotateTowardsDirectionFaster()
+    {
+
+        Vector3 newDirection = playerCam.transform.TransformDirection(inputDirection);
+        newDirection.y = 0; newDirection.Normalize();
+        if (newDirection != Vector3.zero)
+            transform.rotation = Quaternion.RotateTowards(transform.rotation,
+                Quaternion.LookRotation(newDirection), Time.deltaTime * rotationSpeed * 2);
     }
 
     private void RotateTowardsDirection(Transform TargetObject)
