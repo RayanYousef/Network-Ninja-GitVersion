@@ -911,11 +911,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2dabb45f8a602247a7c0b3a591714d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winningPanel: {fileID: 0}
   menuPanel: {fileID: 0}
-  volumeSlider: {fileID: 211499109}
   MainMenu: 
   prompt: {fileID: 0}
+  optionsPanel: {fileID: 0}
+  optionsBtn: {fileID: 0}
+  volumeSlider: {fileID: 211499109}
+  mouseSensitivitySlider: {fileID: 0}
+  camFarBtn: {fileID: 0}
+  camMidBtn: {fileID: 0}
+  camNearBtn: {fileID: 0}
+  closeBtn: {fileID: 0}
 --- !u!114 &211499109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3390,8 +3396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b99df2f3152d03b40a4b53e83a92b62d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirstLevel: Game_Scene0.2
-  Level1: Game_Scene0.2
+  FirstLevel: After Light
+  Level1: After Light
   Level2: 
   Level3: 
   optionsScreen: {fileID: 1035063992}
