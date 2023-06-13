@@ -7,10 +7,10 @@ using TMPro;
 public class RadwasFadeManager : MonoBehaviour
 {
     [SerializeField] Sprite[] sprites;
+    [SerializeField] string[] msgs;
     [SerializeField] Image img;
     [SerializeField] TMP_Text txt;
-    [SerializeField] string[] msgs;
-    int i = 1;
+    [SerializeField] int i = 0;
 
     private void Start()
     {
@@ -22,15 +22,15 @@ public class RadwasFadeManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            i++;
             if (i < msgs.Length)
             {
-                i++;
-                StartCoroutine(FadeOutPanelFadeInAnotherPanel(img, 1f));
+                StartCoroutine(FadeOutInImgTxt(img, 1f));
             }
         }
     }
 
-    public IEnumerator FadeOutPanelFadeInAnotherPanel(Image panel1, float time)
+    public IEnumerator FadeOutInImgTxt(Image panel1, float time)
     {
         panel1.CrossFadeAlpha(0f, time, true);
         txt.CrossFadeAlpha(0f, time, true);
