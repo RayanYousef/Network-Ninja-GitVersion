@@ -111,7 +111,8 @@ public class rUIManager : MonoBehaviour
 
             yield return null;
         }
-        if(stopTimeScale)
+        panelToFade.alpha = 1;
+        if (stopTimeScale)
             Time.timeScale = 0;
     }
     #endregion

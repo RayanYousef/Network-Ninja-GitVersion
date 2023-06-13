@@ -10,18 +10,23 @@ public class IntroManager : MonoBehaviour
 
     public Image[] images;
     public TextMeshProUGUI[] text;
+    public Image currentImg;
 
     public int index = 0;
     void Start()
     {
-        images[index].gameObject.SetActive(true);
-        text[index].gameObject.SetActive(true);
+        images[index].CrossFadeAlpha(255, 1f, true);
+        text[index].CrossFadeAlpha(255, 1f, true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayIntroWithNoFade();
+        currentImg = images[index];
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            PlayIntro();
+        }
     }
 
     void PlayIntroWithNoFade()
@@ -46,17 +51,14 @@ public class IntroManager : MonoBehaviour
     }
     void PlayIntro()
     {
-        index++;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            if (images[index].color.a == 0)
-            {
-                FadeInImageAndText(images[index], text[index], 0.5f);
-                FadeOutImageAndText(images[index - 1], text[index - 1], 0.5f);
-            }
+        
             index++;
-        }
+
+        StartCoroutine(CrossFadeImgAndTxt(1f));
+
+
+
         if (index == images.Length)
         {
             MoveToTutorialScene();
@@ -110,5 +112,18 @@ public class IntroManager : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public IEnumerator CrossFadeImgAndTxt (float time)
+    {
+
+
+        images[index].CrossFadeAlpha(255, time, true);
+        text[index].CrossFadeAlpha(255, time, true);
+        yield return new WaitForSecondsRealtime(time);
+        images[index - 1].CrossFadeAlpha(0, time, true);
+        text[index - 1].CrossFadeAlpha(0, time, true);
+
+        
     }
 }

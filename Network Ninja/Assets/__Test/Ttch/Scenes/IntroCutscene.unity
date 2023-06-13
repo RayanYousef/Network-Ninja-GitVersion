@@ -197,8 +197,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 127261896}
   - component: {fileID: 127261899}
   - component: {fileID: 127261898}
-  - component: {fileID: 127261897}
+  - component: {fileID: 127261900}
   m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
@@ -304,26 +304,6 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: -539.99994}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &127261897
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127261895}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9013564384c95fd4aa7062676852a6da, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &127261898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -362,6 +342,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 127261895}
   m_CullTransparentMesh: 1
+--- !u!111 &127261900
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127261895}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a6039d784df705644bb6ffe1fa5e18d2, type: 2}
+  - {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &145435718
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,8 +430,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -569,8 +566,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -707,8 +704,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -786,7 +783,7 @@ GameObject:
   - component: {fileID: 460090496}
   - component: {fileID: 460090499}
   - component: {fileID: 460090498}
-  - component: {fileID: 460090497}
+  - component: {fileID: 460090500}
   m_Layer: 5
   m_Name: Image (4)
   m_TagString: Untagged
@@ -814,26 +811,6 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: -539.99994}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &460090497
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 460090495}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9013564384c95fd4aa7062676852a6da, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &460090498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,7 +824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -872,6 +849,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460090495}
   m_CullTransparentMesh: 1
+--- !u!111 &460090500
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460090495}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a6039d784df705644bb6ffe1fa5e18d2, type: 2}
+  - {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &525512441
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +877,7 @@ GameObject:
   - component: {fileID: 525512442}
   - component: {fileID: 525512445}
   - component: {fileID: 525512444}
-  - component: {fileID: 525512443}
+  - component: {fileID: 525512446}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -911,26 +905,6 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: -539.99994}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &525512443
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525512441}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9013564384c95fd4aa7062676852a6da, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &525512444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,7 +918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -969,6 +943,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525512441}
   m_CullTransparentMesh: 1
+--- !u!111 &525512446
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525512441}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a6039d784df705644bb6ffe1fa5e18d2, type: 2}
+  - {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &739020648
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,14 +1086,14 @@ GameObject:
   - component: {fileID: 934583241}
   - component: {fileID: 934583244}
   - component: {fileID: 934583243}
-  - component: {fileID: 934583242}
+  - component: {fileID: 934583245}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &934583241
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1123,26 +1114,6 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: -539.99994}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &934583242
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934583240}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9013564384c95fd4aa7062676852a6da, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &934583243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,7 +1134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fc483f023b64a724fb0447ecfec65879, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1181,6 +1152,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934583240}
   m_CullTransparentMesh: 1
+--- !u!111 &934583245
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934583240}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a6039d784df705644bb6ffe1fa5e18d2, type: 2}
+  - {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1049794048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,7 +1180,7 @@ GameObject:
   - component: {fileID: 1049794049}
   - component: {fileID: 1049794052}
   - component: {fileID: 1049794051}
-  - component: {fileID: 1049794050}
+  - component: {fileID: 1049794053}
   m_Layer: 5
   m_Name: Image (5)
   m_TagString: Untagged
@@ -1220,26 +1208,6 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: -540}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1049794050
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1049794048}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9013564384c95fd4aa7062676852a6da, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &1049794051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1253,7 +1221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1278,6 +1246,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049794048}
   m_CullTransparentMesh: 1
+--- !u!111 &1049794053
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049794048}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a6039d784df705644bb6ffe1fa5e18d2, type: 2}
+  - {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1260772525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,7 +1348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1345758471
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1404,8 +1389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: In the year 20XX, cyber crime has become more and more prevalent, and armies
-    of viruses, led by hackers, began to swarm the internet.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1414,7 +1398,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1738,8 +1722,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1935,7 +1919,7 @@ GameObject:
   - component: {fileID: 1732103709}
   - component: {fileID: 1732103712}
   - component: {fileID: 1732103711}
-  - component: {fileID: 1732103710}
+  - component: {fileID: 1732103713}
   m_Layer: 5
   m_Name: Image (3)
   m_TagString: Untagged
@@ -1963,26 +1947,6 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: -539.99994}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1732103710
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732103708}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9013564384c95fd4aa7062676852a6da, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &1732103711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1996,7 +1960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2021,6 +1985,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732103708}
   m_CullTransparentMesh: 1
+--- !u!111 &1732103713
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732103708}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a6039d784df705644bb6ffe1fa5e18d2, type: 2}
+  - {fileID: 7400000, guid: 09b69279f8343344f8bae92eef684854, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1841372804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,6 +2012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1841372806}
   - component: {fileID: 1841372805}
+  - component: {fileID: 1841372807}
   m_Layer: 0
   m_Name: IntroManager
   m_TagString: Untagged
@@ -2045,7 +2027,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841372804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bee436f354d76d242ae60529508819f3, type: 3}
   m_Name: 
@@ -2064,6 +2046,7 @@ MonoBehaviour:
   - {fileID: 30288983}
   - {fileID: 250238174}
   - {fileID: 1551460387}
+  currentImg: {fileID: 0}
   index: 0
 --- !u!4 &1841372806
 Transform:
@@ -2080,3 +2063,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1841372807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841372804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a2f08062c027340bd55ccb4f3dd8ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: fc483f023b64a724fb0447ecfec65879, type: 3}
+  - {fileID: 21300000, guid: 96214363b44319d4198ffcd7cc67babf, type: 3}
+  - {fileID: 21300000, guid: ddb4b8d671558ea4086faf878d6b1d66, type: 3}
+  - {fileID: 21300000, guid: 5eb7e397e6f90b54dafdf40bad474076, type: 3}
+  - {fileID: 21300000, guid: 387ceb9351da6bc4fb7b9a81e4d9ce59, type: 3}
+  - {fileID: 21300000, guid: 2a2bfe2a562078640b9ce1b52f1c7455, type: 3}
+  img: {fileID: 934583243}
+  txt: {fileID: 1345758472}
+  msgs:
+  - In the year 20XX, cyber crime has become more and more prevalent, and armies
+    of viruses, led by hackers, began to swarm the internet.
+  - To keep those attacks under control, a cyber-security patrol unit was formed
+    to patrol the internet and fight off hackers.
+  - But the numbers of hackers and viruses wasn't going down. And it became commonplace
+    for people to defend their data by themselves with the aid of their anti-virus.
+  - For that to spread, ordinary people first needed the means to fend off the hackers.
+    And that's where NINJA.exe came in. A software-hardware hybrid anti-virus, that
+    gives the user strength to fight viruses and hackers inside the internet.
+  - 'And somewhere, a kid dreamt of becoming a cyber-defender. To draw out every
+    last bit of power NINJA.exe was capable of providing. '
+  - This is their journey to become THE NETWORK NINJA.
