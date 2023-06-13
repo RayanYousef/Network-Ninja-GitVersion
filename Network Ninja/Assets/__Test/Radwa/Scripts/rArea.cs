@@ -26,6 +26,7 @@ public class rArea : MonoBehaviour
 
     [Header("Area Components")]
     EnemySpawner enemySpawner;
+    
 
     [SerializeField] private Transform[] alliesSpawnPos;
     private Formation alliesSpawnerPrefab;

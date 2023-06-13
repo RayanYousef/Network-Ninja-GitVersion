@@ -9,6 +9,7 @@ public class m_BossIdleState : StateMachineBehaviour
 
      Transform player;
      float timer;
+     float timer2;
     m_BossManager bossMovement;
 
 
@@ -20,6 +21,8 @@ public class m_BossIdleState : StateMachineBehaviour
         player = GameObjectsManager.Instance.Player.transform;
         bossMovement = animator.GetComponent<m_BossManager>();
         timer =0;
+        timer2 =0;
+
 
     }
 
@@ -27,6 +30,7 @@ public class m_BossIdleState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer += Time.deltaTime;
+        timer2 += Time.deltaTime;
         float distance = Vector3.Distance(player.position, animator.transform.position);
 
         //if(distance > chaseRange)
@@ -37,25 +41,29 @@ public class m_BossIdleState : StateMachineBehaviour
         //    }
         //}
 
-        if (distance <= chaseRange && distance > AttackRange)
+        if(timer2> 16)
         {
-            animator.SetBool("isChasing", true);
-        }
-
-        if (distance <= AttackRange)
-        {
-            //if (bossMovement.LookAtPlyer == true)
-            //{
-            //    bossMovement.LookAtPlayer();
-            //}
-
-            if (timer > bossMovement.IntervalBetweenBossAttacks)
+            if (distance <= chaseRange && distance > AttackRange)
             {
-                 // animator.SetTrigger("Attack");
-                animator.SetBool("isAttacking", true);
-                timer = 0;
+                animator.SetBool("isChasing", true);
+            }
+
+            if (distance <= AttackRange)
+            {
+                //if (bossMovement.LookAtPlyer == true)
+                //{
+                //    bossMovement.LookAtPlayer();
+                //}
+
+                if (timer > bossMovement.IntervalBetweenBossAttacks)
+                {
+                    // animator.SetTrigger("Attack");
+                    animator.SetBool("isAttacking", true);
+                    timer = 0;
+                }
             }
         }
+       
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

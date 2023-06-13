@@ -10,10 +10,11 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using Unity.Mathematics;
 using Unity.IO.LowLevel.Unsafe;
+using UnityEngine.Playables;
+using Unity.VisualScripting;
 
 public class m_BossManager : MonoBehaviour , IStopObject
 {
-
 
 
     public GameObject[] trails;
@@ -21,6 +22,10 @@ public class m_BossManager : MonoBehaviour , IStopObject
     public float IntervalBetweenBossAttacks = 10;
     public float AttackDuration;
     public bool LookAtPlyer = true;
+    public PlayableDirector playableDirector;
+    public CinemachineVirtualCamera BossCam1;
+    public CinemachineVirtualCamera BossCam2;
+    public CinemachineVirtualCamera BossCam3;
 
 
 
@@ -40,10 +45,6 @@ public class m_BossManager : MonoBehaviour , IStopObject
     [SerializeField] private Color transparentColor;
     [SerializeField] private Color color;
     [SerializeField] float frictionCoefficient = 2.0f;
-
-
-
-
 
     private void Awake()
     {
@@ -66,16 +67,15 @@ public class m_BossManager : MonoBehaviour , IStopObject
         // prevent sliding
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
-
-
-
-    }
+        StartCoroutine(intervalBetCams());
+   }
     void Update()
     {
         //if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("IdleState")  && LookAtPlyer == true)
         //{
         //    LookAtPlayer();
         //}
+ 
         if (LookAtPlyer)
         {
             Vector3 enemyToPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
@@ -233,5 +233,23 @@ public class m_BossManager : MonoBehaviour , IStopObject
     {
         agent.isStopped = !value;
         LookAtPlyer = value;
+    }
+
+    private IEnumerator intervalBetCams()
+    {
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+        yield return new WaitForSeconds(5);
+        BossCam1.enabled = false;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+        yield return new WaitForSeconds(5);
+        BossCam2.enabled = false;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+        yield return new WaitForSeconds(5);
+        BossCam3.enabled = false;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+
+
+
+
     }
 }

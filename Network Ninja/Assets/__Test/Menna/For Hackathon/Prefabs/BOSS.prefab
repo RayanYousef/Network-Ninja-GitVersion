@@ -5075,7 +5075,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 13
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 7895259779614894275}
   m_Follow: {fileID: 0}
@@ -29630,7 +29630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &731668661
 Transform:
   m_ObjectHideFlags: 0
@@ -29668,7 +29668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &759619901
 Transform:
   m_ObjectHideFlags: 0
@@ -29677,7 +29677,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759619898}
   m_LocalRotation: {x: -0.00074457255, y: -0.9945734, z: -0.10379, w: 0.0071349056}
-  m_LocalPosition: {x: 0.008199946, y: 0.011099998, z: 0.174}
+  m_LocalPosition: {x: 0.0082, y: 0.0111, z: 0.174}
   m_LocalScale: {x: 0.016666666, y: 0.016666666, z: 0.016666666}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49617,7 +49617,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 12
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 7895259779614894275}
   m_Follow: {fileID: 0}
@@ -81144,7 +81144,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 11
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 7895259779614894275}
   m_Follow: {fileID: 0}
@@ -92421,6 +92421,10 @@ MonoBehaviour:
   IntervalBetweenBossAttacks: 1
   AttackDuration: 2.12
   LookAtPlyer: 1
+  playableDirector: {fileID: 252617476061625004}
+  BossCam1: {fileID: 143251583}
+  BossCam2: {fileID: 1501450348}
+  BossCam3: {fileID: 3805979201053680740}
   BossDie:
     m_PersistentCalls:
       m_Calls: []
@@ -94822,7 +94826,7 @@ PrefabInstance:
     - target: {fileID: 8411304518413027858, guid: 46e8b9b7354d3f9438f867f9301e2bf5,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8588175489442519319, guid: 46e8b9b7354d3f9438f867f9301e2bf5,
         type: 3}
@@ -94881,6 +94885,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46e8b9b7354d3f9438f867f9301e2bf5, type: 3}
+--- !u!320 &252617476061625004 stripped
+PlayableDirector:
+  m_CorrespondingSourceObject: {fileID: 6050578873618310593, guid: 46e8b9b7354d3f9438f867f9301e2bf5,
+    type: 3}
+  m_PrefabInstance: {fileID: 5797965795610189677}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2835534072028448378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8588175489442519319, guid: 46e8b9b7354d3f9438f867f9301e2bf5,
