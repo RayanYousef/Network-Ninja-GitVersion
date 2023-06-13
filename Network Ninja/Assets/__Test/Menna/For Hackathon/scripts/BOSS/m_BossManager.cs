@@ -242,17 +242,17 @@ public class m_BossManager : MonoBehaviour , IStopObject
 
     private IEnumerator intervalBetCams()
     {
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         yield return new WaitForSeconds(5);
         BossCam1.enabled = false;
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         yield return new WaitForSeconds(5);
         BossCam2.enabled = false;
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         yield return new WaitForSeconds(5);
         BossCam3.enabled = false;
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 5.0f;
-        yield return new WaitForSeconds(1);
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
+        yield return new WaitForSeconds(2);
         startBossState = true;
     }
 }
