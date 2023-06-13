@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class m_BossIdleState : StateMachineBehaviour
 {
+
      [SerializeField] float chaseRange;
      [SerializeField] float AttackRange;
 
      Transform player;
      float timer;
-    m_BossManager bossMovement;
+     m_BossManager bossMovement;
 
 
 
@@ -20,6 +21,8 @@ public class m_BossIdleState : StateMachineBehaviour
         player = GameObjectsManager.Instance.Player.transform;
         bossMovement = animator.GetComponent<m_BossManager>();
         timer =0;
+        //startStats = false;
+
 
     }
 
@@ -37,25 +40,30 @@ public class m_BossIdleState : StateMachineBehaviour
         //    }
         //}
 
-        if (distance <= chaseRange && distance > AttackRange)
+        if (bossMovement.startBossState)
         {
-            animator.SetBool("isChasing", true);
-        }
-
-        if (distance <= AttackRange)
-        {
-            //if (bossMovement.LookAtPlyer == true)
-            //{
-            //    bossMovement.LookAtPlayer();
-            //}
-
-            if (timer > bossMovement.IntervalBetweenBossAttacks)
+            if (distance <= chaseRange && distance > AttackRange)
             {
-                 // animator.SetTrigger("Attack");
-                animator.SetBool("isAttacking", true);
-                timer = 0;
+                animator.SetBool("isChasing", true);
             }
+
+            if (distance <= AttackRange)
+            {
+                //if (bossMovement.LookAtPlyer == true)
+                //{
+                //    bossMovement.LookAtPlayer();
+                //}
+
+                if (timer > bossMovement.IntervalBetweenBossAttacks)
+                {
+                    // animator.SetTrigger("Attack");
+                    animator.SetBool("isAttacking", true);
+                    timer = 0;
+                }
+            }
+
         }
+       
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

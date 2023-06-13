@@ -4,6 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
+using Cinemachine;
+
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject BigBossPrefab;
     public GameObject cardPrefab;
     public GameObject IntroEffectPrefab;
-    public PlayableDirector playableDirector;
+    private PlayableDirector playableDirector;
 
 
     [Header("Enemies")]
@@ -51,7 +53,6 @@ public class EnemySpawner : MonoBehaviour
         player = GameObjectsManager.Instance.Player.transform;
 
         OnAllMiniBossesKilled.AddListener(rUIManager.Instance.UiPassword.ShowCreatePasswordPanel);
-        OnAllMiniBossesKilled.AddListener(delegate { GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().UltimateDisabled(false); });
         OnAllMiniBossesKilled.AddListener(delegate { rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle); });
 
         //obj pooling
@@ -65,6 +66,8 @@ public class EnemySpawner : MonoBehaviour
             enemy.SetActive(false);
             enemyPool.Add(enemy);
         }
+
+        playableDirector = BigBossPrefab.GetComponentInChildren<PlayableDirector>();
 
 
         //SpawnEnemies();
@@ -183,10 +186,10 @@ public class EnemySpawner : MonoBehaviour
 
     public void spawnBossIntroEffect()
     {
-        GameObject introEffect = Instantiate(IntroEffectPrefab , this.transform.position, Quaternion.identity);
+        GameObject introEffect = Instantiate(IntroEffectPrefab, this.transform.position, Quaternion.identity);
         introEffect.transform.parent = this.transform;
     }
-    
+
     public void SpawnCard()
     {
         GameObject BigBoss = Instantiate(cardPrefab, this.transform.position, Quaternion.identity);
@@ -316,7 +319,7 @@ public class EnemySpawner : MonoBehaviour
         MiniBosses.Remove(MiniBoss);
         if (MiniBosses.Count == 0 && OnAllMiniBossesKilled != null)
         {
-          
+            GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().UltimateDisabled(false);
             foreach (GameObject Enemy in enemies)
             {
                 if (Enemy != null)
@@ -352,16 +355,16 @@ public class EnemySpawner : MonoBehaviour
     public IEnumerator SpawnBossCoroutine()
     {
         yield return new WaitForSeconds(delayBeforeSpawnBoss / 2);
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
         spawnBossIntroEffect();
         yield return new WaitForSeconds(3.5f);
         // Spawn the boss
         SpawnBigBoss();
-       // playableDirector.Play();
-       // BigBossPrefab.GetComponent<Animator>().enabled = false;
-       // yield return new WaitForSeconds(5);
-       // BigBossPrefab.GetComponent<Animator>().enabled = true;
-
-
+        //GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+        //playableDirector.Play();
+        // BigBossPrefab.GetComponent<Animator>().enabled = false;
+        // yield return new WaitForSeconds(5);
+        // BigBossPrefab.GetComponent<Animator>().enabled = true;
 
     }
 
