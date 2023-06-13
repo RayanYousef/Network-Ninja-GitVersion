@@ -53,7 +53,6 @@ public class EnemySpawner : MonoBehaviour
         player = GameObjectsManager.Instance.Player.transform;
 
         OnAllMiniBossesKilled.AddListener(rUIManager.Instance.UiPassword.ShowCreatePasswordPanel);
-        OnAllMiniBossesKilled.AddListener(delegate { GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().UltimateDisabled(false); });
         OnAllMiniBossesKilled.AddListener(delegate { rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle); });
 
         //obj pooling
@@ -320,7 +319,7 @@ public class EnemySpawner : MonoBehaviour
         MiniBosses.Remove(MiniBoss);
         if (MiniBosses.Count == 0 && OnAllMiniBossesKilled != null)
         {
-          
+            GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().UltimateDisabled(false);
             foreach (GameObject Enemy in enemies)
             {
                 if (Enemy != null)
