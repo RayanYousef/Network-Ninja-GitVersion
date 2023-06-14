@@ -41,13 +41,10 @@ public class CS_FreezeObjectsInRange : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent<IStopObject>(out IStopObject slowInterface)
-            && !objectsInRange.Contains(other.transform))
+            && objectsInRange.Contains(other.transform))
         {
             objectsInRange.Remove(other.transform);
             slowInterface.ObjectMovementEnabled(true);
-
-
-
         }
 
     }
