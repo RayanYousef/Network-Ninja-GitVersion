@@ -20,7 +20,7 @@ public class CS_PlayerManager : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] CS_MovementController moveController;
     [SerializeField] CS_AnimatorController animController;
-    [SerializeField] CS_LookAtClosestTarget lookAtClosestTarget;
+    [SerializeField] CS_RotateTowardTarget lookAtClosestTarget;
     [SerializeField] CS_CameraManager cameraManager;
     [SerializeField] CS_FreezeObjectsInRange _freezeObjectsInRange;
     [SerializeField] StatsManager pStatsManager;
@@ -90,7 +90,7 @@ public class CS_PlayerManager : MonoBehaviour
         anim = PlayerTopMostParent.GetComponentInChildren<Animator>();
         moveController = PlayerTopMostParent.GetComponentInChildren<CS_MovementController>();
         animController = PlayerTopMostParent.GetComponentInChildren<CS_AnimatorController>();
-        lookAtClosestTarget = PlayerTopMostParent.GetComponentInChildren<CS_LookAtClosestTarget>();
+        lookAtClosestTarget = PlayerTopMostParent.GetComponentInChildren<CS_RotateTowardTarget>();
         _freezeObjectsInRange = PlayerTopMostParent.GetComponentInChildren<CS_FreezeObjectsInRange>();
 
         // Camera Manager
@@ -181,8 +181,7 @@ public class CS_PlayerManager : MonoBehaviour
                 anim.SetBool(animController.B_Attacking, true);
                 anim.applyRootMotion = true;
                 moveController.RotateTowardsDirectionFaster();
-                //if (lookAtClosestTarget != null)
-                //    lookAtClosestTarget.RotateTowardsClosestEnemy();
+                lookAtClosestTarget.RotateTowardsClosestEnemy();
                 break;
 
             case CharacterState.Falling:
@@ -195,8 +194,8 @@ public class CS_PlayerManager : MonoBehaviour
             case CharacterState.Ultimate:
                 anim.SetBool(animController.B_Attacking, true);
                 anim.applyRootMotion = false;
-                if (lookAtClosestTarget != null)
-                    lookAtClosestTarget.RotateTowardsClosestEnemy();
+                if(cameraManager.LockedOn)
+                lookAtClosestTarget.RotateTowardsClosestEnemy();
                 break;
 
         }
@@ -420,7 +419,10 @@ public class CS_PlayerManager : MonoBehaviour
         anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
         cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
         if (_freezeObjectsInRange != null)
-            _freezeObjectsInRange.ObjectsMovementEnabled(false,0.05f);
+        {
+            _freezeObjectsInRange.CheckInActiveObjectsAndRemoveIt();
+            _freezeObjectsInRange.ObjectsMovementEnabled(false, 0.05f);
+        }
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
     }
@@ -430,7 +432,10 @@ public class CS_PlayerManager : MonoBehaviour
         anim.SetFloat(animController.F_animSpeed, 0.9f);
         cameraManager.SwitchCamerasBasedOnLockState();
         if (_freezeObjectsInRange != null)
-            _freezeObjectsInRange.ObjectsMovementEnabled(true,1);
+        {
+            _freezeObjectsInRange.CheckInActiveObjectsAndRemoveIt();
+            _freezeObjectsInRange.ObjectsMovementEnabled(true, 1);
+        }
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
     } 

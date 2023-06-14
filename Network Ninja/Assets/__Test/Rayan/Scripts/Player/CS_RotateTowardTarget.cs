@@ -1,30 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-public class CS_LookAtClosestTarget : MonoBehaviour
+public class CS_RotateTowardTarget : MonoBehaviour
 {
 
     [SerializeField] List<Transform> listOfTargets;
     [SerializeField] Transform objectToRotate, objectToRotateTowards;
 
-
+    public Transform ObjectToRotateTowards { get => objectToRotateTowards;}
 
     public void RotateTowardsClosestEnemy()
     {
-        if (listOfTargets.Count > 0)
-        {
-            objectToRotateTowards = GetClosestTransform();
+        CheckInActiveObjectsAndRemoveIt();
+        if (listOfTargets.Count < 1) return;
+
+        objectToRotateTowards = GetClosestTransform(listOfTargets);
+        Vector3 direction = objectToRotateTowards.position - objectToRotate.position;
+        direction.y = 0; direction.Normalize();
+        if (direction != Vector3.zero)
+            objectToRotate.rotation = Quaternion.LookRotation(direction);
+    }
+
+    public void RotateTowardsClosestEnemy(Transform target)
+    {
+        objectToRotateTowards = target;
+        Vector3 direction = objectToRotateTowards.position - objectToRotate.position;
+        direction.y = 0; direction.Normalize();
+        if (direction != Vector3.zero)
+            objectToRotate.rotation = Quaternion.LookRotation(direction);
+    }
+
+    public void RotateTowardsClosestEnemy(List<Transform> listOfTargets)
+    {
+        if (listOfTargets.Count < 1) return;
+
+            objectToRotateTowards = GetClosestTransform(listOfTargets);
             Vector3 direction = objectToRotateTowards.position - objectToRotate.position;
             direction.y = 0; direction.Normalize();
             if (direction != Vector3.zero)
                 objectToRotate.rotation = Quaternion.LookRotation(direction);
-        }
-
     }
 
-    public Transform GetClosestTransform()
+    public void CheckInActiveObjectsAndRemoveIt()
     {
+
+        for (int i = listOfTargets.Count - 1; i >= 0; i--)
+            if (listOfTargets[i].gameObject.activeInHierarchy == false)
+                listOfTargets.Remove(listOfTargets[i]);
+    }
+
+    public Transform GetClosestTransform(List<Transform> listOfTargets)
+    {
+
         Transform closestTransform = null;
         float closestSqrDistance = float.MaxValue;
 

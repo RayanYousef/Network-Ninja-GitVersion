@@ -22,7 +22,7 @@ public class CS_MovementController : MonoBehaviour
 
     [Header("Gravity Variables")]
     [SerializeField] float gravityAccumiliationForce;
-    [SerializeField] float maxGravity,minGravity;
+    [SerializeField] float maxGravity, minGravity;
     [SerializeField] bool gravity;
 
     [Header("Character Movement and Rotation Speed")]
@@ -40,7 +40,7 @@ public class CS_MovementController : MonoBehaviour
     public float AppliedGravityForce { get => appliedGravityForce; set => appliedGravityForce = value; }
     public CS_PlayerManager PlayerManager { get => playerManager; set => playerManager = value; }
     public bool Gravity { get => gravity; set => gravity = value; }
-    public float MovementSpeed { get => movementSpeed;}
+    public float MovementSpeed { get => movementSpeed; }
 
     private void Awake()
     {
@@ -82,21 +82,12 @@ public class CS_MovementController : MonoBehaviour
 
         }
 
-        if (PlayerManager.enabled && playerManager.AnimController.Grounded == false && playerManager.CurrentState!= CharacterState.Dashing)
+        if (PlayerManager.enabled && playerManager.AnimController.Grounded == false && playerManager.CurrentState != CharacterState.Dashing)
             FallingUpdate();
 
+        if (playerManager.CurrentState != CharacterState.Attacking)
+            RotateTowardsDirection();
 
-        switch (playerManager.CameraManager.LockedOn)
-        {
-            case true:
-                RotateTowardsDirection(playerManager.CameraManager.LockedTarget);
-                break;
-            case false:
-                if(playerManager.CurrentState!= CharacterState.Attacking)
-                RotateTowardsDirection();
-                break;
-
-        }
 
     }
     public void FallingUpdate()
@@ -110,18 +101,18 @@ public class CS_MovementController : MonoBehaviour
     }
 
     #region Movement and Rotation
-    public void MoveTowardsDirection( float speed)
+    public void MoveTowardsDirection(float speed)
     {
         Vector3 newDirection = playerCam.transform.TransformDirection(inputDirection);
         newDirection.y = 0; newDirection.Normalize();
-        rb.AddForce(newDirection * speed * Time.deltaTime, ForceMode.VelocityChange);
+        rb.AddForce(newDirection * speed *playerManager.PStatsManager.GetMoveSpeed() * Time.deltaTime, ForceMode.VelocityChange);
     }
 
     public void RotateTowardsDirection()
     {
 
         Vector3 newDirection = playerCam.transform.TransformDirection(inputDirection);
-        newDirection.y = 0; newDirection.Normalize()    ;
+        newDirection.y = 0; newDirection.Normalize();
         if (newDirection != Vector3.zero)
             transform.rotation = Quaternion.RotateTowards(transform.rotation,
                 Quaternion.LookRotation(newDirection), Time.deltaTime * rotationSpeed);
@@ -204,5 +195,5 @@ public class CS_MovementController : MonoBehaviour
     #endregion
 
 
-  
+
 }
