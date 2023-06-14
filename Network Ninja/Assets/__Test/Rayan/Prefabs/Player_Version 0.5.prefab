@@ -152030,7 +152030,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2867223328803240011}
-  m_LocalRotation: {x: -0.017968243, y: 0.0025818236, z: -0.14220375, w: 0.98967093}
+  m_LocalRotation: {x: -0.017968245, y: 0.0025818236, z: -0.14220376, w: 0.98967093}
   m_LocalPosition: {x: 0.033240866, y: 0.09389851, z: 0.0005152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -158007,7 +158007,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4425544236516706809}
-  - component: {fileID: 7749179684011037571}
   m_Layer: 0
   m_Name: V3_13-daiavloz_character_original_pose_26-05-2023_V3
   m_TagString: Untagged
@@ -158032,26 +158031,6 @@ Transform:
   m_Father: {fileID: 4922773842600253304}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &7749179684011037571
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3900506115756741443}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 2fd5521e9893f9c43b407de2526bcc00, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &3902643949288040884
 GameObject:
   m_ObjectHideFlags: 0
@@ -170089,8 +170068,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922773841797100647}
-  m_LocalRotation: {x: 0.000000016058612, y: 0.0000001284689, z: -2.0630322e-15, w: 1}
-  m_LocalPosition: {x: 0.8499985, y: 1.3600001, z: -1.2800007}
+  m_LocalRotation: {x: -0.000000002289009, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.85000014, y: 1.36, z: -1.2800001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170415,8 +170394,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922773842041303621}
-  m_LocalRotation: {x: 0.000000022675161, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7999997, z: -3}
+  m_LocalRotation: {x: -0.0000000021471802, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.8000001, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170703,7 +170682,6 @@ GameObject:
   - component: {fileID: 4922773842341368157}
   - component: {fileID: 4922773842341369506}
   - component: {fileID: 4922773842341369507}
-  - component: {fileID: 1775837541}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: Untagged
@@ -170718,8 +170696,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922773842341369505}
-  m_LocalRotation: {x: 0.000000022675161, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7999997, z: -3}
+  m_LocalRotation: {x: -0.0000000022576168, y: 3.7779543e-10, z: 0.1650476, w: 0.9862856}
+  m_LocalPosition: {x: 0.85000014, y: 1.36, z: -1.2800001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -170751,7 +170729,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 100
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -170844,59 +170822,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1775837541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4922773842341369505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ImpulseDefinition:
-    m_ImpulseChannel: 1
-    m_ImpulseShape: 2
-    m_CustomImpulseShape:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_ImpulseDuration: 0.2
-    m_ImpulseType: 0
-    m_DissipationRate: 0.25
-    m_RawSignal: {fileID: 0}
-    m_AmplitudeGain: 1
-    m_FrequencyGain: 1
-    m_RepeatMode: 0
-    m_Randomize: 1
-    m_TimeEnvelope:
-      m_AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_AttackTime: 0
-      m_SustainTime: 0.2
-      m_DecayTime: 0.7
-      m_ScaleWithImpact: 1
-      m_HoldForever: 0
-    m_ImpactRadius: 100
-    m_DirectionMode: 0
-    m_DissipationMode: 2
-    m_DissipationDistance: 100
-    m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1 &4922773842411934872
 GameObject:
   m_ObjectHideFlags: 0
