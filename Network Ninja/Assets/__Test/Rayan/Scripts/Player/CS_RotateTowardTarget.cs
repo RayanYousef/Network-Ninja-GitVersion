@@ -87,7 +87,7 @@ public class CS_RotateTowardTarget : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent<StatsManager>(out StatsManager enemy)
-            && !listOfTargets.Contains(other.transform)
+            && listOfTargets.Contains(other.transform)
             && enemy.Targetable == true) listOfTargets.Remove(other.transform);
 
     }
