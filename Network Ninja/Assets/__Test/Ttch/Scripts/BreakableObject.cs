@@ -20,15 +20,15 @@ public class BreakableObject : MonoBehaviour
                 switch (stat)
                 {
                     case StatToChange.Health:
-                        dmgObject.MyStatsManager.Heal(400);
+                        dmgObject.MyStatsManager.Heal(dmgObject.MyStatsManager.Stats.MaxHealth / 6);
                         break;
 
                     case StatToChange.Energy:
-                        dmgObject.MyStatsManager.AddtoEnergy();
+                        dmgObject.MyStatsManager.AddtoEnergy(dmgObject.MyStatsManager.Stats.DefaultEnergy / 4);
                         break;
 
                     case StatToChange.MovementSpeed:
-                        dmgObject.MyStatsManager.BuffMoveSpeed(1.3f);
+                        dmgObject.MyStatsManager.BuffMoveSpeed(0.5f);
                         break;
 
                     case StatToChange.None:
