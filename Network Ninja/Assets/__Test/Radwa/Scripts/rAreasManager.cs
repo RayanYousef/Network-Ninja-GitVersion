@@ -68,7 +68,8 @@ public class rAreasManager : MonoBehaviour
 
         foreach (rArea area in listOfLevelAreas)
         {
-            area.SharingPasswordWarningIcon.gameObject.SetActive(false);
+            area.SharingPasswordWarningIcon.gameObject.GetComponent<UnityEngine.UI.Image>().enabled = false;
+            //area.SharingPasswordWarningIcon.gameObject.SetActive(false);
         }
 
         for (int i = 0; i < listOfLevelAreas.Length; i++)
@@ -77,9 +78,11 @@ public class rAreasManager : MonoBehaviour
             {
                 if (listOfLevelAreas[i].Password!=null && listOfLevelAreas[i].Password == listOfLevelAreas[j].Password)
                 {
-                    listOfLevelAreas[i].SharingPasswordWarningIcon.gameObject.SetActive(true);
-                    listOfLevelAreas[j].SharingPasswordWarningIcon.gameObject.SetActive(true);
+                    listOfLevelAreas[i].SharingPasswordWarningIcon.gameObject.GetComponent<UnityEngine.UI.Image>().enabled = true;
+                    listOfLevelAreas[j].SharingPasswordWarningIcon.gameObject.GetComponent<UnityEngine.UI.Image>().enabled = true;
 
+                    //listOfLevelAreas[i].SharingPasswordWarningIcon.gameObject.SetActive(true);
+                    //listOfLevelAreas[j].SharingPasswordWarningIcon.gameObject.SetActive(true);
                 }
             }
         }

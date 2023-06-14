@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Linq;
 using Cinemachine;
@@ -35,7 +36,7 @@ public class rArea : MonoBehaviour
 
     [Header("MiniMap Components")]
     [SerializeField] CS_ChangeObjectsColour meshColourChanger;
-    [SerializeField] SpriteRenderer sharingPasswordWarningIcon;
+    [SerializeField] Image sharingPasswordWarningIcon;
     [SerializeField] bool isFlashing;
 
 
@@ -57,7 +58,7 @@ public class rArea : MonoBehaviour
     public AreaType AreaType { get => areaType; set => areaType = value; }
     public EnemySpawner EnemySpawner { get => enemySpawner; set => enemySpawner = value; }
     public CS_ChangeObjectsColour MeshColourChanger { get => meshColourChanger; }
-    public SpriteRenderer SharingPasswordWarningIcon { get => sharingPasswordWarningIcon; }
+    public Image SharingPasswordWarningIcon { get => sharingPasswordWarningIcon; }
     public bool IsFlashing { get => isFlashing; set => isFlashing = value; }
     public bool PlayerInside {
         get => playerInside;
@@ -82,6 +83,7 @@ public class rArea : MonoBehaviour
         }
     }
 
+    public Image SharingPasswordWarningIcon1 { get => sharingPasswordWarningIcon; set => sharingPasswordWarningIcon = value; }
 
     private void Awake()
     {
@@ -91,7 +93,6 @@ public class rArea : MonoBehaviour
             areaCamera = GetComponentInChildren<CinemachineVirtualCamera>();
         }
 
-        sharingPasswordWarningIcon = GetComponentsInChildren<SpriteRenderer>()[0];
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnMiniBosses);
         OnEnteringFight.AddListener(GetComponentInChildren<EnemySpawner>().SpawnEnemies);
 
@@ -108,7 +109,7 @@ public class rArea : MonoBehaviour
         Renderers[0] = GetComponentsInChildren<Renderer>()[1];
         meshColourChanger.MeshRenderers = Renderers;
 
-        sharingPasswordWarningIcon.gameObject.SetActive(false);
+        sharingPasswordWarningIcon.gameObject.GetComponent<Image>().enabled = false;
     }
     void Start()
     {
@@ -180,7 +181,7 @@ public class rArea : MonoBehaviour
     {
         areaType = AreaType.Fight;
         password = null;
-        sharingPasswordWarningIcon.gameObject.SetActive(false);
+        sharingPasswordWarningIcon.gameObject.GetComponent<Image>().enabled = false;
         meshColourChanger.ChangeToColour(Color.red);
 
         DestroyAllAllies();
