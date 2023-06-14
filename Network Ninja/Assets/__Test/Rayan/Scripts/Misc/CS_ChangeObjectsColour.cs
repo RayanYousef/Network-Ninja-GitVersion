@@ -1,37 +1,62 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class CS_ChangeObjectsColour
 {
     public Renderer[] MeshRenderers;
+    public Image[] Images;
     public Color MaxHealth, HalfHealth, LowHealth;
 
 
     public void ChangeToColour(Color color)
     {
-        foreach (Renderer renderer in MeshRenderers)
-        {
-            renderer.material.color =color;
-        }
+        if (MeshRenderers.Length > 0)
+            foreach (Renderer renderer in MeshRenderers)
+            {
+                renderer.material.color = color;
+            }
+
+        if (Images.Length > 0)
+            foreach (Image image in Images)
+            {
+                image.color = color;
+            }
     }
     public void LerpBetweenThreeGivenColours(float value, Color LowHealth, Color HalfHealth, Color MaxHealth)
     {
-        foreach (Renderer renderer in MeshRenderers)
-        {
-            renderer.material.color = LerpColors(value, LowHealth, HalfHealth,MaxHealth);
-        }
+        if (MeshRenderers.Length > 0)
+            foreach (Renderer renderer in MeshRenderers)
+            {
+                renderer.material.color = LerpColors(value, LowHealth, HalfHealth, MaxHealth);
+            }
+
+        if (Images.Length > 0)
+            foreach (Image image in Images)
+            {
+                image.color = LerpColors(value, LowHealth, HalfHealth, MaxHealth);
+            }
     }
 
     public void LerpBetweenObjectColours(float value)
     {
-        foreach (Renderer renderer in MeshRenderers)
+
+        if (MeshRenderers.Length > 0)
+            foreach (Renderer renderer in MeshRenderers)
         {
             renderer.material.color = LerpColors(value, LowHealth, HalfHealth, MaxHealth);
         }
+
+        if (Images.Length > 0)
+            foreach (Image image in Images)
+            {
+                image.color = LerpColors(value, LowHealth, HalfHealth, MaxHealth);
+            }
     }
 
     public Color LerpColors(float t, Color LowHealth, Color HalfHealth, Color MaxHealth)
