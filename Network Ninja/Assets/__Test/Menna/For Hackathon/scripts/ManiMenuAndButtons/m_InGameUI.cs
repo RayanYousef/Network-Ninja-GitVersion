@@ -24,9 +24,9 @@ public class m_InGameUI : MonoBehaviour
     [SerializeField] Slider volumeSlider;
     [SerializeField] Slider mouseSensitivitySlider;
 
-    [SerializeField] Button camFarBtn;
-    [SerializeField] Button camMidBtn;
-    [SerializeField] Button camNearBtn;
+    //[SerializeField] Button camFarBtn;
+    //[SerializeField] Button camMidBtn;
+    //[SerializeField] Button camNearBtn;
     [SerializeField] Button closeBtn;
 
     public GameObject MenuPanel { get => menuPanel; set => menuPanel = value; }
@@ -44,13 +44,21 @@ public class m_InGameUI : MonoBehaviour
 
         //mouseSensitivitySlider.onValueChanged.AddListener(delegate { (); });
 
-        //camFarBtn.onClick.AddListener(GameObjectsManager.Instance.Player.GetComponent<CS_CameraManager>().SetCameraToFar);
-        //camMidBtn.onClick.AddListener(GameObjectsManager.Instance.Player.GetComponent<CS_CameraManager>().SetCameraToMid);
-        //camNearBtn.onClick.AddListener(GameObjectsManager.Instance.Player.GetComponent<CS_CameraManager>().SetCameraToClose);
+        //camFarBtn.onClick.AddListener(() =>
+        //{
+        //    GameObjectsManager.Instance.Player.GetComponent<CS_CameraManager>().SetCameraToFar();
+        //});
+
+        //camMidBtn.onClick.AddListener(() =>
+        //{
+        //    GameObjectsManager.Instance.Player.GetComponent<CS_CameraManager>().SetCameraToMid();
+        //});
+
+        //camNearBtn.onClick.AddListener(delegate { GameObjectsManager.Instance.Player.GetComponent<CS_CameraManager>().SetCameraToClose(); });
 
         closeBtn.onClick.AddListener(OnCloseClicked);
        
-        //    #region Volume Slider
+        #region Volume Slider
         //    volumeSlider.value = 1;
 
         //    if (!PlayerPrefs.HasKey("musicVolume"))
@@ -62,7 +70,7 @@ public class m_InGameUI : MonoBehaviour
         //    {
         //        Load();
         //    } 
-        //    #endregion
+        #endregion
     }
 
     private void Update()
