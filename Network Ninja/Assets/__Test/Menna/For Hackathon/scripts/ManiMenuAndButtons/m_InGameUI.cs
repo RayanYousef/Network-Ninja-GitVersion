@@ -135,7 +135,8 @@ public class m_InGameUI : MonoBehaviour
 
     private void OnClkOptions()
     {
-        optionsPanel.SetActive(true);
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(optionsPanel.GetComponent<CanvasGroup>(), 0.2f));
+
         rUIManager.Instance.SetInteractivePanelState = true;
     }
 

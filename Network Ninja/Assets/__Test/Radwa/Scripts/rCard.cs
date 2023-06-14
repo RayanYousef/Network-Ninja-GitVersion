@@ -18,6 +18,18 @@ public class rCard : MonoBehaviour
 
     [SerializeField] TMP_Text infoTxt;
 
+    string[] defaultLayers = { "Default", "TransparentFX", "Ignore Raycast", "Enemy", "Water", "UI", "Environment" };
+    string[] layersForCard = { "TransparentFX", "Ignore Raycast", "Enemy", "Water", "UI" };
+    
+    LayerMask newCullingMask = 0;
+
+    [SerializeField] Camera playerCam;
+
+    private void Awake()
+    {
+        playerCam = GameObjectsManager.Instance.cameraBrain.gameObject.GetComponent<Camera>();
+    }
+
     void Start()
     {
         cardPanel1.alpha = 0;
@@ -26,6 +38,14 @@ public class rCard : MonoBehaviour
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
         cardCam.enabled = true;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+
+        foreach (string layerName in layersForCard)
+        {
+            int layerIndex = LayerMask.NameToLayer(layerName);
+            newCullingMask |= 1 << layerIndex;
+        }
+
+        playerCam.cullingMask = newCullingMask;
         
         skipBtn.onClick.AddListener(OnClkSkip);
 
@@ -76,6 +96,14 @@ public class rCard : MonoBehaviour
         
         // hide card parent
         gameObject.transform.parent.gameObject.SetActive(false);
+
+        foreach (string layerName in defaultLayers)
+        {
+            int layerIndex = LayerMask.NameToLayer(layerName);
+            newCullingMask |= 1 << layerIndex;
+        }
+
+        playerCam.cullingMask = newCullingMask;
     }
 
     private void ShowCursorAndStopInputs(bool value)
