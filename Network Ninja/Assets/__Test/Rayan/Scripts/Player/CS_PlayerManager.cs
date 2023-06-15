@@ -412,7 +412,7 @@ public class CS_PlayerManager : MonoBehaviour
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
     }
-    private void EnableUltimate()
+    public void EnableUltimate()
     {
         ultimateOn = true;
         anim.SetBool(animController.B_Ultimate, true);
