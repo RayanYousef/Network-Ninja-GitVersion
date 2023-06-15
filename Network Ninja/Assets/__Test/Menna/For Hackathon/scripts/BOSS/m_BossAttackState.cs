@@ -11,7 +11,7 @@ public class m_BossAttackState : StateMachineBehaviour
 
 
     Transform player;
-    private float[] attackOptions = new float[] { 0f, 0.5f, 1f };
+    private float[] attackOptions = new float[] { 0f, 0.2f, 0.4f , 0.6f , 0.8f, 1f };
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -43,7 +43,7 @@ public class m_BossAttackState : StateMachineBehaviour
 
     public int ChooseDragonAttack()
     {
-        int DragonAttack = Random.Range(0, 3);
+        int DragonAttack = Random.Range(0, 6);
         return DragonAttack;
     }
 

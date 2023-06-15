@@ -6,13 +6,15 @@ using Random = UnityEngine.Random;
 using static Unity.VisualScripting.Member;
 using static UnityEngine.ParticleSystem;
 using UnityEngine.Events;
-using UnityEngine.UI;
 using UnityEngine.AI;
 using Unity.Mathematics;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine.Playables;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
+using UnityEngine.UIElements;
+using UnityEngine.UI;
+
 
 public class m_BossManager : MonoBehaviour , IStopObject
 {
@@ -44,12 +46,14 @@ public class m_BossManager : MonoBehaviour , IStopObject
 
 
     [SerializeField] UnityEvent BossDie;
-    [SerializeField] private Image bloodSplatter;
+    [SerializeField] private UnityEngine.UI.Image bloodSplatter;
     [SerializeField] private Color transparentColor;
     [SerializeField] private Color color;
     [SerializeField] float frictionCoefficient = 2.0f;
     [SerializeField] GameObject HP;
     [SerializeField] GameObject attackFromMouth;
+    //[SerializeField] ParticleSystem[] attackOnLand;
+    [SerializeField] GameObject attackOnLand;
 
 
     private void Awake()
@@ -85,11 +89,12 @@ public class m_BossManager : MonoBehaviour , IStopObject
         //    LookAtPlayer();
         //}
 
-        if (LookAtPlyer && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die"))
+        if (LookAtPlyer && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die")) 
         {
             //Vector3 enemyToPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
             //transform.LookAt(enemyToPlayer);
             LookAtPlayer();
+          
 
         }
     }
@@ -208,8 +213,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
 
         switch (bloodNumber)
         {
-            case 0:
-                
+            case 0:              
                 bloodVfx.Play();
                 Debug.Log(bloodVfx);
                 break;
@@ -224,10 +228,16 @@ public class m_BossManager : MonoBehaviour , IStopObject
         }
     }
 
-    public void ActiveAttackFromMouth()
+    public void PlayAttackOnLand()
     {
-        attackFromMouth.SetActive(true);
-        
+        //foreach (ParticleSystem p in attackOnLand)
+        //{
+        //    //p.Play();
+        //}
+
+        Vector3 effectPos = new Vector3();
+        effectPos = transform.position + transform.forward * 5;
+         GameObject LandEffect = Instantiate(attackOnLand, effectPos , Quaternion.identity);
     }
 
     public IEnumerator DoFade()
