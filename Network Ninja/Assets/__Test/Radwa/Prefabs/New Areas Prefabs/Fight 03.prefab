@@ -353,7 +353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7240306803225901418}
   m_LocalRotation: {x: -0, y: 0.9692236, z: 0, w: 0.24618232}
-  m_LocalPosition: {x: -0.54248786, y: -0.15997314, z: -4.216721}
+  m_LocalPosition: {x: -10.06954, y: -0.15997314, z: -10.985345}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -455,7 +455,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7240306803701181823}
   m_LocalRotation: {x: -0, y: 0.9692236, z: 0, w: 0.24618232}
-  m_LocalPosition: {x: 2.319543, y: -0.15997314, z: -2.6625435}
+  m_LocalPosition: {x: 1.270178, y: -0.15997314, z: -0.7301295}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaCamera: {fileID: 7240306803302879095}
-  switchCamBack: 1
+  switchCamBack: 0
   areaType: 1
   health: 0
   maxHealth: 0
@@ -668,7 +668,8 @@ MonoBehaviour:
   alliesList: []
   meshColourChanger:
     MeshRenderers: []
-    Images: []
+    Images:
+    - {fileID: 0}
     MaxHealth: {r: 0, g: 0, b: 0, a: 0}
     HalfHealth: {r: 0, g: 0, b: 0, a: 0}
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
@@ -5680,7 +5681,7 @@ PrefabInstance:
     - target: {fileID: 5956289530070099838, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4599733
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099838, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
@@ -5725,7 +5726,7 @@ PrefabInstance:
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: armySize
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
@@ -5736,7 +5737,7 @@ PrefabInstance:
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: miniBossSize
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}

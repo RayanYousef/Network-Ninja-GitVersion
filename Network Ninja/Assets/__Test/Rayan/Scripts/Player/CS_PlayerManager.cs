@@ -412,7 +412,7 @@ public class CS_PlayerManager : MonoBehaviour
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
     }
-    private void EnableUltimate()
+    public void EnableUltimate()
     {
         ultimateOn = true;
         anim.SetBool(animController.B_Ultimate, true);
@@ -421,7 +421,7 @@ public class CS_PlayerManager : MonoBehaviour
         if (_freezeObjectsInRange != null)
         {
             _freezeObjectsInRange.CheckInActiveObjectsAndRemoveIt();
-            _freezeObjectsInRange.ObjectsMovementEnabled(false, 0.05f);
+            _freezeObjectsInRange.ObjectsMovementEnabled(false, 0.02f);
         }
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = true;

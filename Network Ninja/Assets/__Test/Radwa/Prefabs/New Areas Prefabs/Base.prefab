@@ -313,13 +313,14 @@ MonoBehaviour:
   alliesList: []
   meshColourChanger:
     MeshRenderers: []
-    Images: []
+    Images:
+    - {fileID: 0}
     MaxHealth: {r: 0, g: 0, b: 0, a: 0}
     HalfHealth: {r: 0, g: 0, b: 0, a: 0}
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
   sharingPasswordWarningIcon: {fileID: 0}
   isFlashing: 0
-  healthTimer: 3
+  healthTimer: 6
 --- !u!1 &2075303866547685170
 GameObject:
   m_ObjectHideFlags: 0
@@ -4470,17 +4471,17 @@ PrefabInstance:
     - target: {fileID: 5956289530070099838, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.0034704409
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099838, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099838, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 5.8082714
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099838, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
@@ -4519,8 +4520,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
+      propertyPath: armySize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
+        type: 3}
       propertyPath: miniBossSize
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}

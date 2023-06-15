@@ -31,6 +31,7 @@ public class rUIPassword : MonoBehaviour
     //private Button OKBtn;
 
     [Header("Intro Panel")]
+    [SerializeField] float timeToFadeInIntroPanel = 3;
     [SerializeField] GameObject introPanel;
     [SerializeField] TMP_Text introTxt;
     [SerializeField] Button nextBtn;
@@ -197,7 +198,7 @@ public class rUIPassword : MonoBehaviour
     {
         introPanel.SetActive(true);
         rUIManager.Instance.SetInteractivePanelState = true;
-        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(introPanel.GetComponent<CanvasGroup>(), 1));
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(introPanel.GetComponent<CanvasGroup>(), timeToFadeInIntroPanel));
         rFaceExpressionManager.Instance.ChangeFacialExp(rFaceExpressionManager.FacialExp.Serious);
     }
     #endregion
