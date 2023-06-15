@@ -62,6 +62,9 @@ public class m_BossManager : MonoBehaviour , IStopObject
         transparentColor = new Color(1f, 1f, 1f, 0f);
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        bloodVfx.Stop();
+        bloodVfx2.Stop(); 
+        bloodVfx3.Stop();
     }
 
     private void Start()
@@ -72,6 +75,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
         StartCoroutine(intervalBetCams());
+
    }
     void Update()
     {
@@ -202,6 +206,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         switch (bloodNumber)
         {
             case 0:
+                
                 bloodVfx.Play();
                 Debug.Log(bloodVfx);
                 break;
