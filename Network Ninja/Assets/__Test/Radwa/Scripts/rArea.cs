@@ -83,7 +83,6 @@ public class rArea : MonoBehaviour
         }
     }
 
-    public Image SharingPasswordWarningIcon1 { get => sharingPasswordWarningIcon; set => sharingPasswordWarningIcon = value; }
 
     private void Awake()
     {
