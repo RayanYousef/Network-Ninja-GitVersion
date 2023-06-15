@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack2
+  m_Name: Attack 2
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -82631,19 +82631,33 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 0.5
     functionName: EnableWeaponWithName
-    data: BossAttack
+    data: RightHand
     objectReferenceParameter: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914,
       type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.2083334
+  - time: 0.7083333
+    functionName: EnableWeaponWithName
+    data: Tongue
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1
     functionName: DisableWeaponWithName
-    data: BossAttack
+    data: RightHand
     objectReferenceParameter: {fileID: 11500000, guid: 2e983d41a31d0e940919950f5ee0d914,
       type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.0833334
+    functionName: DisableWeaponWithName
+    data: Tongue
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
