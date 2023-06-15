@@ -414,6 +414,7 @@ public class CS_PlayerManager : MonoBehaviour
     }
     private void EnableUltimate()
     {
+        ultimateOn = true;
         anim.SetBool(animController.B_Ultimate, true);
         anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
         cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);

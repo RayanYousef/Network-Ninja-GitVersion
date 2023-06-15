@@ -530,7 +530,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -5308070044643959542}
-    m_Position: {x: 380, y: 30, z: 0}
+    m_Position: {x: 360, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5679720058941196082}
     m_Position: {x: 540, y: -140, z: 0}
@@ -697,6 +697,12 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Taking Damage
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: MotionTime
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: UltimateOn
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8552748489748211013}
@@ -1171,6 +1177,9 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Taking Damage
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: UltimateOn
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8552748489748211013}
