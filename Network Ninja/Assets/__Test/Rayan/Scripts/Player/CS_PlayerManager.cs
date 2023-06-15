@@ -17,6 +17,7 @@ public class CS_PlayerManager : MonoBehaviour
     [Header("Components")]
     public GameObject PlayerTopMostParent;
     public CS_HitEffect[] HitEffects;
+    [SerializeField] GameObject particleForTransition,playerModel;
     [SerializeField] Animator anim;
     [SerializeField] CS_MovementController moveController;
     [SerializeField] CS_AnimatorController animController;
@@ -358,6 +359,16 @@ public class CS_PlayerManager : MonoBehaviour
 
     #region Public Functions
 
+    public void ParticleModeEnabled()
+    {
+        playerModel.SetActive(false);
+        particleForTransition.SetActive(true);
+    }
+    public void ParticleModeDisabled()
+    {
+        playerModel.SetActive(true);
+        particleForTransition.SetActive(false);
+    }
     public void LostGameHealthZero(float value)
     {
         if (value <= 0 && GameManager.Instance.CurrentGameState == GameState.InProgress)
