@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         WinningPanel.SetActive(true);
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(WinningPanel.GetComponent<CanvasGroup>(), 4f, false));
     }
     public void LostGame()
     {
