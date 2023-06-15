@@ -314,7 +314,7 @@ public class EnemySpawner : MonoBehaviour
         MiniBosses.Remove(MiniBoss);
         if (MiniBosses.Count == 0 && OnAllMiniBossesKilled != null)
         {
-            GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().UltimateDisabled(false);
+            GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().DisableUltimate();
             foreach (GameObject Enemy in enemies)
             {
                 if (Enemy != null)
@@ -331,7 +331,7 @@ public class EnemySpawner : MonoBehaviour
 
             bool allAreasBase = rAreasManager.Instance.CheckAllAreasBaseExceptCurrent();
 
-            if(allAreasBase)
+            if(allAreasBase && !rAreasManager.Instance.IsTutorial)
             {
                 /// spawn big boss
                 /// in case of emergency... invoke winning event here
