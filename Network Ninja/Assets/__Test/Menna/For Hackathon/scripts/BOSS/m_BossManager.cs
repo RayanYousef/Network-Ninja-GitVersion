@@ -39,7 +39,8 @@ public class m_BossManager : MonoBehaviour , IStopObject
     private Transform player;
     private Rigidbody rb;
     private NavMeshAgent agent;
-    private ParticleSystem bloodVfx, bloodVfx2, bloodVfx3;
+    private ParticleSystem bloodVfx, bloodVfx2, bloodVfx3 ;
+    //private ParticleSystem[] Attacks;
 
 
     [SerializeField] UnityEvent BossDie;
@@ -48,6 +49,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
     [SerializeField] private Color color;
     [SerializeField] float frictionCoefficient = 2.0f;
     [SerializeField] GameObject HP;
+    [SerializeField] GameObject attackFromMouth;
 
 
     private void Awake()
@@ -62,6 +64,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         transparentColor = new Color(1f, 1f, 1f, 0f);
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        //Attacks = attackFromMouth.GetComponentsInChildren<ParticleSystem>();
 
     }
 
@@ -217,6 +220,17 @@ public class m_BossManager : MonoBehaviour , IStopObject
                 Debug.Log(bloodVfx3);
                 break;
         }
+    }
+
+    public void ActiveAttackFromMouth()
+    {
+        //foreach(ParticleSystem p in Attacks)
+        //{
+        //    p.Play();
+        //}
+
+        attackFromMouth.SetActive(true);
+        
     }
 
     public IEnumerator DoFade()
