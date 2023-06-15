@@ -19,7 +19,20 @@ public class m_InGameUI : MonoBehaviour
 
     [Header("Options Panel")]
     [SerializeField] GameObject optionsPanel;
+    [SerializeField] GameObject controlsPanel;
+    [SerializeField] GameObject controlsPage1;
+    [SerializeField] GameObject controlsPage2;
+
+    [SerializeField] GameObject comboMapPanel;
+    [SerializeField] GameObject comboPage1;
+    [SerializeField] GameObject comboPage2;
+
     [SerializeField] Button optionsBtn;
+    [SerializeField] Button controlsBtn;
+    [SerializeField] Button comboMapBtn;
+
+    int controlsPageNumb = 1;
+    int comboPageNumb = 1;
 
     [SerializeField] Slider volumeSlider;
     [SerializeField] Slider mouseSensitivitySlider;
@@ -37,10 +50,14 @@ public class m_InGameUI : MonoBehaviour
             menuPanel.SetActive(false);
         rUIManager.Instance.InteractivePanels.Add(menuPanel);
         rUIManager.Instance.InteractivePanels.Add(optionsPanel);
+        rUIManager.Instance.InteractivePanels.Add(controlsPanel);
+        rUIManager.Instance.InteractivePanels.Add(comboMapPanel);
 
         rUIManager.Instance.IndependantUIElements.Add(prompt.gameObject);
 
         optionsBtn.onClick.AddListener(OnClkOptions);
+        controlsBtn.onClick.AddListener(OnClkControls);
+        comboMapBtn.onClick.AddListener(OnClkComboMap);
 
         //mouseSensitivitySlider.onValueChanged.AddListener(delegate { (); });
 
@@ -81,6 +98,16 @@ public class m_InGameUI : MonoBehaviour
             {
                 optionsPanel.SetActive(false);
                 rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(optionsPanel.GetComponent<CanvasGroup>(), 0.2f));
+            }
+            else if (controlsPanel.activeSelf)
+            {
+                controlsPanel.SetActive(false);
+                rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(controlsPanel.GetComponent<CanvasGroup>(), 0.2f));
+            }
+            else if (comboMapPanel.activeSelf)
+            {
+                comboMapPanel.SetActive(false);
+                rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(comboMapPanel.GetComponent<CanvasGroup>(), 0.2f));
             }
             else
             {
@@ -147,6 +174,61 @@ public class m_InGameUI : MonoBehaviour
 
         rUIManager.Instance.SetInteractivePanelState = true;
     }
+
+    #region Controls Panel
+    private void OnClkControls()
+    {
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(menuPanel.GetComponent<CanvasGroup>(), 0.2f));
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(controlsPanel.GetComponent<CanvasGroup>(), 0.2f));
+
+        rUIManager.Instance.SetInteractivePanelState = true;
+    }     
+    private void OnClkComboMap()
+    {
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(menuPanel.GetComponent<CanvasGroup>(), 0.2f));
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(comboMapPanel.GetComponent<CanvasGroup>(), 0.2f));
+
+        rUIManager.Instance.SetInteractivePanelState = true;
+    } 
+
+    public void OnClkNextControls()
+    {
+        if (controlsPageNumb == 2)
+            return;
+
+        controlsPage1.SetActive(false);
+        controlsPage2.SetActive(true);
+        controlsPageNumb = 2;
+    }
+    public void OnClkPreviousControls()
+    {
+        if (controlsPageNumb == 1)
+            return;
+
+        controlsPage1.SetActive(true);
+        controlsPage2.SetActive(false);
+        controlsPageNumb = 1;
+    }
+    public void OnClkNextComboMap()
+    {
+        if (comboPageNumb == 2)
+            return;
+
+        comboPage1.SetActive(false);
+        comboPage2.SetActive(true);
+        comboPageNumb = 2;
+    }
+    public void OnClkPreviousComboMap()
+    {
+        if (comboPageNumb == 1)
+            return;
+
+        comboPage1.SetActive(true);
+        comboPage2.SetActive(false);
+        comboPageNumb = 1;
+    }
+
+    #endregion
 
     public void OnCloseClicked()
     {
