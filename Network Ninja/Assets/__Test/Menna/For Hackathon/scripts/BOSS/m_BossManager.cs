@@ -58,8 +58,8 @@ public class m_BossManager : MonoBehaviour , IStopObject
         bloodVfx = GetComponentsInChildren<ParticleSystem>()[0];
         bloodVfx2 = GetComponentsInChildren<ParticleSystem>()[1];
         bloodVfx3 =GetComponentsInChildren<ParticleSystem>()[2];
-        color = new Color(188f, 0f, 0f, 1f);
-        transparentColor = new Color(0f, 0f, 0f, 0f);
+        color = new Color(1f, 1f, 1f, 1f);
+        transparentColor = new Color(1f, 1f, 1f, 0f);
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
     }

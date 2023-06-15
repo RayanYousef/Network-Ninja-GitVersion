@@ -92241,7 +92241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7895259779614894275
 Transform:
   m_ObjectHideFlags: 0
@@ -92430,8 +92430,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   bloodSplatter: {fileID: 7673610367410287712}
-  transparentColor: {r: 0.7372549, g: 0.09740115, b: 0.09740115, a: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
+  transparentColor: {r: 0.9433962, g: 0.21715912, b: 0.86539286, a: 0.78431374}
+  color: {r: 0.9056604, g: 0.063225314, b: 0.8750393, a: 0.7882353}
   frictionCoefficient: 2
   HP: {fileID: 6949257893390303693}
 --- !u!1 &7544409072375709949
@@ -94639,12 +94639,12 @@ PrefabInstance:
     - target: {fileID: 6889641390364874792, guid: 850de5759585997489929c435899ca17,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6889641390364874792, guid: 850de5759585997489929c435899ca17,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7902939402413671818, guid: 850de5759585997489929c435899ca17,
         type: 3}
@@ -94755,6 +94755,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BossHealthbar_Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7902939402759282076, guid: 850de5759585997489929c435899ca17,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 347ecc1a58b6b794dbd7f4c5a3975811,
+        type: 3}
+    - target: {fileID: 7902939402759282076, guid: 850de5759585997489929c435899ca17,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.7704231
+      objectReference: {fileID: 0}
+    - target: {fileID: 7902939402759282076, guid: 850de5759585997489929c435899ca17,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.20201136
+      objectReference: {fileID: 0}
+    - target: {fileID: 7902939402759282076, guid: 850de5759585997489929c435899ca17,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.9150943
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 850de5759585997489929c435899ca17, type: 3}
