@@ -14,7 +14,7 @@ public class m_IntroEffect : MonoBehaviour
 
     private IEnumerator WaitForEffect()
     {
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 3.0f;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         yield return new WaitForSeconds(8);
         effectCam.enabled = false;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;

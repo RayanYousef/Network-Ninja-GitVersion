@@ -40,13 +40,6 @@ public class EnemySpawner : MonoBehaviour
 
     public UnityEvent OnAllMiniBossesKilled, OnBigBossKilled;
 
-
-    // public int spawnInterval = 20;
-    //public int enemiesPerSpawn = 5;
-    //public int numSpawned = 0;
-    //public int numAlive = 0;
-    //public bool allArmyDied = false;
-    // public float avoidanceDistance = 2f;  // The distance at which enemies will avoid each other.
     void Start()
     {
         enemies = new List<GameObject>();
@@ -189,6 +182,7 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject introEffect = Instantiate(IntroEffectPrefab, this.transform.position, Quaternion.identity);
         introEffect.transform.parent = this.transform;
+
     }
 
     public void SpawnCard()
@@ -362,17 +356,15 @@ public class EnemySpawner : MonoBehaviour
 
     public IEnumerator SpawnBossCoroutine()
     {
+        player.GetComponent<CS_PlayerManager>().ControllerState(false);
+        player.transform.position = transform.position + new Vector3 (0f,0f,15.0f);
         yield return new WaitForSeconds(delayBeforeSpawnBoss / 2);
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         spawnBossIntroEffect();
         yield return new WaitForSeconds(3.5f);
         // Spawn the boss
         SpawnBigBoss();
-        //GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.0f;
-        //playableDirector.Play();
-        // BigBossPrefab.GetComponent<Animator>().enabled = false;
-        // yield return new WaitForSeconds(5);
-        // BigBossPrefab.GetComponent<Animator>().enabled = true;
+
 
     }
 

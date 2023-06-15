@@ -186,6 +186,8 @@ public class m_BossManager : MonoBehaviour , IStopObject
         GameManager.Instance.CurrentGameState = GameState.Won;
         BossDie?.Invoke();
         HP.SetActive(false);
+        attackFromMouth.SetActive(false);
+
     }
     public bool death()
     {
@@ -224,11 +226,6 @@ public class m_BossManager : MonoBehaviour , IStopObject
 
     public void ActiveAttackFromMouth()
     {
-        //foreach(ParticleSystem p in Attacks)
-        //{
-        //    p.Play();
-        //}
-
         attackFromMouth.SetActive(true);
         
     }
@@ -271,7 +268,9 @@ public class m_BossManager : MonoBehaviour , IStopObject
         yield return new WaitForSeconds(5);
         BossCam3.enabled = false;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
+        player.GetComponent<CS_PlayerManager>().ControllerState(true);
         yield return new WaitForSeconds(2);
         startBossState = true;
+
     }
 }
