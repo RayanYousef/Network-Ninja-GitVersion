@@ -9,6 +9,7 @@ using Cinemachine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] bool canShowCard;
     Transform player;
     Canvas BossCanvas;
 
@@ -340,9 +341,16 @@ public class EnemySpawner : MonoBehaviour
             {
                 /// spawn big boss
                 /// in case of emergency... invoke winning event here
-                //OnBigBossKilled?.Invoke();
-                StartCoroutine(SpawnCardCoroutine());
                 // GameManager.Instance.EndStage(true);
+                GameManager.Instance.BossEntered = true;
+                if(canShowCard)
+                {
+                    StartCoroutine(SpawnCardCoroutine());
+                }
+                else
+                {
+                    StartCoroutine(SpawnBossCoroutine());
+                }
             }
             else
             {
@@ -370,7 +378,6 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnCardCoroutine()
     {
-        GameManager.Instance.BossEntered = true;
         yield return new WaitForSeconds(delayBeforeSpawnBoss);
 
         // Spawn the card
