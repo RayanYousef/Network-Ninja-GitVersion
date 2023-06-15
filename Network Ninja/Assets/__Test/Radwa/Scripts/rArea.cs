@@ -319,13 +319,13 @@ public class rArea : MonoBehaviour
             if (areaType == AreaType.Fight)
             {
                 rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
-                rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Serious);
+                rFaceExpressionManager.Instance.ChangeFacialExp(rFaceExpressionManager.FacialExp.Serious);
                 /// raise event to spawn enemies
                 OnEnteringFight?.Invoke();
                 return;
             }
 
-            rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle);
+            rFaceExpressionManager.Instance.ChangeFacialExp(rFaceExpressionManager.FacialExp.Idle);
             if (areaType == AreaType.Base)
             {
                 playerInside = true;

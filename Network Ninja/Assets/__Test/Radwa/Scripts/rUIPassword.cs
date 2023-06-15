@@ -198,7 +198,7 @@ public class rUIPassword : MonoBehaviour
         introPanel.SetActive(true);
         rUIManager.Instance.SetInteractivePanelState = true;
         rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(introPanel.GetComponent<CanvasGroup>(), 1));
-        rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Serious);
+        rFaceExpressionManager.Instance.ChangeFacialExp(rFaceExpressionManager.FacialExp.Serious);
     }
     #endregion
 
@@ -291,7 +291,7 @@ public class rUIPassword : MonoBehaviour
         if(isFirstClk)
         {
             isFirstClk = false;
-            rUIManager.Instance.ChangeFacialExp(rUIManager.FacialExp.Idle);
+            rFaceExpressionManager.Instance.ChangeFacialExp(rFaceExpressionManager.FacialExp.Idle);
             introTxt.text = "....but don't worry, your main base is still safe with a strong army. " +
                 "You're lucky to have their support! Stay strong and defend what's yours!";
 
