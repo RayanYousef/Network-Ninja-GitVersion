@@ -28,7 +28,7 @@ public class RadwasFadeManager : MonoBehaviour
                 StartCoroutine(FadeOutInImgTxt(img, 1f));
             }
             else
-               if (i == msgs.Length - 1 && fading == false) CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.TutorialScene);
+               if (i == msgs.Length - 1 && fading == false) CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.GameplayScene);
         }
     }
 
