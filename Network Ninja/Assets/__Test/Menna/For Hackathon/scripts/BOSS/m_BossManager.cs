@@ -62,9 +62,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         transparentColor = new Color(1f, 1f, 1f, 0f);
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-        bloodVfx.Stop();
-        bloodVfx2.Stop(); 
-        bloodVfx3.Stop();
+
     }
 
     private void Start()
