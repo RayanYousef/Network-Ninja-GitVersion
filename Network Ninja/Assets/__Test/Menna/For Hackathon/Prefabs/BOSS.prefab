@@ -92376,8 +92376,8 @@ MonoBehaviour:
     OnEnergyUpdated:
       m_PersistentCalls:
         m_Calls: []
-    maxHealth: 5000
-    currentHealth: 5000
+    maxHealth: 500
+    currentHealth: 500
     defaultDefense: 0
     defense: 0
     defaultAtk: 50
@@ -92421,6 +92421,7 @@ MonoBehaviour:
   IntervalBetweenBossAttacks: 1
   AttackDuration: 2.12
   LookAtPlyer: 1
+  startBossState: 0
   playableDirector: {fileID: 252617476061625004}
   BossCam1: {fileID: 143251583}
   BossCam2: {fileID: 1501450348}
@@ -92433,7 +92434,6 @@ MonoBehaviour:
   color: {r: 0, g: 0, b: 0, a: 0}
   frictionCoefficient: 2
   HP: {fileID: 6949257893390303693}
-  StatsForBoss: {fileID: 9100000, guid: 384b8a9361efa784eb65b7bfaf0020ae, type: 2}
 --- !u!1 &7544409072375709949
 GameObject:
   m_ObjectHideFlags: 0

@@ -75,15 +75,17 @@ public class m_BossManager : MonoBehaviour , IStopObject
    }
     void Update()
     {
-        //if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("IdleState")  && LookAtPlyer == true)
+        //if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("IdleState") && LookAtPlyer == true)
         //{
         //    LookAtPlayer();
         //}
- 
-        if (LookAtPlyer)
+
+        if (LookAtPlyer && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die"))
         {
-            Vector3 enemyToPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
-            transform.LookAt(enemyToPlayer);
+            //Vector3 enemyToPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
+            //transform.LookAt(enemyToPlayer);
+            LookAtPlayer();
+
         }
     }
 
