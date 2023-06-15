@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   areaCamera: {fileID: 2579658749602505148}
-  switchCamBack: 1
+  switchCamBack: 0
   areaType: 1
   health: 0
   maxHealth: 0
@@ -135,7 +135,8 @@ MonoBehaviour:
   alliesList: []
   meshColourChanger:
     MeshRenderers: []
-    Images: []
+    Images:
+    - {fileID: 0}
     MaxHealth: {r: 0, g: 0, b: 0, a: 0}
     HalfHealth: {r: 0, g: 0, b: 0, a: 0}
     LowHealth: {r: 0, g: 0, b: 0, a: 0}
@@ -3049,7 +3050,7 @@ PrefabInstance:
     - target: {fileID: 5956289530070099838, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4712249
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099838, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
@@ -3094,7 +3095,7 @@ PrefabInstance:
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: armySize
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
@@ -3105,7 +3106,7 @@ PrefabInstance:
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
       propertyPath: miniBossSize
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5956289530070099839, guid: 8d431039ecc69974cb4c1ec02c9c49ae,
         type: 3}
