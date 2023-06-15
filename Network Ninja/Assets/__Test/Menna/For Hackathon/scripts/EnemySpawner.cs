@@ -314,7 +314,7 @@ public class EnemySpawner : MonoBehaviour
         MiniBosses.Remove(MiniBoss);
         if (MiniBosses.Count == 0 && OnAllMiniBossesKilled != null)
         {
-            GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().UltimateDisabled(false);
+            GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().DisableUltimate();
             foreach (GameObject Enemy in enemies)
             {
                 if (Enemy != null)
