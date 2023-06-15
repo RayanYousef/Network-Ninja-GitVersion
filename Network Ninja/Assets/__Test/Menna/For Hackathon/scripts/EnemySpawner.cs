@@ -331,7 +331,7 @@ public class EnemySpawner : MonoBehaviour
 
             bool allAreasBase = rAreasManager.Instance.CheckAllAreasBaseExceptCurrent();
 
-            if(allAreasBase)
+            if(allAreasBase && !rAreasManager.Instance.IsTutorial)
             {
                 /// spawn big boss
                 /// in case of emergency... invoke winning event here

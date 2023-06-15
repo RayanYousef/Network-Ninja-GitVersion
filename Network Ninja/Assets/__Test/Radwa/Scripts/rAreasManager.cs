@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using System.Text.RegularExpressions;
+using UnityEngine.Events;
 
 
 //public enum Soldiers { Melee, Ranged, MeleeRanged, MeleeRangedTank };
@@ -28,6 +29,10 @@ public class rAreasManager : MonoBehaviour
     [SerializeField] string currentWarning = null;
     [SerializeField] string currentSuggestions = null;
 
+    [Header("Tutorial")]
+    [SerializeField] bool isTutorial = false;
+    [SerializeField] public UnityEvent OnAreasFinished;
+
     /*
     [Header("Password Lists")]
     private string[] playerPersonalData;
@@ -48,6 +53,7 @@ public class rAreasManager : MonoBehaviour
     
     public string Warnings { get => currentWarning; set => currentWarning = value; }
     public string Suggestions { get => currentSuggestions; set => currentSuggestions = value; }
+    public bool IsTutorial { get => isTutorial; set => isTutorial = value; }
 
     private void Awake()
     {
@@ -169,6 +175,11 @@ public class rAreasManager : MonoBehaviour
             {
                 return false;
             }
+        }
+        // invoke event all areas finished
+        if(isTutorial)
+        {
+            OnAreasFinished?.Invoke();
         }
         return true;
     }
