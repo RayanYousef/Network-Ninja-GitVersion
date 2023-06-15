@@ -58,18 +58,16 @@ public class CS_PlayerManager : MonoBehaviour
         get => ultimateOn;
         set
         {
-            ultimateOn = value;
-
                 switch (value)
-            {
+                {
                 case true:
-                    UltimateEnabled(value);
+                    EnableUltimate();
                     break;
 
                 case false:
-                    UltimateDisabled(value);
+                    DisableUltimate();
                     break;
-            }
+                }
         }
     }
 
@@ -385,49 +383,13 @@ public class CS_PlayerManager : MonoBehaviour
         }
 
     }
-    public void DisableUltimate(float energyValue)
-    {
-        if (energyValue == 0)
-            UltimateOn = false;
-    }
     public void ControllerState(bool value)
     {
         PlayerInputs.enabled = value;
     }
-    public void ColliderState(bool value)
-    {
-        this.enabled = value;
-        GetComponent<Collider>().enabled = value;
-    }
-    public void GravityState(bool value)
-    {
-        MoveController.Gravity= value;
-    }
-
-    public void ResetDamageTimerAndCanNotTakeDamage()
-    {
-        damageTimer= 0;
-        pStatsManager.Damagable = false;
-
-    }
-    #endregion
-
-    #region Private Functions
-    private void UltimateEnabled(bool value)
-    {
-        anim.SetBool(animController.B_Ultimate, value);
-        anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
-        cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
-        if (_freezeObjectsInRange != null)
-        {
-            _freezeObjectsInRange.CheckInActiveObjectsAndRemoveIt();
-            _freezeObjectsInRange.ObjectsMovementEnabled(false, 0.05f);
-        }
-        if (AudioManager.instance.BossMusic != null)
-            AudioManager.instance.BossMusic.InCombat = value;
-    }
     public void UltimateDisabled(bool value)
     {
+        ultimateOn = true;
         anim.SetBool(animController.B_Ultimate, value);
         anim.SetFloat(animController.F_animSpeed, 0.9f);
         cameraManager.SwitchCamerasBasedOnLockState();
@@ -438,7 +400,59 @@ public class CS_PlayerManager : MonoBehaviour
         }
         if (AudioManager.instance.BossMusic != null)
             AudioManager.instance.BossMusic.InCombat = value;
-    } 
+    }
+    private void EnableUltimate()
+    {
+        anim.SetBool(animController.B_Ultimate, true);
+        anim.SetFloat(animController.F_animSpeed, ultimateAttackSpeed);
+        cameraManager.DisableAllCamerasExceptParam(cameraManager.UltimateCamera);
+        if (_freezeObjectsInRange != null)
+        {
+            _freezeObjectsInRange.CheckInActiveObjectsAndRemoveIt();
+            _freezeObjectsInRange.ObjectsMovementEnabled(false, 0.05f);
+        }
+        if (AudioManager.instance.BossMusic != null)
+            AudioManager.instance.BossMusic.InCombat = true;
+    }
+    public void DisableUltimate()
+    {
+        ultimateOn= false;
+        anim.SetBool(animController.B_Ultimate, false);
+        anim.SetFloat(animController.F_animSpeed, 0.9f);
+        cameraManager.SwitchCamerasBasedOnLockState();
+        if (_freezeObjectsInRange != null)
+        {
+            _freezeObjectsInRange.CheckInActiveObjectsAndRemoveIt();
+            _freezeObjectsInRange.ObjectsMovementEnabled(true, 1);
+        }
+        if (AudioManager.instance.BossMusic != null)
+            AudioManager.instance.BossMusic.InCombat = false;
+    }
+    public void ColliderState(bool value)
+    {
+        this.enabled = value;
+        GetComponent<Collider>().enabled = value;
+    }
+    public void GravityState(bool value)
+    {
+        MoveController.Gravity= value;
+    }
+    public void ResetDamageTimerAndCanNotTakeDamage()
+    {
+        damageTimer= 0;
+        pStatsManager.Damagable = false;
+
+    }
+    #endregion
+
+    #region Private Functions
+  
+    private void DisableUltimate(float energyValue)
+    {
+        if (energyValue == 0)
+            UltimateOn = false;
+    }
+
 
     private void DamageIntervalFunction()
     {
