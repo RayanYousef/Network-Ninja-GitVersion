@@ -133,7 +133,7 @@ public class rArea : MonoBehaviour
         //if (playerInside == false && password != null && !GameManager.Instance.BossEntered)
         //    UpdateHealth();
 
-        if (!playerInside && (password != null || areaType == AreaType.Main) && !GameManager.Instance.BossEntered)
+        if (!playerInside && (password != null || areaType == AreaType.Main) && !rAreasManager.Instance.IsTutorial && !GameManager.Instance.BossEntered)
             UpdateHealth();
     }
 
