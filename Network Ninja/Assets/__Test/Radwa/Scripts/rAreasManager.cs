@@ -18,7 +18,7 @@ public class rAreasManager : MonoBehaviour
 
     [Header("Area Manager Components")]
     [SerializeField] rArea[] listOfLevelAreas;
-    int maxSoldiersNumber = 75;
+    int maxSoldiersNumber = 48;
     [SerializeField] Color maxHealth, halfHealth, lowHealth;
     [SerializeField] Color darkColor;
     [SerializeField] rArea currentArea;

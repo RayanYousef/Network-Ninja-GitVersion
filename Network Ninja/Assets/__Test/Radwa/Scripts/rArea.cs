@@ -42,7 +42,7 @@ public class rArea : MonoBehaviour
 
     [Header("Script Internal Variables")]
     float Timer;
-    [SerializeField] float healthTimer = 3;
+    [SerializeField] float healthTimer = 5;
 
 
     public string Password { get => password; set => password = value; }
