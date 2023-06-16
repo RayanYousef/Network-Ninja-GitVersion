@@ -165,7 +165,7 @@ public class CS_CameraManager : MonoBehaviour
 
             followTargetLock.rotation = Quaternion.RotateTowards(
                 followTargetLock.rotation,
-                Quaternion.LookRotation(new Vector3(lockedTarget.position.x,followTargetNormal.position.y*0.75f,lockedTarget.position.z) - followTargetLock.position),
+                Quaternion.LookRotation(new Vector3(lockedTarget.position.x,followTargetNormal.position.y,lockedTarget.position.z) - followTargetLock.position),
                 lockRotationSpeed * Time.deltaTime);
 
             if (lockTimer > cameraBrain.m_DefaultBlend.BlendTime)
