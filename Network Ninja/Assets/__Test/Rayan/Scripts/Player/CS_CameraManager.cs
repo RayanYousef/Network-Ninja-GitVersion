@@ -40,7 +40,7 @@ public class CS_CameraManager : MonoBehaviour
 
     [Header("Camera Behavior Vars")]
     [SerializeField] float cinemachineLerpTime;
-    [SerializeField, Range(0,300)] float rotationSpeed;
+    [SerializeField, Range(1,10)] float rotationSpeed;
     [SerializeField] float minAngle, maxAngle;
 
 
@@ -111,24 +111,25 @@ public class CS_CameraManager : MonoBehaviour
 
 
     #endregion
+    #region Unity Functions 
 
     private void Awake()
     {
-        _impulseSource= GetComponentInChildren<CinemachineImpulseSource>();
+        _impulseSource = GetComponentInChildren<CinemachineImpulseSource>();
     }
     private void Start()
     {
-        foreach(CinemachineVirtualCamera camera in PlayerManager.PlayerTopMostParent.GetComponentsInChildren<CinemachineVirtualCamera>())
+        foreach (CinemachineVirtualCamera camera in PlayerManager.PlayerTopMostParent.GetComponentsInChildren<CinemachineVirtualCamera>())
             virtualCameras.Add(camera);
     }
 
-    private void Update()   
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)) 
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            LockedOn = !LockedOn; 
+            LockedOn = !LockedOn;
         }
-        if (Input.GetKeyDown(KeyCode.Tab)) 
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             targetIndex++;
             SetTarget();
@@ -139,14 +140,14 @@ public class CS_CameraManager : MonoBehaviour
     {
 
         followTargetLock.position = followTargetNormal.position = transform.position;
-        
-        if (LockedOn && listOfTargetsInRange.Count>0)
+
+        if (LockedOn && listOfTargetsInRange.Count > 0)
         {
 
             if (lockedTarget == null)
                 SetTarget();
 
-            if(lockedTarget.gameObject.activeInHierarchy==false &&listOfTargetsInRange.Contains(lockedTarget.gameObject))
+            if (lockedTarget.gameObject.activeInHierarchy == false && listOfTargetsInRange.Contains(lockedTarget.gameObject))
             {
                 listOfTargetsInRange.Remove(lockedTarget.gameObject);
                 if (listOfTargetsInRange.Count < 1)
@@ -154,20 +155,20 @@ public class CS_CameraManager : MonoBehaviour
                 else SetTarget();
             }
 
-            followTargetLock.rotation= Quaternion.RotateTowards( 
+            followTargetLock.rotation = Quaternion.RotateTowards(
                 followTargetLock.rotation,
                 Quaternion.LookRotation(lockedTarget.position - followTargetLock.position),
-                lockRotationSpeed*Time.deltaTime);
+                lockRotationSpeed * Time.deltaTime);
 
-            if (lockTimer>cameraBrain.m_DefaultBlend.BlendTime)
+            if (lockTimer > cameraBrain.m_DefaultBlend.BlendTime)
                 followTargetNormal.rotation = followTargetLock.rotation;
             lockTimer += Time.deltaTime;
         }
-        else LockedOn= false;
+        else LockedOn = false;
 
-        for(int i = listOfTargetsInRange.Count-1; i>=0; i--)
+        for (int i = listOfTargetsInRange.Count - 1; i >= 0; i--)
         {
-            if (listOfTargetsInRange[i].activeInHierarchy==false) listOfTargetsInRange.Remove(listOfTargetsInRange[i]);
+            if (listOfTargetsInRange[i].activeInHierarchy == false) listOfTargetsInRange.Remove(listOfTargetsInRange[i]);
 
         }
 
@@ -209,10 +210,11 @@ public class CS_CameraManager : MonoBehaviour
     private void LateUpdate()
     {
         if (lockedOn) return;
-            RotateObjectQuaternionClamping(deltaValues, followTargetNormal);
-    }
+        RotateObjectQuaternionClamping(deltaValues, followTargetNormal);
+    } 
+    #endregion
 
- 
+
     #region Main Rotation Function
 
     public void RotateObjectQuaternionClamping(Vector2 mouseDelta, Transform transform)
@@ -221,8 +223,8 @@ public class CS_CameraManager : MonoBehaviour
         //float mouseX = mouseDelta.x * rotationSpeed * Time.deltaTime;
         //float mouseY = mouseDelta.y * rotationSpeed * Time.deltaTime;
 
-        float mouseX = mouseDelta.x;
-        float mouseY = mouseDelta.y;
+        float mouseX = mouseDelta.x * Time.deltaTime * rotationSpeed;
+        float mouseY = mouseDelta.y * Time.deltaTime * rotationSpeed;
 
         float pitch = -mouseY;
         float yaw = mouseX;
@@ -239,8 +241,8 @@ public class CS_CameraManager : MonoBehaviour
                 break;
         }
 
-        //transform.rotation = Quaternion.Euler(new Vector3(pitch, rotation.eulerAngles.y,0));
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(pitch, rotation.eulerAngles.y, 0)), Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Euler(new Vector3(pitch, rotation.eulerAngles.y,0));
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(pitch, rotation.eulerAngles.y, 0)), Time.deltaTime * rotationSpeed);
     }
 
     #endregion
@@ -306,7 +308,7 @@ public class CS_CameraManager : MonoBehaviour
     }
     public void RotationSpeed(Slider mouseSlider)
     {
-        rotationSpeed = mouseSlider.value * 300;
+        rotationSpeed = mouseSlider.value * 10;
     }
 
     // 1.5 6 
