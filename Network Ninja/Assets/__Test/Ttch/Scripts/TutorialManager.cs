@@ -116,6 +116,7 @@ public class TutorialManager : MonoBehaviour
             case 7:
                 if(Area2.Health >= 75)
                 {
+                    Area1.Health = 0;
                     Area1.AreaType = AreaType.Fight;
                     popUpIndex++;
                 }
