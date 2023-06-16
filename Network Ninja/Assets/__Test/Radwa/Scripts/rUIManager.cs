@@ -88,6 +88,9 @@ public class rUIManager : MonoBehaviour
 
         while (elapsedTime < time + 0.1)
         {
+            if (!panelToFade.gameObject.activeSelf)
+                yield break;
+
             panelToFade.alpha = Mathf.Lerp(0, 1, (elapsedTime / time));
             elapsedTime += Time.unscaledDeltaTime;
 
