@@ -177,18 +177,23 @@ public class CS_PlayerManager : MonoBehaviour
                 break;
 
             case CharacterState.Attacking:
+                rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+
                 anim.SetBool(animController.B_Attacking, true);
-                anim.applyRootMotion = true;
 
                 moveController.RotateTowardsDirectionFaster();
-                if(cameraManager.LockedOn)
-                lookAtClosestTarget.RotateTowardsClosestEnemy(cameraManager.LockedTarget);
+                if (cameraManager.LockedOn)
+                    lookAtClosestTarget.RotateTowardsClosestEnemy(cameraManager.LockedTarget);
                 else
-                lookAtClosestTarget.RotateTowardsClosestEnemy();
+                    lookAtClosestTarget.RotateTowardsClosestEnemy();
+
+                anim.applyRootMotion = true;
+
+
                 break;
 
             case CharacterState.Falling:
-                rb.constraints = RigidbodyConstraints.FreezeRotation;
+               
                 break;
 
             case CharacterState.Idling:
@@ -220,6 +225,8 @@ public class CS_PlayerManager : MonoBehaviour
             animController.ResetCombo();
 
         anim.applyRootMotion = false;
+
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
 
         anim.SetBool(animController.B_Dashing, false);
         anim.SetBool(animController.B_Jumping, false);
