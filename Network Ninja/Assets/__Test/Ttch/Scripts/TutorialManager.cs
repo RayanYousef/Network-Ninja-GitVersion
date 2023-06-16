@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class TutorialManager : MonoBehaviour
     private int RAttackCount = 0;
     private bool ultUsed = false;
     public rArea Area1,Area2,Area3;
+
+    [SerializeField] public UnityEvent OnTutorialFinish;
 
     // Update is called once per frame
     void Update()
@@ -121,7 +124,7 @@ public class TutorialManager : MonoBehaviour
             case 8:
                 if(Area1.AreaType == AreaType.Base)
                 {
-                    GameManager.Instance.WinGame();
+                    CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.GameplayScene);
                 }
                 break;
 

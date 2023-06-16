@@ -29,6 +29,8 @@ public class PathController : MonoBehaviour
     public float distance;
     public float speed = 50f;
 
+    public Animator Gate1,Gate2;
+
     public bool PlayerIsOnPath { get => playerIsOnPath;
         set
         {
@@ -39,12 +41,18 @@ public class PathController : MonoBehaviour
                     //player.GetComponent<CS_PlayerManager>().ControllerState(false);
                     // player.GetComponent<CS_PlayerManager>().ColliderState(false);
                     player.GetComponent<CS_PlayerManager>().GravityState(false);
+                    Gate1.Play("Base Layer.Open");
+                    Gate2.Play("Base Layer.Open");
+
 
                     break;
                 case false:
                     //player.GetComponent<CS_PlayerManager>().ControllerState(true);
                     // player.GetComponent<CS_PlayerManager>().ColliderState(true);
                     player.GetComponent<CS_PlayerManager>().GravityState(true);
+                    Gate1.Play("Base Layer.Close");
+                    Gate2.Play("Base Layer.Close");
+
 
                     break;
                 default:
