@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PathController : MonoBehaviour
 {
@@ -29,8 +30,8 @@ public class PathController : MonoBehaviour
     public float distance;
     public float speed = 50f;
 
-    public Animator Gate1,Gate2;
-
+    public Animator anim1, anim2;
+    
     public bool PlayerIsOnPath { get => playerIsOnPath;
         set
         {
@@ -38,31 +39,44 @@ public class PathController : MonoBehaviour
             switch (value)
             {
                 case true:
-                    //player.GetComponent<CS_PlayerManager>().ControllerState(false);
-                    // player.GetComponent<CS_PlayerManager>().ColliderState(false);
                     player.GetComponent<CS_PlayerManager>().GravityState(false);
-                    Gate1.Play("Base Layer.Open");
-                    Gate2.Play("Base Layer.Open");
+                    player.GetComponent<CS_PlayerManager>().ParticleModeEnabled();
 
-
+                    if (anim1 != null && anim2 != null)
+                    {
+                        anim1.Play("Base Layer.Open");
+                        anim2.Play("Base Layer.Open");
+                    }
+                    
                     break;
+
                 case false:
-                    //player.GetComponent<CS_PlayerManager>().ControllerState(true);
-                    // player.GetComponent<CS_PlayerManager>().ColliderState(true);
                     player.GetComponent<CS_PlayerManager>().GravityState(true);
-                    Gate1.Play("Base Layer.Close");
-                    Gate2.Play("Base Layer.Close");
+                    player.GetComponent<CS_PlayerManager>().ParticleModeDisabled();
 
 
+                    if (anim1 != null && anim2 != null)
+                    {
+                        anim1.Play("Base Layer.Close");
+                        anim2.Play("Base Layer.Close");
+                    }
+                  
                     break;
+
                 default:
                     break;
             }
         }
     }
+  
     private void Start()
     {
         player = GameObjectsManager.Instance.Player;
+        anim1 = startPoint.GetComponentInChildren<Animator>();
+
+        anim2 = endPoint.GetComponentInChildren<Animator>();
+
+
         //brain = GameObjectsManager.Instance.CameraBrain;
     }
 
