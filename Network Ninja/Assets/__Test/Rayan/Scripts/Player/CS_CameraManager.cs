@@ -27,7 +27,7 @@ public class CS_CameraManager : MonoBehaviour
     [SerializeField] CameraMode _cameraMode;
 
 
-    [Header("Targets To Follow")]
+    [Header("Targets To Follow Cinemachine")]
     [SerializeField] Transform followTargetNormal;
     [SerializeField] Transform followTargetLock;
 
@@ -96,14 +96,21 @@ public class CS_CameraManager : MonoBehaviour
                 case CameraMode.Close:
                     mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 3;
                     mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 0.2f;
+                    lockVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 3;
+                    lockVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 0.2f;
                     break;
                 case CameraMode.Mid:
                     mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 4;
                     mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 0.8f;
+                    lockVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 4;
+                    lockVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 0.8f;
                     break;
                 case CameraMode.Far:
                     mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 6;
                     mainVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 1.5f;
+                    lockVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = 6;
+                    lockVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().ShoulderOffset.y = 1.5f;
+
                     break;
             }
         }
@@ -147,7 +154,8 @@ public class CS_CameraManager : MonoBehaviour
             if (lockedTarget == null)
                 SetTarget();
 
-            if (lockedTarget.gameObject.activeInHierarchy == false && listOfTargetsInRange.Contains(lockedTarget.gameObject))
+            if (lockedTarget.gameObject.activeInHierarchy == false && listOfTargetsInRange.Contains(lockedTarget.gameObject)
+                || lockedTarget.GetComponent<StatsManager>().Stats.CurrentHealth<1 && listOfTargetsInRange.Contains(lockedTarget.gameObject))
             {
                 listOfTargetsInRange.Remove(lockedTarget.gameObject);
                 if (listOfTargetsInRange.Count < 1)
@@ -157,7 +165,7 @@ public class CS_CameraManager : MonoBehaviour
 
             followTargetLock.rotation = Quaternion.RotateTowards(
                 followTargetLock.rotation,
-                Quaternion.LookRotation(lockedTarget.position - followTargetLock.position),
+                Quaternion.LookRotation(new Vector3(lockedTarget.position.x,followTargetNormal.position.y,lockedTarget.position.z) - followTargetLock.position),
                 lockRotationSpeed * Time.deltaTime);
 
             if (lockTimer > cameraBrain.m_DefaultBlend.BlendTime)
@@ -254,7 +262,10 @@ public class CS_CameraManager : MonoBehaviour
 
         // On Destroy Remove Target from the list or else a null reference will find his way to you.
         if (listOfTargetsInRange.Count > 0 && listOfTargetsInRange[targetIndex % listOfTargetsInRange.Count] != null)
+
+        {
             lockedTarget = listOfTargetsInRange[targetIndex % listOfTargetsInRange.Count].transform;
+        }
     }
 
     public void DisableAllCamerasExceptParam(CinemachineVirtualCamera ExcludedCamera)
@@ -336,11 +347,12 @@ public class CS_CameraManager : MonoBehaviour
     {
         if (other.TryGetComponent<StatsManager>(out StatsManager enemy) && !listOfTargetsInRange.Contains(other.gameObject))
         {
-            if (enemy.Team == CharacterTeam.Enemy && enemy.Targetable)
+            if (enemy.Team == CharacterTeam.Enemy && enemy.Targetable && enemy.Stats.CurrentHealth>0)
             {
                 listOfTargetsInRange.Add(other.gameObject);
                 SetTarget();
             }
+            
         }
 
     }

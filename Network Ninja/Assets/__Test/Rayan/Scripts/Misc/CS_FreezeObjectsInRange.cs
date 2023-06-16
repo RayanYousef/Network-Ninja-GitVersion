@@ -46,7 +46,7 @@ public class CS_FreezeObjectsInRange : MonoBehaviour
                 slowInterface.ObjectMovementEnabled(false);
         }
 
-        CheckInActiveObjectsAndRemoveIt();
+        //CheckInActiveObjectsAndRemoveIt();
 
 
     }
@@ -54,13 +54,13 @@ public class CS_FreezeObjectsInRange : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent<IStopObject>(out IStopObject slowInterface)
-            && objectsInRange.Contains(other.transform))
+            && objectsInRange.Contains(other.transform) && _playerManager.UltimateOn==false)
         {
             slowInterface.ObjectMovementEnabled(true);
             objectsInRange.Remove(other.transform);
         }
 
-        CheckInActiveObjectsAndRemoveIt();
+        //CheckInActiveObjectsAndRemoveIt();
 
 
     }
