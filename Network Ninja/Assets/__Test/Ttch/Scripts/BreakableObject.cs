@@ -11,6 +11,10 @@ public class BreakableObject : MonoBehaviour
 {
     [SerializeField] public StatToChange stat = StatToChange.None;
 
+    private void Update()
+    {
+        transform.Rotate(0, 25 * Time.deltaTime, 0, Space.Self);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent<CS_DamageObject>(out CS_DamageObject dmgObject))
