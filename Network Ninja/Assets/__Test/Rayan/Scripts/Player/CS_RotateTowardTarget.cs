@@ -19,7 +19,7 @@ public class CS_RotateTowardTarget : MonoBehaviour
         objectToRotateTowards = GetClosestTransform(listOfTargets);
         Vector3 direction = objectToRotateTowards.position - objectToRotate.position;
         direction.y = 0; direction.Normalize();
-        if (direction != Vector3.zero)
+        if (direction != Vector3.zero && listOfTargets.Count==1)
             objectToRotate.rotation = Quaternion.LookRotation(direction);
     }
 

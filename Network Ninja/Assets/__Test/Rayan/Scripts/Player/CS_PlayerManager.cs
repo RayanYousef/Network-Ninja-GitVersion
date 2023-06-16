@@ -179,7 +179,11 @@ public class CS_PlayerManager : MonoBehaviour
             case CharacterState.Attacking:
                 anim.SetBool(animController.B_Attacking, true);
                 anim.applyRootMotion = true;
+
                 moveController.RotateTowardsDirectionFaster();
+                if(cameraManager.LockedOn)
+                lookAtClosestTarget.RotateTowardsClosestEnemy(cameraManager.LockedTarget);
+                else
                 lookAtClosestTarget.RotateTowardsClosestEnemy();
                 break;
 
