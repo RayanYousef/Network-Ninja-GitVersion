@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 
 public enum StatToChange
@@ -10,7 +12,9 @@ public enum StatToChange
 public class BreakableObject : MonoBehaviour
 {
     [SerializeField] public StatToChange stat = StatToChange.None;
+    [SerializeField] public TextMeshProUGUI text;
 
+    public float value;
     private void Update()
     {
         transform.Rotate(0, 25 * Time.deltaTime, 0, Space.Self);
@@ -24,14 +28,26 @@ public class BreakableObject : MonoBehaviour
                 switch (stat)
                 {
                     case StatToChange.Health:
-                        dmgObject.MyStatsManager.Heal(dmgObject.MyStatsManager.Stats.MaxHealth / 6);
+                        value = dmgObject.MyStatsManager.Stats.MaxHealth / 6;
+                        text.text = stat.ToString() + " + " + value;
+                        text.color = Color.green;
+                        text.GetComponent<Animator>().Play("Base Layer.Collectible");
+                        dmgObject.MyStatsManager.Heal(value);
                         break;
 
                     case StatToChange.Energy:
-                        dmgObject.MyStatsManager.AddtoEnergy(dmgObject.MyStatsManager.Stats.DefaultEnergy / 4);
+
+                        value = dmgObject.MyStatsManager.Stats.DefaultEnergy / 4;
+                        text.text = stat.ToString() + " + " + value;
+                        text.color = Color.blue;
+                        text.GetComponent<Animator>().Play("Base Layer.Collectible");
+                        dmgObject.MyStatsManager.AddtoEnergy(value);
                         break;
 
                     case StatToChange.MovementSpeed:
+                        text.text = stat.ToString() + "+";
+                        text.color = Color.yellow;
+                        text.GetComponent<Animator>().Play("Base Layer.Collectible");
                         dmgObject.MyStatsManager.BuffMoveSpeed(0.5f);
                         break;
 
