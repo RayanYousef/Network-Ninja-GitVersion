@@ -10,6 +10,7 @@ public class CS_RotateTowardTarget : MonoBehaviour
     [SerializeField] Transform objectToRotate, objectToRotateTowards;
 
     public Transform ObjectToRotateTowards { get => objectToRotateTowards;}
+    public List<Transform> ListOfTargets { get => listOfTargets;}
 
     public void RotateTowardsClosestEnemy()
     {
