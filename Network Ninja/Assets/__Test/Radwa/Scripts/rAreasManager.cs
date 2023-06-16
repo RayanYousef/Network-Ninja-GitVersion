@@ -134,11 +134,11 @@ public class rAreasManager : MonoBehaviour
         switch (strength)
         {
             case PasswordStrength.Weak:
-                currentArea.Health = 25;
+                currentArea.Health = maxSoldiersNumber / 3;
                 break;
 
             case PasswordStrength.Moderate:
-                currentArea.Health = 50;
+                currentArea.Health = maxSoldiersNumber / 2;
                 break;
 
             case PasswordStrength.Strong:

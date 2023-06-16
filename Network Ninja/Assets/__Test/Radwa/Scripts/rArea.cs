@@ -113,6 +113,8 @@ public class rArea : MonoBehaviour
     void Start()
     {
         Password = null;
+        maxHealth = rAreasManager.Instance.MaxSoldiersNumber;
+
         if (areaType == AreaType.Fight)
         {
             meshColourChanger.ChangeToColour(Color.red);
@@ -122,8 +124,6 @@ public class rArea : MonoBehaviour
             meshColourChanger.ChangeToColour(rAreasManager.Instance.MaxHealth);
             health = maxHealth;
         }
-
-        maxHealth = rAreasManager.Instance.MaxSoldiersNumber;
 
         enemySpawner.OnBigBossKilled.AddListener(Winning);
     }
