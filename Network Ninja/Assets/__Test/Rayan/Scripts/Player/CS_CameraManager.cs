@@ -40,7 +40,7 @@ public class CS_CameraManager : MonoBehaviour
 
     [Header("Camera Behavior Vars")]
     [SerializeField] float cinemachineLerpTime;
-    [SerializeField, Range(0,300)] float rotationSpeed;
+    [SerializeField, Range(1,10)] float rotationSpeed;
     [SerializeField] float minAngle, maxAngle;
 
 
@@ -308,7 +308,7 @@ public class CS_CameraManager : MonoBehaviour
     }
     public void RotationSpeed(Slider mouseSlider)
     {
-        rotationSpeed = mouseSlider.value * 300;
+        rotationSpeed = mouseSlider.value * 10;
     }
 
     // 1.5 6 
