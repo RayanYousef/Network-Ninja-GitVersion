@@ -194,7 +194,7 @@ public class CS_PlayerManager : MonoBehaviour
                 anim.SetBool(animController.B_Attacking, true);
                 anim.applyRootMotion = false;
                 if(cameraManager.LockedOn)
-                lookAtClosestTarget.RotateTowardsClosestEnemy();
+                lookAtClosestTarget.RotateTowardsClosestEnemy(cameraManager.LockedTarget);
                 break;
 
         }
