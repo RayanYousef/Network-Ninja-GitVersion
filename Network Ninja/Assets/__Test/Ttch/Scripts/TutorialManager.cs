@@ -114,7 +114,7 @@ public class TutorialManager : MonoBehaviour
 
             //Resetting Password Tutorial
             case 7:
-                if(Area2.Health == 100)
+                if(Area2.Health >= 75)
                 {
                     Area1.AreaType = AreaType.Fight;
                     popUpIndex++;
