@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class m_BossIdleState : StateMachineBehaviour
 {
-
-     [SerializeField] float chaseRange;
-     [SerializeField] float AttackRange;
-
      Transform player;
      float timer;
      m_BossManager bossMovement;
@@ -42,12 +38,12 @@ public class m_BossIdleState : StateMachineBehaviour
 
         if (bossMovement.startBossState)
         {
-            if (distance <= chaseRange && distance > AttackRange)
+            if (distance <= bossMovement.BossChaseRange && distance >bossMovement.BossAttackRange)
             {
                 animator.SetBool("isChasing", true);
             }
 
-            if (distance <= AttackRange)
+            if (distance <= bossMovement.BossAttackRange)
             {
                 //if (bossMovement.LookAtPlyer == true)
                 //{

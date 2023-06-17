@@ -30,9 +30,8 @@ public class m_BossManager : MonoBehaviour , IStopObject
     public CinemachineVirtualCamera BossCam1;
     public CinemachineVirtualCamera BossCam2;
     public CinemachineVirtualCamera BossCam3;
-
-
-
+    public float BossAttackRange;
+    public float BossChaseRange=50;
 
     private Animator DragonAnim;
     private float dragonSlowSpeed = 0.3f;
@@ -80,8 +79,8 @@ public class m_BossManager : MonoBehaviour , IStopObject
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
         StartCoroutine(intervalBetCams());
-
-   }
+        BossAttackRange = player.GetComponent<Collider>().bounds.extents.y;
+    }
     void Update()
     {
         //if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("IdleState") && LookAtPlyer == true)
