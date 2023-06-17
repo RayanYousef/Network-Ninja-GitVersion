@@ -20,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
     private PlayableDirector playableDirector;
 
 
+
     [Header("Enemies")]
     public GameObject enemyPrefab;
     public GameObject MiniBossPrefab;
@@ -360,15 +361,14 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(1);
         player.transform.position = transform.position + transform.forward * 6.0f + Vector3.up * 1.0f;
         yield return new WaitForSeconds(delayBeforeSpawnBoss / 2);
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
+       // GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         spawnBossIntroEffect();
-        yield return new WaitForSeconds(3.5f);
+       // yield return new WaitForSeconds(3.5f);
         // Spawn the boss
         SpawnBigBoss();
 
 
     }
-
     IEnumerator SpawnCardCoroutine()
     {
         yield return new WaitForSeconds(delayBeforeSpawnBoss);
