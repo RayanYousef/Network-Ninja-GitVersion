@@ -47,6 +47,8 @@ public class _Chase : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        agent.speed = 0;
+        agent.velocity = Vector3.zero;
     }
 
 }
