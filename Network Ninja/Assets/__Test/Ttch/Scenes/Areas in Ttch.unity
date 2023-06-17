@@ -43845,11 +43845,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4922773842341369507, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
-        type: 3}
-      propertyPath: m_DefaultBlend.m_Time
-      value: 0.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c, type: 3}
 --- !u!1 &1433084540
@@ -66143,11 +66138,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1655594522747928175, guid: a61b668a8d68641449932a5cbea0b43b,
         type: 3}
-      propertyPath: armySize
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1655594522747928175, guid: a61b668a8d68641449932a5cbea0b43b,
-        type: 3}
       propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1026547027}
@@ -66284,7 +66274,7 @@ PrefabInstance:
         type: 3}
       propertyPath: nextArea
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2538552629743849016}
     - target: {fileID: 7582276435509701265, guid: e7de38cee69ce5b49958fae0eb2538b7,
         type: 3}
       propertyPath: nextArea
@@ -66537,6 +66527,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6255316750355274192}
     m_Modifications:
+    - target: {fileID: 270947132894160403, guid: f631eef9ad3deb9489997c2d87350a8a,
+        type: 3}
+      propertyPath: sharingPasswordWarningIcon
+      value: 
+      objectReference: {fileID: 1515204763}
     - target: {fileID: 2411173498882015552, guid: f631eef9ad3deb9489997c2d87350a8a,
         type: 3}
       propertyPath: m_Name
@@ -66547,11 +66542,6 @@ PrefabInstance:
       propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1026547027}
-    - target: {fileID: 6515071220678797918, guid: f631eef9ad3deb9489997c2d87350a8a,
-        type: 3}
-      propertyPath: sharingPasswordWarningIcon
-      value: 
-      objectReference: {fileID: 219185205}
     - target: {fileID: 6936616525677475701, guid: f631eef9ad3deb9489997c2d87350a8a,
         type: 3}
       propertyPath: m_RootOrder
@@ -66624,6 +66614,18 @@ Transform:
   m_Father: {fileID: 6562082713082009150}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2538552629743849016 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 270947132894160403, guid: f631eef9ad3deb9489997c2d87350a8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2375746461910771755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d441902dc78043c4a9512f29866fb8bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2562465397194907835
 GameObject:
   m_ObjectHideFlags: 0
@@ -66914,11 +66916,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5180008953038991158, guid: 2cc1c927ed43c334794e224955085b9f,
-        type: 3}
-      propertyPath: armySize
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5180008953038991158, guid: 2cc1c927ed43c334794e224955085b9f,
         type: 3}
