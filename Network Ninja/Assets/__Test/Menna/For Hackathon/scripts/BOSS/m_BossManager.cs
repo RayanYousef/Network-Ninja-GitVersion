@@ -31,7 +31,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
     public CinemachineVirtualCamera BossCam2;
     public CinemachineVirtualCamera BossCam3;
     public float BossAttackRange;
-    public float BossChaseRange=50;
+    public float BossChaseRange;
 
     private Animator DragonAnim;
     private float dragonSlowSpeed = 0.3f;
@@ -79,7 +79,6 @@ public class m_BossManager : MonoBehaviour , IStopObject
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
         StartCoroutine(intervalBetCams());
-        BossAttackRange = player.GetComponent<Collider>().bounds.extents.y;
     }
     void Update()
     {
@@ -243,9 +242,9 @@ public class m_BossManager : MonoBehaviour , IStopObject
     {
         float elapsedTime = 0f;
 
-        while (elapsedTime < 0.5f)
+        while (elapsedTime < 1.0f)
         {
-            bloodSplatter.color = Color.Lerp(color, transparentColor, (elapsedTime / 0.5f));
+            bloodSplatter.color = Color.Lerp(color, transparentColor, (elapsedTime / 1.0f));
             elapsedTime += Time.deltaTime;
 
             yield return null;

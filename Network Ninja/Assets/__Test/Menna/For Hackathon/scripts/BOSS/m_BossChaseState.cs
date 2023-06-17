@@ -17,6 +17,8 @@ public class m_BossChaseState : StateMachineBehaviour
         player = GameObjectsManager.Instance.Player.transform;
         agent = animator.GetComponent<NavMeshAgent>();
         agent.speed = 8.0f;
+        bossMovement = animator.GetComponent<m_BossManager>();
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -28,7 +28,7 @@ public class _Idle : StateMachineBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Vector3.Distance(player.position, RB.transform.position) <enemyManager.enemyChaseRange && Vector3.Distance(player.position, RB.transform.position) >enemyManager.enemyAttackRange)
+        if (Vector3.Distance(player.position, RB.transform.position) <enemyManager.enemyChaseRange && Vector3.Distance(player.position, RB.transform.position) > enemyManager.enemyAttackRange)
         {
             animator.SetBool("IsChasing", true);
         }

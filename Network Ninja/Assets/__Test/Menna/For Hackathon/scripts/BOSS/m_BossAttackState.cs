@@ -18,6 +18,8 @@ public class m_BossAttackState : StateMachineBehaviour
         player = GameObjectsManager.Instance.Player.transform;
         bossMovement = animator.GetComponent<m_BossManager>();
         timer = 0;
+        bossMovement = animator.GetComponent<m_BossManager>();
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

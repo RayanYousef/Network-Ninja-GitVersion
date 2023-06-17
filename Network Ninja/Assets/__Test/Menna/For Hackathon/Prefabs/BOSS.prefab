@@ -5051,7 +5051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143251581}
   m_LocalRotation: {x: -0.0007445988, y: -0.9945734, z: -0.10378995, w: 0.0071348688}
-  m_LocalPosition: {x: 0.0082, y: 0.0069, z: 0.3391}
+  m_LocalPosition: {x: 0.0082, y: 0.0069, z: 0.232}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49593,7 +49593,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501450346}
   m_LocalRotation: {x: 0.03450852, y: 0.3644247, z: -0.013515118, w: 0.9304952}
-  m_LocalPosition: {x: -0.138, y: 0.054, z: -0.178}
+  m_LocalPosition: {x: -0.0984, y: 0.054, z: -0.1293}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -81282,7 +81282,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438523071370031958}
-  m_LocalRotation: {x: -0.00074457255, y: -0.9945734, z: -0.10379, w: 0.0071349056}
+  m_LocalRotation: {x: -0.00086260616, y: -0.99615556, z: -0.08730818, w: 0.007121598}
   m_LocalPosition: {x: 0.0082, y: 0.0111, z: 0.174}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -81290,7 +81290,7 @@ Transform:
   - {fileID: 4144279322024891398}
   m_Father: {fileID: 1389455833}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -11.915, y: -179.178, z: 0}
+  m_LocalEulerAnglesHint: {x: -10.018, y: -179.183, z: 0.028}
 --- !u!114 &3805979201053680740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92765,6 +92765,8 @@ MonoBehaviour:
   BossCam1: {fileID: 143251583}
   BossCam2: {fileID: 1501450348}
   BossCam3: {fileID: 3805979201053680740}
+  BossAttackRange: 8
+  BossChaseRange: 50
   BossDie:
     m_PersistentCalls:
       m_Calls: []
@@ -94558,8 +94560,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.7755816, y: 1.7602808, z: 0.76671183}
+  m_Center: {x: 0.0031310034, y: 0.3801399, z: -0.0018872815}
 --- !u!1 &8969554880265874438
 GameObject:
   m_ObjectHideFlags: 0

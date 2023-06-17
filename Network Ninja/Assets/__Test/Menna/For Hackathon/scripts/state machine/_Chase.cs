@@ -22,6 +22,8 @@ public class _Chase : StateMachineBehaviour
         agent = RB.GetComponent<NavMeshAgent>();
         agent.speed = speed;
         timer = 0;
+        enemyManager = animator.GetComponent<m_EnemyManager>();
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -30,7 +32,7 @@ public class _Chase : StateMachineBehaviour
        agent.SetDestination(player.position);
 
 
-        if (Vector3.Distance(player.position, RB.transform.position) >enemyManager.enemyChaseRange)
+        if (Vector3.Distance(player.position, RB.transform.position) > enemyManager.enemyChaseRange)
         {
             Debug.Log("IDLE");
             animator.SetBool("IsChasing", false);

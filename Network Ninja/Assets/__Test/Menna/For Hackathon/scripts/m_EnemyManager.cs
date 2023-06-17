@@ -20,8 +20,8 @@ public class m_EnemyManager : MonoBehaviour , IStopObject
     public Animator animator;
     public EnemySpawner enemySpawner;
     public float intervalBetweenAttacks;
-    public float enemyAttackRange;
-    public float enemyChaseRange = 20;
+    public float enemyAttackRange ;
+    public float enemyChaseRange ;
 
 
 
@@ -50,7 +50,7 @@ public class m_EnemyManager : MonoBehaviour , IStopObject
         //PREVENT SLIDING
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
-        enemyAttackRange = player.GetComponent<Collider>().bounds.extents.y /2;
+        //enemyAttackRange = player.GetComponent<Collider>().bounds.extents.y *3;
 
         //StartCoroutine("WaitAndDie");
     }
