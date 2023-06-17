@@ -183,7 +183,6 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject introEffect = Instantiate(IntroEffectPrefab, this.transform.position, Quaternion.identity);
         introEffect.transform.parent = this.transform;
-
     }
 
     public void SpawnCard()
@@ -360,14 +359,12 @@ public class EnemySpawner : MonoBehaviour
         player.GetComponent<CS_PlayerManager>().ControllerState(false);
        // yield return new WaitForSeconds(1);
         yield return new WaitForSeconds(delayBeforeSpawnBoss / 2);
-       // GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
+        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         spawnBossIntroEffect();
         player.transform.position = transform.position + transform.forward * 6.0f + Vector3.up * 1.0f;
-       // yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(5.0f);
         // Spawn the boss
         SpawnBigBoss();
-
-
     }
     IEnumerator SpawnCardCoroutine()
     {
