@@ -5765,6 +5765,9 @@ MonoBehaviour:
   interactivePanels: []
   setInteractivePanelState: 0
   independantUIElements: []
+  playerCanvas: {fileID: 1608994370}
+  minimapCanvas: {fileID: 704413202}
+  timeToFadeUIForCutscene: 2
 --- !u!114 &593548500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5954,6 +5957,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Loading Screen Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3456838632286136019, guid: 4446eaae25777794598773236d490a33,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3456838632286136030, guid: 4446eaae25777794598773236d490a33,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6064,6 +6072,12 @@ PrefabInstance:
 --- !u!4 &704413200 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 499601907384802226, guid: 4ab0ad740e251d747bf13aa2e485b18b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1754897148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &704413202 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 704413202, guid: 4ab0ad740e251d747bf13aa2e485b18b,
     type: 3}
   m_PrefabInstance: {fileID: 1754897148}
   m_PrefabAsset: {fileID: 0}
@@ -36414,6 +36428,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1608994366}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &1608994370 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 1608994370, guid: a5708445c4ea80f46825a2884bfd70d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1608994366}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1620123100
 GameObject:
   m_ObjectHideFlags: 0
@@ -46467,8 +46487,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842341368156, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
+      propertyPath: far clip plane
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922773842341368156, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
+        type: 3}
       propertyPath: near clip plane
       value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922773842341368156, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
+        type: 3}
+      propertyPath: orthographic size
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
@@ -46489,6 +46519,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
@@ -47008,7 +47048,7 @@ PrefabInstance:
     - target: {fileID: 6211639813575984867, guid: 733bc324523d9814f8940e2591621bd0,
         type: 3}
       propertyPath: areaType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6211639813575984867, guid: 733bc324523d9814f8940e2591621bd0,
         type: 3}
@@ -47208,7 +47248,7 @@ PrefabInstance:
     - target: {fileID: 4912167475262134979, guid: de3eb53da3379694d978692cd620aa17,
         type: 3}
       propertyPath: areaType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912167475262134979, guid: de3eb53da3379694d978692cd620aa17,
         type: 3}
@@ -47477,7 +47517,7 @@ PrefabInstance:
     - target: {fileID: 6848572513497433360, guid: 820f63ee6e1c87542aeb22edb14c73aa,
         type: 3}
       propertyPath: areaType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6848572513497433360, guid: 820f63ee6e1c87542aeb22edb14c73aa,
         type: 3}
@@ -66817,7 +66857,7 @@ PrefabInstance:
     - target: {fileID: 1508465457661830842, guid: 056c847be4b9d0640b3ab9381f04c6b2,
         type: 3}
       propertyPath: areaType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1508465457661830842, guid: 056c847be4b9d0640b3ab9381f04c6b2,
         type: 3}

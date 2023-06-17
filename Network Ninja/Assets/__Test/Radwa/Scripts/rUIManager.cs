@@ -17,6 +17,11 @@ public class rUIManager : MonoBehaviour
 
     [SerializeField] List<GameObject> independantUIElements;
 
+    [Header("Canvas To Fade")]
+    [SerializeField] CanvasGroup playerCanvas;
+    [SerializeField] CanvasGroup minimapCanvas;
+    [SerializeField] float timeToFadeUIForCutscene = 2;
+
     public static rUIManager Instance { get => instance; }
     public rUIPassword UiPassword { get => uiPassword; set => uiPassword = value; }
     public m_InGameUI InGameUI { get => inGameUI; set => inGameUI = value; }
@@ -99,6 +104,35 @@ public class rUIManager : MonoBehaviour
         panelToFade.alpha = 1;
         if (stopTimeScale)
             Time.timeScale = 0;
+    }
+    #endregion
+
+    #region Fade In/Out in Boss CutScene
+    public IEnumerator FadeOutBeforeCutScene()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < timeToFadeUIForCutscene + 0.1)
+        {
+            playerCanvas.alpha = Mathf.Lerp(1, 0, (elapsedTime / timeToFadeUIForCutscene));
+            minimapCanvas.alpha = Mathf.Lerp(1, 0, (elapsedTime / timeToFadeUIForCutscene));
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+    }
+    public IEnumerator FadeInAfterCutScene()
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < timeToFadeUIForCutscene + 0.1)
+        { 
+            playerCanvas.alpha = Mathf.Lerp(0, 1, (elapsedTime / timeToFadeUIForCutscene));
+            minimapCanvas.alpha = Mathf.Lerp(0, 1, (elapsedTime / timeToFadeUIForCutscene));
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
     }
     #endregion
 
