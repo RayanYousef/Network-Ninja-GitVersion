@@ -6,12 +6,13 @@ public class m_BossChaseState : StateMachineBehaviour
 {
     NavMeshAgent agent;
     Transform player;
-    [SerializeField] int ChaseRange ;
-    [SerializeField] int AttackRange;
-    
+    m_BossManager bossMovement;
 
-// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+
+
+
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObjectsManager.Instance.Player.transform;
         agent = animator.GetComponent<NavMeshAgent>();
@@ -25,8 +26,7 @@ override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo
         float distance = Vector3.Distance(player.position, animator.transform.position);
 
        // Debug.Log("distance betweeen boss and player is " +  distance);
-       //player.GetComponent<Collider>().bounds.extents.y
-        if (distance > ChaseRange || distance <= AttackRange)
+        if (distance >bossMovement.BossChaseRange || distance <= bossMovement.BossAttackRange)
         {
             animator.SetBool("isChasing", false);
         }    

@@ -8,13 +8,12 @@ public class _Chase : StateMachineBehaviour
 {
 
     public float speed;
-    public float attackRange;
-    public float chaseRange;
-
     Rigidbody RB;
     private Transform player;
     NavMeshAgent agent;
     float timer;
+    m_EnemyManager enemyManager;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -31,13 +30,13 @@ public class _Chase : StateMachineBehaviour
        agent.SetDestination(player.position);
 
 
-        if (Vector3.Distance(player.position, RB.transform.position) > chaseRange)
+        if (Vector3.Distance(player.position, RB.transform.position) >enemyManager.enemyChaseRange)
         {
             Debug.Log("IDLE");
             animator.SetBool("IsChasing", false);
         }
 
-        if (Vector3.Distance(player.position, RB.transform.position) < attackRange)
+        if (Vector3.Distance(player.position, RB.transform.position) <enemyManager.enemyAttackRange)
         {
             animator.SetTrigger("Attack");
             animator.SetBool("IsChasing", false);
