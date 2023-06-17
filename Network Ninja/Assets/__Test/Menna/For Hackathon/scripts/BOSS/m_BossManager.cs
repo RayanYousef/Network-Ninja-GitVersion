@@ -244,9 +244,9 @@ public class m_BossManager : MonoBehaviour , IStopObject
     {
         float elapsedTime = 0f;
 
-        while (elapsedTime < 5f)
+        while (elapsedTime < 0.5f)
         {
-            bloodSplatter.color = Color.Lerp(color, transparentColor, (elapsedTime / 5));
+            bloodSplatter.color = Color.Lerp(color, transparentColor, (elapsedTime / 0.5f));
             elapsedTime += Time.deltaTime;
 
             yield return null;

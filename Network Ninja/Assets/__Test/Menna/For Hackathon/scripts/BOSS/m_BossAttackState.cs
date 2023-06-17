@@ -19,7 +19,6 @@ public class m_BossAttackState : StateMachineBehaviour
         player = GameObjectsManager.Instance.Player.transform;
         bossMovement = animator.GetComponent<m_BossManager>();
         timer = 0;
-
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -52,5 +51,6 @@ public class m_BossAttackState : StateMachineBehaviour
     {
         
         animator.SetFloat("attacks", attackOptions[ChooseDragonAttack()]);
+        animator.GetComponent<StatsManager>().DisableAllWeapons();
     }
 }

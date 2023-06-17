@@ -174,6 +174,7 @@ public class CS_PlayerManager : MonoBehaviour
             case CharacterState.Dashing:
                 anim.SetBool(animController.B_Dashing, true);
                 moveController.Dash();
+                pStatsManager.Damagable = false;
                 break;
 
             case CharacterState.Attacking:
@@ -211,12 +212,14 @@ public class CS_PlayerManager : MonoBehaviour
 
     public void OnStateExit(CharacterState exitedState)
     {
-        //Debug.Log("Exited State:" + exitedState);
+        Debug.Log("Exited State:" + exitedState);
 
-        //switch (exitedState)
-        //{
-
-        //}
+        switch (exitedState)
+        {
+            case CharacterState.Dashing:
+                pStatsManager.Damagable = true;
+                break;
+        }
     }
     public void ResetParameters()
     {
@@ -481,7 +484,9 @@ public class CS_PlayerManager : MonoBehaviour
     {
         if (intervalsBetweenDamage > damageTimer)
             damageTimer += Time.deltaTime;
-        else PStatsManager.Damagable = true;
+        else 
+        if (currentState!=CharacterState.Dashing) 
+            PStatsManager.Damagable = true;
     }
     #endregion
 }
