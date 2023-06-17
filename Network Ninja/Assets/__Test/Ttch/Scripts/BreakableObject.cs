@@ -14,6 +14,10 @@ public class BreakableObject : MonoBehaviour
     [SerializeField] public StatToChange stat = StatToChange.None;
     [SerializeField] public TextMeshProUGUI text;
 
+    [SerializeField] public Material healthMat;
+    [SerializeField] public Material energyMat;
+    [SerializeField] public Material speedMat;
+
     public float value;
     private void Update()
     {
@@ -30,7 +34,8 @@ public class BreakableObject : MonoBehaviour
                     case StatToChange.Health:
                         value = dmgObject.MyStatsManager.Stats.MaxHealth / 6;
                         text.text = stat.ToString() + " + " + value;
-                        text.color = Color.green;
+                        text.fontSharedMaterial = healthMat;
+                        //text.color = Color.green;
                         text.GetComponent<Animator>().Play("Base Layer.Collectible");
                         dmgObject.MyStatsManager.Heal(value);
                         break;
@@ -39,14 +44,16 @@ public class BreakableObject : MonoBehaviour
 
                         value = dmgObject.MyStatsManager.Stats.DefaultEnergy / 4;
                         text.text = stat.ToString() + " + " + value;
-                        text.color = Color.blue;
+                        text.fontSharedMaterial = energyMat;
+                        //text.color = Color.blue;
                         text.GetComponent<Animator>().Play("Base Layer.Collectible");
                         dmgObject.MyStatsManager.AddtoEnergy(value);
                         break;
 
                     case StatToChange.MovementSpeed:
                         text.text = stat.ToString() + "+";
-                        text.color = Color.yellow;
+                        text.fontSharedMaterial = speedMat;
+                        //text.color = Color.yellow;
                         text.GetComponent<Animator>().Play("Base Layer.Collectible");
                         dmgObject.MyStatsManager.BuffMoveSpeed(0.5f);
                         break;
