@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
-        WinningPanel.SetActive(true);
+        rFaceExpressionManager.Instance.ChangeFacialExp(rFaceExpressionManager.FacialExp.Idle);
         rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(WinningPanel.GetComponent<CanvasGroup>(), 4f, false));
     }
     public void LostGame()
