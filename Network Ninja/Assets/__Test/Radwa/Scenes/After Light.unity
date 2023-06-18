@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1.58
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 9a819b815e161b64e8c78164c1902994, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 133347283e115d147a5fcce7f47a538f, type: 2}
   m_HaloStrength: 0.557
   m_FlareStrength: 0.273
   m_FlareFadeSpeed: 2.26
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 945604609}
-  m_IndirectSpecularColor: {r: 0.06562549, g: 0.12149553, b: 0.22172818, a: 1}
+  m_IndirectSpecularColor: {r: 0.25119212, g: 0.47104973, b: 0.47418886, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -283,7 +283,7 @@ Transform:
   - {fileID: 1591253348}
   - {fileID: 704413200}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &124958568
 GameObject:
@@ -320,7 +320,7 @@ Transform:
   - {fileID: 7027723496513237203}
   - {fileID: 3391786396862921555}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &188966492 stripped
 MonoBehaviour:
@@ -10922,7 +10922,7 @@ PrefabInstance:
     - target: {fileID: 2908461028440205834, guid: d31844279a37af34b81f8aac451be66f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2908461028440205834, guid: d31844279a37af34b81f8aac451be66f,
         type: 3}
@@ -10999,18 +10999,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 813959164}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &840504741 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4922773842041303623, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1873693958}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &842221382
 GameObject:
   m_ObjectHideFlags: 0
@@ -25782,7 +25770,7 @@ PrefabInstance:
     - target: {fileID: 5714735512408868752, guid: 97b4edcd77df93b4288bc4dc4f1f0bf4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5714735512408868752, guid: 97b4edcd77df93b4288bc4dc4f1f0bf4,
         type: 3}
@@ -25879,18 +25867,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1873693958}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1104023781 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4922773842341369507, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1873693958}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1104023786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
@@ -25931,7 +25907,7 @@ Transform:
   - {fileID: 1508784087}
   - {fileID: 540308094}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1171270933 stripped
 MonoBehaviour:
@@ -26170,16 +26146,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1102171026}
-  cameraBrain: {fileID: 1104023781}
-  playerCamera: {fileID: 840504741}
-  allyPrefab: {fileID: 265395031809472461, guid: fb1cf493ba40f294f81864024554971c,
-    type: 3}
-  allyBatalionPrefab: {fileID: 7038911675469500556, guid: 05d2b31129d61324ea2c3c64475349a7,
-    type: 3}
-  spawnEffect: {fileID: 4386811880964202464, guid: d6561a57ab0403b4eb362e93683f53b0,
-    type: 3}
+  cameraBrain: {fileID: 0}
+  playerCamera: {fileID: 0}
+  allyPrefab: {fileID: 0}
+  allyBatalionPrefab: {fileID: 0}
+  spawnEffect: {fileID: 0}
   combatManager: {fileID: 0}
-  boss: {fileID: 7411315700388573817, guid: 566127f06a2814c4695d322e42da3b8d, type: 3}
+  boss: {fileID: 0}
   currentGate: {fileID: 0}
 --- !u!114 &1280775428 stripped
 MonoBehaviour:
@@ -36109,7 +36082,7 @@ Transform:
   m_Children:
   - {fileID: 945604607}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1575020416
 GameObject:
@@ -46428,7 +46401,7 @@ PrefabInstance:
     - target: {fileID: 4922773842089189653, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842089189653, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
@@ -46934,7 +46907,7 @@ Transform:
   - {fileID: 596032041}
   - {fileID: 1080427955}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &92211073102709023
 PrefabInstance:
@@ -47001,6 +46974,16 @@ PrefabInstance:
     - target: {fileID: 3338736028132391500, guid: 733bc324523d9814f8940e2591621bd0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6048163594007402529, guid: 733bc324523d9814f8940e2591621bd0,
+        type: 3}
+      propertyPath: armySize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6048163594007402529, guid: 733bc324523d9814f8940e2591621bd0,
+        type: 3}
+      propertyPath: miniBossSize
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6048163594007402529, guid: 733bc324523d9814f8940e2591621bd0,
@@ -47223,6 +47206,16 @@ PrefabInstance:
       propertyPath: meshColourChanger.Images.Array.data[0]
       value: 
       objectReference: {fileID: 1848388680}
+    - target: {fileID: 8170713014417717961, guid: de3eb53da3379694d978692cd620aa17,
+        type: 3}
+      propertyPath: armySize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170713014417717961, guid: de3eb53da3379694d978692cd620aa17,
+        type: 3}
+      propertyPath: miniBossSize
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8170713014417717961, guid: de3eb53da3379694d978692cd620aa17,
         type: 3}
       propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -47506,6 +47499,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fight 02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805707275190738614, guid: 820f63ee6e1c87542aeb22edb14c73aa,
+        type: 3}
+      propertyPath: armySize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805707275190738614, guid: 820f63ee6e1c87542aeb22edb14c73aa,
+        type: 3}
+      propertyPath: miniBossSize
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7805707275190738614, guid: 820f63ee6e1c87542aeb22edb14c73aa,
         type: 3}
@@ -66899,6 +66902,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3950291739965598807, guid: 056c847be4b9d0640b3ab9381f04c6b2,
         type: 3}
+      propertyPath: armySize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950291739965598807, guid: 056c847be4b9d0640b3ab9381f04c6b2,
+        type: 3}
+      propertyPath: miniBossSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950291739965598807, guid: 056c847be4b9d0640b3ab9381f04c6b2,
+        type: 3}
       propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1591253349}
@@ -71877,6 +71890,16 @@ PrefabInstance:
       objectReference: {fileID: 1473864358}
     - target: {fileID: 2907300261971502010, guid: d8e4c2e3efe95d54cb4584250fcbce94,
         type: 3}
+      propertyPath: armySize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907300261971502010, guid: d8e4c2e3efe95d54cb4584250fcbce94,
+        type: 3}
+      propertyPath: miniBossSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907300261971502010, guid: d8e4c2e3efe95d54cb4584250fcbce94,
+        type: 3}
       propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1591253349}
@@ -71935,6 +71958,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8858637547195446801, guid: d8e4c2e3efe95d54cb4584250fcbce94,
+        type: 3}
+      propertyPath: m_Range
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8858637547195446801, guid: d8e4c2e3efe95d54cb4584250fcbce94,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8e4c2e3efe95d54cb4584250fcbce94, type: 3}
 --- !u!1001 &8887717088156647722
@@ -71952,7 +71985,7 @@ PrefabInstance:
     - target: {fileID: 8887717087921541769, guid: 42ed4b0d7c93cd742b8ff1ec6a5677dd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8887717087921541769, guid: 42ed4b0d7c93cd742b8ff1ec6a5677dd,
         type: 3}
