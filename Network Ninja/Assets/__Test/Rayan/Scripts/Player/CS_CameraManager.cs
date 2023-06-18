@@ -118,6 +118,7 @@ public class CS_CameraManager : MonoBehaviour
 
 
     #endregion
+
     #region Unity Functions 
 
     private void Awake()
@@ -221,7 +222,6 @@ public class CS_CameraManager : MonoBehaviour
         RotateObjectQuaternionClamping(deltaValues, followTargetNormal);
     } 
     #endregion
-
 
     #region Main Rotation Function
 

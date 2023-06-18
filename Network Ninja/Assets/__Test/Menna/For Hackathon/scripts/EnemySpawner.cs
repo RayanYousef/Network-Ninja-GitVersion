@@ -20,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
     private PlayableDirector playableDirector;
 
 
+
     [Header("Enemies")]
     public GameObject enemyPrefab;
     public GameObject MiniBossPrefab;
@@ -182,7 +183,6 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject introEffect = Instantiate(IntroEffectPrefab, this.transform.position, Quaternion.identity);
         introEffect.transform.parent = this.transform;
-
     }
 
     public void SpawnCard()
@@ -207,6 +207,7 @@ public class EnemySpawner : MonoBehaviour
                 //enemy.transform.position = randomPosition;
                 //enemy.transform.parent = this.transform;
                 enemy.SetActive(true);
+                enemy.GetComponent<Collider>().enabled = true;
                 enemies.Add(enemy);
             }
 
@@ -285,8 +286,8 @@ public class EnemySpawner : MonoBehaviour
                 enemy.transform.position = randomPosition;
                 enemy.transform.parent = this.transform;
                 enemy.SetActive(true);
-            // enemy.AddComponent<CapsuleCollider>();
-            enemies.Add(enemy);
+               // enemy.AddComponent<CapsuleCollider>();
+               enemies.Add(enemy);
            
             }
 
@@ -357,18 +358,16 @@ public class EnemySpawner : MonoBehaviour
     public IEnumerator SpawnBossCoroutine()
     {
         player.GetComponent<CS_PlayerManager>().ControllerState(false);
-        yield return new WaitForSeconds(2);
-        player.transform.position = transform.position + transform.forward * 6.0f + Vector3.up * 1.0f;
+        // yield return new WaitForSeconds(1);
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutBeforeCutScene());
         yield return new WaitForSeconds(delayBeforeSpawnBoss / 2);
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         spawnBossIntroEffect();
-        yield return new WaitForSeconds(3.5f);
+        player.transform.position = transform.position + transform.forward * 6.0f + Vector3.up * 1.0f;
+        yield return new WaitForSeconds(5.0f);
         // Spawn the boss
         SpawnBigBoss();
-
-
     }
-
     IEnumerator SpawnCardCoroutine()
     {
         yield return new WaitForSeconds(delayBeforeSpawnBoss);

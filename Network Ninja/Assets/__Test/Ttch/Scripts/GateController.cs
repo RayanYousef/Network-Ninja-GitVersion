@@ -1,3 +1,4 @@
+using System.Net;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,6 +17,10 @@ public class GateController : MonoBehaviour
     public bool playerIsHere;
     PathController pathController;
 
+
+    public Animator anim1, anim2;
+
+
     [Header("Area")]
     [SerializeField] rArea nextArea;
 
@@ -26,6 +31,10 @@ public class GateController : MonoBehaviour
     private void Start()
     {
         pathController = GetComponentInParent<PathController>();
+        anim1 = this.GetComponentInChildren<Animator>();
+
+
+        //anim2 = endPoint.GetComponentInChildren<Animator>();
     }
     private void Update()
     {
@@ -60,7 +69,10 @@ public class GateController : MonoBehaviour
     {
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
-
+            if (anim1 != null)
+            {
+                anim1.Play("Base Layer.Open");
+            }
             playerIsHere = true;
             GameObjectsManager.Instance.CurrentGate = this;
             //rUIManager.instance.InGameUI.prompt.enabled = true;
@@ -72,6 +84,10 @@ public class GateController : MonoBehaviour
     {
         if (other.gameObject == GameObjectsManager.Instance.Player)
         {
+            if (anim1 != null)
+            {
+                anim1.Play("Base Layer.Close");
+            }
             playerIsHere = false;
             //rUIManager.instance.InGameUI.prompt.enabled = false;
             rUIManager.Instance.InGameUI.prompt.gameObject.SetActive(false);

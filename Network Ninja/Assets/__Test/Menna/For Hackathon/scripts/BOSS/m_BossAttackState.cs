@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class m_BossAttackState : StateMachineBehaviour
 {
-    [SerializeField] int AttackRange;
     m_BossManager bossMovement;
     float timer;
 
@@ -19,6 +18,7 @@ public class m_BossAttackState : StateMachineBehaviour
         player = GameObjectsManager.Instance.Player.transform;
         bossMovement = animator.GetComponent<m_BossManager>();
         timer = 0;
+        bossMovement = animator.GetComponent<m_BossManager>();
 
     }
 
@@ -27,7 +27,7 @@ public class m_BossAttackState : StateMachineBehaviour
     {
         float distance = Vector3.Distance(player.position, animator.transform.position);
         timer += Time.deltaTime;
-        if (distance < AttackRange)
+        if (distance <bossMovement.BossAttackRange)
         {
             if (timer > bossMovement.AttackDuration)
             {
@@ -52,5 +52,6 @@ public class m_BossAttackState : StateMachineBehaviour
     {
         
         animator.SetFloat("attacks", attackOptions[ChooseDragonAttack()]);
+        animator.GetComponent<StatsManager>().DisableAllWeapons();
     }
 }

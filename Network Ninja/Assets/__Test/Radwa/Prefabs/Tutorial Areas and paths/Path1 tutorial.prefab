@@ -128,6 +128,8 @@ MonoBehaviour:
   state: 1
   buttonPressed: 0
   playerIsHere: 0
+  anim1: {fileID: 0}
+  anim2: {fileID: 0}
   nextArea: {fileID: 0}
 --- !u!1 &989047254724006132
 GameObject:
@@ -238,7 +240,7 @@ BoxCollider:
   m_GameObject: {fileID: 989047254724006132}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 6, y: 0.3, z: 6}
   m_Center: {x: -0.0000019073486, y: -3.55, z: -0.0000076293945}
@@ -257,6 +259,8 @@ MonoBehaviour:
   state: 0
   buttonPressed: 0
   playerIsHere: 0
+  anim1: {fileID: 0}
+  anim2: {fileID: 0}
   nextArea: {fileID: 0}
 --- !u!1 &5619259619412363365
 GameObject:
@@ -352,8 +356,6 @@ MonoBehaviour:
   currentWayPointIndex: 0
   distance: 0
   speed: 20
-  anim1: {fileID: 0}
-  anim2: {fileID: 0}
 --- !u!1 &5619259620954170868
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5619259621141908246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.12, y: -2.9, z: 0.049926758}
+  m_LocalPosition: {x: 12.12, y: -2.3665013, z: 0.049926758}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

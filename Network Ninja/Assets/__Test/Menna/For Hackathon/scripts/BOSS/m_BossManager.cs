@@ -30,9 +30,9 @@ public class m_BossManager : MonoBehaviour , IStopObject
     public CinemachineVirtualCamera BossCam1;
     public CinemachineVirtualCamera BossCam2;
     public CinemachineVirtualCamera BossCam3;
-
-
-
+   // public CinemachineVirtualCamera EffectCam;
+    public float BossAttackRange;
+    public float BossChaseRange;
 
     private Animator DragonAnim;
     private float dragonSlowSpeed = 0.3f;
@@ -42,7 +42,6 @@ public class m_BossManager : MonoBehaviour , IStopObject
     private Rigidbody rb;
     private NavMeshAgent agent;
     private ParticleSystem bloodVfx, bloodVfx2, bloodVfx3 ;
-    //private ParticleSystem[] Attacks;
 
 
     [SerializeField] UnityEvent BossDie;
@@ -50,12 +49,13 @@ public class m_BossManager : MonoBehaviour , IStopObject
     [SerializeField] private Color transparentColor;
     [SerializeField] private Color color;
     [SerializeField] float frictionCoefficient = 2.0f;
-    [SerializeField] GameObject HP;
+    [SerializeField] CanvasGroup HP;
     [SerializeField] GameObject attackFromMouth;
-    //[SerializeField] ParticleSystem[] attackOnLand;
     [SerializeField] GameObject attackOnLand;
+    [SerializeField] GameObject attackFromHand;
+    [SerializeField] GameObject AttackFrontOfBoss;
 
-
+    
     private void Awake()
     {
         DragonAnim = GetComponent<Animator>();
@@ -69,6 +69,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         //Attacks = attackFromMouth.GetComponentsInChildren<ParticleSystem>();
+        HP.alpha = 0.0f;
 
     }
 
@@ -80,8 +81,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         Vector3 frictionForce = -rb.velocity * frictionCoefficient;
         rb.AddForce(frictionForce, ForceMode.Acceleration);
         StartCoroutine(intervalBetCams());
-
-   }
+    }
     void Update()
     {
         //if (dragonAnim.GetBool("isChasing") == true && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("IdleState") && LookAtPlyer == true)
@@ -89,14 +89,12 @@ public class m_BossManager : MonoBehaviour , IStopObject
         //    LookAtPlayer();
         //}
 
-        if (LookAtPlyer && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die")) 
-        {
-            //Vector3 enemyToPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
-            //transform.LookAt(enemyToPlayer);
-            LookAtPlayer();
-          
-
-        }
+        //if (LookAtPlyer && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("AttackState")) 
+        //{
+        //    //Vector3 enemyToPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
+        //    //transform.LookAt(enemyToPlayer);
+        //    LookAtPlayer();
+        //}
     }
 
     public void trailActivate()
@@ -190,7 +188,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         DragonAnim.SetBool("isChasing", false);
         GameManager.Instance.CurrentGameState = GameState.Won;
         BossDie?.Invoke();
-        HP.SetActive(false);
+        rUIManager.instance.StartCoroutine(rUIManager.instance.FadeOutPanel(HP, 2));
         attackFromMouth.SetActive(false);
 
     }
@@ -238,15 +236,22 @@ public class m_BossManager : MonoBehaviour , IStopObject
         Vector3 effectPos = new Vector3();
         effectPos = transform.position + transform.forward * 5;
          GameObject LandEffect = Instantiate(attackOnLand, effectPos , Quaternion.identity);
+    }  
+    public void PlayAttackFromHand()
+    {
+         Vector3 effectPos = new Vector3();
+         effectPos = transform.position + transform.forward * 3 + new Vector3 (5,0,0);
+         GameObject FromHandEffect = Instantiate(attackFromHand, effectPos , Quaternion.identity);
     }
+
 
     public IEnumerator DoFade()
     {
         float elapsedTime = 0f;
 
-        while (elapsedTime < 5f)
+        while (elapsedTime < 1.0f)
         {
-            bloodSplatter.color = Color.Lerp(color, transparentColor, (elapsedTime / 5));
+            bloodSplatter.color = Color.Lerp(color, transparentColor, (elapsedTime / 1.0f));
             elapsedTime += Time.deltaTime;
 
             yield return null;
@@ -268,7 +273,9 @@ public class m_BossManager : MonoBehaviour , IStopObject
 
     private IEnumerator intervalBetCams()
     {
-        GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
+        //yield return new WaitForSeconds(5);
+        //EffectCam.enabled = false;
+        //GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         yield return new WaitForSeconds(5);
         BossCam1.enabled = false;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
@@ -276,11 +283,14 @@ public class m_BossManager : MonoBehaviour , IStopObject
         BossCam2.enabled = false;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         yield return new WaitForSeconds(5);
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInAfterCutScene());
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(HP, 2, false));
         BossCam3.enabled = false;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         player.GetComponent<CS_PlayerManager>().ControllerState(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         startBossState = true;
+
 
     }
 }

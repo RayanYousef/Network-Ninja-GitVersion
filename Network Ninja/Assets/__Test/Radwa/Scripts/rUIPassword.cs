@@ -278,7 +278,7 @@ public class rUIPassword : MonoBehaviour
             feedbackPanel.SetActive(true);
             rUIManager.Instance.HideAllIndependantUIElementsExceptLast(feedbackPanel);
 
-            StartCoroutine(rUIManager.Instance.FadeOutPanel(feedbackPanel.GetComponent<CanvasGroup>(), 7));
+            StartCoroutine(rUIManager.Instance.FadeOutPanel(feedbackPanel.GetComponent<CanvasGroup>(), 10));
         }
     }
 

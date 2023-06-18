@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,6 +13,7 @@ public class TutorialManager : MonoBehaviour
     private int RAttackCount = 0;
     private bool ultUsed = false;
     public rArea Area1,Area2,Area3;
+    public BoxCollider gate1Col;
 
     [SerializeField] public UnityEvent OnTutorialFinish;
 
@@ -85,6 +87,7 @@ public class TutorialManager : MonoBehaviour
 
             //Securing Rooms Tutorial
             case 4:
+                gate1Col.enabled = true;
                 if (Area1.AreaType == AreaType.Base)
                 {
                     popUpIndex++;

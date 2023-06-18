@@ -30,8 +30,11 @@ public class PathController : MonoBehaviour
     public float distance;
     public float speed = 50f;
 
-    public Animator anim1, anim2;
-    
+    public BoxCollider solidCol1, solidCol2;
+
+
+    //public Animator anim1, anim2;
+
     public bool PlayerIsOnPath { get => playerIsOnPath;
         set
         {
@@ -39,27 +42,31 @@ public class PathController : MonoBehaviour
             switch (value)
             {
                 case true:
+                    solidCol1.enabled = false;
+                    solidCol2.enabled = false;
                     player.GetComponent<CS_PlayerManager>().GravityState(false);
                     player.GetComponent<CS_PlayerManager>().ParticleModeEnabled();
 
-                    if (anim1 != null && anim2 != null)
-                    {
-                        anim1.Play("Base Layer.Open");
-                        anim2.Play("Base Layer.Open");
-                    }
+                    //if (anim1 != null && anim2 != null)
+                    //{
+                    //    anim1.Play("Base Layer.Open");
+                    //    anim2.Play("Base Layer.Open");
+                    //}
                     
                     break;
 
                 case false:
+                    solidCol1.enabled = true;
+                    solidCol2.enabled = true;
                     player.GetComponent<CS_PlayerManager>().GravityState(true);
                     player.GetComponent<CS_PlayerManager>().ParticleModeDisabled();
 
 
-                    if (anim1 != null && anim2 != null)
-                    {
-                        anim1.Play("Base Layer.Close");
-                        anim2.Play("Base Layer.Close");
-                    }
+                    //if (anim1 != null && anim2 != null)
+                    //{
+                    //    anim1.Play("Base Layer.Close");
+                    //    anim2.Play("Base Layer.Close");
+                    //}
                   
                     break;
 
@@ -72,9 +79,11 @@ public class PathController : MonoBehaviour
     private void Start()
     {
         player = GameObjectsManager.Instance.Player;
-        anim1 = startPoint.GetComponentInChildren<Animator>();
 
-        anim2 = endPoint.GetComponentInChildren<Animator>();
+       
+        //anim1 = startPoint.GetComponentInChildren<Animator>();
+
+        //anim2 = endPoint.GetComponentInChildren<Animator>();
 
 
         //brain = GameObjectsManager.Instance.CameraBrain;

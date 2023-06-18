@@ -5,10 +5,6 @@ using UnityEngine.AI;
 
 public class _Idle : StateMachineBehaviour
 {
-    public float chaseRange;
-    public float AttackRange;
-
-
     Rigidbody RB;
     private Transform player;
     NavMeshAgent agent;
@@ -32,12 +28,12 @@ public class _Idle : StateMachineBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Vector3.Distance(player.position, RB.transform.position) < chaseRange  && Vector3.Distance(player.position, RB.transform.position) > AttackRange)
+        if (Vector3.Distance(player.position, RB.transform.position) <enemyManager.enemyChaseRange && Vector3.Distance(player.position, RB.transform.position) > enemyManager.enemyAttackRange)
         {
             animator.SetBool("IsChasing", true);
         }
 
-        if(Vector3.Distance(player.position , RB.transform.position) < AttackRange)
+        if(Vector3.Distance(player.position , RB.transform.position) <enemyManager.enemyAttackRange)
         {
             if (timer > enemyManager.intervalBetweenAttacks)
             {
