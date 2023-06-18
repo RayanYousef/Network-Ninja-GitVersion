@@ -29,11 +29,11 @@ public class m_BossAttackState : StateMachineBehaviour
         timer += Time.deltaTime;
         if (distance <bossMovement.BossAttackRange)
         {
-            if (timer > bossMovement.AttackDuration)
-            {
+            //if (timer > bossMovement.AttackDuration)
+            //{
                 animator.SetBool("isAttacking", false);
-                timer = 0;
-            }
+                //timer = 0;
+           // }
         }
         else
         {
