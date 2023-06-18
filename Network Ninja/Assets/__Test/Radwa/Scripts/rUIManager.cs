@@ -44,7 +44,10 @@ public class rUIManager : MonoBehaviour
                 }
             }
 
-            GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().ControllerState(true);
+            if(!GameObjectsManager.Instance.DuringCutScene)
+            {
+                GameObjectsManager.Instance.Player.GetComponent<CS_PlayerManager>().ControllerState(true);
+            }
             Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1;
         }

@@ -115,8 +115,8 @@ public class GameManager : MonoBehaviour
     }
     public void LostGame()
     {
-        LosePanel.SetActive(true);
-        Invoke("LoadMainMenu", 3);
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(LosePanel.GetComponent<CanvasGroup>(), 4f, false));
+        Invoke("LoadMainMenu", 4);
  
     }
     public void LoadMainMenu()

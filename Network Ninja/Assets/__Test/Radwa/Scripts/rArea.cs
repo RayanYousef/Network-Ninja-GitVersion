@@ -136,7 +136,8 @@ public class rArea : MonoBehaviour
         //if (playerInside == false && password != null && !GameManager.Instance.BossEntered)
         //    UpdateHealth();
 
-        if (!playerInside && (password != null || areaType == AreaType.Main) && !rAreasManager.Instance.IsTutorial && !GameManager.Instance.BossEntered)
+        //if (!playerInside && (password != null || areaType == AreaType.Main) && !rAreasManager.Instance.IsTutorial && !GameManager.Instance.BossEntered)
+        if (!playerInside && password != null && !rAreasManager.Instance.IsTutorial && !GameManager.Instance.BossEntered)
             UpdateHealth();
     }
 
@@ -344,7 +345,14 @@ public class rArea : MonoBehaviour
                 this.Health = maxHealth;
                 FormStrongArmy();
                 // show intro panel
-                rUIManager.Instance.UiPassword.ShowIntroPanel();
+                if(!rAreasManager.Instance.IsTutorial)
+                {
+                    rUIManager.Instance.UiPassword.ShowIntroPanel();
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
                 isFirst = false;
             }
             else /*AreaType == AreaType.Main && !isFirst*/

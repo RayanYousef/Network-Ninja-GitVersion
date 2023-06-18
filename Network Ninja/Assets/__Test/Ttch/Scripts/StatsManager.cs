@@ -96,7 +96,7 @@ public class StatsManager : MonoBehaviour
         myStats.AtkSpeed = myStats.DefaultAtkSpeed;
         myStats.MoveSpeed = myStats.DefaultMoveSpeed;
         myStats.CooldownReduction = myStats.DefaultCooldownReduction;
-        myStats.Energy = myStats.DefaultEnergy;
+        myStats.Energy = 0;
 
         if (HealthBar != null)
         {

@@ -357,6 +357,7 @@ public class EnemySpawner : MonoBehaviour
 
     public IEnumerator SpawnBossCoroutine()
     {
+        GameObjectsManager.Instance.DuringCutScene = true;
         player.GetComponent<CS_PlayerManager>().ControllerState(false);
         // yield return new WaitForSeconds(1);
         rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutBeforeCutScene());
