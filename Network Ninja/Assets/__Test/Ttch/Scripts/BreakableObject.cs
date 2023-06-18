@@ -21,7 +21,7 @@ public class BreakableObject : MonoBehaviour
     public float value;
     private void Update()
     {
-        transform.Rotate(0, 25 * Time.deltaTime, 0, Space.Self);
+        transform.Rotate(0, 150 * Time.deltaTime, 0, Space.Self);
     }
     private void OnTriggerEnter(Collider other)
     {
