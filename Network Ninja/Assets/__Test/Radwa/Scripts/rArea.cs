@@ -345,7 +345,14 @@ public class rArea : MonoBehaviour
                 this.Health = maxHealth;
                 FormStrongArmy();
                 // show intro panel
-                rUIManager.Instance.UiPassword.ShowIntroPanel();
+                if(!rAreasManager.Instance.IsTutorial)
+                {
+                    rUIManager.Instance.UiPassword.ShowIntroPanel();
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
                 isFirst = false;
             }
             else /*AreaType == AreaType.Main && !isFirst*/
