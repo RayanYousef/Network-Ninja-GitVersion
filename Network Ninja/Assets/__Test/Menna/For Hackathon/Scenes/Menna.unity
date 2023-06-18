@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 945604609}
-  m_IndirectSpecularColor: {r: 0.065619856, g: 0.121488005, b: 0.22171965, a: 1}
+  m_IndirectSpecularColor: {r: 0.12647036, g: 0.23414761, b: 0.42732468, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5777,8 +5777,8 @@ MonoBehaviour:
   interactivePanels: []
   setInteractivePanelState: 0
   independantUIElements: []
-  playerCanvas: {fileID: 0}
-  minimapCanvas: {fileID: 0}
+  playerCanvas: {fileID: 1608994368}
+  minimapCanvas: {fileID: 2001131099}
   timeToFadeUIForCutscene: 2
 --- !u!114 &593548500
 MonoBehaviour:
@@ -36429,6 +36429,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1608994366}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &1608994368 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 1608994370, guid: a5708445c4ea80f46825a2884bfd70d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1608994366}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1620123100
 GameObject:
   m_ObjectHideFlags: 0
@@ -46503,12 +46509,12 @@ PrefabInstance:
     - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6
+      value: 1.7999997
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
@@ -46894,6 +46900,12 @@ MonoBehaviour:
   OnAreasFinished:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &2001131099 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 704413202, guid: 4ab0ad740e251d747bf13aa2e485b18b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1754897148}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2013541290
 GameObject:
   m_ObjectHideFlags: 0
@@ -47356,6 +47368,11 @@ PrefabInstance:
       propertyPath: meshColourChanger.Images.Array.data[0]
       value: 
       objectReference: {fileID: 1280775428}
+    - target: {fileID: 7616584217416438235, guid: 317bd3ca0fb5ebc4eb6700a651bf12ab,
+        type: 3}
+      propertyPath: armySize
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7616584217416438235, guid: 317bd3ca0fb5ebc4eb6700a651bf12ab,
         type: 3}
       propertyPath: miniBossSize
