@@ -17,6 +17,7 @@ public class GateController : MonoBehaviour
     public bool playerIsHere;
     PathController pathController;
 
+
     public Animator anim1, anim2;
 
 
@@ -31,6 +32,7 @@ public class GateController : MonoBehaviour
     {
         pathController = GetComponentInParent<PathController>();
         anim1 = this.GetComponentInChildren<Animator>();
+
 
         //anim2 = endPoint.GetComponentInChildren<Animator>();
     }
