@@ -5777,6 +5777,9 @@ MonoBehaviour:
   interactivePanels: []
   setInteractivePanelState: 0
   independantUIElements: []
+  playerCanvas: {fileID: 0}
+  minimapCanvas: {fileID: 0}
+  timeToFadeUIForCutscene: 2
 --- !u!114 &593548500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46500,12 +46503,12 @@ PrefabInstance:
     - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7999997
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
@@ -46536,14 +46539,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 114602977}
     m_Modifications:
-    - target: {fileID: 90659844, guid: dc78c54bef9633942990407f410a33a8, type: 3}
-      propertyPath: m_fontColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 90659844, guid: dc78c54bef9633942990407f410a33a8, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4279369472
-      objectReference: {fileID: 0}
     - target: {fileID: 451947431264943728, guid: dc78c54bef9633942990407f410a33a8,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -357,7 +357,8 @@ public class EnemySpawner : MonoBehaviour
     public IEnumerator SpawnBossCoroutine()
     {
         player.GetComponent<CS_PlayerManager>().ControllerState(false);
-       // yield return new WaitForSeconds(1);
+        // yield return new WaitForSeconds(1);
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutBeforeCutScene());
         yield return new WaitForSeconds(delayBeforeSpawnBoss / 2);
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         spawnBossIntroEffect();

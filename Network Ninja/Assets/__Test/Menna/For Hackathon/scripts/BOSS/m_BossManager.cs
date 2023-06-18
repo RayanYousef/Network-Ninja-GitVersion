@@ -49,7 +49,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
     [SerializeField] private Color transparentColor;
     [SerializeField] private Color color;
     [SerializeField] float frictionCoefficient = 2.0f;
-    [SerializeField] GameObject HP;
+    [SerializeField] CanvasGroup HP;
     [SerializeField] GameObject attackFromMouth;
     [SerializeField] GameObject attackOnLand;
     [SerializeField] GameObject attackFromHand;
@@ -69,6 +69,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         //Attacks = attackFromMouth.GetComponentsInChildren<ParticleSystem>();
+        HP.alpha = 0.0f;
 
     }
 
@@ -187,7 +188,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         DragonAnim.SetBool("isChasing", false);
         GameManager.Instance.CurrentGameState = GameState.Won;
         BossDie?.Invoke();
-        HP.SetActive(false);
+        rUIManager.instance.StartCoroutine(rUIManager.instance.FadeOutPanel(HP, 2));
         attackFromMouth.SetActive(false);
 
     }
@@ -282,11 +283,14 @@ public class m_BossManager : MonoBehaviour , IStopObject
         BossCam2.enabled = false;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         yield return new WaitForSeconds(5);
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInAfterCutScene());
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(HP, 2, false));
         BossCam3.enabled = false;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         player.GetComponent<CS_PlayerManager>().ControllerState(true);
         yield return new WaitForSeconds(3);
         startBossState = true;
+
 
     }
 }
