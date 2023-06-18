@@ -105,8 +105,11 @@ public class rArea : MonoBehaviour
 
 
         Renderer[] Renderers = new Renderer[1];
+
+
         Renderers[0] = GetComponentsInChildren<Renderer>()[1];
-        meshColourChanger.MeshRenderers = Renderers;
+        if (rAreasManager.Instance.IsTutorial)
+            meshColourChanger.MeshRenderers = Renderers;
 
         sharingPasswordWarningIcon.gameObject.GetComponent<Image>().enabled = false;
     }
