@@ -17,8 +17,6 @@ public class m_BossIdleState : StateMachineBehaviour
         player = GameObjectsManager.Instance.Player.transform;
         bossMovement = animator.GetComponent<m_BossManager>();
         timer =0;
-        //startStats = false;
-
 
     }
 
@@ -27,6 +25,10 @@ public class m_BossIdleState : StateMachineBehaviour
     {
         timer += Time.deltaTime;
         float distance = Vector3.Distance(player.position, animator.transform.position);
+        if(bossMovement.LookAtPlyer == true )
+        {
+            bossMovement.LookAtPlayer();
+        }
 
         //if(distance > chaseRange)
         //{
@@ -45,14 +47,8 @@ public class m_BossIdleState : StateMachineBehaviour
 
             if (distance <= bossMovement.BossAttackRange)
             {
-                //if (bossMovement.LookAtPlyer == true)
-                //{
-                //    bossMovement.LookAtPlayer();
-                //}
-
                 if (timer > bossMovement.IntervalBetweenBossAttacks)
                 {
-                    // animator.SetTrigger("Attack");
                     animator.SetBool("isAttacking", true);
                     timer = 0;
                 }

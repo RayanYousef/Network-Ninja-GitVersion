@@ -30,6 +30,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
     public CinemachineVirtualCamera BossCam1;
     public CinemachineVirtualCamera BossCam2;
     public CinemachineVirtualCamera BossCam3;
+   // public CinemachineVirtualCamera EffectCam;
     public float BossAttackRange;
     public float BossChaseRange;
 
@@ -41,7 +42,6 @@ public class m_BossManager : MonoBehaviour , IStopObject
     private Rigidbody rb;
     private NavMeshAgent agent;
     private ParticleSystem bloodVfx, bloodVfx2, bloodVfx3 ;
-    //private ParticleSystem[] Attacks;
 
 
     [SerializeField] UnityEvent BossDie;
@@ -51,10 +51,11 @@ public class m_BossManager : MonoBehaviour , IStopObject
     [SerializeField] float frictionCoefficient = 2.0f;
     [SerializeField] GameObject HP;
     [SerializeField] GameObject attackFromMouth;
-    //[SerializeField] ParticleSystem[] attackOnLand;
     [SerializeField] GameObject attackOnLand;
+    [SerializeField] GameObject attackFromHand;
+    [SerializeField] GameObject AttackFrontOfBoss;
 
-
+    
     private void Awake()
     {
         DragonAnim = GetComponent<Animator>();
@@ -87,14 +88,12 @@ public class m_BossManager : MonoBehaviour , IStopObject
         //    LookAtPlayer();
         //}
 
-        if (LookAtPlyer && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die")) 
-        {
-            //Vector3 enemyToPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
-            //transform.LookAt(enemyToPlayer);
-            LookAtPlayer();
-          
-
-        }
+        //if (LookAtPlyer && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("die") && !dragonAnim.GetCurrentAnimatorStateInfo(0).IsName("AttackState")) 
+        //{
+        //    //Vector3 enemyToPlayer = new Vector3(player.position.x, transform.position.y, player.position.z);
+        //    //transform.LookAt(enemyToPlayer);
+        //    LookAtPlayer();
+        //}
     }
 
     public void trailActivate()
@@ -236,7 +235,14 @@ public class m_BossManager : MonoBehaviour , IStopObject
         Vector3 effectPos = new Vector3();
         effectPos = transform.position + transform.forward * 5;
          GameObject LandEffect = Instantiate(attackOnLand, effectPos , Quaternion.identity);
+    }  
+    public void PlayAttackFromHand()
+    {
+         Vector3 effectPos = new Vector3();
+         effectPos = transform.position + transform.forward * 3 + new Vector3 (5,0,0);
+         GameObject FromHandEffect = Instantiate(attackFromHand, effectPos , Quaternion.identity);
     }
+
 
     public IEnumerator DoFade()
     {
@@ -266,7 +272,9 @@ public class m_BossManager : MonoBehaviour , IStopObject
 
     private IEnumerator intervalBetCams()
     {
-      //  GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
+        //yield return new WaitForSeconds(5);
+        //EffectCam.enabled = false;
+        //GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         yield return new WaitForSeconds(5);
         BossCam1.enabled = false;
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
