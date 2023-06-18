@@ -13,7 +13,7 @@ public class TutorialManager : MonoBehaviour
     private int RAttackCount = 0;
     private bool ultUsed = false;
     public rArea Area1,Area2,Area3;
-    public BoxCollider gate1Col;
+    public Collider gate1Col;
 
     [SerializeField] public UnityEvent OnTutorialFinish;
 
