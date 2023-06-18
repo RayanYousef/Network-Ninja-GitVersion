@@ -21,6 +21,7 @@ public class GameObjectsManager : MonoBehaviour
 
     [Header("Boss")]
     [SerializeField] GameObject boss;
+    [SerializeField] bool duringCutScene;
 
     [Header("Current Gate")]
     [SerializeField] GateController currentGate;
@@ -36,6 +37,7 @@ public class GameObjectsManager : MonoBehaviour
     public Formation AllyBatalionPrefab { get => allyBatalionPrefab; set => allyBatalionPrefab = value; }
     public CinemachineBrain CameraBrain { get => cameraBrain; set => cameraBrain = value; }
     public GateController CurrentGate { get => currentGate; set => currentGate = value; }
+    public bool DuringCutScene { get => duringCutScene; set => duringCutScene = value; }
 
 
     private void Awake()

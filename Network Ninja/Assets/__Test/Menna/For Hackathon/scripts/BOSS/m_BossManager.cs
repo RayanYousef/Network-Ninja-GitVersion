@@ -289,6 +289,7 @@ public class m_BossManager : MonoBehaviour , IStopObject
         GameObjectsManager.Instance.CameraBrain.m_DefaultBlend.m_Time = 2.5f;
         player.GetComponent<CS_PlayerManager>().ControllerState(true);
         yield return new WaitForSeconds(3);
+        GameObjectsManager.Instance.DuringCutScene = false;
         startBossState = true;
 
 
