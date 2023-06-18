@@ -12,9 +12,12 @@ public class FadeManager : MonoBehaviour
     [SerializeField] TMP_Text txt;
     [SerializeField] int i = 0;
     [SerializeField] bool fading;
+    AudioSource audioSource;
+    //public AudioClip clickSFX;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         img.sprite = sprites[0];
         txt.text = msgs[0];
     }
@@ -23,13 +26,19 @@ public class FadeManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            audioSource.PlayOneShot(audioSource.clip);
             if (i < msgs.Length - 1 && fading == false)
             {
                 StartCoroutine(FadeOutInImgTxt(img, 1f));
             }
             else
-               if (i == msgs.Length - 1 && fading == false) CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.TutorialScene);
+               if (i == msgs.Length - 1 && fading == false) MoveToTutorial();
         }
+    }
+
+    public void MoveToTutorial()
+    {
+        CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.TutorialScene);
     }
 
     public IEnumerator FadeOutInImgTxt(Image panel1, float time)
