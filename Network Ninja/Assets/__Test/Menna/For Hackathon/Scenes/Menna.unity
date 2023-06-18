@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 945604609}
-  m_IndirectSpecularColor: {r: 0.25119212, g: 0.47104973, b: 0.47418886, a: 1}
+  m_IndirectSpecularColor: {r: 0.2511921, g: 0.47104976, b: 0.47418886, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -46483,8 +46483,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842341368156, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
+      propertyPath: far clip plane
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922773842341368156, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
+        type: 3}
       propertyPath: near clip plane
       value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922773842341368156, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
+        type: 3}
+      propertyPath: orthographic size
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
@@ -46508,8 +46518,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922773842341369504, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
+        type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922773842600253300, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ad301e1c0e67824dbd416f0b1c3fe3c, type: 3}
@@ -47023,8 +47048,13 @@ PrefabInstance:
       objectReference: {fileID: 1591253349}
     - target: {fileID: 6211639813575984867, guid: 733bc324523d9814f8940e2591621bd0,
         type: 3}
+      propertyPath: health
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6211639813575984867, guid: 733bc324523d9814f8940e2591621bd0,
+        type: 3}
       propertyPath: areaType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6211639813575984867, guid: 733bc324523d9814f8940e2591621bd0,
         type: 3}
@@ -47223,8 +47253,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4912167475262134979, guid: de3eb53da3379694d978692cd620aa17,
         type: 3}
+      propertyPath: health
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912167475262134979, guid: de3eb53da3379694d978692cd620aa17,
+        type: 3}
       propertyPath: areaType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912167475262134979, guid: de3eb53da3379694d978692cd620aa17,
         type: 3}
@@ -47350,6 +47385,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fight 01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6042369120826762885, guid: 317bd3ca0fb5ebc4eb6700a651bf12ab,
+        type: 3}
+      propertyPath: health
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 6042369120826762885, guid: 317bd3ca0fb5ebc4eb6700a651bf12ab,
         type: 3}
@@ -47512,8 +47552,13 @@ PrefabInstance:
       objectReference: {fileID: 1102171027}
     - target: {fileID: 6848572513497433360, guid: 820f63ee6e1c87542aeb22edb14c73aa,
         type: 3}
+      propertyPath: health
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6848572513497433360, guid: 820f63ee6e1c87542aeb22edb14c73aa,
+        type: 3}
       propertyPath: areaType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6848572513497433360, guid: 820f63ee6e1c87542aeb22edb14c73aa,
         type: 3}
@@ -66862,8 +66907,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1508465457661830842, guid: 056c847be4b9d0640b3ab9381f04c6b2,
         type: 3}
+      propertyPath: health
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508465457661830842, guid: 056c847be4b9d0640b3ab9381f04c6b2,
+        type: 3}
       propertyPath: areaType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1508465457661830842, guid: 056c847be4b9d0640b3ab9381f04c6b2,
         type: 3}
@@ -71905,6 +71955,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1815081135644520218, guid: d8e4c2e3efe95d54cb4584250fcbce94,
         type: 3}
+      propertyPath: areaType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815081135644520218, guid: d8e4c2e3efe95d54cb4584250fcbce94,
+        type: 3}
       propertyPath: sharingPasswordWarningIcon
       value: 
       objectReference: {fileID: 276670713}
@@ -71913,6 +71968,11 @@ PrefabInstance:
       propertyPath: meshColourChanger.Images.Array.data[0]
       value: 
       objectReference: {fileID: 1473864358}
+    - target: {fileID: 2907300261971502010, guid: d8e4c2e3efe95d54cb4584250fcbce94,
+        type: 3}
+      propertyPath: miniBossSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2907300261971502010, guid: d8e4c2e3efe95d54cb4584250fcbce94,
         type: 3}
       propertyPath: OnAllMiniBossesKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
