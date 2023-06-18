@@ -207,6 +207,7 @@ public class EnemySpawner : MonoBehaviour
                 //enemy.transform.position = randomPosition;
                 //enemy.transform.parent = this.transform;
                 enemy.SetActive(true);
+                enemy.GetComponent<Collider>().enabled = true;
                 enemies.Add(enemy);
             }
 
@@ -285,8 +286,8 @@ public class EnemySpawner : MonoBehaviour
                 enemy.transform.position = randomPosition;
                 enemy.transform.parent = this.transform;
                 enemy.SetActive(true);
-            // enemy.AddComponent<CapsuleCollider>();
-            enemies.Add(enemy);
+               // enemy.AddComponent<CapsuleCollider>();
+               enemies.Add(enemy);
            
             }
 
