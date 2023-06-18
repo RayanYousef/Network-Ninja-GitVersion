@@ -377,6 +377,8 @@ public class CS_PlayerManager : MonoBehaviour
     {
         playerModel.SetActive(false);
         particleForTransition.SetActive(true);
+        // Was adding damp to the camera.
+       // CameraManager.MainVirtualCamera.GetCinemachineComponent<>
     }
     public void ParticleModeDisabled()
     {
@@ -469,6 +471,7 @@ public class CS_PlayerManager : MonoBehaviour
         pStatsManager.Damagable = false;
 
     }
+
     #endregion
 
     #region Private Functions
