@@ -22,8 +22,8 @@ public class m_BossCombat : MonoBehaviour
   
     private void Start()
     {
-       // uimanager = GameObjectsManager.Instance.BossUiManager;
-        combatManager = GameObjectsManager.Instance.CombatManager;
+        //uimanager = GameObjectsManager.Instance.BossUiManager;
+        //combatManager = GameObjectsManager.Instance.CombatManager;
         DragonMovement = GameObjectsManager.Instance.Boss.GetComponentInChildren<m_BossManager>();
         statsManager = GameObjectsManager.Instance.Player.GetComponent<StatsManager>();
 
