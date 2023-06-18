@@ -33,7 +33,7 @@ public class BreakableObject : MonoBehaviour
                 {
                     case StatToChange.Health:
                         value = dmgObject.MyStatsManager.Stats.MaxHealth / 6;
-                        text.text = stat.ToString() + " + " + value;
+                        text.text = stat.ToString() + " + ";
                         text.fontSharedMaterial = healthMat;
                         //text.color = Color.green;
                         text.GetComponent<Animator>().Play("Base Layer.Collectible");
@@ -43,7 +43,7 @@ public class BreakableObject : MonoBehaviour
                     case StatToChange.Energy:
 
                         value = dmgObject.MyStatsManager.Stats.DefaultEnergy / 4;
-                        text.text = stat.ToString() + " + " + value;
+                        text.text = stat.ToString() + " + ";
                         text.fontSharedMaterial = energyMat;
                         //text.color = Color.blue;
                         text.GetComponent<Animator>().Play("Base Layer.Collectible");
