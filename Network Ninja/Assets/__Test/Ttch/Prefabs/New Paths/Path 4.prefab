@@ -569,9 +569,8 @@ GameObject:
   - component: {fileID: 1625687746489259281}
   - component: {fileID: 6538177879419957281}
   - component: {fileID: 3352592616421977752}
-  - component: {fileID: 728127825756793143}
-  - component: {fileID: 6841432510876030349}
   - component: {fileID: 2848743895168507597}
+  - component: {fileID: 1194145474}
   m_Layer: 0
   m_Name: Gate (7)
   m_TagString: Untagged
@@ -645,32 +644,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &728127825756793143
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136207749522528870}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.39324218, y: 7.364454, z: 6.89511}
-  m_Center: {x: 0.00000010326954, y: 8.9894814e-11, z: 0.058271844}
---- !u!65 &6841432510876030349
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136207749522528870}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6, y: 0.3, z: 6}
-  m_Center: {x: -0.0000019073486, y: -3.55, z: -0.0000076293945}
 --- !u!114 &2848743895168507597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,7 +659,22 @@ MonoBehaviour:
   state: 1
   buttonPressed: 0
   playerIsHere: 0
+  anim1: {fileID: 0}
+  anim2: {fileID: 0}
   nextArea: {fileID: 0}
+--- !u!135 &1194145474
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136207749522528870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 12.11
+  m_Center: {x: -5.69, y: 0, z: 0}
 --- !u!1 &2136207750020262134
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,9 +686,8 @@ GameObject:
   - component: {fileID: 1625687745931011969}
   - component: {fileID: 6538177878863528625}
   - component: {fileID: 3352592616996936712}
-  - component: {fileID: 728127826264415143}
-  - component: {fileID: 6841432511374812957}
   - component: {fileID: 2848743894526078045}
+  - component: {fileID: 55534518}
   m_Layer: 0
   m_Name: Gate (2)
   m_TagString: Untagged
@@ -774,32 +761,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &728127826264415143
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136207750020262134}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.39324218, y: 7.364454, z: 10.726352}
-  m_Center: {x: 0.00000008537652, y: -0.0000000016385532, z: 1.9738756}
---- !u!65 &6841432511374812957
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136207750020262134}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6, y: 0.3, z: 6}
-  m_Center: {x: -0.0000019073486, y: -3.55, z: -0.0000076293945}
 --- !u!114 &2848743894526078045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,7 +776,22 @@ MonoBehaviour:
   state: 0
   buttonPressed: 0
   playerIsHere: 0
+  anim1: {fileID: 0}
+  anim2: {fileID: 0}
   nextArea: {fileID: 0}
+--- !u!135 &55534518
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136207750020262134}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 12.11
+  m_Center: {x: 3.22, y: 0, z: 0}
 --- !u!1 &6766383871097026969
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,8 +885,8 @@ MonoBehaviour:
   currentWayPointIndex: 0
   distance: 0
   speed: 25
-  anim1: {fileID: 0}
-  anim2: {fileID: 0}
+  solidCol1: {fileID: 6481424921577342788}
+  solidCol2: {fileID: 992574046304356572}
 --- !u!1 &6766383871278428013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,6 +1002,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6a68ee0736394d4eb04ad1408823f87, type: 3}
+--- !u!65 &992574046304356572 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3912340738998419348, guid: d6a68ee0736394d4eb04ad1408823f87,
+    type: 3}
+  m_PrefabInstance: {fileID: 4291149767594243912}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1201648800400304914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3107524209058126938, guid: d6a68ee0736394d4eb04ad1408823f87,
@@ -1119,6 +1101,12 @@ PrefabInstance:
 --- !u!4 &4943241834217825418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3107524209058126938, guid: d6a68ee0736394d4eb04ad1408823f87,
+    type: 3}
+  m_PrefabInstance: {fileID: 8050686313540712656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6481424921577342788 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3912340738998419348, guid: d6a68ee0736394d4eb04ad1408823f87,
     type: 3}
   m_PrefabInstance: {fileID: 8050686313540712656}
   m_PrefabAsset: {fileID: 0}
