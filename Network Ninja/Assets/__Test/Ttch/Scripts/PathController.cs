@@ -30,8 +30,11 @@ public class PathController : MonoBehaviour
     public float distance;
     public float speed = 50f;
 
+    public BoxCollider solidCol1, solidCol2;
+
+
     //public Animator anim1, anim2;
-    
+
     public bool PlayerIsOnPath { get => playerIsOnPath;
         set
         {
@@ -39,6 +42,8 @@ public class PathController : MonoBehaviour
             switch (value)
             {
                 case true:
+                    solidCol1.enabled = false;
+                    solidCol2.enabled = false;
                     player.GetComponent<CS_PlayerManager>().GravityState(false);
                     player.GetComponent<CS_PlayerManager>().ParticleModeEnabled();
 
@@ -51,6 +56,8 @@ public class PathController : MonoBehaviour
                     break;
 
                 case false:
+                    solidCol1.enabled = true;
+                    solidCol2.enabled = true;
                     player.GetComponent<CS_PlayerManager>().GravityState(true);
                     player.GetComponent<CS_PlayerManager>().ParticleModeDisabled();
 
@@ -72,6 +79,8 @@ public class PathController : MonoBehaviour
     private void Start()
     {
         player = GameObjectsManager.Instance.Player;
+
+       
         //anim1 = startPoint.GetComponentInChildren<Animator>();
 
         //anim2 = endPoint.GetComponentInChildren<Animator>();

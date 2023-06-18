@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 1813621579240428008}
   - component: {fileID: 6131821799002731736}
   - component: {fileID: 2387488804421544545}
-  - component: {fileID: 413778341483965902}
-  - component: {fileID: 5860726609471492468}
   - component: {fileID: 2894715226764974644}
+  - component: {fileID: 1945673314}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -87,32 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &413778341483965902
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297468742939401887}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.39324218, y: 7.364454, z: 6.087375}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &5860726609471492468
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297468742939401887}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6, y: 0.3, z: 6}
-  m_Center: {x: -0.0000019073486, y: -3.55, z: -0.0000076293945}
 --- !u!114 &2894715226764974644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +101,22 @@ MonoBehaviour:
   state: 0
   buttonPressed: 0
   playerIsHere: 0
+  anim1: {fileID: 0}
+  anim2: {fileID: 0}
   nextArea: {fileID: 0}
+--- !u!135 &1945673314
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297468742939401887}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 12.11
+  m_Center: {x: 5.43, y: 0, z: 0}
 --- !u!1 &1297468744407156726
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,9 +128,8 @@ GameObject:
   - component: {fileID: 1813621579851434113}
   - component: {fileID: 6131821799346875825}
   - component: {fileID: 2387488805941179144}
-  - component: {fileID: 413778343171339431}
-  - component: {fileID: 5860726609025599517}
   - component: {fileID: 2894715225311888221}
+  - component: {fileID: 366314340}
   m_Layer: 0
   m_Name: Gate (1) Default Gate
   m_TagString: Untagged
@@ -216,32 +203,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &413778343171339431
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297468744407156726}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.39324218, y: 7.364454, z: 6.087375}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &5860726609025599517
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297468744407156726}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6, y: 0.3, z: 6}
-  m_Center: {x: -0.0000019073486, y: -3.55, z: -0.0000076293945}
 --- !u!114 &2894715225311888221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +218,22 @@ MonoBehaviour:
   state: 1
   buttonPressed: 0
   playerIsHere: 0
+  anim1: {fileID: 0}
+  anim2: {fileID: 0}
   nextArea: {fileID: 0}
+--- !u!135 &366314340
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297468744407156726}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 12.11
+  m_Center: {x: -5.34, y: 0, z: 0}
 --- !u!1 &3237641636538841825
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3237641636538841825}
   m_LocalRotation: {x: 0.005970003, y: 0.9663345, z: -0.022633296, w: 0.25622192}
-  m_LocalPosition: {x: 19.854965, y: -3.8491917, z: -36.52231}
+  m_LocalPosition: {x: 21.84, y: -3.8491917, z: -36.52231}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -313,7 +289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3237641636666317942}
   m_LocalRotation: {x: 0.0057663824, y: 0.9686006, z: -0.022687087, w: 0.24751765}
-  m_LocalPosition: {x: 13.66428, y: -3.2637825, z: -25.667908}
+  m_LocalPosition: {x: 16.2, y: -3.2637825, z: -25.667908}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -344,7 +320,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3237641636674885262}
   m_LocalRotation: {x: 0.0067178244, y: 0.9699563, z: -0.027087795, w: 0.24167326}
-  m_LocalPosition: {x: 2.6070862, y: -2.0630302, z: -5.1690063}
+  m_LocalPosition: {x: 2.92, y: -2.0630302, z: -5.1690063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -375,7 +351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3237641636770074354}
   m_LocalRotation: {x: 0.0067178244, y: 0.9699563, z: -0.027087795, w: 0.24167326}
-  m_LocalPosition: {x: 7.8676796, y: -2.6895237, z: -15.071457}
+  m_LocalPosition: {x: 9.53, y: -2.6895237, z: -15.071457}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -478,8 +454,8 @@ MonoBehaviour:
   currentWayPointIndex: 0
   distance: 0
   speed: 20
-  anim1: {fileID: 0}
-  anim2: {fileID: 0}
+  solidCol1: {fileID: 4779158427920087275}
+  solidCol2: {fileID: 8962931282570440859}
 --- !u!1001 &5344039583758864143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -570,6 +546,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5344039583758864143}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &8962931282570440859 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3912340738998419348, guid: d6a68ee0736394d4eb04ad1408823f87,
+    type: 3}
+  m_PrefabInstance: {fileID: 5344039583758864143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8365883158674507647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -654,6 +636,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6a68ee0736394d4eb04ad1408823f87, type: 3}
+--- !u!65 &4779158427920087275 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3912340738998419348, guid: d6a68ee0736394d4eb04ad1408823f87,
+    type: 3}
+  m_PrefabInstance: {fileID: 8365883158674507647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6861711930405526309 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3107524209058126938, guid: d6a68ee0736394d4eb04ad1408823f87,
