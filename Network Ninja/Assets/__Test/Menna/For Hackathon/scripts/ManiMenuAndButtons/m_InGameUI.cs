@@ -150,10 +150,10 @@ public class m_InGameUI : MonoBehaviour
     }
     public void BackToMainMenu()
     {
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         if (MainMenu != null)
         {
-            SceneManager.LoadScene(MainMenu);
+            Time.timeScale = 1;
+            CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.MainMenuScene);
         }
     }
 

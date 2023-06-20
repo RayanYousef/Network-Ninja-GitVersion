@@ -17,6 +17,15 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] public UnityEvent OnTutorialFinish;
 
+    float maxAreaHealth;
+    GameObject player;
+
+    private void Start()
+    {
+        maxAreaHealth = rAreasManager.Instance.MaxSoldiersNumber;
+        player = GameObjectsManager.Instance.Player;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -96,6 +105,7 @@ public class TutorialManager : MonoBehaviour
 
             //Ultimate Attack Tutorial in Area 2
             case 5:
+                player.GetComponent<StatsManager>().AddtoEnergy(100);
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
                     ultUsed = true;
@@ -110,14 +120,14 @@ public class TutorialManager : MonoBehaviour
             case 6:
                 if(Area3.AreaType == AreaType.Base)
                 {
-                    Area2.Health = 50;
+                    Area2.Health = maxAreaHealth / 2;
                     popUpIndex++;
                 }
                 break;
 
             //Resetting Password Tutorial
             case 7:
-                if(Area2.Health >= 75)
+                if(Area2.Health >= maxAreaHealth)
                 {
                     Area1.Health = 0;
                     Area1.AreaType = AreaType.Fight;

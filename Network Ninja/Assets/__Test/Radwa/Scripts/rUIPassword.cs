@@ -198,7 +198,7 @@ public class rUIPassword : MonoBehaviour
     {
         introPanel.SetActive(true);
         rUIManager.Instance.SetInteractivePanelState = true;
-        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(introPanel.GetComponent<CanvasGroup>(), timeToFadeInIntroPanel));
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(introPanel.GetComponent<CanvasGroup>(), timeToFadeInIntroPanel, false));
         rFaceExpressionManager.Instance.ChangeFacialExp(rFaceExpressionManager.FacialExp.Serious);
     }
     #endregion
