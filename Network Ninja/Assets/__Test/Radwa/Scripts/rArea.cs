@@ -147,7 +147,7 @@ public class rArea : MonoBehaviour
         if (Timer > healthTimer)
         {
             Timer = 0;
-            Health = Mathf.Clamp(health - 1, 0, maxHealth);
+            health = Mathf.Clamp(health - 1, 0, maxHealth);
 
             if (health > 0)
                 meshColourChanger.LerpBetweenObjectColours(health / maxHealth);

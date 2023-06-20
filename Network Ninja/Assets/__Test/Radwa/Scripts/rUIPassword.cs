@@ -31,7 +31,7 @@ public class rUIPassword : MonoBehaviour
     //private Button OKBtn;
 
     [Header("Intro Panel")]
-    [SerializeField] float timeToFadeInIntroPanel = 3;
+    float timeToFadeInOutPanels = 0.2f;
     [SerializeField] GameObject introPanel;
     [SerializeField] TMP_Text introTxt;
     [SerializeField] Button nextBtn;
@@ -163,7 +163,13 @@ public class rUIPassword : MonoBehaviour
     #region UI Panels
     public void ShowCreatePasswordPanel()
     {
-        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(createPasswordPanel.GetComponent<CanvasGroup>(), 3));
+        StartCoroutine(WaitForEnemiesToDie());
+    }
+
+    IEnumerator WaitForEnemiesToDie()
+    {
+        yield return new WaitForSeconds(3);
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(createPasswordPanel.GetComponent<CanvasGroup>(), timeToFadeInOutPanels));
 
         ResetPasswordIF();
         rUIManager.Instance.HideAllIndependantUIElementsExceptLast(createPasswordPanel);
@@ -181,7 +187,6 @@ public class rUIPassword : MonoBehaviour
 
     public void ShowCheckPasswordPanel()
     {
-
         string correctAns = GameObjectsManager.Instance.CurrentGate.NextArea.Password;
         //Debug.Log($"Correct Answer is {correctAns}");
 
@@ -194,11 +199,13 @@ public class rUIPassword : MonoBehaviour
         rUIManager.Instance.SetInteractivePanelState = true;
     }
 
+    
+
     public void ShowIntroPanel()
     {
         introPanel.SetActive(true);
         rUIManager.Instance.SetInteractivePanelState = true;
-        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(introPanel.GetComponent<CanvasGroup>(), timeToFadeInIntroPanel, false));
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeInPanel(introPanel.GetComponent<CanvasGroup>(), timeToFadeInOutPanels, false));
         rFaceExpressionManager.Instance.ChangeFacialExp(rFaceExpressionManager.FacialExp.Serious);
     }
     #endregion
@@ -248,7 +255,7 @@ public class rUIPassword : MonoBehaviour
 
 
         //createPasswordPanel.SetActive(false);
-        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(createPasswordPanel.GetComponent<CanvasGroup>(), 0.2f));
+        rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(createPasswordPanel.GetComponent<CanvasGroup>(), timeToFadeInOutPanels));
 
 
         ShowFeedback();
@@ -299,7 +306,7 @@ public class rUIPassword : MonoBehaviour
         }
         else
         {
-            rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(introPanel.GetComponent<CanvasGroup>(), 1));
+            rUIManager.Instance.StartCoroutine(rUIManager.Instance.FadeOutPanel(introPanel.GetComponent<CanvasGroup>(), timeToFadeInOutPanels));
         }
     }
 
