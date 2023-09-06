@@ -1,0 +1,88 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+using TMPro;
+
+public class DialogueCreater : MonoBehaviour
+{
+    DialoguUI dialoguUI;
+    TextArchitect architect;
+    
+    [SerializeField] int lineIndex;
+    [SerializeField] Line[] lines;
+
+    private Line currentLine;
+
+    void Start()
+    {
+        dialoguUI = DialoguUI.instance;
+        currentLine = lines[lineIndex];
+        architect = new TextArchitect(dialoguUI.txtParagraph);
+        SetDialogue();
+    }
+
+    void Update()
+    {
+        if (lineIndex < lines.Length - 1 && lines[lineIndex].isSkippable)
+        {
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            {
+                if(architect.isBuilding)
+                {
+                    if (!architect.hurryUp)
+                        architect.hurryUp = true;
+                    else
+                        architect.ForceComplete();
+                }
+                else
+                {
+                    lineIndex++;
+                    SetDialogue();
+                }
+
+                 //Character currentSpreaker = lines[index].speaker;
+            }
+        }
+    }
+
+    public void SetDialogue()
+    {
+        currentLine = lines[lineIndex];
+
+        Emotion e = Array.Find(currentLine.lineSpeaker.arrayOfEmotions,
+            x => x.emotionType == currentLine.lineEmotion);
+        dialoguUI.midSpeakerImg.sprite = e.emotionSprite;
+
+        dialoguUI.txtName.text = currentLine.lineSpeaker.characterName;
+
+        if (currentLine.hasTextEffect)
+        {
+            foreach (TextEffects tes in currentLine.textEffects)
+            {
+                tes.ApplyTextEffects(architect, currentLine);
+            }
+        }
+
+        if (currentLine.hasCamEffect)
+        {
+            CameraEffects ces = currentLine.camEffects;
+            ces.ApplyCamEffects();
+        }
+    }
+
+    private void ControlFontSize()
+    {
+        if (lines[lineIndex].isChangeFontSize)
+        {
+            dialoguUI.txtParagraph.fontSizeMax = lines[lineIndex].fontSize;
+        }
+        else
+        {
+            dialoguUI.txtParagraph.fontSizeMax = lines[lineIndex].DefualtFontSize;
+        }
+    }
+
+
+}
