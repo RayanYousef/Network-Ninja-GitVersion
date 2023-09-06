@@ -7,8 +7,6 @@ public partial class DialoguUI : MonoBehaviour
     [Header("UI Dialogue Panel")]
     public Image background;
     public SpriteRenderer rightSpeakerImg;
-    [Tooltip("Middle speaker Image, mostly used when one speaker is speaking.")]
-    public SpriteRenderer midSpeakerImg;
     public SpriteRenderer leftSpeakerImg;
 
     public TextMeshProUGUI txtName;

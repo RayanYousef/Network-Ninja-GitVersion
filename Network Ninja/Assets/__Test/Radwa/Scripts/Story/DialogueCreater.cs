@@ -15,6 +15,9 @@ public class DialogueCreater : MonoBehaviour
 
     private Line currentLine;
 
+    private string heroineName = "Daivolo";
+    private string allyName = "Antivirus";
+
     void Start()
     {
         dialoguUI = DialoguUI.instance;
@@ -27,7 +30,7 @@ public class DialogueCreater : MonoBehaviour
     {
         if (lineIndex < lines.Length - 1 && lines[lineIndex].isSkippable)
         {
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 if(architect.isBuilding)
                 {
@@ -41,8 +44,6 @@ public class DialogueCreater : MonoBehaviour
                     lineIndex++;
                     SetDialogue();
                 }
-
-                 //Character currentSpreaker = lines[index].speaker;
             }
         }
     }
@@ -53,9 +54,20 @@ public class DialogueCreater : MonoBehaviour
 
         Emotion e = Array.Find(currentLine.lineSpeaker.arrayOfEmotions,
             x => x.emotionType == currentLine.lineEmotion);
-        dialoguUI.midSpeakerImg.sprite = e.emotionSprite;
+        
 
-        dialoguUI.txtName.text = currentLine.lineSpeaker.characterName;
+        if (currentLine.lineSpeaker.characterName == heroineName)
+        {
+            dialoguUI.txtName.text = heroineName;
+            if (e.emotionSprite != null)
+                dialoguUI.leftSpeakerImg.sprite = e.emotionSprite[0];
+        }
+        else
+        {
+            dialoguUI.txtName.text = allyName;
+            if (e.emotionSprite != null)
+                dialoguUI.rightSpeakerImg.sprite = e.emotionSprite[0];
+        }
 
         if (currentLine.hasTextEffect)
         {

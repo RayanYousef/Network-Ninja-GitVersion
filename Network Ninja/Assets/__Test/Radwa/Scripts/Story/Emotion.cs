@@ -9,5 +9,5 @@ public enum EMOTION { IDLE, SAD, SURPRISED, EXCITED }
 public class Emotion
 {
     public EMOTION emotionType;
-    public Sprite emotionSprite;
+    public Sprite[] emotionSprite;
 }
