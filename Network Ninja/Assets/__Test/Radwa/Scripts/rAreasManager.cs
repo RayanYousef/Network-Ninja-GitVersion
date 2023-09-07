@@ -158,7 +158,7 @@ public class rAreasManager : MonoBehaviour
 
         if (password == currentArea.Password)
         {
-            Debug.Log("Correct Password");
+            //Debug.Log("Correct Password");
             return;
         }
     }

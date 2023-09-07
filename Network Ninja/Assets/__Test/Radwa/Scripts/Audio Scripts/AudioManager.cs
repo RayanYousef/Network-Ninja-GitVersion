@@ -76,7 +76,7 @@ public class AudioManager : MonoBehaviour
             {
                 return;
             }
-            Debug.Log(sfxSource.pitch);
+            //Debug.Log(sfxSource.pitch);
             sfxSource.PlayOneShot(s.clip, SFXVolume);
         }
     }

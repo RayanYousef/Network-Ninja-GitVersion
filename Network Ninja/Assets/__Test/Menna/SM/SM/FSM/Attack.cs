@@ -25,7 +25,7 @@ public class Attack : BaseState
 
         if (Vector3.SqrMagnitude(npcStateMachine.player.transform.position - npcStateMachine.transform.position) > npcStateMachine.attackRange)
         {
-            Debug.Log("CHASE");
+            //Debug.Log("CHASE");
             this.stateMachine.OnChangeState(npcStateMachine.chase);
         }
     }

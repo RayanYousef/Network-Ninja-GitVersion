@@ -237,7 +237,7 @@ public class StatsManager : MonoBehaviour
             myStats.CurrentHealth -= dmg;
             if (HealthBar != null)
                 HealthBar.value = myStats.CurrentHealth;
-            Debug.Log(myStats.CurrentHealth);
+            //Debug.Log(myStats.CurrentHealth);
             OnTakingDamage?.Invoke();
         }
 

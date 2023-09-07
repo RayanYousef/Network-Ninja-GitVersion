@@ -321,7 +321,7 @@ public class EnemySpawner : MonoBehaviour
                 if (Enemy != null)
                 {
                     Enemy.GetComponent<m_EnemyManager>().Die();
-                    Debug.Log("All DEAAAAAAAAAAAAAAAAAAAAAAAD");
+                    //Debug.Log("All DEAAAAAAAAAAAAAAAAAAAAAAAD");
 
                 }
                 // MiniBossPrefab.GetComponent<Animator>().SetTrigger("Death");

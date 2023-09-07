@@ -78,7 +78,7 @@ public class m_EnemyManager : MonoBehaviour , IStopObject
 
     public void showHealth()
     {
-        Debug.Log(GetComponent<StatsManager>().Stats.CurrentHealth + gameObject.name);
+        //Debug.Log(GetComponent<StatsManager>().Stats.CurrentHealth + gameObject.name);
     }
 
     public virtual void OnHealthUpdatedFunction()
@@ -90,7 +90,7 @@ public class m_EnemyManager : MonoBehaviour , IStopObject
     public virtual void Die()
     {
         //animation
-        Debug.Log("When enemy died");
+        //Debug.Log("When enemy died");
         if (animator != null)
         {
             animator.SetTrigger("Death");

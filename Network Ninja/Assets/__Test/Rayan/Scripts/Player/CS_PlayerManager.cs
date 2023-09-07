@@ -212,7 +212,7 @@ public class CS_PlayerManager : MonoBehaviour
 
     public void OnStateExit(CharacterState exitedState)
     {
-        Debug.Log("Exited State:" + exitedState);
+        //Debug.Log("Exited State:" + exitedState);
 
         switch (exitedState)
         {
@@ -255,7 +255,7 @@ public class CS_PlayerManager : MonoBehaviour
                 var yLength = GetComponent<CapsuleCollider>().bounds.center.y - contact.point.y;
                 if (yLength > GetComponent<CapsuleCollider>().height / 2 - 0.01f)
                 {
-                    Debug.Log("happened");
+                    //Debug.Log("happened");
                     //  rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                 }
             }
@@ -301,7 +301,7 @@ public class CS_PlayerManager : MonoBehaviour
     {
         if (currentState != CharacterState.Dashing && value == true && animController.Grounded && clicksIntervalTimer > clicksIntervalTime)
         {
-            Debug.Log("Attack Clicked");
+            //Debug.Log("Attack Clicked");
             clicksIntervalTimer = 0;
             anim.SetInteger(animController.I_Combo_1, anim.GetInteger(animController.I_Combo_1) + 1);
         }
@@ -311,7 +311,7 @@ public class CS_PlayerManager : MonoBehaviour
     {
         if (currentState != CharacterState.Dashing && value == true && animController.Grounded && clicksIntervalTimer > clicksIntervalTime)
         {
-            Debug.Log("Attack Clicked");
+            //Debug.Log("Attack Clicked");
             clicksIntervalTimer = 0;
             anim.SetInteger(animController.I_Combo_2, anim.GetInteger(animController.I_Combo_2) + 1);
             if (ultimateOn) anim.SetTrigger(animController.T_Ultimate);

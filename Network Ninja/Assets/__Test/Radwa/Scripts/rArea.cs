@@ -167,7 +167,7 @@ public class rArea : MonoBehaviour
     {
         while(IsFlashing)
         {
-            Debug.Log("flashing");
+            //Debug.Log("flashing");
             meshColourChanger.ChangeToColour(rAreasManager.Instance.DarkColor);
             yield return new WaitForSecondsRealtime(0.5f);
             if (!IsFlashing)
