@@ -85,6 +85,15 @@ public class rUIPassword : MonoBehaviour
 
     void Start()
     {
+        if(GameManager.Instance.GameLang == GameLang.English)
+        {
+            introTxt.text = "Hey, hero! Hackers are spreading malwares and virsues in your computer...";
+        }
+        else if(GameManager.Instance.GameLang == GameLang.Arabic)
+        {
+            introTxt.text = "يا بطل! الهاكرز ينشرون برامج ضارة وفيروسات في الكمبيوتر...";
+        }
+
         createPasswordPanel.SetActive(false);
         passwordIF = createPasswordPanel.GetComponentInChildren<TMP_InputField>();
         passwordIF.characterLimit = 18;
