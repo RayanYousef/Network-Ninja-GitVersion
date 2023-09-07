@@ -52,7 +52,7 @@ public class m_EnemyManager : MonoBehaviour , IStopObject
         rb.AddForce(frictionForce, ForceMode.Acceleration);
         //enemyAttackRange = player.GetComponent<Collider>().bounds.extents.y *3;
 
-        if(rCipherManager.Instance.AutoDie)
+        if(rCipherManager.Instance != null && rCipherManager.Instance.AutoDie)
             StartCoroutine("WaitAndDie");
     }
 

@@ -120,7 +120,7 @@ public class TutorialManager : MonoBehaviour
             case 6:
                 if(Area3.AreaType == AreaType.Base)
                 {
-                    Area2.Health = maxAreaHealth / 2;
+                    Area2.Health /= 2;
                     popUpIndex++;
                 }
                 break;
