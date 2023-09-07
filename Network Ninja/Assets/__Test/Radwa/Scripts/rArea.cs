@@ -343,9 +343,11 @@ public class rArea : MonoBehaviour
             {
                 // defualt area has max health
                 this.Health = maxHealth;
-                FormStrongArmy();
-                // show intro panel
                 if(!rAreasManager.Instance.IsTutorial)
+                    FormStrongArmy();
+                rAreasManager.Instance.PasswordCanvas.ResetPasswordButtonInteractbility(false);
+                // show intro panel
+                if (!rAreasManager.Instance.IsTutorial)
                 {
                     rUIManager.Instance.UiPassword.ShowIntroPanel();
                 }

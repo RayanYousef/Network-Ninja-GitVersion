@@ -300,8 +300,16 @@ public class rUIPassword : MonoBehaviour
         {
             isFirstClk = false;
             rFaceExpressionManager.Instance.ChangeFacialExp(rFaceExpressionManager.FacialExp.Idle);
-            introTxt.text = "....but don't worry, your main base is still safe with a strong army. " +
-                "You're lucky to have their support! Stay strong and defend what's yours!";
+            if (GameManager.Instance.GameLang == GameLang.English)
+            {
+                introTxt.text = "....but don't worry, your main base is still safe with a strong army. " +
+                    "You're lucky to have their support! Stay strong and defend what's yours!";
+            }
+            else if (GameManager.Instance.GameLang == GameLang.Arabic)
+            {
+                introTxt.text = "...لكن لا تقلق، ملفاتك الرئيسية ما زالت آمنة مع جيش قوي. " +
+                    "أنت محظوظ لأن لديك دعمهم! كن قويا ودافع عما تملك!";
+            }
 
         }
         else
