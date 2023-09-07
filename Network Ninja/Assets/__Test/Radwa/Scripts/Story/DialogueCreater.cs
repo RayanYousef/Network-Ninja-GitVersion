@@ -9,6 +9,7 @@ public class DialogueCreater : MonoBehaviour
 {
     DialoguUI dialoguUI;
     TextArchitect architect;
+    [SerializeField] AudioSource audioSource;
     
     [SerializeField] int lineIndex;
     [SerializeField] Line[] lines;
@@ -23,6 +24,7 @@ public class DialogueCreater : MonoBehaviour
         dialoguUI = DialoguUI.instance;
         currentLine = lines[lineIndex];
         architect = new TextArchitect(dialoguUI.txtParagraph);
+        architect.speed = 0.5f;
         SetDialogue();
     }
 
@@ -55,6 +57,7 @@ public class DialogueCreater : MonoBehaviour
         Emotion e = Array.Find(currentLine.lineSpeaker.arrayOfEmotions,
             x => x.emotionType == currentLine.lineEmotion);
         
+        PlayVoice();
 
         if (currentLine.lineSpeaker.characterName == heroineName)
         {
@@ -77,10 +80,24 @@ public class DialogueCreater : MonoBehaviour
             }
         }
 
+
         if (currentLine.hasCamEffect)
         {
             CameraEffects ces = currentLine.camEffects;
             ces.ApplyCamEffects();
+        }
+
+    }
+
+    private void PlayVoice()
+    {
+        if(currentLine.voice != null)
+        {
+            if(audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+            audioSource.PlayOneShot(currentLine.voice);
         }
     }
 

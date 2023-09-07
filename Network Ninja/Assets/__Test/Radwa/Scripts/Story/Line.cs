@@ -10,6 +10,7 @@ public class Line
     public Character lineSpeaker;
     public EMOTION lineEmotion;
     public string says;
+    public AudioClip voice;
     public LINETYPE lineType;
 
     public bool hasTextEffect;
