@@ -10,6 +10,8 @@ public class DialogueCreater : MonoBehaviour
     DialoguUI dialoguUI;
     TextArchitect architect;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] float talkingSpeed;
+    private bool isHeroineSpeaking;
     
     [SerializeField] int lineIndex;
     [SerializeField] Line[] lines;
@@ -54,21 +56,34 @@ public class DialogueCreater : MonoBehaviour
     {
         currentLine = lines[lineIndex];
 
+        PlayVoice();
+
         Emotion e = Array.Find(currentLine.lineSpeaker.arrayOfEmotions,
             x => x.emotionType == currentLine.lineEmotion);
-        
-        PlayVoice();
 
         if (currentLine.lineSpeaker.characterName == heroineName)
         {
+            isHeroineSpeaking = true;
+
             dialoguUI.txtName.text = heroineName;
-            if (e.emotionSprite != null)
+
+            if(currentLine.lineEmotion == EMOTION.Talking)
+            {
+                StartCoroutine(LeftTalking(e));
+            }
+            else
                 dialoguUI.leftSpeakerImg.sprite = e.emotionSprite[0];
         }
         else
         {
+            isHeroineSpeaking = false;
+
             dialoguUI.txtName.text = allyName;
-            if (e.emotionSprite != null)
+            if (currentLine.lineEmotion == EMOTION.Talking)
+            {
+                StartCoroutine(RightTalking(e));
+            }
+            else
                 dialoguUI.rightSpeakerImg.sprite = e.emotionSprite[0];
         }
 
@@ -87,6 +102,36 @@ public class DialogueCreater : MonoBehaviour
             ces.ApplyCamEffects();
         }
 
+    }
+    private IEnumerator LeftTalking(Emotion e)
+    {
+        int len = e.emotionSprite.Length;
+        for(int i = 0; i < len; i = (i+1) % len)
+        {
+            dialoguUI.leftSpeakerImg.sprite = e.emotionSprite[i];
+            if (!isHeroineSpeaking)
+            {
+                dialoguUI.leftSpeakerImg.sprite = e.emotionSprite[0];
+                yield break;
+            }
+            yield return new WaitForSeconds(talkingSpeed);
+        }
+    } 
+    
+    private IEnumerator RightTalking(Emotion e)
+    {
+        int len = e.emotionSprite.Length;
+        for(int i = 0; i < len; i = (i+1) % len)
+        {
+            dialoguUI.rightSpeakerImg.sprite = e.emotionSprite[i];
+            if (isHeroineSpeaking)
+            {
+                dialoguUI.rightSpeakerImg.sprite = e.emotionSprite[0];
+                yield break;
+
+            }
+            yield return new WaitForSeconds(talkingSpeed);
+        }
     }
 
     private void PlayVoice()

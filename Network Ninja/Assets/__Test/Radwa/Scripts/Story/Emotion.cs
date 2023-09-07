@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EMOTION { IDLE, SAD, SURPRISED, EXCITED }
+public enum EMOTION { Talking, Idle, Surprised }
 
 [System.Serializable]
 
