@@ -138,7 +138,7 @@ public class TutorialManager : MonoBehaviour
             case 8:
                 if(Area1.AreaType == AreaType.Base)
                 {
-                    CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.GameplayScene);
+                    CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.EasyLevelScene);
                 }
                 break;
 

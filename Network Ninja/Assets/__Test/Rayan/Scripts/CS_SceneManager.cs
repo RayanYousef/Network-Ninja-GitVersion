@@ -12,7 +12,7 @@ public class CS_SceneManager : MonoBehaviour
     public static CS_SceneManager Instance;
     [Header("The Number of the Scene in Build Hierarchy")]
     [SerializeField] int mainMenuScene = 0;
-    [SerializeField] int storyScene=1,tutorialScene=2,gameplayScene=3;
+    [SerializeField] int storyScene=1,tutorialScene=2,easyLevelScene=3,gameplayScene=4;
 
     [Header("Next Scene")]
     int nextSceneNumber;
@@ -22,6 +22,7 @@ public class CS_SceneManager : MonoBehaviour
     public int MainMenuScene { get => mainMenuScene;}
     public int StoryScene { get => storyScene;}
     public int TutorialScene { get => tutorialScene;}
+    public int EasyLevelScene { get => easyLevelScene; }
     public int GameplayScene { get => gameplayScene;}
 
 

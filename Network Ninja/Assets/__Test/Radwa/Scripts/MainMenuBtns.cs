@@ -13,7 +13,12 @@ public class MainMenuBtns : MonoBehaviour
         CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.TutorialScene);
     }
 
-    public void OpenLevel1()
+    public void OpenEasyLevel()
+    {
+        CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.EasyLevelScene);
+    }
+    
+    public void OpenHardLevel()
     {
         CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.GameplayScene);
     }
