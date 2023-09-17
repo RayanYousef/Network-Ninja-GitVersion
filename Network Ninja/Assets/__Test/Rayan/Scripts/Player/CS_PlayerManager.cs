@@ -109,16 +109,26 @@ public class CS_PlayerManager : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        AssignInputsActionsStart();
+
+    }
+
+    private void OnDisable()
+    {
+        UnassignInputsActionsStart();
+    }
+
     private void Start()
     {
         if (GameObjectsManager.Instance!=null)
             GameObjectsManager.Instance.Player = gameObject;
 
-        pStatsManager.Stats.OnHealthUpdated.AddListener(LostGameHealthZero);
-        pStatsManager.Stats.OnEnergyUpdated.AddListener(DisableUltimate);
-        pStatsManager.OnTakingDamage.AddListener(ResetDamageTimerAndCanNotTakeDamage);
-        pStatsManager.OnTakingDamage.AddListener(AnimController.PlayTakeDamageAnim);
+        StatsManagerStart();
     }
+
+
 
     private void Update()
     {
@@ -151,7 +161,38 @@ public class CS_PlayerManager : MonoBehaviour
 
     }
 
- 
+
+    #region Awake/Enable/Disable/Start
+
+    private void AssignInputsActionsStart()
+    {
+        CS_InputManager.Instance.Move += SendInputDirection;
+        CS_InputManager.Instance.RotateCamera += SendInputRotation;
+        CS_InputManager.Instance.Jump += SendJumpInputState;
+        CS_InputManager.Instance.Dash += SendDashInputState;
+        CS_InputManager.Instance.Combo_1 += SendCombo_1;
+        CS_InputManager.Instance.Combo_2 += SendCombo_2;
+        CS_InputManager.Instance.Ultimate += SendUltimate;
+    }
+    private void UnassignInputsActionsStart()
+    {
+        CS_InputManager.Instance.Move -= SendInputDirection;
+        CS_InputManager.Instance.RotateCamera -= SendInputDirection;
+        CS_InputManager.Instance.Jump -= SendJumpInputState;
+        CS_InputManager.Instance.Dash -= SendDashInputState;
+        CS_InputManager.Instance.Combo_1 -= SendCombo_1;
+        CS_InputManager.Instance.Combo_2 -= SendCombo_2;
+        CS_InputManager.Instance.Ultimate -= SendUltimate;
+    }
+    private void StatsManagerStart()
+    {
+        pStatsManager.Stats.OnHealthUpdated.AddListener(LostGameHealthZero);
+        pStatsManager.Stats.OnEnergyUpdated.AddListener(DisableUltimate);
+        pStatsManager.OnTakingDamage.AddListener(ResetDamageTimerAndCanNotTakeDamage);
+        pStatsManager.OnTakingDamage.AddListener(AnimController.PlayTakeDamageAnim);
+    } 
+
+    #endregion
 
     #region Animator States
     public void OnStateEnter(CharacterState enteredState)
@@ -263,7 +304,7 @@ public class CS_PlayerManager : MonoBehaviour
     }
     #endregion
 
-    #region Main Input Functions
+    #region Input Functions
     public void SendInputDirection(Vector2 value)
     {
         // Setting the value of the direction on Movement Controller
@@ -318,7 +359,7 @@ public class CS_PlayerManager : MonoBehaviour
         }
     }
 
-    public void ActivateUltimate(bool value)
+    public void SendUltimate(bool value)
     {
         
         if (value == true && ultimateOn == false && pStatsManager.Stats.Energy>0)
@@ -327,48 +368,6 @@ public class CS_PlayerManager : MonoBehaviour
             UltimateOn = false;
     }
 
-    #endregion
-
-    #region Messages from Player Inputs
-    public void OnMove(InputValue value)
-    {
-        SendInputDirection(value.Get<Vector2>());
-        //Debug.Log("MoveTowardsDirection:" + value.Get<Vector2>());
-    }
-
-    public void OnCameraRotation(InputValue value)
-    {
-        SendInputRotation(value.Get<Vector2>());
-        //Debug.Log("CamRotation:" + value.Get<Vector2>());
-    }
-    public void OnJump(InputValue value)
-    {
-        SendJumpInputState(value.isPressed);
-        //Debug.Log("SendJumpInputState:" + value.isPressed);
-    }
-
-    public void OnDash(InputValue value)
-    {
-        SendDashInputState(value.isPressed);
-        //Debug.Log("SendDashInputState:" + value.isPressed);
-    }
-
-    public void OnCombo_1(InputValue value)
-    {
-        SendCombo_1(value.isPressed);
-        //Debug.Log("SendDashInputState:" + value.isPressed);
-    }
-
-    public void OnCombo_2(InputValue value)
-    {
-        SendCombo_2(value.isPressed);
-        //Debug.Log("SendDashInputState:" + value.isPressed);
-    }
-
-    public void OnUltimate(InputValue value)
-    {
-        ActivateUltimate(value.isPressed);
-    }
     #endregion
 
     #region Public Functions
