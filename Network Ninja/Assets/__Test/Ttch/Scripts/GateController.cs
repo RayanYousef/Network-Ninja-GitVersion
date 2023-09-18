@@ -38,7 +38,8 @@ public class GateController : MonoBehaviour
     }
     private void Update()
     {
-        buttonPressed = Input.GetKeyDown(KeyCode.E);
+        buttonPressed = CS_PathButton.IsPressed;
+
         if (playerIsHere == true && buttonPressed)
         { 
             if(rUIManager.Instance.UiPassword.CheckPasswordPanel.activeSelf)
@@ -76,7 +77,9 @@ public class GateController : MonoBehaviour
             playerIsHere = true;
             GameObjectsManager.Instance.CurrentGate = this;
             //rUIManager.instance.InGameUI.prompt.enabled = true;
-            rUIManager.Instance.InGameUI.prompt.gameObject.SetActive(true);
+           // rUIManager.Instance.InGameUI.prompt.gameObject.SetActive(true);
+            if (CS_PathButton.PathButton != null)
+                CS_PathButton.PathButton.SetActive(true);
         }
     }
 
@@ -90,7 +93,10 @@ public class GateController : MonoBehaviour
             }
             playerIsHere = false;
             //rUIManager.instance.InGameUI.prompt.enabled = false;
-            rUIManager.Instance.InGameUI.prompt.gameObject.SetActive(false);
+            //rUIManager.Instance.InGameUI.prompt.gameObject.SetActive(false);
+            if(CS_PathButton.PathButton!=null)
+            CS_PathButton.PathButton.SetActive(false);
+
         }
     }
 }

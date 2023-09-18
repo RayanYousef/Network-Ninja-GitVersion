@@ -85,14 +85,14 @@ public class rUIPassword : MonoBehaviour
 
     void Start()
     {
-        if(GameManager.Instance.GameLang == GameLang.English)
-        {
-            introTxt.text = "Hey, hero! Hackers are spreading malwares and virsues in your computer...";
-        }
-        else if(GameManager.Instance.GameLang == GameLang.Arabic)
-        {
-            introTxt.text = "يا بطل! الهاكرز ينشرون برامج ضارة وفيروسات في الكمبيوتر...";
-        }
+        //if(GameManager.Instance.GameLang == GameLang.English)
+        //{
+        //    introTxt.text = "Hey, hero! Hackers are spreading malwares and virsues in your computer...";
+        //}
+        //else if(GameManager.Instance.GameLang == GameLang.Arabic)
+        //{
+        //    introTxt.text = "يا بطل! الهاكرز ينشرون برامج ضارة وفيروسات في الكمبيوتر...";
+        //}
 
         createPasswordPanel.SetActive(false);
         passwordIF = createPasswordPanel.GetComponentInChildren<TMP_InputField>();
@@ -139,6 +139,7 @@ public class rUIPassword : MonoBehaviour
             ShowHideSidePanel();
         }
 
+        if(passwordIF!=null)
         PasswordInput = passwordIF.text;
     }
 
@@ -163,7 +164,7 @@ public class rUIPassword : MonoBehaviour
     }
 
     public void ResetPasswordButtonInteractbility(bool value)
-    {
+    {                  if(resetBtn!= null)
         resetBtn.interactable = value;
     }
 
