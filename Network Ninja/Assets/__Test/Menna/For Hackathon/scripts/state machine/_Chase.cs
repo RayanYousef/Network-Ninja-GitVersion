@@ -34,7 +34,7 @@ public class _Chase : StateMachineBehaviour
 
         if (Vector3.Distance(player.position, RB.transform.position) > enemyManager.enemyChaseRange)
         {
-            Debug.Log("IDLE");
+            //Debug.Log("IDLE");
             animator.SetBool("IsChasing", false);
         }
 

@@ -12,6 +12,8 @@ public partial class DialoguUI : MonoBehaviour
     public TextMeshProUGUI txtName;
     public TextMeshProUGUI txtParagraph;
 
+    [SerializeField] Button skipBtn;
+
     public static DialoguUI instance;
     private void Awake()
     {
@@ -21,5 +23,14 @@ public partial class DialoguUI : MonoBehaviour
             DestroyImmediate(gameObject);
     }
 
+    private void Start()
+    {
+        skipBtn.onClick.AddListener(MoveToTutorial);
+    }
+
+    public void MoveToTutorial()
+    {
+        CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.TutorialScene);
+    }
 
 }

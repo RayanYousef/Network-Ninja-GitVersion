@@ -120,7 +120,7 @@ public class TutorialManager : MonoBehaviour
             case 6:
                 if(Area3.AreaType == AreaType.Base)
                 {
-                    Area2.Health = maxAreaHealth / 2;
+                    Area2.Health /= 2;
                     popUpIndex++;
                 }
                 break;
@@ -138,7 +138,7 @@ public class TutorialManager : MonoBehaviour
             case 8:
                 if(Area1.AreaType == AreaType.Base)
                 {
-                    CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.GameplayScene);
+                    CS_SceneManager.Instance.LoadSceneByNumber(CS_SceneManager.Instance.EasyLevelScene);
                 }
                 break;
 
